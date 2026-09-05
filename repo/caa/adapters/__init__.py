@@ -100,20 +100,24 @@ for _name in ("ticket_export", "model_registry", "eval_results", "rollback_log",
 @adapter("git_log")
 def git_log(target: Path, cfg: dict) -> AdapterResult:
     """
-    cfg: {max_commits: int, ticket_pattern: regex, governed_paths: [glob-ish prefixes]}
+    cfg: {max_commits: int, ticket_pattern: regex, governed_paths: [path prefixes relative to target]}
     Records: commit, author, email, date, message, ticket_ref, paths, touches_governed_paths
+    Works when target is a subfolder of the git repo: paths are made relative to target and
+    commits touching nothing under target still appear (with empty paths).
     """
-    if not (target / ".git").exists():
-        return AdapterResult("missing", message="not a git repository")
+    def git(*args):
+        return subprocess.run(["git", "-C", str(target), *args], capture_output=True, text=True, check=True).stdout
+    try:
+        git("rev-parse", "--is-inside-work-tree")
+        prefix = git("rev-parse", "--show-prefix").strip()   # "" at root, "repo/" in a subfolder
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return AdapterResult("missing", message="not inside a git repository")
     n = cfg.get("max_commits", 200)
     pat = re.compile(cfg.get("ticket_pattern", r"\b([A-Z]{2,10}-\d+)\b"))
     governed = cfg.get("governed_paths", [])
     fmt = "%H%x1f%an%x1f%ae%x1f%aI%x1f%s"
     try:
-        out = subprocess.run(
-            ["git", "-C", str(target), "log", f"-n{n}", f"--format={fmt}", "--name-only"],
-            capture_output=True, text=True, check=True,
-        ).stdout
+        out = git("log", f"-n{n}", f"--format={fmt}", "--name-only")
     except subprocess.CalledProcessError as e:
         return AdapterResult("error", message=e.stderr)
     records, cur = [], None
@@ -125,8 +129,13 @@ def git_log(target: Path, cfg: dict) -> AdapterResult:
                    "ticket_ref": m.group(1) if m else None, "paths": [], "touches_governed_paths": False}
             records.append(cur)
         elif line.strip() and cur is not None:
-            cur["paths"].append(line.strip())
-            if any(line.strip().startswith(g) for g in governed):
+            rel = line.strip()
+            if prefix and rel.startswith(prefix):
+                rel = rel[len(prefix):]
+            elif prefix:
+                continue  # file outside target subfolder
+            cur["paths"].append(rel)
+            if any(rel.startswith(g) for g in governed):
                 cur["touches_governed_paths"] = True
     return AdapterResult("ok", records, [_hash_text(f"git log -n{n} @ {target}", out)])
 
