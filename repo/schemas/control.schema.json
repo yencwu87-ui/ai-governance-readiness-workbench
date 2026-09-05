@@ -74,7 +74,10 @@
         "all_pinned",
         "elapsed_within",
         "threshold_met",
-        "record_count"
+        "record_count",
+        "recency_each",
+        "preceded_within",
+        "rate_within"
       ]
     },
     "params": {
@@ -105,6 +108,14 @@
         "critical"
       ],
       "default": "medium"
+    },
+    "play_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^P\\d+\\.\\d+$"
+      },
+      "description": "Lifecycle play steps (from the playbook's Playbooks & Runbooks sheet) whose evidence output this control tests, e.g. P4.2"
     }
   }
 }

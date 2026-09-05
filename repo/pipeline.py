@@ -137,3 +137,62 @@ def unsign_result(bundle_path, control_id: str) -> None:
 def control_history(control_id: str) -> list[dict]:
     """Stage B5 — report. One control across every bundle, newest first."""
     return _review.control_history(CAA_EVIDENCE, control_id)
+
+
+# ====================================================================
+# Join — lifecycle plays link Lane A (design) and Lane B (operation)
+# ====================================================================
+from plays import load_plays, norm_id  # noqa: E402
+
+
+def latest_lane_b() -> dict[str, dict]:
+    """Newest Lane B result per control id across all bundles."""
+    return _review.latest_results(CAA_EVIDENCE)
+
+
+def lifecycle_view(plays: list, in_scope: list, decisions: dict, proposals: dict, lane_b: dict) -> list[dict]:
+    """Stage J — report. One block per play:
+         steps      -> each with the Lane B results whose play_refs name that step (or none)
+         controls   -> playbook controls the play satisfies that are in scope, with Lane A rating
+         summary    -> counts for design (Lane A) and operation (Lane B)
+    Lane A rating precedence: recorded decision > proposal (flagged) > not assessed."""
+    by_step: dict[str, list[dict]] = {}
+    for r in lane_b.values():
+        for ref in r.get("play_refs", []):
+            by_step.setdefault(ref, []).append(r)
+    ctl_by_id = {norm_id(c.id): c for c in in_scope}
+
+    out = []
+    for p in plays:
+        steps = []
+        for s in p.steps:
+            tests = sorted(by_step.get(s.id, []), key=lambda r: r["control_id"])
+            steps.append({"id": s.id, "n": s.n, "owner": s.owner, "action": s.action, "evidence": s.evidence,
+                          "cadence": s.cadence, "tests": tests})
+        controls = []
+        for cid in sorted(p.control_ids):
+            c = ctl_by_id.get(cid)
+            if not c:
+                continue
+            d, a = decisions.get(c.key), proposals.get(c.key, {})
+            rating = d["sufficiency"] if d else (a.get("sufficiency") if a else None)
+            controls.append({"id": cid, "title": c.title, "lib": c.lib, "key": c.key, "rating": rating,
+                             "recorded": bool(d), "maturity": d["maturity"] if d else a.get("proposedMaturity")})
+        all_tests = [t for s in steps for t in s["tests"]]
+        summary = {
+            "steps": len(steps), "steps_tested": sum(1 for s in steps if s["tests"]),
+            "tests": len(all_tests),
+            "op_pass": sum(1 for t in all_tests if t["machine_verdict"] == "PASS"),
+            "op_fail": sum(1 for t in all_tests if t["machine_verdict"] == "FAIL"),
+            "op_nt": sum(1 for t in all_tests if t["machine_verdict"] == "NOT_TESTABLE"),
+            "controls": len(controls),
+            "design_full": sum(1 for c in controls if c["rating"] == "full"),
+            "design_partial": sum(1 for c in controls if c["rating"] == "partial"),
+            "design_none": sum(1 for c in controls if c["rating"] == "none"),
+            "design_unassessed": sum(1 for c in controls if c["rating"] is None),
+        }
+        # the interesting cell: design says full, operation says FAIL
+        summary["design_full_op_fail"] = summary["design_full"] > 0 and summary["op_fail"] > 0
+        out.append({"id": p.id, "n": p.n, "title": p.title, "header": p.header, "steps": steps,
+                    "controls": controls, "summary": summary})
+    return out

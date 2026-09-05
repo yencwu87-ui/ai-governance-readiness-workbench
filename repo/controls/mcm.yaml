@@ -8,6 +8,7 @@
   objective: All changes are identified
   assertion: Every deployed model or prompt version in production has a matching change record
   framework_refs: [MAS-TRM-6.1, ISO42001-8.4, NIST-AI-RMF-MANAGE-2.4]
+  play_refs: [P4.3]
   inputs:
     - source: deploy_manifest
       fields: [version]
@@ -23,20 +24,22 @@
 
 - id: MCM-02
   domain: model-change-management
-  objective: Changes are risk-classified
-  assertion: Each change ticket has a risk tier and the tier matches the model's registered tier
+  objective: Changes are raised against registered models
+  assertion: Every change ticket references a model_id that exists in the model registry
+  # changelog 2026-09-06: was "ticket tier equals registry tier"; retired because a change has its own
+  # risk tier (a high-risk hardening change on a medium-tier model is legitimate). Tier judgement is Lane A.
   framework_refs: [MAS-TRM-6.2, ISO42001-6.1.2]
+  play_refs: [P1.2, P8.1]
   inputs:
     - source: ticket_export
-      fields: [ticket_id, model_id, risk_tier]
+      fields: [ticket_id, model_id]
     - source: model_registry
-      fields: [model_id, risk_tier]
-  check: field_equals
+      fields: [model_id]
+  check: values_subset
   params:
-    left: {source: ticket_export, field: risk_tier}
-    right: {source: model_registry, field: risk_tier}
-    join: {left_key: model_id, right_key: model_id}
-  human_gate: Reviewer samples 10% to check the tier was applied honestly, not defaulted.
+    subset: {source: ticket_export, field: model_id}
+    superset: {source: model_registry, field: model_id}
+  human_gate: Reviewer samples tickets to check the risk tier assigned to the change is honest, not defaulted.
   frequency: weekly
   severity: medium
 
@@ -45,6 +48,7 @@
   objective: Changes are tested before release
   assertion: An evaluation run exists for the released version with a timestamp before deploy time
   framework_refs: [MAS-TRM-6.3, ISO42001-8.4, NIST-AI-RMF-MEASURE-2.5]
+  play_refs: [P3.3, P4.1]
   inputs:
     - source: eval_results
       fields: [version, run_at]
@@ -64,6 +68,7 @@
   objective: No regression on key metrics
   assertion: Released version's key metrics are within tolerance of the prior version
   framework_refs: [MAS-FEAT-F3, NIST-AI-RMF-MEASURE-2.6]
+  play_refs: [P5.1]
   inputs:
     - source: eval_results
       fields: [version, accuracy, fairness_gap, refusal_rate]
@@ -84,6 +89,7 @@
   objective: Segregation of duties
   assertion: Approver on the change ticket is not the author of the code or prompt change
   framework_refs: [MAS-TRM-6.1, ISO27001-A.5.3]
+  play_refs: [P3.4]
   inputs:
     - source: ticket_export
       fields: [ticket_id, approver]
@@ -103,6 +109,7 @@
   objective: Prompt and config changes are treated as changes
   assertion: Every commit touching prompt, guardrail or tool-permission paths references a change ticket
   framework_refs: [MAS-TRM-6.1, ISO42001-8.4]
+  play_refs: [P4.1]
   inputs:
     - source: git_log
       fields: [commit, paths, ticket_ref]
@@ -120,6 +127,7 @@
   objective: Dependency and upstream model changes are captured
   assertion: All dependencies are pinned to exact versions
   framework_refs: [MAS-TRM-6.4, ISO42001-A.10.3]
+  play_refs: [P7.3]
   inputs:
     - source: lock_file
       fields: [package, version, pinned]
@@ -135,6 +143,7 @@
   objective: Rollback is possible
   assertion: A rollback test has been exercised within the last 180 days
   framework_refs: [MAS-TRM-8.2, ISO27001-A.8.14]
+  play_refs: [P4.2, P6.3]
   inputs:
     - source: rollback_log
       fields: [tested_at, outcome]
@@ -153,6 +162,7 @@
   objective: Emergency changes are retrospectively controlled
   assertion: Emergency changes complete full approval evidence within 5 working days
   framework_refs: [MAS-TRM-6.1]
+  play_refs: [P6.5]
   inputs:
     - source: ticket_export
       fields: [ticket_id, emergency, opened_at, approved_at]
@@ -173,6 +183,7 @@
   objective: Exceptions expire
   assertion: Every open exception has an owner and an expiry date not yet passed
   framework_refs: [MAS-TRM-3.4]
+  play_refs: [P8.4]
   inputs:
     - source: exception_register
       fields: [exception_id, owner, expires_on, status]

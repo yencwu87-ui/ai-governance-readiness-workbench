@@ -6,6 +6,7 @@
   objective: No plaintext secrets in the evidence or code folder
   assertion: No file matching secrets patterns (.env, *secret*) exists in the scanned folder
   framework_refs: [MAS-TRM-11.2, ISO27001-A.8.24]
+  play_refs: [P9.3, P4.2]
   inputs:
     - source: environment_scan
       fields: [path, kind]
@@ -23,6 +24,7 @@
   objective: Model documentation exists
   assertion: At least one model card is present in the scanned folder
   framework_refs: [ISO42001-A.6.2, NIST-AI-RMF-MAP-1.1]
+  play_refs: [P3.2]
   inputs:
     - source: environment_scan
       fields: [path, kind]

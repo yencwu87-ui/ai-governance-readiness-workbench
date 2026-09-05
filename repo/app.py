@@ -8,7 +8,9 @@ import streamlit as st
 from assessor import PROVIDER, model_name
 from scanner import signals_for
 from pipeline import (build_evidence, control_history, export_playbook, gap_analysis, index_folder, list_bundles, load_bundle,
-                      match_controls, open_items, propose, record_decision, run_audit, sign_result, unsign_result)
+                      match_controls, open_items, propose, record_decision, run_audit, sign_result, unsign_result,
+                      latest_lane_b, lifecycle_view)
+from plays import load_plays
 from caa.review import DISPOSITIONS
 from playbook import LIBRARIES, load_controls
 
@@ -78,13 +80,21 @@ def _load(path: str):
 
 
 controls = ({} if src is None else _load(str(src)) if isinstance(src, Path) else load_controls(src))
+
+
+@st.cache_data(show_spinner=False)
+def _load_plays(path: str):
+    return load_plays(path)
+
+
+plays = ([] if src is None else _load_plays(str(src)) if isinstance(src, Path) else load_plays(src))
 in_scope = [c for lib, rows in controls.items() if scope.get(lib) for c in rows]
 by_key = {c.key: c for c in in_scope}
 
 st.title("AI governance readiness workbench")
 st.caption("Evidence in, sufficiency rating proposed by AI, decision recorded by a named reviewer. Ratings are not a determination of regulatory compliance.")
 
-tab_s, tab_c, tab_a, tab_r, tab_b, tab_h = st.tabs(["Scan", "Controls", "Assess", "Report", "Audit", "History"])
+tab_s, tab_c, tab_a, tab_r, tab_b, tab_h, tab_l = st.tabs(["Scan", "Controls", "Assess", "Report", "Audit", "History", "Lifecycle"])
 VCOL = {"PASS": "#2F7D5B", "FAIL": "#A23B3B", "NOT_TESTABLE": "#6B7A8A"}
 vpill = lambda v: f'<span class="pill" style="background:{VCOL[v]}">{v}</span>'
 
@@ -302,6 +312,16 @@ with tab_r:
             md += [f"### {c.id} — {c.title} ({c.lib})",
                    f"- Rating: {d['sufficiency']}, maturity {d['maturity']}/5 — accepted by {d['reviewer']} on {d['at'][:10]}" + (f" (AI proposed {d['aiSufficiency']})" if d.get('aiSufficiency') != d['sufficiency'] else ""),
                    f"- Rationale: {a.get('rationale', '')}"] + ([f'- Evidence excerpt: "{a["excerpt"]}"'] if a.get("excerpt") else []) + ([f"- Validation flags: {'; '.join(a['flags'])}"] if a.get("flags") else []) + ([f"- Reviewer note: {d['note']}"] if d.get("note") else []) + [""]
+        if st.session_state.get("lifecycle_view"):
+            md += ["\n## Lifecycle plays — design vs operation\n",
+                   "| Play | Steps tested | Op PASS | Op FAIL | Op N/T | Design full | Design partial | Design none | Unassessed | Flag |",
+                   "|---|---|---|---|---|---|---|---|---|---|"]
+            for v_ in st.session_state.lifecycle_view:
+                s_ = v_["summary"]
+                md.append(f"| {v_['id']} {v_['title']} | {s_['steps_tested']}/{s_['steps']} | {s_['op_pass']} | {s_['op_fail']} | {s_['op_nt']} | "
+                          f"{s_['design_full']} | {s_['design_partial']} | {s_['design_none']} | {s_['design_unassessed']} | "
+                          f"{'design full / op FAIL' if s_['design_full_op_fail'] else ''} |")
+            md.append("\nOperation verdicts are deterministic Lane B checks; design ratings are reviewer-recorded Lane A assessments. A step without an operating test is a coverage gap, not a pass.")
         report = "\n".join(md)
 
         c1, c2 = st.columns(2)
@@ -427,3 +447,56 @@ with tab_h:
         st.caption("FAIL or NOT_TESTABLE results with no reviewer signature.")
         st.dataframe([{"Control": i_["control_id"], "Verdict": i_["machine_verdict"], "Severity": i_["severity"], "Detail": i_["detail"]} for i_ in items],
                      width="stretch", hide_index=True)
+
+
+# ====================================================================
+# ---------- Lifecycle (join: plays link design and operation) ----------
+# ====================================================================
+with tab_l:
+    st.subheader("Lifecycle plays — design vs operation")
+    st.caption("Each play from the playbook's Playbooks & Runbooks sheet. Design = Lane A rating of the controls the play satisfies "
+               "(reviewer-recorded, or AI-proposed and flagged). Operation = latest Lane B verdict of the tests hung off each step's evidence output. "
+               "A step with no test is a gap in continuous coverage, not a pass.")
+    if not plays:
+        st.info("Load the playbook workbook to see the lifecycle plays.")
+    else:
+        lb = latest_lane_b()
+        view = lifecycle_view(plays, in_scope, S["decisions"], S["ai"], lb)
+        RCOL = {"full": COL["full"], "partial": COL["partial"], "none": COL["none"], None: COL["pending"]}
+
+        # overview
+        st.dataframe([{"Play": f"{v['id']} {v['title']}", "Steps": v["summary"]["steps"], "Steps tested": v["summary"]["steps_tested"],
+                       "Op PASS": v["summary"]["op_pass"], "Op FAIL": v["summary"]["op_fail"], "Op N/T": v["summary"]["op_nt"],
+                       "Controls in scope": v["summary"]["controls"], "Design full": v["summary"]["design_full"],
+                       "Design partial": v["summary"]["design_partial"], "Design none": v["summary"]["design_none"],
+                       "Unassessed": v["summary"]["design_unassessed"],
+                       "Flag": "design full / op FAIL" if v["summary"]["design_full_op_fail"] else ""} for v in view],
+                     width="stretch", hide_index=True, height=430)
+        st.session_state.lifecycle_view = view
+
+        sel_play = st.selectbox("Open play", [v["id"] for v in view], format_func=lambda i: next(f"{v['id']} {v['title']}" for v in view if v["id"] == i))
+        v = next(x for x in view if x["id"] == sel_play)
+        st.markdown(f"#### {v['id']} — {v['title']}")
+        st.caption(v["header"])
+        if v["summary"]["design_full_op_fail"]:
+            st.error("Design rated full on at least one control, but an operating test is failing. Investigate before relying on the design rating.")
+
+        st.markdown("**Steps and operating tests**")
+        for s in v["steps"]:
+            c1, c2 = st.columns([3, 2])
+            c1.markdown(f"**{s['id']}** {s['action']}  \n<small>{s['owner']}"
+                        + (f" · {s['cadence']}" if s["cadence"] else "") + f" · evidence: *{s['evidence']}*</small>", unsafe_allow_html=True)
+            if not s["tests"]:
+                c2.markdown('<span class="pill" style="background:#6B7A8A">no operating test</span>', unsafe_allow_html=True)
+            for r_ in s["tests"]:
+                hv = r_.get("human_verdict") or {}
+                c2.markdown(f"{vpill(r_['machine_verdict'])} **{r_['control_id']}** <small>{r_['detail'][:60]}"
+                            + (f" · {hv['disposition']} by {hv['reviewer']}" if hv else "") + f" · {r_['run_at'][:10]}</small>", unsafe_allow_html=True)
+
+        st.markdown("**Controls this play satisfies (design)**")
+        if v["controls"]:
+            st.dataframe([{"Control": f"{c['id']} {c['title'][:70]}", "Library": c["lib"],
+                           "Design rating": (c["rating"] or "not assessed") + ("" if c["recorded"] or not c["rating"] else " (proposed)"),
+                           "Maturity": c["maturity"] or "—"} for c in v["controls"]], width="stretch", hide_index=True)
+        else:
+            st.caption("None of this play's controls are in the selected scope.")

@@ -117,6 +117,7 @@ def run_controls(controls: list[dict], inventory: dict, trigger: str) -> list[di
             "domain": c["domain"],
             "assertion": c["assertion"],
             "framework_refs": c.get("framework_refs", []),
+            "play_refs": c.get("play_refs", []),
             "severity": c.get("severity", "medium"),
             "machine_verdict": r.verdict,
             "detail": r.detail,

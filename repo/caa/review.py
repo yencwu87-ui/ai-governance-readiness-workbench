@@ -100,3 +100,15 @@ def open_items(evidence_dir: Path) -> list[dict]:
         return []
     b = load_bundle(Path(bs[0]["path"]))
     return [r for r in b["results"] if r["machine_verdict"] != "PASS" and not r.get("human_verdict")]
+
+
+def latest_results(evidence_dir: Path) -> dict[str, dict]:
+    """Newest result per control_id across all bundles (triggers run different subsets, so the
+    latest bundle alone is not enough). Each value carries run_at, trigger and bundle path."""
+    out: dict[str, dict] = {}
+    for s in list_bundles(evidence_dir):           # newest first
+        b = load_bundle(Path(s["path"]))
+        for r in b["results"]:
+            if r["control_id"] not in out:
+                out[r["control_id"]] = {**r, "run_at": b["run_at"], "trigger": b["trigger"], "bundle": s["path"]}
+    return out
