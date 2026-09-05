@@ -1,0 +1,763 @@
+{
+  "inventory_id": "84a71faf-71a8-4ee4-aac2-6afddb4351b3",
+  "generated_at": "2026-09-05T16:56:32.311382+00:00",
+  "target": {
+    "path": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo",
+    "git_head": "218a4403a21404e7a18e84d76e56e7eeca9a52b6",
+    "git_remote": "https://github.com/yencwu87-ui/ai-governance-readiness-workbench"
+  },
+  "sources": {
+    "environment_scan": {
+      "adapter": "environment_scan",
+      "status": "ok",
+      "message": "",
+      "records": [
+        {
+          "path": "requirements.txt",
+          "kind": "dependencies",
+          "hint": "Python dependency manifest \u2014 third-party AI libraries and pinned versions",
+          "controls": [
+            "M3",
+            "A.10"
+          ],
+          "sha256": "37d903265c975af8a94873ea613aa5b58c82a25c0e7b54d4d9d4a4640f805376"
+        },
+        {
+          "path": "test_assessor.py",
+          "kind": "evaluation",
+          "hint": "Test artefacts",
+          "controls": [
+            "D3.1",
+            "M4"
+          ],
+          "sha256": "bd1a9f72264abb179860759b888ddb461b58b69ea3eb18f49f4849d4280140e8"
+        },
+        {
+          "path": "MODEL_CARD.md",
+          "kind": "model-doc",
+          "hint": "Model card \u2014 documentation of intended use, limits and evaluation",
+          "controls": [
+            "D1.1",
+            "M2",
+            "A.6.2",
+            "MAP 1.1"
+          ],
+          "sha256": "0dbd2d5b75a498fc71ec5571ac17e0f245c055d73ef0276b4d83a35b7dcccd29"
+        },
+        {
+          "path": ".streamlit/secrets.toml.example",
+          "kind": "secrets",
+          "hint": "Secrets-related file \u2014 verify it is a reference, not plaintext credentials",
+          "controls": [
+            "S1.3",
+            "D2.2"
+          ],
+          "sha256": "a7145b6e4facacd96d90f1d2f60829d4f9a5fca7889d061e0e5e91845f38dd57"
+        },
+        {
+          "path": "governance/eval_results.json",
+          "kind": "evaluation",
+          "hint": "Evaluation artefacts \u2014 tests or golden sets for model behaviour",
+          "controls": [
+            "D3.1",
+            "M4",
+            "MEASURE 2"
+          ],
+          "sha256": "193546a240d1232fe3fef61c76d51f9adb824884312639ff36cb1a8abb64a217"
+        },
+        {
+          "path": "schemas/inventory.schema.json",
+          "kind": "inventory",
+          "hint": "Inventory register \u2014 agent/model registration evidence",
+          "controls": [
+            "S1.1",
+            "M1.3",
+            "A.9"
+          ],
+          "sha256": "dc158723bcfd9c4cae21c2e226b3c6ad78a76955e95cfc7ba6507649d25e1314"
+        },
+        {
+          "path": "sample_evidence/records/AI_inventory_extract_Aug2026.docx",
+          "kind": "inventory",
+          "hint": "Inventory register \u2014 agent/model registration evidence",
+          "controls": [
+            "S1.1",
+            "M1.3",
+            "A.9"
+          ],
+          "sha256": "dfc9c464135fc9eb2f740bd3f3eed32cd8b9b575b5c0231cbcec0b7de05e93c3"
+        },
+        {
+          "path": "sample_evidence/infra/agent_logging_config.yaml",
+          "kind": "logging",
+          "hint": "Logging configuration \u2014 check what agent actions are captured and retained",
+          "controls": [
+            "S4.1",
+            "D4.1",
+            "M5"
+          ],
+          "sha256": "a0efd40090a9753473d07bcc1b93dfbb611de06a0d4d1629eb28ca76635c96db"
+        },
+        {
+          "path": "sample_evidence/infra/.env",
+          "kind": "secrets",
+          "hint": "Environment file \u2014 secrets may be stored in plaintext; must not be in evidence or repos",
+          "controls": [
+            "S1.3",
+            "D2.2"
+          ],
+          "sha256": "7169412703c3edbf2de7c2dcd1fb1476dea91d7c951621eb2e3b79c06a3d174e"
+        }
+      ],
+      "artefacts": [
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/requirements.txt",
+          "sha256": "37d903265c975af8a94873ea613aa5b58c82a25c0e7b54d4d9d4a4640f805376",
+          "bytes": 187
+        },
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/test_assessor.py",
+          "sha256": "bd1a9f72264abb179860759b888ddb461b58b69ea3eb18f49f4849d4280140e8",
+          "bytes": 1478
+        },
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/MODEL_CARD.md",
+          "sha256": "0dbd2d5b75a498fc71ec5571ac17e0f245c055d73ef0276b4d83a35b7dcccd29",
+          "bytes": 2872
+        },
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/.streamlit/secrets.toml.example",
+          "sha256": "a7145b6e4facacd96d90f1d2f60829d4f9a5fca7889d061e0e5e91845f38dd57",
+          "bytes": 33
+        },
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/eval_results.json",
+          "sha256": "193546a240d1232fe3fef61c76d51f9adb824884312639ff36cb1a8abb64a217",
+          "bytes": 478
+        },
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/schemas/inventory.schema.json",
+          "sha256": "dc158723bcfd9c4cae21c2e226b3c6ad78a76955e95cfc7ba6507649d25e1314",
+          "bytes": 1828
+        },
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/sample_evidence/records/AI_inventory_extract_Aug2026.docx",
+          "sha256": "dfc9c464135fc9eb2f740bd3f3eed32cd8b9b575b5c0231cbcec0b7de05e93c3",
+          "bytes": 37115
+        },
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/sample_evidence/infra/agent_logging_config.yaml",
+          "sha256": "a0efd40090a9753473d07bcc1b93dfbb611de06a0d4d1629eb28ca76635c96db",
+          "bytes": 29
+        },
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/sample_evidence/infra/.env",
+          "sha256": "7169412703c3edbf2de7c2dcd1fb1476dea91d7c951621eb2e3b79c06a3d174e",
+          "bytes": 4
+        }
+      ]
+    },
+    "git_log": {
+      "adapter": "git_log",
+      "status": "ok",
+      "message": "",
+      "records": [
+        {
+          "commit": "218a4403a21404e7a18e84d76e56e7eeca9a52b6",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-06T00:56:21+08:00",
+          "message": "Revert \"WB-006: test the gate\"",
+          "ticket_ref": "WB-006",
+          "paths": [
+            "requirements.txt"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "f0c6d348fa44d91dcfa02d27182f3e0b1a61fff3",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-06T00:56:14+08:00",
+          "message": "WB-006: test the gate",
+          "ticket_ref": "WB-006",
+          "paths": [
+            "requirements.txt"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "88c4441ba394374b8f7d5323b7d9a408735a04a9",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-06T00:53:24+08:00",
+          "message": "WB-006: record gate test ticket",
+          "ticket_ref": "WB-006",
+          "paths": [
+            "governance/tickets.csv"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "cd228388875b0f10f67a3efa1a7ee5557e7c6abd",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-06T00:53:18+08:00",
+          "message": "Reapply \"WB-005: CI gate with exception-aware blocking and evidence branch\"",
+          "ticket_ref": "WB-005",
+          "paths": [
+            ".DS_Store",
+            ".github/workflows/audit.yml",
+            "caa/adapters/__init__.py",
+            "caa/checks.py",
+            "caa/runner.py",
+            "controls/mcm.yaml",
+            "data/AI_Governance_Playbook_MGF_SAFR_FINAL_v3_CSA_backref.xlsx",
+            "docs/LLM_REASONING.md",
+            "governance/exceptions.csv",
+            "governance/tickets.csv"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "3767ad907353669c003a7520fbeb85a5dbaf0946",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-06T00:52:41+08:00",
+          "message": "Revert \"WB-005: CI gate with exception-aware blocking and evidence branch\"",
+          "ticket_ref": "WB-005",
+          "paths": [
+            ".DS_Store",
+            ".github/workflows/audit.yml",
+            "caa/adapters/__init__.py",
+            "caa/checks.py",
+            "caa/runner.py",
+            "controls/mcm.yaml",
+            "data/AI_Governance_Playbook_MGF_SAFR_FINAL_v3_CSA_backref.xlsx",
+            "docs/LLM_REASONING.md",
+            "governance/exceptions.csv",
+            "governance/tickets.csv"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "11d3da129c1458cf867ba51a8b002455436ed9f1",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-06T00:43:05+08:00",
+          "message": "WB-005: CI gate with exception-aware blocking and evidence branch",
+          "ticket_ref": "WB-005",
+          "paths": [
+            ".DS_Store",
+            ".github/workflows/audit.yml",
+            "caa/adapters/__init__.py",
+            "caa/checks.py",
+            "caa/runner.py",
+            "controls/mcm.yaml",
+            "data/AI_Governance_Playbook_MGF_SAFR_FINAL_v3_CSA_backref.xlsx",
+            "docs/LLM_REASONING.md",
+            "governance/exceptions.csv",
+            "governance/tickets.csv"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "c6d3699a472762ef0054a42950183f2dd85f5d00",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-06T00:27:33+08:00",
+          "message": "WB-002: git adapter handles subfolder targets",
+          "ticket_ref": "WB-002",
+          "paths": [
+            "caa/adapters/__init__.py"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "71bd510e693dcacdf63b52d822b46b5002a65176",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-06T00:25:24+08:00",
+          "message": "WB-004: add model card for readiness-assessor",
+          "ticket_ref": "WB-004",
+          "paths": [
+            "MODEL_CARD.md"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "83b2ae6b7c028532408462479e32307c868468b7",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-06T00:25:20+08:00",
+          "message": "WB-002: add Lane B continuous control testing",
+          "ticket_ref": "WB-002",
+          "paths": [
+            ".github/workflows/audit.yml",
+            ".gitignore",
+            "MERGE.md",
+            "app.py",
+            "audit.yaml",
+            "caa/__init__.py",
+            "caa/adapters/__init__.py",
+            "caa/adapters/environment_scan.py",
+            "caa/checks.py",
+            "caa/review.py",
+            "caa/runner.py",
+            "controls/discovery.yaml",
+            "controls/mcm.yaml",
+            "deploy.yml",
+            "examples/sample_repo",
+            "governance/README.md",
+            "governance/eval_results.json",
+            "governance/exceptions.csv",
+            "governance/model_registry.csv",
+            "governance/rollback_log.csv",
+            "pipeline.py",
+            "schemas/control.schema.json",
+            "schemas/evidence_bundle.schema.json",
+            "schemas/inventory.schema.json"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "d5ae9ec26b5b88461c7e7c638161025ff3f06381",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-06T00:22:36+08:00",
+          "message": "WB-003: record ticket",
+          "ticket_ref": "WB-003",
+          "paths": [
+            "governance/tickets.csv"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "df480e8737172cdba3528d51b47f660b912b4985",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-06T00:21:25+08:00",
+          "message": "WB-003: pin dependencies to exact versions",
+          "ticket_ref": "WB-003",
+          "paths": [
+            "requirements.txt"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "4c716b390012a41ae9e7a12cd2cf33f1f08b76e4",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-05T21:55:20+08:00",
+          "message": "Add call-graph card to README",
+          "ticket_ref": null,
+          "paths": [
+            "README.md",
+            "docs/graph_card.png",
+            "docs/graph_card.svg"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "65ec800f07bb0d0c0d7e22913dfe58b4d63a3127",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-05T21:49:28+08:00",
+          "message": "Move app to repo root, remove stale copies, rewrite README",
+          "ticket_ref": null,
+          "paths": [
+            "README.md"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "87b56c0139f3f794b1a02364153835c858fb3fe8",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-05T21:46:57+08:00",
+          "message": "Pipeline nodes, headless run_scan, graphify graph",
+          "ticket_ref": null,
+          "paths": [
+            "docs/pipeline.py",
+            "docs/run_scan.py",
+            "graphify-out/.graphify_analysis.json",
+            "graphify-out/.graphify_labels.json",
+            "graphify-out/.graphify_labels.json.sig",
+            "graphify-out/2026-09-05/.graphify_analysis.json",
+            "graphify-out/2026-09-05/.graphify_labels.json",
+            "graphify-out/2026-09-05/GRAPH_REPORT.md",
+            "graphify-out/2026-09-05/graph.json",
+            "graphify-out/2026-09-05/manifest.json",
+            "graphify-out/GRAPH_REPORT.md",
+            "graphify-out/cache/ast/v0.9.54-s2/34a839a266c1ac3fa9372d1378ffbc4c30eefe05f965db9164919c0cfa9e3b37.json",
+            "graphify-out/cache/ast/v0.9.54-s2/a6f06205335b903fbe7fd5f94ff4ce0224eb3aa08af61f64b502cdcf59b106b9.json",
+            "graphify-out/cache/ast/v0.9.54-s2/b5f1985478222f58abcf8454647ea429286cd359e5a4e5a340202ae37d89bc2f.json",
+            "graphify-out/cache/ast/v0.9.54-s2/ddd9c8e84493230f00f3bc871cda4c1ab6b5a8f3566ed741e91a04682a9348b2.json",
+            "graphify-out/cache/stat-index.json",
+            "graphify-out/graph.html",
+            "graphify-out/graph.json",
+            "graphify-out/manifest.json",
+            "pipeline.py",
+            "run_scan.py"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "dbba044168ae8516b809258be10f3b8608b94208",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-05T21:42:25+08:00",
+          "message": "Pipeline nodes, headless run_scan, graphify knowledge graph",
+          "ticket_ref": null,
+          "paths": [
+            "app.py",
+            "docs/ARCHITECTURE.md",
+            "docs/USER_GUIDE.md",
+            "graphify-out/.graphify_analysis.json",
+            "graphify-out/.graphify_labels.json",
+            "graphify-out/.graphify_labels.json.sig",
+            "graphify-out/.graphify_root",
+            "graphify-out/GRAPH_REPORT.md",
+            "graphify-out/cache/ast/v0.9.54-s2/3f8c07c93ccfdf61de2cc1046e02e0d23fd82b613e5c739b1a022f548df1e294.json",
+            "graphify-out/cache/ast/v0.9.54-s2/5a1cc7f8ddcfe9ad01a19a20d1b9394701131d9f4356172e1ad51d814ba8ec29.json",
+            "graphify-out/cache/ast/v0.9.54-s2/5e56d162339a3ee996b21bc541af962062c92729d5ad1e492400d9fe11a13eb5.json",
+            "graphify-out/cache/ast/v0.9.54-s2/6029405724ab40249a9c9f21e405640e899745d50ca63f90ba5b79ad29a90878.json",
+            "graphify-out/cache/ast/v0.9.54-s2/6500f1c749df4c305d89cb3ebf4fd97a6418e3b22d541dc67b0d4499b6f15741.json",
+            "graphify-out/cache/ast/v0.9.54-s2/cf4df686fe90ec811a37df6c6f7c9c746249366c712b93b0a2c116d3d73bf194.json",
+            "graphify-out/cache/ast/v0.9.54-s2/f536f3d9bc02ce4ca4d33b9fe24582d74ef95a36ca673d38fc2f5f6ecb1c8b09.json",
+            "graphify-out/cache/last_query_stamp",
+            "graphify-out/cache/stat-index.json",
+            "graphify-out/graph.html",
+            "graphify-out/graph.json",
+            "graphify-out/manifest.json",
+            "pipeline.py"
+          ],
+          "touches_governed_paths": false
+        },
+        {
+          "commit": "f75e64bf5aa2004e94c4c62f7d26db6b1a4cad25",
+          "author": "Yen-Ching Wu",
+          "email": "yencwu87@gmail.com",
+          "date": "2026-09-05T21:33:57+08:00",
+          "message": "AI governance readiness workbench: local scanner, Ollama assessor, reviewer gate",
+          "ticket_ref": null,
+          "paths": [
+            ".DS_Store",
+            ".gitignore",
+            ".streamlit/config.toml",
+            ".streamlit/secrets.toml.example",
+            "README.md",
+            "app.py",
+            "assessor.py",
+            "docs/ARCHITECTURE.md",
+            "docs/USER_GUIDE.md",
+            "playbook.py",
+            "requirements.txt",
+            "sample_evidence.md",
+            "sample_evidence/infra/.env",
+            "sample_evidence/infra/.github/workflows/deploy.yml",
+            "sample_evidence/infra/agent_logging_config.yaml",
+            "sample_evidence/policies/AI_Acceptable_Use_Policy_v2.1.md",
+            "sample_evidence/records/AI_inventory_extract_Aug2026.docx",
+            "sample_evidence/records/Board_Risk_Committee_minutes_May2026.txt",
+            "sample_evidence/records/UCS-2026-018_suitability_assessment.md",
+            "sample_evidence/records/agent_runtime_monitoring_Aug2026.txt",
+            "scanner.py",
+            "test_assessor.py"
+          ],
+          "touches_governed_paths": false
+        }
+      ],
+      "artefacts": [
+        {
+          "ref": "git log -n500 @ /home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo",
+          "sha256": "7645cea4521e9f17dec8eeba252df403fb566c8f6592cae24846de925c45dc8b",
+          "bytes": 8087
+        }
+      ]
+    },
+    "lock_file": {
+      "adapter": "lock_file",
+      "status": "ok",
+      "message": "",
+      "records": [
+        {
+          "package": "anthropic",
+          "version": "1.4.0",
+          "pinned": true,
+          "raw": "anthropic==1.4.0"
+        },
+        {
+          "package": "jsonschema",
+          "version": "4.26.0",
+          "pinned": true,
+          "raw": "jsonschema==4.26.0"
+        },
+        {
+          "package": "jsonschema-specifications",
+          "version": "2025.9.1",
+          "pinned": true,
+          "raw": "jsonschema-specifications==2025.9.1"
+        },
+        {
+          "package": "openpyxl",
+          "version": "3.1.5",
+          "pinned": true,
+          "raw": "openpyxl==3.1.5"
+        },
+        {
+          "package": "pypdf",
+          "version": "6.17.0",
+          "pinned": true,
+          "raw": "pypdf==6.17.0"
+        },
+        {
+          "package": "python-docx",
+          "version": "1.2.0",
+          "pinned": true,
+          "raw": "python-docx==1.2.0"
+        },
+        {
+          "package": "PyYAML",
+          "version": "6.0.3",
+          "pinned": true,
+          "raw": "PyYAML==6.0.3"
+        },
+        {
+          "package": "rank-bm25",
+          "version": "0.2.2",
+          "pinned": true,
+          "raw": "rank-bm25==0.2.2"
+        },
+        {
+          "package": "requests",
+          "version": "2.34.2",
+          "pinned": true,
+          "raw": "requests==2.34.2"
+        },
+        {
+          "package": "streamlit",
+          "version": "1.63.0",
+          "pinned": true,
+          "raw": "streamlit==1.63.0"
+        }
+      ],
+      "artefacts": [
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/requirements.txt",
+          "sha256": "37d903265c975af8a94873ea613aa5b58c82a25c0e7b54d4d9d4a4640f805376",
+          "bytes": 187
+        }
+      ]
+    },
+    "deploy_manifest": {
+      "adapter": "deploy_manifest",
+      "status": "ok",
+      "message": "",
+      "records": [
+        {
+          "name": "readiness-assessor",
+          "version": "v0.1.0",
+          "deployed_at": "2026-08-28 12:00:00+00:00",
+          "_manifest": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/deploy.yml"
+        },
+        {
+          "name": "readiness-assessor",
+          "version": "v0.2.0",
+          "deployed_at": "2026-09-05 23:00:00+00:00",
+          "_manifest": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/deploy.yml"
+        }
+      ],
+      "artefacts": [
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/deploy.yml",
+          "sha256": "9a539d124e4e5de339eb10905a5a5abdb5932ce197e590d16f50e64b5408b907",
+          "bytes": 393
+        }
+      ]
+    },
+    "ticket_export": {
+      "adapter": "ticket_export",
+      "status": "ok",
+      "message": "",
+      "records": [
+        {
+          "ticket_id": "WB-001",
+          "model_id": "readiness-assessor",
+          "version": "v0.1.0",
+          "risk_tier": "medium",
+          "approver": "Reviewer Name",
+          "emergency": "FALSE",
+          "opened_at": "2026-08-25",
+          "approved_at": "2026-08-28",
+          "description": "Initial assessor prompt and harness"
+        },
+        {
+          "ticket_id": "WB-002",
+          "model_id": "readiness-assessor",
+          "version": "v0.2.0",
+          "risk_tier": "medium",
+          "approver": "Reviewer Name",
+          "emergency": "FALSE",
+          "opened_at": "2026-09-04",
+          "approved_at": "2026-09-05",
+          "description": "Add Lane B continuous control testing"
+        },
+        {
+          "ticket_id": "WB-003",
+          "model_id": "readiness-assessor",
+          "version": "v0.2.0",
+          "risk_tier": "medium",
+          "approver": "Reviewer Name",
+          "emergency": "false",
+          "opened_at": "2026-09-06",
+          "approved_at": "2026-09-06",
+          "description": "Pin dependencies to exact versions"
+        },
+        {
+          "ticket_id": "WB-005",
+          "model_id": "readiness-assessor",
+          "version": "v0.2.0",
+          "risk_tier": "medium",
+          "approver": "Reviewer Name",
+          "emergency": "false",
+          "opened_at": "2026-09-06",
+          "approved_at": "2026-09-06",
+          "description": "CI gate with exception-aware blocking and evidence branch"
+        },
+        {
+          "ticket_id": "WB-004",
+          "model_id": "readiness-assessor",
+          "version": "v0.2.0",
+          "risk_tier": "medium",
+          "approver": "Reviewer Name",
+          "emergency": "false",
+          "opened_at": "2026-09-06",
+          "approved_at": "2026-09-06",
+          "description": "Add model card for readiness-assessor"
+        },
+        {
+          "ticket_id": "WB-006",
+          "model_id": "readiness-assessor",
+          "version": "v0.2.0",
+          "risk_tier": "low",
+          "approver": "Reviewer Name",
+          "emergency": "false",
+          "opened_at": "2026-09-06",
+          "approved_at": "2026-09-06",
+          "description": "Gate test: unpin and revert"
+        }
+      ],
+      "artefacts": [
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/tickets.csv",
+          "sha256": "6f6d2ee3e075a3bb42d5ff215c94d4a410b19bef9b6c5128271efe8b4b473c00",
+          "bytes": 815
+        }
+      ]
+    },
+    "model_registry": {
+      "adapter": "model_registry",
+      "status": "ok",
+      "message": "",
+      "records": [
+        {
+          "model_id": "readiness-assessor",
+          "risk_tier": "medium",
+          "owner": "Yen-Ching",
+          "provider": "anthropic or ollama",
+          "intended_use": "Propose evidence sufficiency and maturity per control for reviewer decision"
+        }
+      ],
+      "artefacts": [
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/model_registry.csv",
+          "sha256": "02313a018619c4968357361ccd69119d368376be6a68241e29f80ce98520c37d",
+          "bytes": 179
+        }
+      ]
+    },
+    "eval_results": {
+      "adapter": "eval_results",
+      "status": "ok",
+      "message": "",
+      "records": [
+        {
+          "version": "v0.1.0",
+          "run_at": "2026-08-27T10:00:00Z",
+          "accuracy": 0.8,
+          "fairness_gap": 0.0,
+          "refusal_rate": 0.02,
+          "eval_set": "golden_20_controls",
+          "notes": "20 hand-labelled control/evidence pairs; accuracy = agreement with reviewer sufficiency"
+        },
+        {
+          "version": "v0.2.0",
+          "run_at": "2026-09-04T22:00:00Z",
+          "accuracy": 0.8,
+          "fairness_gap": 0.0,
+          "refusal_rate": 0.02,
+          "eval_set": "golden_20_controls",
+          "notes": "no assessor change in this version; re-run of same set"
+        }
+      ],
+      "artefacts": [
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/eval_results.json",
+          "sha256": "193546a240d1232fe3fef61c76d51f9adb824884312639ff36cb1a8abb64a217",
+          "bytes": 478
+        }
+      ]
+    },
+    "rollback_log": {
+      "adapter": "rollback_log",
+      "status": "ok",
+      "message": "",
+      "records": [
+        {
+          "tested_at": "2026-09-06",
+          "outcome": "success",
+          "tested_by": "Yen-Ching",
+          "method": "git checkout previous tag and re-run app"
+        }
+      ],
+      "artefacts": [
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/rollback_log.csv",
+          "sha256": "7e45eeb6d375f79e66354ee3a1c52dbe6e5d6087f011b94fef13575c42fdb2ac",
+          "bytes": 105
+        }
+      ]
+    },
+    "exception_register": {
+      "adapter": "exception_register",
+      "status": "ok",
+      "message": "",
+      "records": [
+        {
+          "exception_id": "EXC-001",
+          "control_id": "MCM-04",
+          "owner": "Yen-Ching",
+          "expires_on": "2026-12-31",
+          "status": "open",
+          "rationale": "Eval set is 20 items; tolerance band not meaningful until set reaches 100"
+        },
+        {
+          "exception_id": "EXC-002",
+          "control_id": "DISC-01",
+          "owner": "Yen-Ching",
+          "expires_on": "2026-12-31",
+          "status": "open",
+          "rationale": "secrets.toml.example and sample_evidence match *secret* by name; no credentials present"
+        }
+      ],
+      "artefacts": [
+        {
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/exceptions.csv",
+          "sha256": "b9750cdd563c1b59fcfd0f06bebc158845473e2f0d27766452fc9531caf0d306",
+          "bytes": 303
+        }
+      ]
+    }
+  }
+}
