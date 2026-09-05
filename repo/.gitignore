@@ -1,0 +1,6 @@
+data/*.xlsx
+data/assessments.json
+data/evidence/
+.streamlit/secrets.toml
+__pycache__/
+.venv/
