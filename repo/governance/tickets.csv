@@ -1,4 +1,6 @@
 ﻿ticket_id,model_id,version,risk_tier,approver,emergency,opened_at,approved_at,description
-WB-001,readiness-assessor,v0.1.0,medium,Reviewer Name,FALSE,08-25-26,08-28-26,Initial assessor prompt and harness
-WB-002,readiness-assessor,v0.2.0,medium,Reviewer Name,FALSE,09-04-26,09-05-26,Add Lane B continuous control testing
-"WB-003,readiness-assessor,v0.2.0,low,Reviewer Name,false,2026-09-06,2026-09-06,Pin dependencies to exact versions"
+WB-001,readiness-assessor,v0.1.0,medium,Reviewer Name,FALSE,2026-08-25,2026-08-28,Initial assessor prompt and harness
+WB-002,readiness-assessor,v0.2.0,medium,Reviewer Name,FALSE,2026-09-04,2026-09-05,Add Lane B continuous control testing
+WB-003,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Pin dependencies to exact versions
+WB-005,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,CI gate with exception-aware blocking and evidence branch
+WB-004,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Add model card for readiness-assessor
