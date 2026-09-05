@@ -262,7 +262,7 @@ def elapsed_within(ctx, p):
         dts = [d for d in dts if d]
         if not dts:
             return CheckResult("NOT_TESTABLE", "No parseable dates")
-        age = (now - max(dts)).days
+        age = max(0, (now - max(dts)).days)
         if age > p["max_days"]:
             return CheckResult("FAIL", f"Most recent is {age} days old (limit {p['max_days']})", [{"most_recent": max(dts).isoformat()}])
         return CheckResult("PASS", f"Most recent is {age} days old")

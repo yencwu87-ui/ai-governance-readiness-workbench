@@ -67,8 +67,8 @@ def _resolve(target: Path, rel: str) -> Path:
 
 def _read_table(p: Path) -> list[dict]:
     if p.suffix.lower() == ".csv":
-        with p.open(newline="") as f:
-            return list(csv.DictReader(f))
+        with p.open(newline="", encoding="utf-8-sig") as f:   # utf-8-sig strips an Excel BOM
+            return [{(k or "").strip(): (v.strip() if isinstance(v, str) else v) for k, v in row.items()} for row in csv.DictReader(f)]
     if p.suffix.lower() == ".json":
         data = json.loads(p.read_text())
         return data if isinstance(data, list) else data.get("records", [data])
