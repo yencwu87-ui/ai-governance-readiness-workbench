@@ -1,0 +1,42 @@
+# Play 11 — Agentic Operation & Human Oversight. Evidence source: the workbench's own decision log.
+# These test oversight of the readiness-assessor itself (the governed model in this repo).
+
+- id: OVS-01
+  domain: human-oversight
+  objective: Reviewers exercise real judgement over AI proposals
+  assertion: Override rate of AI proposals in the last 90 days is between 5% and 60%
+  framework_refs: [ISO42001-A.9.3, NIST-AI-RMF-GOVERN-5.1, MAS-AIRG-M3.10, MGF-D2.5]
+  play_refs: [P11.3]
+  inputs:
+    - source: decisions_log
+      fields: [override, at]
+  check: rate_within
+  params:
+    source: decisions_log
+    field: override
+    date_field: at
+    since_days: 90
+    min: 0.05
+    max: 0.60
+    min_records: 10
+  human_gate: Near 0% suggests rubber-stamping; near 60%+ suggests the assessor is not fit for purpose. Reviewer decides which, and whether the band itself is right.
+  frequency: monthly
+  severity: high
+
+- id: OVS-02
+  domain: human-oversight
+  objective: Every recorded decision is attributable
+  assertion: No recorded decision carries an empty or placeholder reviewer name
+  framework_refs: [ISO42001-A.9.4, MAS-AIRG-M1.5]
+  play_refs: [P11.3]
+  inputs:
+    - source: decisions_log
+      fields: [reviewer, unnamed]
+  check: record_count
+  params:
+    source: decisions_log
+    where: {field: unnamed, equals: true}
+    max: 0
+  human_gate: None. An unattributed decision is reopened, not accepted.
+  frequency: weekly
+  severity: critical

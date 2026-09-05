@@ -315,3 +315,69 @@ def record_count(ctx, p):
     if "min" in p and n < p["min"]:
         return CheckResult("FAIL", f"{n} records found (min {p['min']})")
     return CheckResult("PASS", f"{n} records found")
+
+
+@register("recency_each")
+def recency_each(ctx, p):
+    """Each filtered record's `field` date must be within max_days of now. max_days can be a
+    number or the name of a per-record field (`max_days_field`). Missing date = FAIL."""
+    recs = _records(ctx, p["source"])
+    if recs is None:
+        return _not_testable(p["source"])
+    recs = _apply_where(recs, p.get("where"))
+    if not recs:
+        return CheckResult("PASS", "No records in scope after filter")
+    now = datetime.now(timezone.utc)
+    findings = []
+    for r in recs:
+        limit = r.get(p["max_days_field"]) if p.get("max_days_field") else p.get("max_days")
+        try:
+            limit = int(limit)
+        except (TypeError, ValueError):
+            findings.append({**r, "_reason": "no cadence limit"}); continue
+        dt = _parse_dt(r.get(p["field"]))
+        if dt is None:
+            findings.append({**r, "_reason": "never run / no date"})
+        elif (now - dt).days > limit:
+            findings.append({**r, "_reason": f"{(now - dt).days} days old, limit {limit}"})
+    if findings:
+        return CheckResult("FAIL", f"{len(findings)} of {len(recs)} records overdue or never run", findings)
+    return CheckResult("PASS", f"All {len(recs)} records within cadence")
+
+
+@register("preceded_within")
+def preceded_within(ctx, p):
+    """For each `later` record, some `earlier` record must be dated within max_days before it. No join key."""
+    E, Lt = _records(ctx, p["earlier"]["source"]), _records(ctx, p["later"]["source"])
+    if E is None or Lt is None:
+        return _not_testable(p["earlier"]["source"], p["later"]["source"])
+    edts = [d for d in (_parse_dt(e.get(p["earlier"]["field"])) for e in E) if d]
+    findings = []
+    for r in Lt:
+        ld = _parse_dt(r.get(p["later"]["field"]))
+        if ld is None:
+            findings.append({**r, "_reason": "unparseable date"}); continue
+        if not any(0 <= (ld - ed).days <= p["max_days"] for ed in edts):
+            findings.append({**r, "_reason": f"no {p['earlier']['source']} run in the {p['max_days']} days before"})
+    if findings:
+        return CheckResult("FAIL", f"{len(findings)} of {len(Lt)} records not preceded by a run", findings)
+    return CheckResult("PASS", f"All {len(Lt)} records preceded by a run within {p['max_days']} days")
+
+
+@register("rate_within")
+def rate_within(ctx, p):
+    """Share of records (optionally within since_days by date_field) where `field` is truthy must lie in [min, max]."""
+    recs = _records(ctx, p["source"])
+    if recs is None:
+        return _not_testable(p["source"])
+    if p.get("since_days"):
+        cutoff = datetime.now(timezone.utc).timestamp() - p["since_days"] * 86400
+        recs = [r for r in recs if (_parse_dt(r.get(p["date_field"])) or datetime.min.replace(tzinfo=timezone.utc)).timestamp() >= cutoff]
+    n = len(recs)
+    if n < p.get("min_records", 5):
+        return CheckResult("NOT_TESTABLE", f"Only {n} records in window (need {p.get('min_records', 5)})")
+    k = sum(1 for r in recs if _norm(r.get(p["field"])) is True)
+    rate = k / n
+    if rate < p.get("min", 0) or rate > p.get("max", 1):
+        return CheckResult("FAIL", f"Rate {rate:.0%} ({k}/{n}) outside [{p.get('min', 0):.0%}, {p.get('max', 1):.0%}]", [{"rate": rate, "n": n}])
+    return CheckResult("PASS", f"Rate {rate:.0%} ({k}/{n}) within band")

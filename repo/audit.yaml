@@ -38,3 +38,13 @@ sources:
     args: {path: governance/rollback_log.csv}
   exception_register:
     args: {path: governance/exceptions.csv}
+
+  # Play 10 — the playbook's Stress-Test Tracker (workbook is git-ignored; use a CSV export for CI)
+  stress_tracker:
+    adapter: stress_tracker
+    args: {path: "data/*.xlsx", sheet: Stress-Test Tracker}
+
+  # Play 11 — Lane A decision log written by the workbench
+  decisions_log:
+    adapter: decisions_log
+    args: {path: data/assessments.json}

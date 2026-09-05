@@ -196,4 +196,4 @@ def deploy_manifest(target: Path, cfg: dict) -> AdapterResult:
 
 
 # ---------- workbench adapters (registered on import) ----------
-from . import environment_scan  # noqa: E402,F401
+from . import environment_scan, lifecycle  # noqa: E402,F401
