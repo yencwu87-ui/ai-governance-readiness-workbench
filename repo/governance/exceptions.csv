@@ -1,0 +1,2 @@
+exception_id,control_id,owner,expires_on,status,rationale
+EXC-001,MCM-04,Yen-Ching,2026-12-31,open,Eval set is 20 items; tolerance band not meaningful until set reaches 100

@@ -1,0 +1,40 @@
+# Lane B evidence sources. Maps logical source names (used in controls/*.yaml)
+# to adapters and their arguments. Paths are relative to `target`.
+# `target` is overridden by the folder entered in the app or --target on the CLI.
+target: examples/sample_repo
+
+sources:
+  environment_scan:
+    adapter: environment_scan
+    args: {}
+
+  git_log:
+    adapter: git_log
+    args:
+      max_commits: 500
+      ticket_pattern: '\b([A-Z]{2,10}-\d+)\b'
+      governed_paths: [prompts/, guardrails/, tools/permissions]
+
+  lock_file:
+    adapter: lock_file
+    args: {path: requirements.txt}
+
+  deploy_manifest:
+    adapter: deploy_manifest
+    args:
+      path: deploy.yml
+      records_key: models
+      fields: {name: name, version: version, deployed_at: deployed_at}
+
+  # Governance exports. Put CSV/JSON exports from your ticketing, registry and
+  # eval systems under <target>/governance/. Missing files -> NOT_TESTABLE, never PASS.
+  ticket_export:
+    args: {path: governance/tickets.csv}
+  model_registry:
+    args: {path: governance/model_registry.csv}
+  eval_results:
+    args: {path: governance/eval_results.json}
+  rollback_log:
+    args: {path: governance/rollback_log.csv}
+  exception_register:
+    args: {path: governance/exceptions.csv}

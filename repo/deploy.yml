@@ -1,0 +1,10 @@
+# Deploy manifest for the workbench. Lane B reads `models` for MCM-01 and MCM-03.
+# Update version + deployed_at whenever the assessor prompt, harness or provider changes.
+app: ai-governance-readiness-workbench
+models:
+  - name: readiness-assessor
+    version: v0.1.0
+    deployed_at: 2026-08-28T12:00:00Z
+  - name: readiness-assessor
+    version: v0.2.0
+    deployed_at: 2026-09-05T23:00:00Z

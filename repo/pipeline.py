@@ -1,7 +1,14 @@
 """Pipeline nodes. Each function is one stage; the graph of calls is the governance story.
 
-index_folder -> match_controls -> propose -> (human) record_decision -> export_playbook
-propose() never reaches write_back(): the only path to the playbook goes through record_decision().
+Lane A — readiness assessment (probabilistic, document-based, LLM under a harness):
+  index_folder -> match_controls -> propose -> (human) record_decision -> export_playbook
+  propose() never reaches write_back(): the only path to the playbook goes through record_decision().
+
+Lane B — continuous control testing (deterministic, artefact-based, no model):
+  run_audit -> [caa.runner: discover -> assert -> bundle] -> (human) sign_result
+  The runner never writes human_verdict; sign_result() is the only path to it.
+
+Both lanes end at a named reviewer. Neither lane's automated output is ever recorded as a conclusion.
 """
 from __future__ import annotations
 
@@ -87,3 +94,46 @@ def run_scan(folder: str, controls: list, min_score: float = 4.0, progress=None)
         evidence[c.key] = build_evidence(c, matches[c.key], signals)
         proposals[c.key] = propose(c, evidence[c.key])
     return evidence, proposals
+
+
+# ====================================================================
+# Lane B — continuous control testing (caa)
+# ====================================================================
+from pathlib import Path as _Path
+
+from caa import review as _review
+from caa.runner import run as _caa_run
+
+CAA_CONFIG, CAA_CONTROLS, CAA_EVIDENCE = _Path("audit.yaml"), _Path("controls"), _Path("evidence")
+
+
+def run_audit(folder: str, trigger: str = "manual") -> tuple[dict, _Path]:
+    """Stage B1–B3 — deterministic. Discover artefacts, run control checks, write a hashed bundle.
+    Records nothing a human is accountable for; every result has human_verdict = null."""
+    return _caa_run(CAA_CONFIG, CAA_CONTROLS, CAA_EVIDENCE, trigger=trigger, target=_Path(folder))
+
+
+def list_bundles() -> list[dict]:
+    return _review.list_bundles(CAA_EVIDENCE)
+
+
+def load_bundle(path) -> dict:
+    return _review.load_bundle(_Path(path))
+
+
+def open_items() -> list[dict]:
+    return _review.open_items(CAA_EVIDENCE)
+
+
+def sign_result(bundle_path, control_id: str, reviewer: str, disposition: str, rationale: str = "", exception_ref: str | None = None) -> dict:
+    """Stage B4 — human. The only function that writes human_verdict. Refuses if bundle integrity fails."""
+    return _review.sign(_Path(bundle_path), control_id, reviewer, disposition, rationale, exception_ref)
+
+
+def unsign_result(bundle_path, control_id: str) -> None:
+    _review.unsign(_Path(bundle_path), control_id)
+
+
+def control_history(control_id: str) -> list[dict]:
+    """Stage B5 — report. One control across every bundle, newest first."""
+    return _review.control_history(CAA_EVIDENCE, control_id)

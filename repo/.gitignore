@@ -1,6 +1,4 @@
-data/*.xlsx
+evidence/
 data/assessments.json
-data/evidence/
-.streamlit/secrets.toml
 __pycache__/
-.venv/
+.DS_Store

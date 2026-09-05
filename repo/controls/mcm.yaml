@@ -1,0 +1,187 @@
+# Model Change Management control pack
+# Each control is data. The runner resolves `inputs[].source` names via audit.yaml,
+# runs the named generic `check` with `params`, and records a machine verdict.
+# The `human_gate` is never executed by the runner; it is shown to the reviewer.
+
+- id: MCM-01
+  domain: model-change-management
+  objective: All changes are identified
+  assertion: Every deployed model or prompt version in production has a matching change record
+  framework_refs: [MAS-TRM-6.1, ISO42001-8.4, NIST-AI-RMF-MANAGE-2.4]
+  inputs:
+    - source: deploy_manifest
+      fields: [version]
+    - source: ticket_export
+      fields: [version]
+  check: values_subset
+  params:
+    subset: {source: deploy_manifest, field: version}
+    superset: {source: ticket_export, field: version}
+  human_gate: None if zero gaps. Reviewer confirms root cause for any orphan version.
+  frequency: on_deploy
+  severity: high
+
+- id: MCM-02
+  domain: model-change-management
+  objective: Changes are risk-classified
+  assertion: Each change ticket has a risk tier and the tier matches the model's registered tier
+  framework_refs: [MAS-TRM-6.2, ISO42001-6.1.2]
+  inputs:
+    - source: ticket_export
+      fields: [ticket_id, model_id, risk_tier]
+    - source: model_registry
+      fields: [model_id, risk_tier]
+  check: field_equals
+  params:
+    left: {source: ticket_export, field: risk_tier}
+    right: {source: model_registry, field: risk_tier}
+    join: {left_key: model_id, right_key: model_id}
+  human_gate: Reviewer samples 10% to check the tier was applied honestly, not defaulted.
+  frequency: weekly
+  severity: medium
+
+- id: MCM-03
+  domain: model-change-management
+  objective: Changes are tested before release
+  assertion: An evaluation run exists for the released version with a timestamp before deploy time
+  framework_refs: [MAS-TRM-6.3, ISO42001-8.4, NIST-AI-RMF-MEASURE-2.5]
+  inputs:
+    - source: eval_results
+      fields: [version, run_at]
+    - source: deploy_manifest
+      fields: [version, deployed_at]
+  check: timestamp_before
+  params:
+    earlier: {source: eval_results, field: run_at}
+    later: {source: deploy_manifest, field: deployed_at}
+    join: {left_key: version, right_key: version}
+  human_gate: Reviewer judges whether the eval set is still representative of the use case.
+  frequency: on_deploy
+  severity: high
+
+- id: MCM-04
+  domain: model-change-management
+  objective: No regression on key metrics
+  assertion: Released version's key metrics are within tolerance of the prior version
+  framework_refs: [MAS-FEAT-F3, NIST-AI-RMF-MEASURE-2.6]
+  inputs:
+    - source: eval_results
+      fields: [version, accuracy, fairness_gap, refusal_rate]
+  check: within_tolerance
+  params:
+    source: eval_results
+    order_by: run_at
+    metrics:
+      accuracy: {max_drop: 0.02}
+      fairness_gap: {max_rise: 0.01}
+      refusal_rate: {max_rise: 0.05}
+  human_gate: Owner explains and 2LoD accepts or rejects any tolerated breach.
+  frequency: on_deploy
+  severity: high
+
+- id: MCM-05
+  domain: model-change-management
+  objective: Segregation of duties
+  assertion: Approver on the change ticket is not the author of the code or prompt change
+  framework_refs: [MAS-TRM-6.1, ISO27001-A.5.3]
+  inputs:
+    - source: ticket_export
+      fields: [ticket_id, approver]
+    - source: git_log
+      fields: [ticket_ref, author]
+  check: identity_disjoint
+  params:
+    left: {source: git_log, field: author}
+    right: {source: ticket_export, field: approver}
+    join: {left_key: ticket_ref, right_key: ticket_id}
+  human_gate: None if clean. Any overlap is escalated, not waived.
+  frequency: on_commit
+  severity: critical
+
+- id: MCM-06
+  domain: model-change-management
+  objective: Prompt and config changes are treated as changes
+  assertion: Every commit touching prompt, guardrail or tool-permission paths references a change ticket
+  framework_refs: [MAS-TRM-6.1, ISO42001-8.4]
+  inputs:
+    - source: git_log
+      fields: [commit, paths, ticket_ref]
+  check: field_present
+  params:
+    source: git_log
+    fields: [ticket_ref]
+    where: {field: touches_governed_paths, equals: true}
+  human_gate: Reviewer confirms quarterly what counts as a material prompt change.
+  frequency: on_commit
+  severity: high
+
+- id: MCM-07
+  domain: model-change-management
+  objective: Dependency and upstream model changes are captured
+  assertion: All dependencies are pinned to exact versions
+  framework_refs: [MAS-TRM-6.4, ISO42001-A.10.3]
+  inputs:
+    - source: lock_file
+      fields: [package, version, pinned]
+  check: all_pinned
+  params:
+    source: lock_file
+  human_gate: Reviewer assesses vendor-side model updates that occur without a customer-side change.
+  frequency: on_commit
+  severity: medium
+
+- id: MCM-08
+  domain: model-change-management
+  objective: Rollback is possible
+  assertion: A rollback test has been exercised within the last 180 days
+  framework_refs: [MAS-TRM-8.2, ISO27001-A.8.14]
+  inputs:
+    - source: rollback_log
+      fields: [tested_at, outcome]
+  check: elapsed_within
+  params:
+    source: rollback_log
+    field: tested_at
+    max_days: 180
+    mode: most_recent
+  human_gate: Reviewer confirms the rollback test was realistic, not a dry-run tick.
+  frequency: monthly
+  severity: medium
+
+- id: MCM-09
+  domain: model-change-management
+  objective: Emergency changes are retrospectively controlled
+  assertion: Emergency changes complete full approval evidence within 5 working days
+  framework_refs: [MAS-TRM-6.1]
+  inputs:
+    - source: ticket_export
+      fields: [ticket_id, emergency, opened_at, approved_at]
+  check: elapsed_within
+  params:
+    source: ticket_export
+    start_field: opened_at
+    end_field: approved_at
+    max_days: 7
+    where: {field: emergency, equals: true}
+    mode: each
+  human_gate: Reviewer questions the emergency justification itself.
+  frequency: weekly
+  severity: high
+
+- id: MCM-10
+  domain: model-change-management
+  objective: Exceptions expire
+  assertion: Every open exception has an owner and an expiry date not yet passed
+  framework_refs: [MAS-TRM-3.4]
+  inputs:
+    - source: exception_register
+      fields: [exception_id, owner, expires_on, status]
+  check: date_not_passed
+  params:
+    source: exception_register
+    field: expires_on
+    require_fields: [owner]
+    where: {field: status, equals: open}
+  human_gate: Expired or extended exceptions re-tabled at the governance forum.
+  frequency: weekly
+  severity: medium

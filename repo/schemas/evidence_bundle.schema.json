@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "caa/evidence_bundle",
+  "title": "Evidence bundle",
+  "description": "Output of one Assert run. Append-only. Machine verdicts are filled by the runner; human verdicts are filled only by the Review stage.",
+  "type": "object",
+  "required": ["bundle_id", "run_at", "trigger", "inventory_id", "runner_version", "control_pack", "results", "bundle_sha256"],
+  "additionalProperties": false,
+  "properties": {
+    "bundle_id": { "type": "string" },
+    "run_at": { "type": "string", "format": "date-time" },
+    "trigger": { "type": "string", "enum": ["manual", "on_commit", "on_deploy", "scheduled"] },
+    "inventory_id": { "type": "string" },
+    "runner_version": { "type": "string" },
+    "control_pack": {
+      "type": "object",
+      "required": ["path", "sha256", "control_count"],
+      "properties": {
+        "path": { "type": "string" },
+        "sha256": { "type": "string" },
+        "control_count": { "type": "integer" }
+      }
+    },
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["control_id", "assertion", "machine_verdict", "detail", "evidence", "human_gate", "human_verdict"],
+        "additionalProperties": false,
+        "properties": {
+          "control_id": { "type": "string" },
+          "domain": { "type": "string" },
+          "assertion": { "type": "string" },
+          "framework_refs": { "type": "array", "items": { "type": "string" } },
+          "severity": { "type": "string" },
+          "machine_verdict": { "type": "string", "enum": ["PASS", "FAIL", "NOT_TESTABLE"] },
+          "detail": { "type": "string", "description": "Human-readable explanation of the verdict" },
+          "findings": {
+            "type": "array",
+            "description": "Individual exceptions (records that failed), for the reviewer",
+            "items": { "type": "object" }
+          },
+          "evidence": {
+            "type": "array",
+            "description": "Artefacts examined, copied from inventory with hashes",
+            "items": {
+              "type": "object",
+              "required": ["source", "ref", "sha256"],
+              "properties": {
+                "source": { "type": "string" },
+                "ref": { "type": "string" },
+                "sha256": { "type": "string" }
+              }
+            }
+          },
+          "human_gate": { "type": "string" },
+          "human_verdict": {
+            "type": ["object", "null"],
+            "description": "Null until a reviewer signs. Written only by the Review stage.",
+            "properties": {
+              "reviewer": { "type": "string" },
+              "signed_at": { "type": "string", "format": "date-time" },
+              "disposition": { "type": "string", "enum": ["ACCEPT", "EXCEPTION_RAISED", "ESCALATE", "REJECT_MACHINE_VERDICT"] },
+              "rationale": { "type": "string" },
+              "exception_ref": { "type": ["string", "null"] }
+            }
+          }
+        }
+      }
+    },
+    "bundle_sha256": {
+      "type": "string",
+      "description": "SHA-256 of the canonical JSON of everything above except this field and human_verdict blocks. Detects tampering with machine results."
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "caa/control",
+  "title": "Control definition",
+  "description": "One testable control. Controls are data: the runner executes the named generic check against the named evidence sources.",
+  "type": "object",
+  "required": [
+    "id",
+    "domain",
+    "objective",
+    "assertion",
+    "inputs",
+    "check",
+    "human_gate",
+    "frequency"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z]{2,6}-[0-9]{2,3}$"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "objective": {
+      "type": "string",
+      "description": "Control objective in plain language"
+    },
+    "assertion": {
+      "type": "string",
+      "description": "Binary, testable statement the check evaluates"
+    },
+    "framework_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "External framework clause references, e.g. MAS-TRM-5.1, ISO42001-8.4"
+    },
+    "inputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "source"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "Logical source name resolved via audit.yaml"
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "check": {
+      "type": "string",
+      "enum": [
+        "field_present",
+        "field_equals",
+        "values_subset",
+        "timestamp_before",
+        "within_tolerance",
+        "identity_disjoint",
+        "date_not_passed",
+        "all_pinned",
+        "elapsed_within",
+        "threshold_met",
+        "record_count"
+      ]
+    },
+    "params": {
+      "type": "object",
+      "description": "Check-specific parameters; see caa/checks.py docstrings"
+    },
+    "human_gate": {
+      "type": "string",
+      "description": "What judgement remains for the reviewer after the machine verdict"
+    },
+    "frequency": {
+      "type": "string",
+      "enum": [
+        "on_commit",
+        "on_deploy",
+        "daily",
+        "weekly",
+        "monthly",
+        "quarterly"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ],
+      "default": "medium"
+    }
+  }
+}

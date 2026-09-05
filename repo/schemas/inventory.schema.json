@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "caa/inventory",
+  "title": "Environment inventory",
+  "description": "Output of the Discover stage. Everything the Assert stage may need to know exists, normalised.",
+  "type": "object",
+  "required": ["inventory_id", "generated_at", "target", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "inventory_id": { "type": "string" },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "target": {
+      "type": "object",
+      "required": ["path"],
+      "properties": {
+        "path": { "type": "string" },
+        "git_head": { "type": ["string", "null"] },
+        "git_remote": { "type": ["string", "null"] }
+      }
+    },
+    "sources": {
+      "type": "object",
+      "description": "Keyed by logical source name. Each entry is the normalised record set the adapter produced plus provenance.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["adapter", "status", "records", "artefacts"],
+        "properties": {
+          "adapter": { "type": "string" },
+          "status": { "type": "string", "enum": ["ok", "missing", "error"] },
+          "message": { "type": "string" },
+          "records": { "type": "array", "items": { "type": "object" } },
+          "artefacts": {
+            "type": "array",
+            "description": "Files (or commands) the adapter read, with hashes for the evidence bundle",
+            "items": {
+              "type": "object",
+              "required": ["ref", "sha256"],
+              "properties": {
+                "ref": { "type": "string", "description": "Path or command" },
+                "sha256": { "type": "string" },
+                "bytes": { "type": "integer" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

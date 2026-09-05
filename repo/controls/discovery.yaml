@@ -1,0 +1,36 @@
+# Discovery controls driven by the workbench scanner's environment signals.
+# These are presence/absence tests over what scan_environment finds.
+
+- id: DISC-01
+  domain: discovery
+  objective: No plaintext secrets in the evidence or code folder
+  assertion: No file matching secrets patterns (.env, *secret*) exists in the scanned folder
+  framework_refs: [MAS-TRM-11.2, ISO27001-A.8.24]
+  inputs:
+    - source: environment_scan
+      fields: [path, kind]
+  check: record_count
+  params:
+    source: environment_scan
+    where: {field: kind, equals: secrets}
+    max: 0
+  human_gate: Reviewer confirms whether flagged files are references or actual credentials.
+  frequency: on_commit
+  severity: critical
+
+- id: DISC-02
+  domain: discovery
+  objective: Model documentation exists
+  assertion: At least one model card is present in the scanned folder
+  framework_refs: [ISO42001-A.6.2, NIST-AI-RMF-MAP-1.1]
+  inputs:
+    - source: environment_scan
+      fields: [path, kind]
+  check: record_count
+  params:
+    source: environment_scan
+    where: {field: kind, equals: model-doc}
+    min: 1
+  human_gate: Reviewer assesses whether the model card is current and covers intended use and limits (Lane A does this).
+  frequency: weekly
+  severity: medium
