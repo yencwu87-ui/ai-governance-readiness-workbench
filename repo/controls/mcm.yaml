@@ -128,7 +128,7 @@
     source: lock_file
   human_gate: Reviewer assesses vendor-side model updates that occur without a customer-side change.
   frequency: on_commit
-  severity: high
+  severity: medium
 
 - id: MCM-08
   domain: model-change-management

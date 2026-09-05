@@ -170,7 +170,7 @@ def verify_bundle(path: Path) -> bool:
 
 # ---------- entry ----------
 
-def run(config_path: Path, controls_path: Path, out: Path, trigger: str = "manual", target: Path | None = None, return_inventory: bool = False):
+def run(config_path: Path, controls_path: Path, out: Path, trigger: str = "manual", target: Path | None = None) -> tuple[dict, Path]:
     """Library entry point used by pipeline.py. Returns (bundle, bundle_path)."""
     config = yaml.safe_load(Path(config_path).read_text())
     target = Path(target or config.get("target", ".")).resolve()
@@ -187,7 +187,7 @@ def run(config_path: Path, controls_path: Path, out: Path, trigger: str = "manua
     (out / "inventories" / f"{stamp}_{inv['inventory_id'][:8]}.json").write_text(json.dumps(inv, indent=2, default=str))
     bpath = out / "bundles" / f"{stamp}_{b['bundle_id'][:8]}.json"
     bpath.write_text(json.dumps(b, indent=2, default=str))
-    return (b, bpath, inv) if return_inventory else (b, bpath)
+    return b, bpath
 
 
 def main(argv=None):
@@ -200,9 +200,9 @@ def main(argv=None):
     ap.add_argument("--fail-on", default="none", choices=["none", "critical", "high", "any"],
                     help="Exit non-zero if any FAIL at or above this severity (for CI gating)")
     a = ap.parse_args(argv)
-    b, bpath, inv = run(Path(a.config), Path(a.controls), Path(a.out), a.trigger, a.target, return_inventory=True)
+    b, bpath = run(Path(a.config), Path(a.controls), Path(a.out), a.trigger, a.target)
     _print_summary(b, bpath)
-    return _exit_code(b["results"], a.fail_on, _excepted_controls(inv))
+    return _exit_code(b["results"], a.fail_on)
 
 
 def _print_summary(b: dict, path: Path):
@@ -217,33 +217,12 @@ def _print_summary(b: dict, path: Path):
     print(f"\nWritten: {path}\nbundle_sha256: {b['bundle_sha256']}")
 
 
-def _excepted_controls(inventory: dict) -> dict[str, str]:
-    """control_id -> exception_id for open, unexpired rows in the exception_register source."""
-    src = inventory["sources"].get("exception_register", {})
-    if src.get("status") != "ok":
-        return {}
-    today = datetime.now(timezone.utc).date().isoformat()
-    out = {}
-    for r in src["records"]:
-        if str(r.get("status", "")).strip().lower() == "open" and str(r.get("expires_on", "")) >= today and r.get("control_id"):
-            out[str(r["control_id"]).strip()] = str(r.get("exception_id", ""))
-    return out
-
-
-def _exit_code(results: list[dict], fail_on: str, excepted: dict[str, str] | None = None) -> int:
-    """Non-zero if any FAIL at or above the severity floor that is not covered by an open exception."""
+def _exit_code(results: list[dict], fail_on: str) -> int:
     if fail_on == "none":
         return 0
-    excepted = excepted or {}
     rank = {"low": 0, "medium": 1, "high": 2, "critical": 3}
     floor = {"any": 0, "high": 2, "critical": 3}[fail_on]
-    blocking = [r for r in results if r["machine_verdict"] == "FAIL" and rank[r["severity"]] >= floor and r["control_id"] not in excepted]
-    if blocking:
-        print(f"\nGATE: blocked by {', '.join(r['control_id'] for r in blocking)}")
-    covered = [r["control_id"] for r in results if r["machine_verdict"] == "FAIL" and r["control_id"] in excepted]
-    if covered:
-        print("GATE: FAIL covered by open exception: " + ", ".join(f"{c} ({excepted[c]})" for c in covered))
-    return 1 if blocking else 0
+    return 1 if any(r["machine_verdict"] == "FAIL" and rank[r["severity"]] >= floor for r in results) else 0
 
 
 if __name__ == "__main__":
