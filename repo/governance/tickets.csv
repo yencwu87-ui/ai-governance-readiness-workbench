@@ -4,3 +4,4 @@ WB-002,readiness-assessor,v0.2.0,medium,Reviewer Name,FALSE,2026-09-04,2026-09-0
 WB-003,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Pin dependencies to exact versions
 WB-005,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,CI gate with exception-aware blocking and evidence branch
 WB-004,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Add model card for readiness-assessor
+WB-006,readiness-assessor,v0.2.0,low,Reviewer Name,false,2026-09-06,2026-09-06,Gate test: unpin and revert
