@@ -5,3 +5,6 @@ WB-003,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-0
 WB-005,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,CI gate with exception-aware blocking and evidence branch
 WB-004,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Add model card for readiness-assessor
 WB-006,readiness-assessor,v0.2.0,low,Reviewer Name,false,2026-09-06,2026-09-06,Gate test: unpin and revert
+WB-007,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Join Lane A and Lane B through lifecycle plays
+WB-008,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Add stress-test and oversight control packs
+WB-009,readiness-assessor,v0.2.0,high,Reviewer Name,false,2026-09-06,,Harden assessor against evidence-embedded instructions
