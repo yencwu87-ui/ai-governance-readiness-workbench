@@ -1,1 +1,1 @@
-{"0": "assessor.py", "1": "playbook.py", "2": "scanner.py", "3": "app.py", "4": "index_folder", "5": "Path", "6": "Chunk", "7": "pipeline.py", "8": "build_evidence", "9": "propose", "10": "record_decision"}
+{"0": "docs/pipeline.py", "1": "scanner.py", "2": "playbook.py", "3": "assessor.py", "4": "pipeline.py", "5": "app.py", "6": "run_scan", "7": "build_evidence", "8": "record_decision", "9": "Index"}

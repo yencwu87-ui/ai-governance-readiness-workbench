@@ -143,6 +143,16 @@
       "degree": 7
     },
     {
+      "id": "playbook_write_back",
+      "label": "write_back()",
+      "degree": 6
+    },
+    {
+      "id": "scanner_extract",
+      "label": "extract()",
+      "degree": 6
+    },
+    {
       "id": "docs_pipeline_index_folder",
       "label": "index_folder()",
       "degree": 6
@@ -153,33 +163,34 @@
       "degree": 6
     },
     {
-      "id": "scanner_extract",
-      "label": "extract()",
-      "degree": 6
-    },
-    {
-      "id": "playbook_write_back",
-      "label": "write_back()",
-      "degree": 6
+      "id": "playbook_load_controls",
+      "label": "load_controls()",
+      "degree": 5
     },
     {
       "id": "scanner_scan_environment",
       "label": "scan_environment()",
       "degree": 5
-    },
-    {
-      "id": "playbook_load_controls",
-      "label": "load_controls()",
-      "degree": 5
     }
   ],
   "surprises": [
     {
-      "source": "build_evidence()",
-      "target": "signals_for()",
+      "source": "propose()",
+      "target": "assess()",
       "source_files": [
         "docs/pipeline.py",
-        "scanner.py"
+        "assessor.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "propose()",
+      "target": "assess()",
+      "source_files": [
+        "pipeline.py",
+        "assessor.py"
       ],
       "confidence": "EXTRACTED",
       "relation": "calls",
@@ -197,6 +208,17 @@
       "why": "connects across different repos/directories; bridges separate communities"
     },
     {
+      "source": "export_playbook()",
+      "target": "write_back()",
+      "source_files": [
+        "pipeline.py",
+        "playbook.py"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; bridges separate communities"
+    },
+    {
       "source": "index_folder()",
       "target": "scan_documents()",
       "source_files": [
@@ -206,50 +228,10 @@
       "confidence": "EXTRACTED",
       "relation": "calls",
       "why": "connects across different repos/directories; bridges separate communities"
-    },
-    {
-      "source": "index_folder()",
-      "target": "scan_environment()",
-      "source_files": [
-        "docs/pipeline.py",
-        "scanner.py"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "calls",
-      "why": "connects across different repos/directories; bridges separate communities"
-    },
-    {
-      "source": "propose()",
-      "target": "assess()",
-      "source_files": [
-        "docs/pipeline.py",
-        "assessor.py"
-      ],
-      "confidence": "EXTRACTED",
-      "relation": "calls",
-      "why": "connects across different repos/directories; bridges separate communities"
     }
   ],
-  "questions": [
-    {
-      "type": "bridge_node",
-      "question": "Why does `index_folder()` connect `run_scan` to `scanner.py`, `pipeline.py`, `app.py`?",
-      "why": "High betweenness centrality (0.059) - this node is a cross-community bridge."
-    },
-    {
-      "type": "bridge_node",
-      "question": "Why does `index_folder()` connect `docs/pipeline.py` to `scanner.py`?",
-      "why": "High betweenness centrality (0.052) - this node is a cross-community bridge."
-    },
-    {
-      "type": "bridge_node",
-      "question": "Why does `write_back()` connect `playbook.py` to `docs/pipeline.py`, `app.py`?",
-      "why": "High betweenness centrality (0.037) - this node is a cross-community bridge."
-    },
-    {
-      "type": "low_cohesion",
-      "question": "Should `docs/pipeline.py` be split into smaller, more focused modules?",
-      "why": "Cohesion score 0.13450292397660818 - nodes in this community are weakly interconnected."
-    }
-  ]
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
 }
