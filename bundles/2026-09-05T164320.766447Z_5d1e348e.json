@@ -1,0 +1,169 @@
+{
+  "bundle_id": "5d1e348e-b74f-403b-9989-a89e1576f7d1",
+  "run_at": "2026-09-05T16:43:20.766447+00:00",
+  "trigger": "on_commit",
+  "inventory_id": "593ac639-a8e3-46c2-b0ff-00e29f140d7c",
+  "runner_version": "0.1.0",
+  "control_pack": {
+    "path": "controls",
+    "sha256": "0cad2cd2ccdb85bc313aaace872608fd20f2db433a97eee410c51222078c6c07",
+    "control_count": 12
+  },
+  "results": [
+    {
+      "control_id": "DISC-01",
+      "domain": "discovery",
+      "assertion": "No file matching secrets patterns (.env, *secret*) exists in the scanned folder",
+      "framework_refs": [
+        "MAS-TRM-11.2",
+        "ISO27001-A.8.24"
+      ],
+      "severity": "critical",
+      "machine_verdict": "FAIL",
+      "detail": "2 records found (max 0)",
+      "findings": [
+        {
+          "path": ".streamlit/secrets.toml.example",
+          "kind": "secrets",
+          "hint": "Secrets-related file \u2014 verify it is a reference, not plaintext credentials",
+          "controls": [
+            "S1.3",
+            "D2.2"
+          ],
+          "sha256": "a7145b6e4facacd96d90f1d2f60829d4f9a5fca7889d061e0e5e91845f38dd57"
+        },
+        {
+          "path": "sample_evidence/infra/.env",
+          "kind": "secrets",
+          "hint": "Environment file \u2014 secrets may be stored in plaintext; must not be in evidence or repos",
+          "controls": [
+            "S1.3",
+            "D2.2"
+          ],
+          "sha256": "7169412703c3edbf2de7c2dcd1fb1476dea91d7c951621eb2e3b79c06a3d174e"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/requirements.txt",
+          "sha256": "37d903265c975af8a94873ea613aa5b58c82a25c0e7b54d4d9d4a4640f805376"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/test_assessor.py",
+          "sha256": "bd1a9f72264abb179860759b888ddb461b58b69ea3eb18f49f4849d4280140e8"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/MODEL_CARD.md",
+          "sha256": "0dbd2d5b75a498fc71ec5571ac17e0f245c055d73ef0276b4d83a35b7dcccd29"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/.streamlit/secrets.toml.example",
+          "sha256": "a7145b6e4facacd96d90f1d2f60829d4f9a5fca7889d061e0e5e91845f38dd57"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/eval_results.json",
+          "sha256": "193546a240d1232fe3fef61c76d51f9adb824884312639ff36cb1a8abb64a217"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/schemas/inventory.schema.json",
+          "sha256": "dc158723bcfd9c4cae21c2e226b3c6ad78a76955e95cfc7ba6507649d25e1314"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/sample_evidence/records/AI_inventory_extract_Aug2026.docx",
+          "sha256": "dfc9c464135fc9eb2f740bd3f3eed32cd8b9b575b5c0231cbcec0b7de05e93c3"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/sample_evidence/infra/agent_logging_config.yaml",
+          "sha256": "a0efd40090a9753473d07bcc1b93dfbb611de06a0d4d1629eb28ca76635c96db"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/sample_evidence/infra/.env",
+          "sha256": "7169412703c3edbf2de7c2dcd1fb1476dea91d7c951621eb2e3b79c06a3d174e"
+        }
+      ],
+      "human_gate": "Reviewer confirms whether flagged files are references or actual credentials.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "MCM-05",
+      "domain": "model-change-management",
+      "assertion": "Approver on the change ticket is not the author of the code or prompt change",
+      "framework_refs": [
+        "MAS-TRM-6.1",
+        "ISO27001-A.5.3"
+      ],
+      "severity": "critical",
+      "machine_verdict": "PASS",
+      "detail": "6 pairs, no identity overlap",
+      "findings": [],
+      "evidence": [
+        {
+          "source": "ticket_export",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/tickets.csv",
+          "sha256": "2265a48b83a18494e3094299a8467fdb64cc473a30cc338c34d98ffadd359d2b"
+        },
+        {
+          "source": "git_log",
+          "ref": "git log -n500 @ /home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo",
+          "sha256": "61dfc99137521681c9c7bc7cb82f74d2c44648c6467692b0ae1c8cbe5409153a"
+        }
+      ],
+      "human_gate": "None if clean. Any overlap is escalated, not waived.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "MCM-06",
+      "domain": "model-change-management",
+      "assertion": "Every commit touching prompt, guardrail or tool-permission paths references a change ticket",
+      "framework_refs": [
+        "MAS-TRM-6.1",
+        "ISO42001-8.4"
+      ],
+      "severity": "high",
+      "machine_verdict": "PASS",
+      "detail": "No records in scope after filter",
+      "findings": [],
+      "evidence": [
+        {
+          "source": "git_log",
+          "ref": "git log -n500 @ /home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo",
+          "sha256": "61dfc99137521681c9c7bc7cb82f74d2c44648c6467692b0ae1c8cbe5409153a"
+        }
+      ],
+      "human_gate": "Reviewer confirms quarterly what counts as a material prompt change.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "MCM-07",
+      "domain": "model-change-management",
+      "assertion": "All dependencies are pinned to exact versions",
+      "framework_refs": [
+        "MAS-TRM-6.4",
+        "ISO42001-A.10.3"
+      ],
+      "severity": "high",
+      "machine_verdict": "PASS",
+      "detail": "All 10 dependencies pinned",
+      "findings": [],
+      "evidence": [
+        {
+          "source": "lock_file",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/requirements.txt",
+          "sha256": "37d903265c975af8a94873ea613aa5b58c82a25c0e7b54d4d9d4a4640f805376"
+        }
+      ],
+      "human_gate": "Reviewer assesses vendor-side model updates that occur without a customer-side change.",
+      "human_verdict": null
+    }
+  ],
+  "bundle_sha256": "d73584d1fb6c318bbb5e498e70c72a2495ec638a83cee973cfea17458dd6a4e6"
+}
