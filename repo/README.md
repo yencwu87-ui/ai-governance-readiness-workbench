@@ -18,6 +18,7 @@ flowchart LR
     class C model
     class D,E human
 ```
+![Call graph: no directed path from propose() to write_back()](docs/graph_card.png)
 
 The call graph enforces this rather than a comment promising it. From a [graphify](https://github.com/safishamsi/graphify) AST scan of the code:
 
