@@ -8,3 +8,4 @@ WB-006,readiness-assessor,v0.2.0,low,Reviewer Name,false,2026-09-06,2026-09-06,G
 WB-007,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Join Lane A and Lane B through lifecycle plays
 WB-008,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Add stress-test and oversight control packs
 WB-009,readiness-assessor,v0.2.0,high,Reviewer Name,false,2026-09-06,2026-09-06,Harden assessor against evidence-embedded instructions
+WB-010,readiness-assessor,v0.3.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Stress-test scanner with target abstraction and engine adapters (garak, promptfoo)
