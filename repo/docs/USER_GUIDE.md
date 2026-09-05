@@ -57,6 +57,14 @@ The sidebar should show "Assessor: ollama/llama3.1:8b". If it shows a warning th
 3. **Reuse this evidence on…** copies the same evidence to another control (useful for cross-mapped controls). Each copy still needs its own assessment.
 4. Click **Assess with AI**.
 
+### C. Headless scan from Terminal
+
+```bash
+python run_scan.py /path/to/evidence --scope "MAS,SAFR"
+```
+
+Runs index → match → propose over the folder and writes `data/proposals_<date>.json` plus a Markdown gap analysis of unreviewed proposals. Useful for a first pass overnight; review the results in the app afterwards. It never writes to the playbook.
+
 ## 6. Reading an AI proposal
 
 Each proposal shows:

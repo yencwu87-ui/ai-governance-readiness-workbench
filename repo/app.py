@@ -5,9 +5,10 @@ from pathlib import Path
 
 import streamlit as st
 
-from assessor import PROVIDER, assess, model_name
-from playbook import LIBRARIES, load_controls, write_back
-from scanner import Index, scan_documents, scan_environment, signals_for
+from assessor import PROVIDER, model_name
+from scanner import signals_for
+from pipeline import build_evidence, export_playbook, gap_analysis, index_folder, match_controls, propose, record_decision
+from playbook import LIBRARIES, load_controls
 
 DATA = Path("data")
 DATA.mkdir(exist_ok=True)
@@ -99,10 +100,9 @@ with tab_s:
             st.error("Folder not found. Paste the full path (in Finder: right-click the folder, hold Option, Copy as Pathname).")
         else:
             bar = st.progress(0.0, "Reading files…")
-            chunks = scan_documents(folder, lambda n, t, name: bar.progress((n + 1) / max(t, 1), f"Reading {name}"))
+            st.session_state.index, st.session_state.signals = index_folder(folder, lambda n, t, name: bar.progress((n + 1) / max(t, 1), f"Reading {name}"))
             bar.empty()
-            st.session_state.index = Index(chunks)
-            st.session_state.signals = scan_environment(folder)
+            chunks = st.session_state.index.chunks
             files = len({c.path for c in chunks})
             st.success(f"Indexed {files} documents into {len(chunks)} passages. Found {len(st.session_state.signals)} environment signals.")
     idx = st.session_state.get("index")
@@ -114,8 +114,8 @@ with tab_s:
                          width="stretch", hide_index=True)
 
     if idx:
-        matches = {c.key: idx.query(c, k=3, min_score=min_score) for c in in_scope}
-        found = [c for c in in_scope if matches[c.key]]
+        matches = match_controls(idx, in_scope, min_score=min_score)
+        found = [c for c in in_scope if c.key in matches]
         st.write(f"Candidate evidence found for **{len(found)}** of {len(in_scope)} in-scope controls; **{len(in_scope) - len(found)}** have no matching document.")
         with st.expander("Preview matches"):
             st.dataframe([{"Control": f"{c.id} {c.title}", "Library": c.lib, "Best match": matches[c.key][0][0].label, "Score": round(matches[c.key][0][1], 1),
@@ -127,17 +127,10 @@ with tab_s:
             fails = 0
             for n, c in enumerate(todo):
                 bar.progress(n / len(todo), f"Assessing {c.id} ({n + 1}/{len(todo)})")
-                ev_text = "\n\n".join(f"--- Source: {ch.label} ---\n{ch.text}" for ch, _ in matches[c.key])
-                sg = signals_for(c, sigs)
-                if sg:
-                    ev_text += "\n\n--- Environment signals ---\n" + "\n".join(f"{x.path}: {x.hint}" for x in sg)
-                S["evidence"][c.key] = {"text": ev_text[:20000], "file_name": "", "auto": True, "sources": [ch.path for ch, _ in matches[c.key]]}
-                try:
-                    S["ai"][c.key] = assess(c, ev_text)
-                    S["decisions"].pop(c.key, None)
-                except Exception as e:
-                    fails += 1
-                    S["ai"][c.key] = {"sufficiency": "none", "proposedMaturity": 1, "rationale": f"Assessment failed: {e}", "excerpt": "", "gaps": [], "remediation": [], "flags": ["assessor error"], "model": "error"}
+                S["evidence"][c.key] = build_evidence(c, matches[c.key], sigs)
+                S["ai"][c.key] = propose(c, S["evidence"][c.key])
+                fails += S["ai"][c.key].get("model") == "error"
+                S["decisions"].pop(c.key, None)
                 save_state()
             bar.empty()
             st.success(f"Assessed {len(todo)} controls ({fails} errors). Review each on the Assess tab — nothing is recorded until you accept or override.")
@@ -145,20 +138,7 @@ with tab_s:
     # gap analysis
     if S["ai"] or S["decisions"]:
         st.subheader("Gap analysis")
-        rating = lambda k: S["decisions"].get(k, {}).get("sufficiency") or S["ai"].get(k, {}).get("sufficiency")
-        rows_ = []
-        for c in in_scope:
-            r = rating(c.key)
-            if r == "full":
-                continue
-            a = S["ai"].get(c.key, {})
-            no_ev = c.key not in S["ai"]
-            rows_.append({"Priority": 0 if r == "none" else 1 if no_ev else 2, "Control": f"{c.id} {c.title}", "Library": c.lib,
-                          "Finding": "not assessed — no evidence located" if no_ev else r + (" (proposed, not yet reviewed)" if c.key not in S["decisions"] else ""),
-                          "Gaps": "; ".join(a.get("gaps", [])) if not no_ev else "No document in the scanned folder matched this control",
-                          "Suggested action": "; ".join(a.get("remediation", [])) if a.get("remediation") else ("Produce evidence: " + (c.req[:120] if no_ev else "see gaps")),
-                          "Owner": c.owner})
-        rows_.sort(key=lambda r: r["Priority"])
+        rows_ = gap_analysis(in_scope, S["ai"], S["decisions"])
         st.caption(f"{len(rows_)} controls below full. Proposed ratings are the assessor's; only reviewed ones are recorded.")
         st.dataframe([{k: v for k, v in r.items() if k != "Priority"} for r in rows_], width="stretch", hide_index=True, height=400)
         st.session_state.gap_rows = rows_
@@ -221,12 +201,11 @@ with tab_a:
             st.error("Add evidence before assessing.")
         else:
             with st.spinner("Assessing…"):
-                try:
-                    pdf = Path(ev["file_path"]).read_bytes() if ev.get("file_path") else None
-                    S["ai"][c.key] = assess(c, ev.get("text", ""), pdf, ev.get("file_name", ""))
-                    S["decisions"].pop(c.key, None)
-                except Exception as e:
-                    st.error(f"Assessment failed: {e}")
+                pdf = Path(ev["file_path"]).read_bytes() if ev.get("file_path") else None
+                S["ai"][c.key] = propose(c, ev, pdf)
+                S["decisions"].pop(c.key, None)
+                if S["ai"][c.key].get("model") == "error":
+                    st.error(S["ai"][c.key]["rationale"])
     save_state()
 
     a = S["ai"].get(c.key)
@@ -263,8 +242,7 @@ with tab_a:
             note = k3.text_input("Note (optional)")
             changed = suff != a["sufficiency"] or mat != a["proposedMaturity"]
             if st.button("Record override" if changed else "Accept proposal", type="primary"):
-                S["decisions"][c.key] = {"sufficiency": suff, "maturity": mat, "note": note, "reviewer": S["reviewer"] or "Unnamed reviewer",
-                                         "at": dt.datetime.now().isoformat(timespec="seconds"), "aiSufficiency": a["sufficiency"], "aiMaturity": a["proposedMaturity"]}
+                S["decisions"][c.key] = record_decision(a, suff, mat, note, S["reviewer"])
                 save_state(); st.rerun()
 
 # ---------- Report ----------
@@ -315,6 +293,6 @@ with tab_r:
     c1.download_button("Download report (.md)", report, file_name=f"AI_readiness_{(S['org'] or 'org').replace(' ', '_')}.md", type="primary")
     if c2.button("Write results back to playbook"):
         out = DATA / f"playbook_assessed_{dt.date.today()}.xlsx"
-        n = write_back(src if isinstance(src, Path) else src, str(out), controls, S["decisions"], S["ai"], S["evidence"])
+        n = export_playbook(src, str(out), controls, S["decisions"], S["ai"], S["evidence"])
         st.success(f"{n} control rows updated → {out}")
         st.download_button("Download updated playbook", out.read_bytes(), file_name=out.name)

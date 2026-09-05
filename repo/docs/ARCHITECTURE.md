@@ -20,6 +20,12 @@ flowchart TD
     class RG human
 ```
 
+## Pipeline nodes (`pipeline.py`)
+
+`index_folder → match_controls → propose → record_decision → export_playbook`
+
+There is no call path from `propose()` to `write_back()`. The only function that reaches the playbook is `export_playbook()`, and it writes only what `record_decision()` produced. `graphify path "propose()" "write_back()"` returns no path; `graphify path "record_decision()" "write_back()"` does not either, because a human sits between them in the UI — the graph shows the gate as an absence of edges.
+
 ## Stages
 
 | Stage | Module | What it does | Can it change a rating? |
