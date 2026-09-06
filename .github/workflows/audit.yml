@@ -1,11 +1,11 @@
 # Lane B in CI. Lives at <git root>/.github/workflows/audit.yml (NOT inside repo/).
 #
-# On push to main:   run on_commit controls, block on high/critical FAIL not covered by an open exception.
+# On push to main:   run on_commit controls, gate per policy/ai-lifecycle.yaml.
 # Nightly 02:00 SGT: run scheduled controls.
-# Every run:         commit the bundle + inventory to the `evidence` branch (record of audit).
+# Every run:         commit the bundle + inventory to the `evidence` branch, including blocked runs.
 #
-# One-time setup after first push: Settings → Branches → add rule for `evidence`:
-#   - Restrict deletions, Block force pushes. Nobody can rewrite the record quietly after that.
+# Sources whose data is gitignored (the playbook workbook) report NOT_TESTABLE here. That is correct:
+# CI tests what CI can see. Export the tracker to governance/stress_tracker.csv to make STR-* testable in CI.
 
 name: continuous-ai-audit
 
@@ -34,11 +34,12 @@ jobs:
         with:
           python-version: "3.12"
 
-      - run: pip install pyyaml jsonschema
+      # openpyxl for the stress_tracker adapter; requests for any HTTP adapter
+      - run: pip install pyyaml jsonschema openpyxl requests
 
       - name: Run audit (push -> on_commit, gated)
         if: github.event_name == 'push'
-        run: python -m caa.runner --target . --trigger on_commit --fail-on high
+        run: python -m caa.runner --target . --trigger on_commit
 
       - name: Run audit (scheduled / manual -> full)
         if: github.event_name != 'push'
@@ -59,8 +60,8 @@ jobs:
           fi
           git worktree add ../evidence evidence
           mkdir -p ../evidence/bundles ../evidence/inventories
-          cp repo/evidence/bundles/*.json ../evidence/bundles/
-          cp repo/evidence/inventories/*.json ../evidence/inventories/
+          cp repo/evidence/bundles/*.json ../evidence/bundles/ 2>/dev/null || true
+          cp repo/evidence/inventories/*.json ../evidence/inventories/ 2>/dev/null || true
           cd ../evidence
           git add -A
           git commit -m "audit ${{ github.event_name }} @ ${{ github.sha }}" || echo "nothing new"

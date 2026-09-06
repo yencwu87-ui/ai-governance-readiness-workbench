@@ -27,6 +27,7 @@ import yaml
 
 from . import checks
 from . import adapters as ad
+from .policy import gate_for, hash_of, load as load_policy
 
 RUNNER_VERSION = "0.1.0"
 ROOT = Path(__file__).resolve().parent.parent
@@ -63,7 +64,12 @@ def discover(target: Path, config: dict) -> dict:
         if fn is None:
             sources[name] = {"adapter": adapter_name, "status": "error", "message": "unknown adapter", "records": [], "artefacts": []}
             continue
-        res = fn(target, cfg.get("args", {}))
+        try:
+            res = fn(target, cfg.get("args", {}))
+        except Exception as e:  # an adapter must never take the run down; a source that errors is NOT_TESTABLE
+            sources[name] = {"adapter": adapter_name, "status": "error", "message": f"{type(e).__name__}: {e}"[:300],
+                             "records": [], "artefacts": []}
+            continue
         sources[name] = {
             "adapter": adapter_name,
             "status": res.status,
@@ -96,7 +102,21 @@ def load_controls(controls_path: Path) -> tuple[list[dict], str]:
     return controls, hashlib.sha256(blob.encode()).hexdigest()
 
 
-def run_controls(controls: list[dict], inventory: dict, trigger: str) -> list[dict]:
+def _apply_policy_params(c: dict, policy: dict) -> dict:
+    """Substitute {policy: dotted.path} placeholders in params so a threshold lives in one place."""
+    from .policy import resolve
+
+    def walk(v):
+        if isinstance(v, dict):
+            if set(v) == {"policy"}:
+                return resolve(policy, v["policy"])
+            return {k: walk(x) for k, x in v.items()}
+        return [walk(x) for x in v] if isinstance(v, list) else v
+
+    return walk(c.get("params", {})) if policy else c.get("params", {})
+
+
+def run_controls(controls: list[dict], inventory: dict, trigger: str, policy: dict | None = None) -> list[dict]:
     ctx = {name: s["records"] for name, s in inventory["sources"].items() if s["status"] == "ok"}
     results = []
     for c in controls:
@@ -104,7 +124,7 @@ def run_controls(controls: list[dict], inventory: dict, trigger: str) -> list[di
             continue
         fn = checks.REGISTRY[c["check"]]
         try:
-            r = fn(ctx, c.get("params", {}))
+            r = fn(ctx, _apply_policy_params(c, policy or {}))
         except Exception as e:  # noqa: BLE001
             r = checks.CheckResult("NOT_TESTABLE", f"check raised {type(e).__name__}: {e}")
         evidence = []
@@ -118,6 +138,7 @@ def run_controls(controls: list[dict], inventory: dict, trigger: str) -> list[di
             "assertion": c["assertion"],
             "framework_refs": c.get("framework_refs", []),
             "play_refs": c.get("play_refs", []),
+            "policy_refs": c.get("policy_refs", []),
             "severity": c.get("severity", "medium"),
             "machine_verdict": r.verdict,
             "detail": r.detail,
@@ -142,7 +163,8 @@ def _in_scope(frequency: str, trigger: str) -> bool:
 
 # ---------- stage 3: bundle ----------
 
-def bundle(inventory: dict, results: list[dict], controls_path: Path, pack_sha: str, n_controls: int, trigger: str) -> dict:
+def bundle(inventory: dict, results: list[dict], controls_path: Path, pack_sha: str, n_controls: int, trigger: str,
+           policy: dict | None = None) -> dict:
     b = {
         "bundle_id": str(uuid.uuid4()),
         "run_at": _now(),
@@ -150,6 +172,7 @@ def bundle(inventory: dict, results: list[dict], controls_path: Path, pack_sha: 
         "inventory_id": inventory["inventory_id"],
         "runner_version": RUNNER_VERSION,
         "control_pack": {"path": str(controls_path), "sha256": pack_sha, "control_count": n_controls},
+        "policy": ({"path": policy["_path"], "version": str(policy.get("version", "")), "sha256": hash_of(policy)} if policy else None),
         "results": results,
     }
     b["bundle_sha256"] = bundle_hash(b)
@@ -179,16 +202,17 @@ def run(config_path: Path, controls_path: Path, out: Path, trigger: str = "manua
     (out / "inventories").mkdir(parents=True, exist_ok=True)
     (out / "bundles").mkdir(parents=True, exist_ok=True)
 
+    policy = load_policy(target / "policy" / "ai-lifecycle.yaml")
     inv = discover(target, config)
     controls, pack_sha = load_controls(Path(controls_path))
-    results = run_controls(controls, inv, trigger)
-    b = bundle(inv, results, Path(controls_path), pack_sha, len(controls), trigger)
+    results = run_controls(controls, inv, trigger, policy)
+    b = bundle(inv, results, Path(controls_path), pack_sha, len(controls), trigger, policy)
 
     stamp = b["run_at"].replace(":", "").replace("+0000", "Z")
     (out / "inventories" / f"{stamp}_{inv['inventory_id'][:8]}.json").write_text(json.dumps(inv, indent=2, default=str))
     bpath = out / "bundles" / f"{stamp}_{b['bundle_id'][:8]}.json"
     bpath.write_text(json.dumps(b, indent=2, default=str))
-    return (b, bpath, inv) if return_inventory else (b, bpath)
+    return (b, bpath, inv, policy) if return_inventory else (b, bpath)
 
 
 def main(argv=None):
@@ -198,15 +222,19 @@ def main(argv=None):
     ap.add_argument("--out", default="evidence")
     ap.add_argument("--target", default=None, help="Override target folder from audit.yaml")
     ap.add_argument("--trigger", default="manual", choices=["manual", "on_commit", "on_deploy", "scheduled"])
-    ap.add_argument("--fail-on", default="none", choices=["none", "critical", "high", "any"],
-                    help="Exit non-zero if any FAIL at or above this severity (for CI gating)")
+    ap.add_argument("--fail-on", default=None, choices=["none", "critical", "high", "any"],
+                    help="Override the policy's gate for this trigger (recorded in the run output)")
     a = ap.parse_args(argv)
-    b, bpath, inv = run(Path(a.config), Path(a.controls), Path(a.out), a.trigger, a.target, return_inventory=True)
-    _print_summary(b, bpath)
-    return _exit_code(b["results"], a.fail_on, _excepted_controls(inv))
+    b, bpath, inv, policy = run(Path(a.config), Path(a.controls), Path(a.out), a.trigger, a.target, return_inventory=True)
+    _print_summary(b, bpath, inv)
+    fail_on, require_pass = gate_for(policy, a.trigger, a.fail_on)
+    if policy:
+        src = "CLI override" if a.fail_on else f"policy v{policy.get('version')}"
+        print(f"gate: fail_on={fail_on} ({src})" + (f", require_pass={', '.join(require_pass)}" if require_pass else ""))
+    return _exit_code(b["results"], fail_on, _excepted_controls(inv), require_pass)
 
 
-def _print_summary(b: dict, path: Path):
+def _print_summary(b: dict, path: Path, inventory: dict | None = None):
     counts = {"PASS": 0, "FAIL": 0, "NOT_TESTABLE": 0}
     for r in b["results"]:
         counts[r["machine_verdict"]] += 1
@@ -215,6 +243,11 @@ def _print_summary(b: dict, path: Path):
     for r in b["results"]:
         flag = {"PASS": "  ", "FAIL": "!!", "NOT_TESTABLE": "??"}[r["machine_verdict"]]
         print(f"{flag} {r['control_id']:<8} {r['machine_verdict']:<13} {r['detail']}")
+    bad = {n: s.get("message", "") for n, s in ((inventory or {}).get("sources") or {}).items() if s["status"] == "error"}
+    if bad:
+        print("\nSources in error (their controls are NOT_TESTABLE):")
+        for n, m in bad.items():
+            print(f"  {n}: {m}")
     print(f"\nWritten: {path}\nbundle_sha256: {b['bundle_sha256']}")
 
 
@@ -231,11 +264,17 @@ def _excepted_controls(inventory: dict) -> dict[str, str]:
     return out
 
 
-def _exit_code(results: list[dict], fail_on: str, excepted: dict[str, str] | None = None) -> int:
-    """Non-zero if any FAIL at or above the severity floor that is not covered by an open exception."""
-    if fail_on == "none":
-        return 0
+def _exit_code(results: list[dict], fail_on: str, excepted: dict[str, str] | None = None,
+               require_pass: list[str] | None = None) -> int:
+    """Non-zero if any FAIL at or above the severity floor that is not covered by an open exception,
+    or if any control the policy requires to pass did not pass. require_pass is not exception-exempt:
+    the policy names those controls precisely because they gate the action."""
     excepted = excepted or {}
+    must = [r for r in results if r["control_id"] in (require_pass or []) and r["machine_verdict"] != "PASS"]
+    if must:
+        print(f"\nGATE: policy requires these to pass: {', '.join(r['control_id'] + '=' + r['machine_verdict'] for r in must)}")
+    if fail_on == "none":
+        return 1 if must else 0
     rank = {"low": 0, "medium": 1, "high": 2, "critical": 3}
     floor = {"any": 0, "high": 2, "critical": 3}[fail_on]
     blocking = [r for r in results if r["machine_verdict"] == "FAIL" and rank[r["severity"]] >= floor and r["control_id"] not in excepted]
@@ -244,7 +283,7 @@ def _exit_code(results: list[dict], fail_on: str, excepted: dict[str, str] | Non
     covered = [r["control_id"] for r in results if r["machine_verdict"] == "FAIL" and r["control_id"] in excepted]
     if covered:
         print("GATE: FAIL covered by open exception: " + ", ".join(f"{c} ({excepted[c]})" for c in covered))
-    return 1 if blocking else 0
+    return 1 if (blocking or must) else 0
 
 
 if __name__ == "__main__":
