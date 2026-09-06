@@ -174,16 +174,22 @@ def within_tolerance(ctx, p):
         return CheckResult("NOT_TESTABLE", "Fewer than two records; no baseline to compare")
     prev, cur = recs[-2], recs[-1]
     findings = []
+    missing = []
     for m, tol in p["metrics"].items():
+        if prev.get(m) is None or cur.get(m) is None:
+            missing.append(m)
+            continue
         try:
             a, b = float(prev.get(m)), float(cur.get(m))
         except (TypeError, ValueError):
-            findings.append({"metric": m, "_reason": "missing or non-numeric"})
+            missing.append(m)
             continue
         if "max_drop" in tol and (a - b) > tol["max_drop"]:
             findings.append({"metric": m, "prev": a, "cur": b, "drop": a - b, "limit": tol["max_drop"]})
         if "max_rise" in tol and (b - a) > tol["max_rise"]:
             findings.append({"metric": m, "prev": a, "cur": b, "rise": b - a, "limit": tol["max_rise"]})
+    if missing and not findings:
+        return CheckResult("NOT_TESTABLE", f"No numeric values for {', '.join(missing)} in the two most recent records")
     if findings:
         return CheckResult("FAIL", f"{len(findings)} metric(s) out of tolerance", findings)
     return CheckResult("PASS", f"All {len(p['metrics'])} metrics within tolerance")
