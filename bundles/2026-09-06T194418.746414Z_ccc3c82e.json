@@ -1,0 +1,625 @@
+{
+  "bundle_id": "ccc3c82e-a256-4573-9be2-95e2cbed7e67",
+  "run_at": "2026-09-06T19:44:18.746414+00:00",
+  "trigger": "scheduled",
+  "inventory_id": "de8fabd9-4095-4282-8ef0-98998ebec254",
+  "runner_version": "0.1.0",
+  "control_pack": {
+    "path": "controls",
+    "sha256": "35fb4445d802752a9954d1dd28b47cd616a4d711897cdefb4d5e69c01a522612",
+    "control_count": 24
+  },
+  "policy": {
+    "path": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/policy/ai-lifecycle.yaml",
+    "version": "1.1.0",
+    "sha256": "250db9c56f381cb3c4014d58c6e2505d729ff2a4e3f928c84fecf9cde98b0de2"
+  },
+  "results": [
+    {
+      "control_id": "DISC-02",
+      "domain": "discovery",
+      "assertion": "At least one model card is present in the scanned folder",
+      "framework_refs": [
+        "ISO42001-A.6.2",
+        "NIST-AI-RMF-MAP-1.1"
+      ],
+      "play_refs": [
+        "P3.2"
+      ],
+      "policy_refs": [
+        "required_artefacts.all"
+      ],
+      "severity": "medium",
+      "machine_verdict": "PASS",
+      "detail": "1 records found",
+      "findings": [],
+      "evidence": [
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/requirements.txt",
+          "sha256": "37d903265c975af8a94873ea613aa5b58c82a25c0e7b54d4d9d4a4640f805376"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/test_assessor.py",
+          "sha256": "bd1a9f72264abb179860759b888ddb461b58b69ea3eb18f49f4849d4280140e8"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/MODEL_CARD.md",
+          "sha256": "0dbd2d5b75a498fc71ec5571ac17e0f245c055d73ef0276b4d83a35b7dcccd29"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/.streamlit/secrets.toml.example",
+          "sha256": "a7145b6e4facacd96d90f1d2f60829d4f9a5fca7889d061e0e5e91845f38dd57"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/tests/test_step8.py",
+          "sha256": "76d85e1a568865e075e714bd10b2d9f0c8faf91dd4428a84b4a2ce03d0c62d47"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/eval_results.json",
+          "sha256": "af088e020f18fcb9decaba77659921e58b7182524cc0813b6cc4a46eb4944828"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/schemas/inventory.schema.json",
+          "sha256": "dc158723bcfd9c4cae21c2e226b3c6ad78a76955e95cfc7ba6507649d25e1314"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/sample_evidence/records/AI_inventory_extract_Aug2026.docx",
+          "sha256": "dfc9c464135fc9eb2f740bd3f3eed32cd8b9b575b5c0231cbcec0b7de05e93c3"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/sample_evidence/infra/agent_logging_config.yaml",
+          "sha256": "a0efd40090a9753473d07bcc1b93dfbb611de06a0d4d1629eb28ca76635c96db"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/sample_evidence/infra/.env",
+          "sha256": "7169412703c3edbf2de7c2dcd1fb1476dea91d7c951621eb2e3b79c06a3d174e"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/stress/hotspots/h03_agent_promptfoo.py",
+          "sha256": "9f2ed7651c007a6577c8c760ebd80085e4364bce1038d9269ac55fe01f5b82ec"
+        },
+        {
+          "source": "environment_scan",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/stress/corpora/h03_promptfoo.yaml",
+          "sha256": "cc4c95c9c7e256ed89dffda33f82604312403499992eb2e5ca4e81059ce8f67f"
+        }
+      ],
+      "human_gate": "Reviewer assesses whether the model card is current and covers intended use and limits (Lane A does this).",
+      "human_verdict": null
+    },
+    {
+      "control_id": "GOV-02",
+      "domain": "policy",
+      "assertion": "Every registered model has the artefacts the policy requires for all models",
+      "framework_refs": [
+        "ISO42001-A.6.2",
+        "MAS-AIRG-M2.2",
+        "NIST-AI-RMF-MAP-1.1"
+      ],
+      "play_refs": [
+        "P1.2",
+        "P3.2"
+      ],
+      "policy_refs": [
+        "required_artefacts.all"
+      ],
+      "severity": "high",
+      "machine_verdict": "NOT_TESTABLE",
+      "detail": "Required source(s) missing or empty: artefact_status",
+      "findings": [],
+      "evidence": [],
+      "human_gate": "Reviewer confirms the artefact is current and approved, not merely present.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "GOV-03",
+      "domain": "policy",
+      "assertion": "Every open exception carries the policy's required fields and expires within the policy's maximum life",
+      "framework_refs": [
+        "MAS-TRM-3.4",
+        "ISO42001-A.9.4"
+      ],
+      "play_refs": [
+        "P8.4"
+      ],
+      "policy_refs": [
+        "exceptions.max_days"
+      ],
+      "severity": "high",
+      "machine_verdict": "NOT_TESTABLE",
+      "detail": "Required source(s) missing or empty: exception_status",
+      "findings": [],
+      "evidence": [],
+      "human_gate": "Expired or over-long exceptions are re-tabled at the governance forum, not silently extended.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "GOV-04",
+      "domain": "policy",
+      "assertion": "Every registered model has the artefacts its risk tier requires, beyond the universal set",
+      "framework_refs": [
+        "MAS-AIRG-M2.3",
+        "ISO42001-6.1.2",
+        "NIST-AI-RMF-MAP-1.5"
+      ],
+      "play_refs": [
+        "P1.3",
+        "P2.1",
+        "P8.1"
+      ],
+      "policy_refs": [
+        "required_artefacts.high",
+        "required_artefacts.medium"
+      ],
+      "severity": "high",
+      "machine_verdict": "NOT_TESTABLE",
+      "detail": "Required source(s) missing or empty: artefact_status",
+      "findings": [],
+      "evidence": [],
+      "human_gate": "Reviewer confirms the tier is right before accepting the gap \u2014 an over-tiered model creates false findings, an under-tiered one hides real ones.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "GOV-05",
+      "domain": "policy",
+      "assertion": "Every tier obligation (review cycle, eval before deploy, independent validation, stress-test window) is met",
+      "framework_refs": [
+        "MAS-AIRG-M3.4",
+        "MAS-TRM-6.2",
+        "ISO42001-A.9.3"
+      ],
+      "play_refs": [
+        "P8.1",
+        "P8.2",
+        "P3.4",
+        "P10.1"
+      ],
+      "policy_refs": [
+        "tier_obligations"
+      ],
+      "severity": "high",
+      "machine_verdict": "NOT_TESTABLE",
+      "detail": "Required source(s) missing or empty: tier_obligations",
+      "findings": [],
+      "evidence": [],
+      "human_gate": "Reviewer decides whether an unmet obligation is a finding, an exception, or a signal the tier is wrong.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "GOV-07",
+      "domain": "policy",
+      "assertion": "Every version in the history register has a named approver, an approval date, and a change ticket that exists in the ticket register",
+      "framework_refs": [
+        "MAS-TRM-3.1",
+        "ISO42001-9.3"
+      ],
+      "play_refs": [
+        "P8.4"
+      ],
+      "policy_refs": [
+        "approved_by"
+      ],
+      "severity": "high",
+      "machine_verdict": "NOT_TESTABLE",
+      "detail": "Required source(s) missing or empty: policy_history",
+      "findings": [],
+      "evidence": [],
+      "human_gate": "Reviewer confirms the named body actually approved the amendment \u2014 a name in a CSV is a claim, not a minute.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "MCM-02",
+      "domain": "model-change-management",
+      "assertion": "Every change ticket references a model_id that exists in the model registry",
+      "framework_refs": [
+        "MAS-TRM-6.2",
+        "ISO42001-6.1.2"
+      ],
+      "play_refs": [
+        "P1.2",
+        "P8.1"
+      ],
+      "policy_refs": [
+        "required_artefacts.all"
+      ],
+      "severity": "medium",
+      "machine_verdict": "PASS",
+      "detail": "All 12 values present in model_registry",
+      "findings": [],
+      "evidence": [
+        {
+          "source": "ticket_export",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/tickets.csv",
+          "sha256": "9d860ded07a16531b769990ba4071792714836e25752bf96ac5eab1103b44d76"
+        },
+        {
+          "source": "model_registry",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/model_registry.csv",
+          "sha256": "02313a018619c4968357361ccd69119d368376be6a68241e29f80ce98520c37d"
+        }
+      ],
+      "human_gate": "Reviewer samples tickets to check the risk tier assigned to the change is honest, not defaulted.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "MCM-08",
+      "domain": "model-change-management",
+      "assertion": "A rollback test has been exercised within the last 180 days",
+      "framework_refs": [
+        "MAS-TRM-8.2",
+        "ISO27001-A.8.14"
+      ],
+      "play_refs": [
+        "P4.2",
+        "P6.3"
+      ],
+      "policy_refs": [
+        "cadence.rollback_test_days"
+      ],
+      "severity": "medium",
+      "machine_verdict": "PASS",
+      "detail": "Most recent is 0 days old",
+      "findings": [],
+      "evidence": [
+        {
+          "source": "rollback_log",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/rollback_log.csv",
+          "sha256": "7e45eeb6d375f79e66354ee3a1c52dbe6e5d6087f011b94fef13575c42fdb2ac"
+        }
+      ],
+      "human_gate": "Reviewer confirms the rollback test was realistic, not a dry-run tick.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "MCM-09",
+      "domain": "model-change-management",
+      "assertion": "Emergency changes complete full approval evidence within 5 working days",
+      "framework_refs": [
+        "MAS-TRM-6.1"
+      ],
+      "play_refs": [
+        "P6.5"
+      ],
+      "policy_refs": [
+        "cadence.emergency_change_close_days"
+      ],
+      "severity": "high",
+      "machine_verdict": "PASS",
+      "detail": "No records in scope after filter",
+      "findings": [],
+      "evidence": [
+        {
+          "source": "ticket_export",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/tickets.csv",
+          "sha256": "9d860ded07a16531b769990ba4071792714836e25752bf96ac5eab1103b44d76"
+        }
+      ],
+      "human_gate": "Reviewer questions the emergency justification itself.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "MCM-10",
+      "domain": "model-change-management",
+      "assertion": "Every open exception has an owner and an expiry date not yet passed",
+      "framework_refs": [
+        "MAS-TRM-3.4"
+      ],
+      "play_refs": [
+        "P8.4"
+      ],
+      "policy_refs": [
+        "exceptions.max_days"
+      ],
+      "severity": "medium",
+      "machine_verdict": "PASS",
+      "detail": "All 4 records current and complete",
+      "findings": [],
+      "evidence": [
+        {
+          "source": "exception_register",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/governance/exceptions.csv",
+          "sha256": "7c22236f084c2283042972e8b9d6fb1daccf4e07d4788b74fcf08a7ad52295aa"
+        }
+      ],
+      "human_gate": "Expired or extended exceptions re-tabled at the governance forum.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "OVS-01",
+      "domain": "human-oversight",
+      "assertion": "Override rate of AI proposals in the last 90 days is between 5% and 60%",
+      "framework_refs": [
+        "ISO42001-A.9.3",
+        "NIST-AI-RMF-GOVERN-5.1",
+        "MAS-AIRG-M3.10",
+        "MGF-D2.5"
+      ],
+      "play_refs": [
+        "P11.3"
+      ],
+      "policy_refs": [
+        "oversight.override_rate_band"
+      ],
+      "severity": "high",
+      "machine_verdict": "NOT_TESTABLE",
+      "detail": "Required source(s) missing or empty: decisions_log",
+      "findings": [],
+      "evidence": [],
+      "human_gate": "Near 0% suggests rubber-stamping; near 60%+ suggests the assessor is not fit for purpose. Reviewer decides which, and whether the band itself is right.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "OVS-02",
+      "domain": "human-oversight",
+      "assertion": "No recorded decision carries an empty or placeholder reviewer name",
+      "framework_refs": [
+        "ISO42001-A.9.4",
+        "MAS-AIRG-M1.5"
+      ],
+      "play_refs": [
+        "P11.3"
+      ],
+      "policy_refs": [
+        "oversight.reviewer_required"
+      ],
+      "severity": "critical",
+      "machine_verdict": "NOT_TESTABLE",
+      "detail": "Required source(s) missing or empty: decisions_log",
+      "findings": [],
+      "evidence": [],
+      "human_gate": "None. An unattributed decision is reopened, not accepted.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "STR-01",
+      "domain": "stress-testing",
+      "assertion": "Each tracker row has a last-run date within the days implied by its cadence",
+      "framework_refs": [
+        "NIST-AI-RMF-MEASURE-2.6",
+        "NIST-AI-RMF-MEASURE-2.7",
+        "MAS-AIRG-M3.6",
+        "MAS-AIRG-M3.15"
+      ],
+      "play_refs": [
+        "P10.3"
+      ],
+      "policy_refs": [
+        "cadence.stress_test_days"
+      ],
+      "severity": "high",
+      "machine_verdict": "FAIL",
+      "detail": "13 of 14 records overdue or never run",
+      "findings": [
+        {
+          "n": 1,
+          "hotspot": "Generative AI hallucination & factual unreliability",
+          "class": "GenAI / Agent",
+          "maps_to": "NIST MEASURE 2.5, 2.9  |  ISO A.6.2.4, A.6.2.6  |  MAS M3.6, M3.15",
+          "owner": "InfoSec + Model Owner",
+          "cadence": "Quarterly + pre-release",
+          "last_run": null,
+          "result": "Not run",
+          "residual_risk": "",
+          "next_run": null,
+          "max_days": 100,
+          "_reason": "never run / no date"
+        },
+        {
+          "n": 3,
+          "hotspot": "Autonomous agent behaviour & unintended actions",
+          "class": "GenAI / Agent",
+          "maps_to": "NIST MANAGE 2.3, 2.4  |  ISO A.9.4, A.6.2.6  |  MAS M3.4, M3.15",
+          "owner": "InfoSec + Model Owner",
+          "cadence": "Quarterly + pre-release",
+          "last_run": null,
+          "result": "Not run",
+          "residual_risk": "",
+          "next_run": null,
+          "max_days": 100,
+          "_reason": "never run / no date"
+        },
+        {
+          "n": 4,
+          "hotspot": "Model drift & performance degradation in production",
+          "class": "Classic ML",
+          "maps_to": "NIST MEASURE 2.4, 3.1  |  ISO A.6.2.6  |  MAS M3.10",
+          "owner": "Model Risk + Data Sci",
+          "cadence": "Quarterly",
+          "last_run": null,
+          "result": "Not run",
+          "residual_risk": "",
+          "next_run": null,
+          "max_days": 100,
+          "_reason": "never run / no date"
+        },
+        {
+          "n": 5,
+          "hotspot": "Fairness & bias across subgroups",
+          "class": "Cross-cutting",
+          "maps_to": "NIST MEASURE 2.11  |  ISO A.5.4, A.7.4  |  MAS M3.2, FEAT F1",
+          "owner": "AI Risk + InfoSec",
+          "cadence": "Semi-annual",
+          "last_run": null,
+          "result": "Not run",
+          "residual_risk": "",
+          "next_run": null,
+          "max_days": 190,
+          "_reason": "never run / no date"
+        },
+        {
+          "n": 6,
+          "hotspot": "Data quality, lineage & poisoning",
+          "class": "Classic ML",
+          "maps_to": "NIST MAP 2.3, MEASURE 2.1  |  ISO A.7.4, A.7.5  |  MAS M3.1, M2.3",
+          "owner": "Model Risk + Data Sci",
+          "cadence": "Quarterly",
+          "last_run": null,
+          "result": "Not run",
+          "residual_risk": "",
+          "next_run": null,
+          "max_days": 100,
+          "_reason": "never run / no date"
+        },
+        {
+          "n": 7,
+          "hotspot": "Robustness to adversarial & edge-case inputs",
+          "class": "Classic ML",
+          "maps_to": "NIST MEASURE 2.6, 2.7  |  ISO A.6.2.4  |  MAS M3.6",
+          "owner": "Model Risk + Data Sci",
+          "cadence": "Quarterly",
+          "last_run": null,
+          "result": "Not run",
+          "residual_risk": "",
+          "next_run": null,
+          "max_days": 100,
+          "_reason": "never run / no date"
+        },
+        {
+          "n": 8,
+          "hotspot": "Third-party / foundation-model concentration & dependency",
+          "class": "Cross-cutting",
+          "maps_to": "NIST GOVERN 6.2, MANAGE 3.1, 3.2  |  ISO A.10.3  |  MAS M3.14, M3.15",
+          "owner": "AI Risk + InfoSec",
+          "cadence": "Semi-annual",
+          "last_run": null,
+          "result": "Not run",
+          "residual_risk": "",
+          "next_run": null,
+          "max_days": 190,
+          "_reason": "never run / no date"
+        },
+        {
+          "n": 9,
+          "hotspot": "Human oversight failure & automation bias",
+          "class": "Cross-cutting",
+          "maps_to": "NIST GOVERN 3.2, MAP 3.5  |  ISO A.9.2, A.9.3  |  MAS M3.4",
+          "owner": "AI Risk + InfoSec",
+          "cadence": "Semi-annual",
+          "last_run": null,
+          "result": "Not run",
+          "residual_risk": "",
+          "next_run": null,
+          "max_days": 190,
+          "_reason": "never run / no date"
+        },
+        {
+          "n": 10,
+          "hotspot": "Privacy: memorisation, re-identification & inference",
+          "class": "Classic ML",
+          "maps_to": "NIST MEASURE 2.10  |  ISO A.7.2  |  MAS M3.1",
+          "owner": "Model Risk + Data Sci",
+          "cadence": "Quarterly",
+          "last_run": null,
+          "result": "Not run",
+          "residual_risk": "",
+          "next_run": null,
+          "max_days": 100,
+          "_reason": "never run / no date"
+        },
+        {
+          "n": 11,
+          "hotspot": "Disposition-engine latency & fail-open",
+          "class": "SAFR / Runtime",
+          "maps_to": "SAFR S2.1, S2.6  |  NIST MANAGE 2.4, MEASURE 2.7  |  ISO A.6, A.4  |  MAS M3.4",
+          "owner": "InfoSec + Technology",
+          "cadence": "Quarterly + pre-release",
+          "last_run": null,
+          "result": "Not run",
+          "residual_risk": "",
+          "next_run": null,
+          "max_days": 100,
+          "_reason": "never run / no date"
+        },
+        {
+          "n": 12,
+          "hotspot": "Audit-log tamper-evidence & completeness",
+          "class": "SAFR / Runtime",
+          "maps_to": "SAFR S3.1, S3.2, S3.4  |  NIST MEASURE 3.1, MANAGE 4.1  |  ISO A.9, A.8  |  MAS M3.15",
+          "owner": "InfoSec + Internal Audit",
+          "cadence": "Semi-annual",
+          "last_run": null,
+          "result": "Not run",
+          "residual_risk": "",
+          "next_run": null,
+          "max_days": 190,
+          "_reason": "never run / no date"
+        },
+        {
+          "n": 13,
+          "hotspot": "Mandate bypass & stale controls-repository",
+          "class": "SAFR / Runtime",
+          "maps_to": "SAFR S1.2, S1.3, S1.4  |  NIST MANAGE 2.3, GOVERN 1.3  |  ISO A.9, A.2  |  MAS M3.4",
+          "owner": "AI Risk + InfoSec",
+          "cadence": "Quarterly + pre-release",
+          "last_run": null,
+          "result": "Not run",
+          "residual_risk": "",
+          "next_run": null,
+          "max_days": 100,
+          "_reason": "never run / no date"
+        },
+        {
+          "n": 14,
+          "hotspot": "Gateway coverage & cross-system enforcement gaps",
+          "class": "SAFR / Runtime",
+          "maps_to": "SAFR S4.2, S4.4, S4.5  |  NIST MANAGE 2.3, 3.1  |  ISO A.9, A.10  |  MAS M3.14",
+          "owner": "InfoSec + Technology",
+          "cadence": "Semi-annual",
+          "last_run": null,
+          "result": "Not run",
+          "residual_risk": "",
+          "next_run": null,
+          "max_days": 190,
+          "_reason": "never run / no date"
+        }
+      ],
+      "evidence": [
+        {
+          "source": "stress_tracker",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/data/AI_Governance_Playbook_MGF_SAFR_FINAL_v3_CSA_backref.xlsx",
+          "sha256": "58e58890e21f3b5e00525ee6c7815a65e559a8fd12389f1bee24c764b9e9e28d"
+        }
+      ],
+      "human_gate": "Reviewer confirms the recorded run exercised the failure mode, not a smoke test.",
+      "human_verdict": null
+    },
+    {
+      "control_id": "STR-02",
+      "domain": "stress-testing",
+      "assertion": "Every hotspot whose last result is Fail has a next-run date",
+      "framework_refs": [
+        "NIST-AI-RMF-MANAGE-1.3",
+        "MAS-AIRG-M3.15"
+      ],
+      "play_refs": [
+        "P10.4"
+      ],
+      "policy_refs": [],
+      "severity": "medium",
+      "machine_verdict": "PASS",
+      "detail": "All 1 records have ['next_run']",
+      "findings": [],
+      "evidence": [
+        {
+          "source": "stress_tracker",
+          "ref": "/home/runner/work/ai-governance-readiness-workbench/ai-governance-readiness-workbench/repo/data/AI_Governance_Playbook_MGF_SAFR_FINAL_v3_CSA_backref.xlsx",
+          "sha256": "58e58890e21f3b5e00525ee6c7815a65e559a8fd12389f1bee24c764b9e9e28d"
+        }
+      ],
+      "human_gate": "Reviewer checks a remediation item exists for the failure, not only a re-test date.",
+      "human_verdict": null
+    }
+  ],
+  "bundle_sha256": "093e176a5abcae20f8e6e22915d0b9f03dc7701b04b5e5048261d32b24504539"
+}
