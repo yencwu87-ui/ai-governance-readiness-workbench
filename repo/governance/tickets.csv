@@ -8,3 +8,4 @@ WB-011,readiness-assessor,v0.3.0,high,Reviewer Name,false,2026-09-06,2026-09-06,
 WB-012,readiness-assessor,v0.3.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Restore stress scanner and governance exports lost in a bad commit
 WB-011,readiness-assessor,v0.3.0,high,Reviewer Name,false,2026-09-06,2026-09-06,Policy as code for the AI lifecycle
 WB-012,readiness-assessor,v0.3.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Restore stress scanner and governance exports lost in a bad commit
+WB-014,readiness-assessor,v0.3.0,high,Reviewer Name,false,2026-09-06,2026-09-06,Tiered obligations in policy as code
