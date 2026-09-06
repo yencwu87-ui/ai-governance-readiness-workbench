@@ -4,3 +4,5 @@ WB-002,readiness-assessor,v0.2.0,medium,Reviewer Name,FALSE,2026-09-04,2026-09-0
 WB-003,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Pin dependencies to exact versions
 WB-005,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,CI gate with exception-aware blocking and evidence branch
 WB-004,readiness-assessor,v0.2.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Add model card for readiness-assessor
+WB-011,readiness-assessor,v0.3.0,high,Reviewer Name,false,2026-09-06,2026-09-06,Policy as code for the AI lifecycle
+WB-012,readiness-assessor,v0.3.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Restore stress scanner and governance exports lost in a bad commit
