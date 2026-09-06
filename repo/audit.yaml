@@ -58,7 +58,7 @@ sources:
     args: {}
   artefact_status:
     adapter: artefact_status
-    args: {enforce_tier: false}
+    args: {enforce_tier: true}
   exception_status:
     adapter: exception_status
     args: {}
@@ -88,3 +88,6 @@ sources:
   decisions_log:
     adapter: decisions_log
     args: {path: data/assessments.json}
+  tier_obligations:
+    adapter: tier_obligations
+    args: {}

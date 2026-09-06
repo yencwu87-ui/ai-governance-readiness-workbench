@@ -7,6 +7,7 @@
   assertion: Each tracker row has a last-run date within the days implied by its cadence
   framework_refs: [NIST-AI-RMF-MEASURE-2.6, NIST-AI-RMF-MEASURE-2.7, MAS-AIRG-M3.6, MAS-AIRG-M3.15]
   play_refs: [P10.3]
+  policy_refs: [cadence.stress_test_days]
   inputs:
     - source: stress_tracker
       fields: [hotspot, cadence, last_run, max_days]
@@ -43,6 +44,7 @@
   assertion: Each deployment is preceded by at least one tracker run within the prior 100 days
   framework_refs: [NIST-AI-RMF-MEASURE-2.6, MAS-AIRG-M3.6]
   play_refs: [P10.1, P4.1]
+  policy_refs: [required_artefacts.high]
   inputs:
     - source: stress_tracker
       fields: [last_run]

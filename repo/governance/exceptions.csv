@@ -1,3 +1,5 @@
 exception_id,control_id,owner,expires_on,status,rationale
 EXC-001,MCM-04,Yen-Ching,2026-12-31,open,Eval set is 20 items; tolerance band not meaningful until set reaches 100
 EXC-002,DISC-01,Yen-Ching,2026-12-31,open,secrets.toml.example and sample_evidence match *secret* by name; no credentials present
+EXC-004,MCM-03,Yen-Ching,2026-10-06,open,v0.3.0 deployed for development use only; golden set re-run scheduled before any third-party or client use
+EXC-005,GOV-05,Yen-Ching,2026-10-06,open,v0.3.0 eval_before_deploy pending golden set re-run after WB-009 hardening

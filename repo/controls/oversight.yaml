@@ -7,6 +7,7 @@
   assertion: Override rate of AI proposals in the last 90 days is between 5% and 60%
   framework_refs: [ISO42001-A.9.3, NIST-AI-RMF-GOVERN-5.1, MAS-AIRG-M3.10, MGF-D2.5]
   play_refs: [P11.3]
+  policy_refs: [oversight.override_rate_band]
   inputs:
     - source: decisions_log
       fields: [override, at]
@@ -16,8 +17,8 @@
     field: override
     date_field: at
     since_days: 90
-    min: 0.05
-    max: 0.60
+    min: {policy: oversight.override_rate_band.0}
+    max: {policy: oversight.override_rate_band.1}
     min_records: 10
   human_gate: Near 0% suggests rubber-stamping; near 60%+ suggests the assessor is not fit for purpose. Reviewer decides which, and whether the band itself is right.
   frequency: monthly
@@ -29,6 +30,7 @@
   assertion: No recorded decision carries an empty or placeholder reviewer name
   framework_refs: [ISO42001-A.9.4, MAS-AIRG-M1.5]
   play_refs: [P11.3]
+  policy_refs: [oversight.reviewer_required]
   inputs:
     - source: decisions_log
       fields: [reviewer, unnamed]

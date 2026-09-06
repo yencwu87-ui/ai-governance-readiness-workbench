@@ -32,10 +32,29 @@ golden_state:
     pinned: true
     lockfile: requirements.txt
 
-  required_artefacts:                  # by registered risk tier of the model
+  # Obligations by registered risk tier. `all` applies to every model; the tier block is additional.
+  # Tiers are cumulative upward: a high-tier model owes all + medium + high.
+  required_artefacts:
     all:    [model_card, registry_entry, change_ticket]
+    low:    []
     medium: [eval_before_deploy]
-    high:   [impact_assessment, independent_validation, stress_test_pre_release]
+    high:   [eval_before_deploy, impact_assessment, independent_validation, stress_test_pre_release]
+
+  # Additional obligations that are not artefacts. Tested by GOV-04.
+  tier_obligations:
+    low:
+      review_cycle_days: 380
+      approval_level: model owner
+    medium:
+      review_cycle_days: 190
+      approval_level: model owner
+      eval_before_deploy: true
+    high:
+      review_cycle_days: 100
+      approval_level: AI Risk Committee
+      eval_before_deploy: true
+      independent_validation: true          # approver must not be the model owner
+      stress_test_within_days: 100
 
   evaluation:
     golden_set_min_items: 20           # EXC-001 acknowledges 20 is too few for a tolerance band

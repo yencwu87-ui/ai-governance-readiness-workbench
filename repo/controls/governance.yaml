@@ -33,7 +33,7 @@
   check: record_count
   params:
     source: artefact_status
-    where: {field: present, equals: false}
+    where: {field: universal_gap, equals: true}
     max: 0
   human_gate: Reviewer confirms the artefact is current and approved, not merely present.
   frequency: weekly
@@ -55,5 +55,44 @@
     where: {field: ok, equals: false}
     max: 0
   human_gate: Expired or over-long exceptions are re-tabled at the governance forum, not silently extended.
+  frequency: weekly
+  severity: high
+
+- id: GOV-04
+  domain: policy
+  objective: Tier-specific artefacts exist for higher-risk models
+  assertion: Every registered model has the artefacts its risk tier requires, beyond the universal set
+  # Separated from GOV-02 deliberately: a high-tier gap must not hide behind a passing universal check.
+  framework_refs: [MAS-AIRG-M2.3, ISO42001-6.1.2, NIST-AI-RMF-MAP-1.5]
+  play_refs: [P1.3, P2.1, P8.1]
+  policy_refs: [required_artefacts.high, required_artefacts.medium]
+  inputs:
+    - source: artefact_status
+      fields: [model_id, risk_tier, artefact, scope, present]
+  check: record_count
+  params:
+    source: artefact_status
+    where: {field: tier_gap, equals: true}
+    max: 0
+  human_gate: Reviewer confirms the tier is right before accepting the gap — an over-tiered model creates false findings, an under-tiered one hides real ones.
+  frequency: weekly
+  severity: high
+
+- id: GOV-05
+  domain: policy
+  objective: Higher-risk models meet their tier's operating obligations
+  assertion: Every tier obligation (review cycle, eval before deploy, independent validation, stress-test window) is met
+  framework_refs: [MAS-AIRG-M3.4, MAS-TRM-6.2, ISO42001-A.9.3]
+  play_refs: [P8.1, P8.2, P3.4, P10.1]
+  policy_refs: [tier_obligations]
+  inputs:
+    - source: tier_obligations
+      fields: [model_id, risk_tier, obligation, met]
+  check: record_count
+  params:
+    source: tier_obligations
+    where: {field: met, equals: false}
+    max: 0
+  human_gate: Reviewer decides whether an unmet obligation is a finding, an exception, or a signal the tier is wrong.
   frequency: weekly
   severity: high

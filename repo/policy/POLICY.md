@@ -1,6 +1,6 @@
 # ai-lifecycle — policy v1.0.0
 
-**Owner** AI Risk (second line) · **Approved by** AI Risk Committee · **Effective** 2026-09-06 · **Policy hash** `fd02a745facbf144`
+**Owner** AI Risk (second line) · **Approved by** AI Risk Committee · **Effective** 2026-09-06 · **Policy hash** `b37d9916d9eb5255`
 
 > Generated from `policy/ai-lifecycle.yaml`. Do not edit by hand — edit the policy and re-render, so the approved policy and the enforced gate cannot drift apart.
 
@@ -14,7 +14,7 @@
 | Non-local providers | anthropic permitted only under a registered, unexpired exception | GOV-01 |
 | Dependencies | pinned in `requirements.txt` | MCM-07 |
 | Artefacts, all models | model_card, registry_entry, change_ticket | DISC-02, GOV-02, MCM-01, MCM-02 |
-| Artefacts, high tier | impact_assessment, independent_validation, stress_test_pre_release | STR-03 |
+| Artefacts, high tier | eval_before_deploy, impact_assessment, independent_validation, stress_test_pre_release | GOV-04, STR-03 |
 | Evaluation | golden set ≥ 20 items; run before deploy | MCM-03 |
 | Segregation of duties | approver is not the author | MCM-05 |
 
@@ -51,6 +51,8 @@ A named reviewer records every decision. AI may: propose, retrieve, summarise, t
 | GOV-01 Every configured and deployed inference provider is in the policy's al | inference.residency, inference.provider_exceptions |
 | GOV-02 Every registered model has the artefacts the policy requires for all m | required_artefacts.all |
 | GOV-03 Every open exception carries the policy's required fields and expires  | exceptions.max_days |
+| GOV-04 Every registered model has the artefacts its risk tier requires, beyon | required_artefacts.high, required_artefacts.medium |
+| GOV-05 Every tier obligation (review cycle, eval before deploy, independent v | tier_obligations |
 | MCM-01 Every deployed model or prompt version in production has a matching ch | required_artefacts.all |
 | MCM-02 Every change ticket references a model_id that exists in the model reg | required_artefacts.all |
 | MCM-03 An evaluation run exists for the released version with a timestamp bef | evaluation.run_before_deploy |

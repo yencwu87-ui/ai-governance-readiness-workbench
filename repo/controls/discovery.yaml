@@ -25,6 +25,7 @@
   assertion: At least one model card is present in the scanned folder
   framework_refs: [ISO42001-A.6.2, NIST-AI-RMF-MAP-1.1]
   play_refs: [P3.2]
+  policy_refs: [required_artefacts.all]
   inputs:
     - source: environment_scan
       fields: [path, kind]

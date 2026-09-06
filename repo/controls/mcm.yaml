@@ -9,6 +9,7 @@
   assertion: Every deployed model or prompt version in production has a matching change record
   framework_refs: [MAS-TRM-6.1, ISO42001-8.4, NIST-AI-RMF-MANAGE-2.4]
   play_refs: [P4.3]
+  policy_refs: [required_artefacts.all]
   inputs:
     - source: deploy_manifest
       fields: [version]
@@ -30,6 +31,7 @@
   # risk tier (a high-risk hardening change on a medium-tier model is legitimate). Tier judgement is Lane A.
   framework_refs: [MAS-TRM-6.2, ISO42001-6.1.2]
   play_refs: [P1.2, P8.1]
+  policy_refs: [required_artefacts.all]
   inputs:
     - source: ticket_export
       fields: [ticket_id, model_id]
@@ -49,6 +51,7 @@
   assertion: An evaluation run exists for the released version with a timestamp before deploy time
   framework_refs: [MAS-TRM-6.3, ISO42001-8.4, NIST-AI-RMF-MEASURE-2.5]
   play_refs: [P3.3, P4.1]
+  policy_refs: [evaluation.run_before_deploy]
   inputs:
     - source: eval_results
       fields: [version, run_at]
@@ -69,6 +72,7 @@
   assertion: Released version's key metrics are within tolerance of the prior version
   framework_refs: [MAS-FEAT-F3, NIST-AI-RMF-MEASURE-2.6]
   play_refs: [P5.1]
+  policy_refs: [evaluation.tolerances]
   inputs:
     - source: eval_results
       fields: [version, accuracy, fairness_gap, refusal_rate]
@@ -90,6 +94,7 @@
   assertion: Approver on the change ticket is not the author of the code or prompt change
   framework_refs: [MAS-TRM-6.1, ISO27001-A.5.3]
   play_refs: [P3.4]
+  policy_refs: [segregation_of_duties.approver_not_author]
   inputs:
     - source: ticket_export
       fields: [ticket_id, approver]
@@ -128,6 +133,7 @@
   assertion: All dependencies are pinned to exact versions
   framework_refs: [MAS-TRM-6.4, ISO42001-A.10.3]
   play_refs: [P7.3]
+  policy_refs: [dependencies.pinned]
   inputs:
     - source: lock_file
       fields: [package, version, pinned]
@@ -144,6 +150,7 @@
   assertion: A rollback test has been exercised within the last 180 days
   framework_refs: [MAS-TRM-8.2, ISO27001-A.8.14]
   play_refs: [P4.2, P6.3]
+  policy_refs: [cadence.rollback_test_days]
   inputs:
     - source: rollback_log
       fields: [tested_at, outcome]
@@ -151,7 +158,7 @@
   params:
     source: rollback_log
     field: tested_at
-    max_days: 180
+    max_days: {policy: cadence.rollback_test_days}
     mode: most_recent
   human_gate: Reviewer confirms the rollback test was realistic, not a dry-run tick.
   frequency: monthly
@@ -163,6 +170,7 @@
   assertion: Emergency changes complete full approval evidence within 5 working days
   framework_refs: [MAS-TRM-6.1]
   play_refs: [P6.5]
+  policy_refs: [cadence.emergency_change_close_days]
   inputs:
     - source: ticket_export
       fields: [ticket_id, emergency, opened_at, approved_at]
@@ -171,7 +179,7 @@
     source: ticket_export
     start_field: opened_at
     end_field: approved_at
-    max_days: 7
+    max_days: {policy: cadence.emergency_change_close_days}
     where: {field: emergency, equals: true}
     mode: each
   human_gate: Reviewer questions the emergency justification itself.
@@ -184,6 +192,7 @@
   assertion: Every open exception has an owner and an expiry date not yet passed
   framework_refs: [MAS-TRM-3.4]
   play_refs: [P8.4]
+  policy_refs: [exceptions.max_days]
   inputs:
     - source: exception_register
       fields: [exception_id, owner, expires_on, status]
