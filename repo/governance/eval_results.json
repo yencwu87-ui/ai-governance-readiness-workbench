@@ -1,4 +1,7 @@
 [
- {"version": "v0.1.0", "run_at": "2026-08-27T10:00:00Z", "accuracy": 0.80, "fairness_gap": 0.00, "refusal_rate": 0.02, "eval_set": "golden_20_controls", "notes": "20 hand-labelled control/evidence pairs; accuracy = agreement with reviewer sufficiency"},
- {"version": "v0.2.0", "run_at": "2026-09-04T22:00:00Z", "accuracy": 0.80, "fairness_gap": 0.00, "refusal_rate": 0.02, "eval_set": "golden_20_controls", "notes": "no assessor change in this version; re-run of same set"}
+  {"version": "v0.1.0", "run_at": "2026-08-27T10:00:00Z", "accuracy": null, "fairness_gap": null, "refusal_rate": null,
+   "eval_set": null, "status": "not_evaluated",
+   "notes": "CORRECTION 2026-09-06: earlier rows recorded accuracy 0.80 against 'golden_20_controls'. No such eval set exists and no evaluation was run. Placeholder values from a scaffolding template were mistaken for results."},
+  {"version": "v0.2.0", "run_at": "2026-09-04T22:00:00Z", "accuracy": null, "fairness_gap": null, "refusal_rate": null,
+   "eval_set": null, "status": "not_evaluated", "notes": "See correction above."}
 ]
