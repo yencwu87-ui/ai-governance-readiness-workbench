@@ -1,0 +1,70 @@
+# Policy as code for the AI lifecycle.
+#
+# This file is the single declaration of the golden state and the gate rules. The runner reads its
+# gates and thresholds from here; GOV-* controls test the golden state; POLICY.md is generated from
+# it so the approved policy and the enforced policy cannot drift apart.
+#
+# Changing this file is a governed change: policy/ is a governed path, so an edit without a ticket
+# reference fails MCM-06, and the bundle records this file's hash next to every verdict.
+
+policy: ai-lifecycle
+version: 1.0.0
+owner: AI Risk (second line)
+approved_by: AI Risk Committee
+effective: 2026-09-06
+scope: >
+  The readiness-assessor and any model, agent or prompt deployed from this repository, across the
+  eleven lifecycle plays in the AI Governance Playbook.
+
+golden_state:
+
+  inference:
+    # The premise of this workbench is that evidence never leaves the machine.
+    residency: local-only
+    allowed_providers: [ollama, mlx]
+    model_allowlist: null              # any locally-served model is permitted
+    egress_permitted: false
+    provider_exceptions:               # non-local providers need a registered, unexpired exception
+      - provider: anthropic
+        requires_exception: true
+
+  dependencies:
+    pinned: true
+    lockfile: requirements.txt
+
+  required_artefacts:                  # by registered risk tier of the model
+    all:    [model_card, registry_entry, change_ticket]
+    medium: [eval_before_deploy]
+    high:   [impact_assessment, independent_validation, stress_test_pre_release]
+
+  evaluation:
+    golden_set_min_items: 20           # EXC-001 acknowledges 20 is too few for a tolerance band
+    run_before_deploy: true
+    tolerances: {accuracy_max_drop: 0.02, fairness_gap_max_rise: 0.01, refusal_rate_max_rise: 0.05}
+
+  segregation_of_duties:
+    approver_not_author: true
+
+gates:
+  # fail_on: severity floor at or above which an uncovered FAIL blocks. Exceptions always exempt.
+  on_commit: {fail_on: high}
+  on_deploy: {fail_on: high, require_pass: [MCM-03, STR-03]}
+  scheduled: {fail_on: none}
+  manual:    {fail_on: none}
+
+exceptions:
+  max_days: 180
+  requires: [exception_id, control_id, owner, expires_on, rationale]
+  re_table_at: monthly service governance forum
+
+cadence:
+  stress_test_days: {quarterly: 100, semi-annual: 190, annual: 380}
+  rollback_test_days: 180
+  emergency_change_close_days: 7
+
+oversight:
+  reviewer_required: true
+  override_rate_band: [0.05, 0.60]     # near 0% is rubber-stamping; above 60% the assessor is not fit
+  ai_may: [propose, retrieve, summarise, triage]
+  ai_may_not: [record a decision, sign a result, set a gate outcome, edit an evidence bundle,
+               edit the tracker, edit this policy]

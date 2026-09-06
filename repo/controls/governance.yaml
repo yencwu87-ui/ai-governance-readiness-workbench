@@ -1,0 +1,59 @@
+# GOV-* — controls that test the declared golden state in policy/ai-lifecycle.yaml.
+# Thresholds and lists are NOT repeated here; they are read from the policy at run time via
+# params.from_policy, so the policy file stays the single source of truth.
+
+- id: GOV-01
+  domain: policy
+  objective: Inference stays on permitted local providers
+  assertion: Every configured and deployed inference provider is in the policy's allowed_providers, or has an open exception
+  framework_refs: [MAS-TRM-11.1, ISO42001-A.10.2, MGF-D2.1]
+  play_refs: [P7.1, P4.3]
+  policy_refs: [inference.residency, inference.provider_exceptions]
+  inputs:
+    - source: runtime_config
+      fields: [provider, source]
+  check: values_subset
+  params:
+    subset: {source: runtime_config, field: provider}
+    superset: {source: policy_providers, field: provider}
+  human_gate: Reviewer confirms no evidence left the machine during any period a non-local provider was configured.
+  frequency: on_commit
+  severity: critical
+
+- id: GOV-02
+  domain: policy
+  objective: Required artefacts exist for every registered model
+  assertion: Every registered model has the artefacts the policy requires for all models
+  framework_refs: [ISO42001-A.6.2, MAS-AIRG-M2.2, NIST-AI-RMF-MAP-1.1]
+  play_refs: [P1.2, P3.2]
+  policy_refs: [required_artefacts.all]
+  inputs:
+    - source: artefact_status
+      fields: [model_id, artefact, present]
+  check: record_count
+  params:
+    source: artefact_status
+    where: {field: present, equals: false}
+    max: 0
+  human_gate: Reviewer confirms the artefact is current and approved, not merely present.
+  frequency: weekly
+  severity: high
+
+- id: GOV-03
+  domain: policy
+  objective: Exceptions are complete and within their maximum life
+  assertion: Every open exception carries the policy's required fields and expires within the policy's maximum life
+  framework_refs: [MAS-TRM-3.4, ISO42001-A.9.4]
+  play_refs: [P8.4]
+  policy_refs: [exceptions.max_days]
+  inputs:
+    - source: exception_status
+      fields: [exception_id, complete, within_max_life]
+  check: record_count
+  params:
+    source: exception_status
+    where: {field: ok, equals: false}
+    max: 0
+  human_gate: Expired or over-long exceptions are re-tabled at the governance forum, not silently extended.
+  frequency: weekly
+  severity: high

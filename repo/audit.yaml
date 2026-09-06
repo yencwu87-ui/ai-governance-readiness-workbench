@@ -48,3 +48,43 @@ sources:
   decisions_log:
     adapter: decisions_log
     args: {path: data/assessments.json}
+
+  # Policy as code — GOV-* controls test the declared golden state
+  runtime_config:
+    adapter: runtime_config
+    args: {}
+  policy_providers:
+    adapter: policy_providers
+    args: {}
+  artefact_status:
+    adapter: artefact_status
+    args: {enforce_tier: false}
+  exception_status:
+    adapter: exception_status
+    args: {}
+
+  stress_tracker:
+    adapter: stress_tracker
+    args: {path: "data/*.xlsx", sheet: Stress-Test Tracker}
+
+  decisions_log:
+    adapter: decisions_log
+    args: {path: data/assessments.json}
+
+  ticket_export:
+    args: {path: governance/tickets.csv}
+  model_registry:
+    args: {path: governance/model_registry.csv}
+  eval_results:
+    args: {path: governance/eval_results.json}
+  rollback_log:
+    args: {path: governance/rollback_log.csv}
+  exception_register:
+    args: {path: governance/exceptions.csv}
+
+  stress_tracker:
+    adapter: stress_tracker
+    args: {path: "data/*.xlsx", sheet: Stress-Test Tracker}
+  decisions_log:
+    adapter: decisions_log
+    args: {path: data/assessments.json}
