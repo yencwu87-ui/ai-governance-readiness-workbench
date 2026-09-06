@@ -49,7 +49,9 @@ jobs:
         working-directory: ${{ github.workspace }}
         run: |
           set -e
-          [ -d repo/evidence/bundles ] || { echo "no bundle produced"; exit 0; }
+          shopt -s nullglob
+          bundles=(repo/evidence/bundles/*.json)
+          [ ${#bundles[@]} -gt 0 ] || { echo "no bundle produced"; exit 0; }
           git config user.name "caa-runner"
           git config user.email "caa-runner@users.noreply.github.com"
           if git fetch origin evidence:evidence 2>/dev/null; then :; else
