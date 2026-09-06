@@ -43,3 +43,15 @@ Commit as WB-008: lifecycle cards per use case; step judge + validator; hybrid r
       lifecycle_cards.render(plays, st.session_state.get("index"), latest_lane_b(), reviewer)
   where `reviewer` is whatever app.py already calls the sidebar reviewer name.
 - Delete repo/.cache/embeddings.jsonl once: chunk boundaries changed, so old vectors are stale.
+
+## Revision 3 (items 4 and 5)
+- judge.py: prompt tells the model an artefact may serve the expected output under another
+  name (suitability assessment = intake form); `is_data_step()` and `lane_b_proposal()`.
+- validator.py: `source == "lane_b"` proposals skip V1/V3/V4/V6, keep V2/V5.
+- lifecycle_cards.py: steps with Lane B tests (or data-type outputs) are evidenced by the
+  operating test; retrieval off by default with a per-step toggle.
+- decisions.calibration(): excludes Lane-B-fed proposals.
+- stress/judge_target.py + stress/judge_cases.jsonl: run `python -m stress.judge_target`
+  from repo/ (Ollama up). Wire into the hotspot runner via `JudgeTarget.run_case`.
+- tests: 12.
+Commit as WB-009: Lane-B-fed lifecycle steps; judge stress target.

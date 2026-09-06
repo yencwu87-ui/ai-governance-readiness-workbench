@@ -16,7 +16,7 @@ import streamlit as st
 
 import decisions as D
 import usecases as U
-from judge import StepContext, judge_step, call_ollama
+from judge import StepContext, judge_step, call_ollama, is_data_step, lane_b_proposal
 from retriever import HybridIndex, chunk_documents
 from validator import validate, make_gate_check
 
@@ -126,19 +126,30 @@ def render(plays: list, index, lane_b: dict[str, dict], reviewer: str = "") -> N
                 st.markdown("**Operating test (Lane B)** " + ", ".join(
                     f"{t['control_id']}: {t['machine_verdict']}" for t in lb))
 
+            data_step = bool(lb) or is_data_step(expected)
+            include_docs = True
+            if data_step:
+                st.info("Evidenced by operating test — the proposal comes from Lane B, no model involved."
+                        if lb else "This step's output is data (dashboard / tracker / log). No operating test covers it "
+                                   "yet: add a control pack with play_refs to this step. Document retrieval is off by default.")
+                include_docs = st.toggle("Also retrieve documents", value=False, key=f"docs_{uc.id}_{sid}")
             q = f"{_g(s,'action','')} {expected}"
-            hits = idx.search(q, k=6)
+            hits = idx.search(q, k=6) if include_docs else []
             if hits:
                 st.markdown("**Evidence retrieved**")
                 for h in hits:
                     tag = "+".join(h.found_by) + (f" · terms: {', '.join(h.bm25_terms[:6])}" if h.bm25_terms else "")
                     st.markdown(f"- `{h.chunk.label}` <small>{tag}</small>", unsafe_allow_html=True)
                     st.caption(h.chunk.text[:280].replace("\n", " ") + ("…" if len(h.chunk.text) > 280 else ""))
-            else:
+            elif not data_step:
                 st.warning("No evidence retrieved for this step.")
 
             key = f"prop_{uc.id}_{sid}"
-            if st.button("Ask judge", key=f"btn_{key}"):
+            if lb and not include_docs:
+                if key not in st.session_state:
+                    prop = lane_b_proposal(lb)
+                    st.session_state[key] = (prop, validate(prop, [], expected, sid, lat))
+            elif st.button("Ask judge", key=f"btn_{key}"):
                 ctx = StepContext(sel, _g(play, "title", ""), gate, controls_str,
                                   sid, _g(s, "owner", ""), _g(s, "action", ""), expected, uc.name, uc.materiality)
                 with st.spinner("Judging…"):
@@ -151,7 +162,8 @@ def render(plays: list, index, lane_b: dict[str, dict], reviewer: str = "") -> N
             if prop:
                 c1, c2 = st.columns([2, 3])
                 with c1:
-                    st.markdown(f"**Judge proposes:** `{prop['sufficiency']}` · confidence {prop['confidence']:.2f}")
+                    who = "Operating test proposes" if prop.get("source") == "lane_b" else "Judge proposes"
+                    st.markdown(f"**{who}:** `{prop['sufficiency']}` · confidence {prop['confidence']:.2f}")
                     if v.status == "needs_review":
                         st.error("Validator: needs review" + (f" — downgraded to `{v.downgraded_to}`" if v.downgraded_to else ""))
                         for fnd in v.failures:

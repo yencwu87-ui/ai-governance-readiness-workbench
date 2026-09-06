@@ -74,6 +74,23 @@ def validate(proposal: dict, hits: list[Hit], expected_output: str,
              gate_check: Callable[[], tuple[bool, str]] | None = None) -> Verdict:
     f: list[Finding] = []
     suff = proposal.get("sufficiency", "none")
+    if proposal.get("source") == "lane_b":
+        # deterministic proposal: no excerpts to check, no expected-output rule; keep consistency + sequence
+        gaps = [g for g in (proposal.get("gaps") or []) if str(g).strip()]
+        f.append(Finding("V1 cite_exists", True, "skipped — operating test, not a document"))
+        v2_ok = not (suff == "full" and gaps)
+        f.append(Finding("V2 rating_vs_gaps", v2_ok, "" if v2_ok else "full with open gaps"))
+        f.append(Finding("V3 cites_required", True, "skipped"))
+        f.append(Finding("V4 expected_output", True, "skipped"))
+        missing = [p for p in PREREQS.get(step_id, [])
+                   if p not in prior_decisions or prior_decisions[p].get("decision") == "reject"]
+        v5_ok = not (suff == "full" and missing)
+        f.append(Finding("V5 cross_step", v5_ok, "" if v5_ok else f"prerequisite step(s) undecided or rejected: {', '.join(missing)}"))
+        f.append(Finding("V6 injection", True, "skipped"))
+        fails = [x for x in f if not x.ok]
+        if not fails:
+            return Verdict("ok", f)
+        return Verdict("needs_review", f, downgraded_to="partial" if suff == "full" else None)
     cites = proposal.get("cited_excerpts", []) or []
     gaps = [g for g in (proposal.get("gaps") or []) if str(g).strip()]
     chunks = {h.chunk.id: h.chunk.text for h in hits}

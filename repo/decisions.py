@@ -89,10 +89,11 @@ def play_status(plays: list, uc_id: str, path: Path = LOG) -> dict[str, str]:
 
 
 def calibration(path: Path = LOG) -> dict:
-    """Judge-vs-reviewer agreement, overall and per play. Amend/reject with a proposal count as
+    """Judge-vs-reviewer agreement, overall and per play. Lane-B-fed (deterministic) proposals are
+    excluded — they measure the control, not the judge. Amend/reject with a proposal count as
     disagreement; the sufficiency delta says whether the judge over- or under-rates."""
     rank = {"none": 0, "partial": 1, "full": 2}
-    rows = [r for r in load(path) if r.get("proposal")]
+    rows = [r for r in load(path) if r.get("proposal") and r["proposal"].get("source") != "lane_b"]
     per: dict[str, dict] = {}
     for r in rows:
         play = r["step"].split(".")[0]

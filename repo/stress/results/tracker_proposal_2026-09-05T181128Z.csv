@@ -1,2 +1,0 @@
-#,Hotspot,Last run,Result,Residual risk,Next run,Engine,Evidence hash,Note
-2,"Prompt injection, jailbreak & data exfiltration",2026-09-05,Not run,High,2026-12-14,?,4f53cda18c2baa0c,"runner error: HTTPConnectionPool(host='localhost', port=9): Max retries exceeded with url: /v1/chat/completions (Caused by NewConnectionError(""HTTPConnection(host='localhost', port=9): Failed to establish a new connection: [Errno 61] Connection refused""))"
