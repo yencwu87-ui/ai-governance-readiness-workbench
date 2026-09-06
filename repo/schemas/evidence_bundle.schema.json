@@ -12,7 +12,8 @@
     "runner_version",
     "control_pack",
     "results",
-    "bundle_sha256"
+    "bundle_sha256",
+    "policy"
   ],
   "additionalProperties": false,
   "properties": {
@@ -174,6 +175,12 @@
             "items": {
               "type": "string"
             }
+          },
+          "policy_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }
@@ -181,6 +188,24 @@
     "bundle_sha256": {
       "type": "string",
       "description": "SHA-256 of the canonical JSON of everything above except this field and human_verdict blocks. Detects tampering with machine results."
+    },
+    "policy": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        }
+      },
+      "description": "The policy in force for this run. Null when no policy file is present."
     }
   }
 }

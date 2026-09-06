@@ -116,6 +116,13 @@
         "pattern": "^P\\d+\\.\\d+$"
       },
       "description": "Lifecycle play steps (from the playbook's Playbooks & Runbooks sheet) whose evidence output this control tests, e.g. P4.2"
+    },
+    "policy_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Dotted clause paths in policy/ai-lifecycle.yaml that this control enforces, e.g. inference.residency"
     }
   }
 }
