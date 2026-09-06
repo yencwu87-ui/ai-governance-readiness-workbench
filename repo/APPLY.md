@@ -34,12 +34,3 @@ Play.header. Lane B tests are matched to steps through play_refs, as lifecycle_v
 - Optional: run the stress kit against judge.judge_step (guardrail 9).
 
 Commit as WB-008: lifecycle cards per use case; step judge + validator; hybrid retrieval.
-
-## Revision 2 (after first run)
-- retriever: chunks cut at paragraph/sentence/word boundaries, never mid-word; at most 2 hits
-  per document and near-duplicate chunks (overlap neighbours) suppressed; short `file#n` labels.
-- cards: caption says "no documents indexed" until a Scan has run; render() accepts a
-  `reviewer` argument so the sidebar name can be reused —
-      lifecycle_cards.render(plays, st.session_state.get("index"), latest_lane_b(), reviewer)
-  where `reviewer` is whatever app.py already calls the sidebar reviewer name.
-- Delete repo/.cache/embeddings.jsonl once: chunk boundaries changed, so old vectors are stale.

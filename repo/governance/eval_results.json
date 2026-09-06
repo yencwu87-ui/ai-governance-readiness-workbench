@@ -1,4 +1,0 @@
-[
- {"version": "v0.1.0", "run_at": "2026-08-27T10:00:00Z", "accuracy": 0.80, "fairness_gap": 0.00, "refusal_rate": 0.02, "eval_set": "golden_20_controls", "notes": "20 hand-labelled control/evidence pairs; accuracy = agreement with reviewer sufficiency"},
- {"version": "v0.2.0", "run_at": "2026-09-04T22:00:00Z", "accuracy": 0.80, "fairness_gap": 0.00, "refusal_rate": 0.02, "eval_set": "golden_20_controls", "notes": "no assessor change in this version; re-run of same set"}
-]

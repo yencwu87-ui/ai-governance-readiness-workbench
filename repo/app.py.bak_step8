@@ -500,11 +500,3 @@ with tab_l:
                            "Maturity": c["maturity"] or "—"} for c in v["controls"]], width="stretch", hide_index=True)
         else:
             st.caption("None of this play's controls are in the selected scope.")
-
-
-# ---- Step 8: per-use-case lifecycle cards (judge proposes, reviewer decides) ----
-with tab_l:
-    if plays:
-        st.markdown("---")
-        import lifecycle_cards
-        lifecycle_cards.render(plays, st.session_state.get("index"), latest_lane_b())

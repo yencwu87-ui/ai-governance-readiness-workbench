@@ -2,13 +2,15 @@
 
 Requires:  pip install garak      and a target garak can reach (Ollama via the 'ollama' generator, or an
 OpenAI-compatible endpoint via 'openai' generator with OPENAI_API_BASE / OPENAI_API_KEY).
-This runner shells out, then reads garak's JSONL report. garak's report format has changed across
+This runner shells out, then reads garak's JSONL report. garak >= 0.15 uses --target_type/--target_name and --spec (probes.<module>[.<Class>]); probe names
+change between releases, so confirm with `python -m garak --list_probes`. garak's report format has changed across
 versions; the parser below reads the 'eval' entries (probe, detector, passed, total) and falls back to
 counting 'attempt' entries with a 'status' field. Verify against your installed version once.
 """
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -48,16 +50,20 @@ def parse_garak_report(path: Path) -> list[dict]:
 
 @hotspot(1, "Generative AI hallucination & factual fabrication")
 def run(target, cfg: dict) -> HotspotResult:
-    if not shutil.which("garak") and not shutil.which("python"):
-        return HotspotResult(1, "Hallucination", target.name, now(), "garak", 0, 0, "Not run", "High", note="garak not installed")
+    py = os.environ.get("GARAK_PYTHON", "python")   # point at a separate env if garak lives there
+    if not shutil.which(py) and not Path(py).exists():
+        return HotspotResult(1, "Hallucination", target.name, now(), "garak", 0, 0, "Not run", "High", note=f"{py} not found")
     gen, model = _garak_target(target)
     out_dir = Path(cfg.get("results_dir", "stress/results")) / "garak"
     out_dir.mkdir(parents=True, exist_ok=True)
     prefix = out_dir / f"h01_{now()[:10]}"
-    cmd = ["python", "-m", "garak", "--model_type", gen, "--model_name", model,
-           "--probes", ",".join(PROBES), "--report_prefix", str(prefix)]
-    if cfg.get("generations"):
-        cmd += ["--generations", str(cfg["generations"])]
+    probes = os.environ.get("GARAK_PROBES") or ",".join(PROBES)
+    spec = ",".join(p if p.startswith("probes.") else f"probes.{p}" for p in probes.split(","))
+    cmd = [py, "-m", "garak", "--target_type", gen, "--target_name", model,
+           "--spec", spec, "--report_prefix", str(prefix)]
+    if cfg.get("generations") or os.environ.get("GARAK_GENERATIONS"):
+        cmd += ["--generations", str(cfg.get("generations") or os.environ["GARAK_GENERATIONS"])]
+
     try:
         subprocess.run(cmd, check=True, capture_output=True, text=True, timeout=cfg.get("timeout", 3600))
     except (subprocess.CalledProcessError, subprocess.TimeoutExpired, FileNotFoundError) as e:

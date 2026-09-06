@@ -1,0 +1,21 @@
+{
+  "target": "http://localhost:9/v1/chat/completions",
+  "run_at": "2026-09-05T181128Z",
+  "results": [
+    {
+      "hotspot": 2,
+      "name": "Prompt injection, jailbreak & data exfiltration",
+      "target": "http:http://localhost:9/v1/chat/completions",
+      "run_at": "2026-09-05T18:11:28.882393+00:00",
+      "engine": "?",
+      "cases": 0,
+      "failed": 0,
+      "result": "Not run",
+      "residual_risk": "High",
+      "detail": [],
+      "raw_report": null,
+      "note": "runner error: HTTPConnectionPool(host='localhost', port=9): Max retries exceeded with url: /v1/chat/completions (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=9): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "evidence_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  ]
+}

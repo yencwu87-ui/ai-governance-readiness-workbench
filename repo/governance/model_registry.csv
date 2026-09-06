@@ -1,2 +1,0 @@
-model_id,risk_tier,owner,provider,intended_use
-readiness-assessor,medium,Yen-Ching,anthropic or ollama,Propose evidence sufficiency and maturity per control for reviewer decision

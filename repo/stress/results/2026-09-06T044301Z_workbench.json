@@ -1,0 +1,21 @@
+{
+  "target": "workbench",
+  "run_at": "2026-09-06T044301Z",
+  "results": [
+    {
+      "hotspot": 1,
+      "name": "Hallucination",
+      "target": "workbench",
+      "run_at": "2026-09-06T04:43:02.125990+00:00",
+      "engine": "garak",
+      "cases": 0,
+      "failed": 0,
+      "result": "Not run",
+      "residual_risk": "High",
+      "detail": [],
+      "raw_report": null,
+      "note": "no report produced",
+      "evidence_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    }
+  ]
+}
