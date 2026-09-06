@@ -1,6 +1,6 @@
-# ai-lifecycle — policy v1.0.0
+# ai-lifecycle — policy v1.1.0
 
-**Owner** AI Risk (second line) · **Approved by** AI Risk Committee · **Effective** 2026-09-06 · **Policy hash** `b37d9916d9eb5255`
+**Owner** AI Risk (second line) · **Approved by** AI Risk Committee · **Effective** 2026-09-06 · **Policy hash** `250db9c56f381cb3`
 
 > Generated from `policy/ai-lifecycle.yaml`. Do not edit by hand — edit the policy and re-render, so the approved policy and the enforced gate cannot drift apart.
 
@@ -53,6 +53,8 @@ A named reviewer records every decision. AI may: propose, retrieve, summarise, t
 | GOV-03 Every open exception carries the policy's required fields and expires  | exceptions.max_days |
 | GOV-04 Every registered model has the artefacts its risk tier requires, beyon | required_artefacts.high, required_artefacts.medium |
 | GOV-05 Every tier obligation (review cycle, eval before deploy, independent v | tier_obligations |
+| GOV-06 The policy file's version appears in the history register with a named | approved_by, version |
+| GOV-07 Every version in the history register has a named approver, an approva | approved_by |
 | MCM-01 Every deployed model or prompt version in production has a matching ch | required_artefacts.all |
 | MCM-02 Every change ticket references a model_id that exists in the model reg | required_artefacts.all |
 | MCM-03 An evaluation run exists for the released version with a timestamp bef | evaluation.run_before_deploy |
@@ -68,3 +70,12 @@ A named reviewer records every decision. AI may: propose, retrieve, summarise, t
 | STR-03 Each deployment is preceded by at least one tracker run within the pri | required_artefacts.high |
 
 Controls with no policy clause test operating discipline rather than the golden state; see `controls/*.yaml`.
+
+## 7. Version history
+
+| Version | Approved by | Approved on | Ticket | Change |
+|---|---|---|---|---|
+| 1.0.0 | AI Risk Committee | 2026-09-06 | WB-011 | Initial policy: inference residency, dependency pinning, required artefacts, evaluation, s |
+| 1.1.0 | AI Risk Committee | 2026-09-06 | WB-014 | Tiered obligations: per-tier required artefacts (cumulative) and tier_obligations (review  |
+
+GOV-06 tests that the version in force matches an approved record by hash; GOV-07 tests that every amendment carries a named approver, a date and a change ticket.

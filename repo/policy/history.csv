@@ -1,0 +1,3 @@
+version,sha256,effective_from,approved_by,approved_on,ticket_id,summary
+1.0.0,(not recorded — the history register was created after this version was superseded),2026-09-06,AI Risk Committee,2026-09-06,WB-011,"Initial policy: inference residency, dependency pinning, required artefacts, evaluation, segregation of duties, gates, exceptions, cadence, oversight"
+1.1.0,250db9c56f381cb3c4014d58c6e2505d729ff2a4e3f928c84fecf9cde98b0de2,2026-09-06,AI Risk Committee,2026-09-06,WB-014,"Tiered obligations: per-tier required artefacts (cumulative) and tier_obligations (review cycle, eval before deploy, independent validation, stress-test window, approval level)"

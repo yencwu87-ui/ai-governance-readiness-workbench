@@ -23,6 +23,10 @@ def load(path: Path | str = DEFAULT_PATH) -> dict:
         return {}
     d = yaml.safe_load(p.read_text()) or {}
     d["_path"], d["_sha256"] = str(p), hashlib.sha256(p.read_bytes()).hexdigest()
+    hp = p.parent / "history.csv"
+    if hp.exists():
+        import csv
+        d["_history"] = list(csv.DictReader(hp.open()))
     return d
 
 
@@ -103,13 +107,50 @@ def render(policy: dict, controls: list[dict]) -> str:
             L.append(f"| {c['id']} {c['assertion'][:70]} | {', '.join(c['policy_refs'])} |")
     L += ["", f"Controls with no policy clause test operating discipline rather than the golden state; "
               f"see `controls/*.yaml`.", ""]
+    hist = policy.get("_history") or []
+    if hist:
+        L += ["## 7. Version history", "", "| Version | Approved by | Approved on | Ticket | Change |", "|---|---|---|---|---|"]
+        for h in hist:
+            L.append(f"| {h.get('version')} | {h.get('approved_by')} | {h.get('approved_on')} | {h.get('ticket_id')} | {h.get('summary','')[:90]} |")
+        L += ["", "GOV-06 tests that the version in force matches an approved record by hash; GOV-07 tests that every "
+                  "amendment carries a named approver, a date and a change ticket.", ""]
     return "\n".join(L)
+
+
+def record(ppath: Path, approved_by: str, ticket: str, summary: str) -> int:
+    """Append the policy file in force to the history register. Run this AFTER the approver has
+    approved the amendment — the register records an approval, it does not grant one."""
+    import csv
+    from datetime import date
+    policy = load(ppath)
+    if not policy:
+        print(f"no policy at {ppath}"); return 1
+    hp = ppath.parent / "history.csv"
+    hdr = ["version", "sha256", "effective_from", "approved_by", "approved_on", "ticket_id", "summary"]
+    rows = list(csv.DictReader(hp.open())) if hp.exists() else []
+    v = str(policy.get("version", "")).strip()
+    if any(r["version"] == v for r in rows):
+        print(f"version {v} is already recorded — bump `version:` in the policy before recording an amendment")
+        return 1
+    today = date.today().isoformat()
+    with hp.open("a", newline="") as f:
+        w = csv.writer(f)
+        if not rows:
+            w.writerow(hdr)
+        w.writerow([v, hash_of(policy), str(policy.get("effective", today)), approved_by, today, ticket, summary])
+    print(f"recorded v{v} ({hash_of(policy)[:16]}) approved by {approved_by}, ticket {ticket}")
+    return 0
 
 
 def main(argv=None):
     argv = argv or sys.argv[1:]
+    if argv and argv[0] == "record":
+        if len(argv) < 4:
+            print('usage: python -m caa.policy record "<approved by>" <ticket> "<summary>" [policy_path]'); return 2
+        return record(Path(argv[4]) if len(argv) > 4 else DEFAULT_PATH, argv[1], argv[2], argv[3])
     if not argv or argv[0] != "render":
-        print("usage: python -m caa.policy render [policy_path] [controls_dir]"); return 2
+        print("usage: python -m caa.policy render [policy_path] [controls_dir]\n"
+              '       python -m caa.policy record "<approved by>" <ticket> "<summary>"'); return 2
     ppath = Path(argv[1]) if len(argv) > 1 else DEFAULT_PATH
     cdir = Path(argv[2]) if len(argv) > 2 else Path("controls")
     policy = load(ppath)

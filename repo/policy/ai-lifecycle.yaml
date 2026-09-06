@@ -8,10 +8,11 @@
 # reference fails MCM-06, and the bundle records this file's hash next to every verdict.
 
 policy: ai-lifecycle
-version: 1.0.0
+version: 1.1.0
 owner: AI Risk (second line)
 approved_by: AI Risk Committee
 effective: 2026-09-06
+amends: 1.0.0
 scope: >
   The readiness-assessor and any model, agent or prompt deployed from this repository, across the
   eleven lifecycle plays in the AI Governance Playbook.

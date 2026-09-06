@@ -10,3 +10,4 @@ WB-011,readiness-assessor,v0.3.0,high,Reviewer Name,false,2026-09-06,2026-09-06,
 WB-012,readiness-assessor,v0.3.0,medium,Reviewer Name,false,2026-09-06,2026-09-06,Restore stress scanner and governance exports lost in a bad commit
 WB-014,readiness-assessor,v0.3.0,high,Reviewer Name,false,2026-09-06,2026-09-06,Tiered obligations in policy as code
 WB-015,readiness-assessor,v0.3.0,high,Reviewer Name,false,2026-09-06,2026-09-06,Correct eval_results (no evaluation was ever run); within_tolerance reports NOT_TESTABLE on missing metrics
+WB-016,readiness-assessor,v0.3.0,high,Reviewer Name,false,2026-09-06,2026-09-06,Policy versioning and change control

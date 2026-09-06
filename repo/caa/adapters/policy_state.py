@@ -225,3 +225,53 @@ def tier_obligations(target: Path, cfg: dict) -> AdapterResult:
         if ob.get("approval_level"):
             add("approval_level_recorded", True, f"policy requires {ob['approval_level']} — human gate")
     return AdapterResult("ok", records, [_hash_file(reg)])
+
+
+@adapter("policy_history")
+def policy_history(target: Path, cfg: dict) -> AdapterResult:
+    """Rows from policy/history.csv, each annotated against the policy file actually in force.
+
+    Fields per row: version, sha256, approved_by, approved_on, ticket_id, is_current,
+    hash_matches (current row only), ticket_exists, approver_matches_policy, complete.
+    The current row is the one whose version equals the policy file's `version`.
+    """
+    pol = _policy(target, cfg)
+    if not pol:
+        return AdapterResult("missing", message="policy file not found")
+    hp = _resolve(target, cfg.get("history", "policy/history.csv"))
+    if not hp.exists():
+        return AdapterResult("missing", message=f"{hp} not found — no approval record for the policy in force")
+    tickets = _read_table(target / "governance" / "tickets.csv") if (target / "governance" / "tickets.csv").exists() else []
+    ticket_ids = {str(t.get("ticket_id", "")).strip() for t in tickets}
+    body = str(pol.get("approved_by", "")).strip().lower()
+    cur_version, cur_hash = str(pol.get("version", "")).strip(), pol["_sha256"]
+    PLACEHOLDERS = {"", "tbd", "reviewer name", "unnamed", "n/a", "none"}
+
+    records = []
+    for r in _read_table(hp):
+        v = str(r.get("version", "")).strip()
+        is_current = v == cur_version
+        appr = str(r.get("approved_by", "")).strip()
+        rec = {
+            "version": v, "is_current": is_current,
+            "sha256": str(r.get("sha256", "")).strip(),
+            "hash_matches": (str(r.get("sha256", "")).strip() == cur_hash) if is_current else None,
+            "approved_by": appr, "approved_on": str(r.get("approved_on", "")).strip(),
+            "ticket_id": str(r.get("ticket_id", "")).strip(),
+            "ticket_exists": str(r.get("ticket_id", "")).strip() in ticket_ids,
+            "approver_named": appr.lower() not in PLACEHOLDERS,
+            "approver_matches_policy": appr.lower() == body if body else None,
+        }
+        rec["complete"] = bool(rec["approver_named"] and rec["ticket_exists"] and rec["approved_on"])
+        # the version in force must additionally hash-match: an edited policy is an unapproved policy
+        rec["in_force_and_approved"] = bool(is_current and rec["complete"] and rec["hash_matches"])
+        rec["current_unapproved"] = bool(is_current and not rec["in_force_and_approved"])
+        records.append(rec)
+
+    if not any(r["is_current"] for r in records):
+        records.append({"version": cur_version, "is_current": True, "sha256": cur_hash, "hash_matches": False,
+                        "approved_by": "", "approved_on": "", "ticket_id": "", "ticket_exists": False,
+                        "approver_named": False, "approver_matches_policy": False, "complete": False,
+                        "in_force_and_approved": False, "current_unapproved": True,
+                        "detail": "the policy version in force has no row in the history register"})
+    return AdapterResult("ok", records, [_hash_file(hp), _hash_text(pol["_path"], cur_hash)])

@@ -96,3 +96,43 @@
   human_gate: Reviewer decides whether an unmet obligation is a finding, an exception, or a signal the tier is wrong.
   frequency: weekly
   severity: high
+
+- id: GOV-06
+  domain: policy
+  objective: The policy in force was approved, and has not changed since
+  assertion: The policy file's version appears in the history register with a named approver, an approval date, a change ticket, and a hash matching the file on disk
+  # An edited policy is an unapproved policy: if the hash differs from the approved record, someone
+  # changed the rules without going back to the approver. That is the whole point of this control.
+  framework_refs: [MAS-TRM-3.1, ISO42001-5.2, NIST-AI-RMF-GOVERN-1.1]
+  play_refs: [P8.4]
+  policy_refs: [approved_by, version]
+  inputs:
+    - source: policy_history
+      fields: [version, is_current, hash_matches, approved_by, ticket_id, in_force_and_approved]
+  check: record_count
+  params:
+    source: policy_history
+    where: {field: current_unapproved, equals: true}
+    max: 0
+  human_gate: If the hash differs, the reviewer establishes what changed and whether it was ever put to the approver — a diff, not a re-approval.
+  frequency: on_commit
+  severity: critical
+
+- id: GOV-07
+  domain: policy
+  objective: Every policy amendment has a complete approval record
+  assertion: Every version in the history register has a named approver, an approval date, and a change ticket that exists in the ticket register
+  framework_refs: [MAS-TRM-3.1, ISO42001-9.3]
+  play_refs: [P8.4]
+  policy_refs: [approved_by]
+  inputs:
+    - source: policy_history
+      fields: [version, approved_by, approved_on, ticket_id, ticket_exists, complete]
+  check: record_count
+  params:
+    source: policy_history
+    where: {field: complete, equals: false}
+    max: 0
+  human_gate: Reviewer confirms the named body actually approved the amendment — a name in a CSV is a claim, not a minute.
+  frequency: weekly
+  severity: high

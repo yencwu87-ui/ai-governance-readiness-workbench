@@ -91,3 +91,6 @@ sources:
   tier_obligations:
     adapter: tier_obligations
     args: {}
+  policy_history:
+    adapter: policy_history
+    args: {}
