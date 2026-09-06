@@ -13,7 +13,7 @@ sources:
     args:
       max_commits: 500
       ticket_pattern: '\b([A-Z]{2,10}-\d+)\b'
-      governed_paths: [prompts/, guardrails/, tools/permissions]
+      governed_paths: [prompts/, guardrails/, tools/permissions, policy/]
 
   lock_file:
     adapter: lock_file
