@@ -1,0 +1,5 @@
+2a. Minutes with approval — expect FULL (maturity 3)
+
+Extract, Board Risk Committee minutes, 22 May 2026, item 6 "AI Risk Framework and Appetite":
+"The Committee reviewed the AI Risk Management Framework v1.0 presented by the Chief Risk Officer, including the AI risk appetite statement (Appendix B) setting a low tolerance for customer-facing AI decisions without human review and a moderate tolerance for internal productivity use cases. Following discussion of model inventory coverage and third-party AI dependencies, the Committee APPROVED the Framework and the appetite statement, and requested a semi-annual update on AI risk metrics commencing November 2026. Action: CRO."
+Attendance: 5 of 5 committee members present. Minutes signed by Committee Secretary, 29 May 2026.

@@ -1,0 +1,209 @@
+# MAS control requirements — overlay for the playbook workbook.
+#
+# The MAS sheet has no requirement column: LIBRARIES maps `req` to "MAS expectation area",
+# which is a heading, so all 30 MAS controls load as "Expectation: <title>." This file supplies
+# the missing text. It is loaded over the workbook at load_controls() time and replaces `req`
+# and `artefacts` for any control id it names. Controls not named here are unchanged.
+#
+# Kept out of the workbook deliberately: write_back overwrites the "Evidence / artifact"
+# column, so load-bearing text on that sheet has a known failure mode.
+#
+# Every entry is a second-line judgement about what MAS expects and what evidences it. Cite
+# what you can and mark what you cannot — an unmarked extrapolation is worse than a gap.
+
+version: 1
+library: MAS
+
+controls:
+
+  # ---------------------------------------------------------------------------
+  M3.12:
+    requirement: >
+      Changes to deployed AI models — including retraining, feature pipeline changes,
+      threshold adjustments and decommissioning — are authorised before implementation, and
+      the change that reached production is verifiably the change that was approved.
+
+    # What the evidence must DEMONSTRATE. Not the same as the workbook's artefact column,
+    # which only names the document. "Change records" is an artefact; "authorisation recorded
+    # before the first production action" is an element. These replace the artefact list in
+    # the prompt and in harness check 4a, so each one must be a thing that can be absent.
+    elements:
+      - id: e1
+        text: Model changes are raised as changes, including scheduled retraining
+        basis: MRM            # MRM | PRACTICE | P017 | INTERNAL
+      - id: e2
+        text: >
+          Authorisation is recorded before the first production action, including for
+          emergency changes
+        basis: PRACTICE
+      - id: e3
+        text: >
+          Privileged access used to implement the change reconciles to the approved change
+          and its named implementer
+        basis: PRACTICE
+      - id: e4
+        text: >
+          Production state after implementation is verified against the approved plan, with
+          deviations approved rather than closed silently
+        basis: PRACTICE
+
+    # For the reviewer and the corpus labels. Whether this also goes in the prompt is
+    # open_question 4 — set prompt_boundary below to test it.
+    boundary:
+      none: A procedure, target operating model or intent, with no change records
+      partial: >
+        Change records exist and cover the AI estate, but one or more of e2–e4 does not
+        operate consistently across the tested population
+      full: >
+        All four elements evidenced across a tested population. Observations or housekeeping
+        findings recorded in an assurance review do not prevent full
+
+    source:
+      - instrument: AI MRM Paper (Dec 2024)
+        note: Change and version control over deployed models
+        confidence: known
+      - instrument: AIRG Consultation Paper P017-2025
+        note: UNVERIFIED — confirm the section before relying on this attribution
+        confidence: unchecked
+
+    # Free text. Not loaded into the prompt; kept so a later reviewer can see the reasoning.
+    rationale: >
+      e1 is the classic finding — retraining treated as BAU rather than as change. e3 and e4
+      are audit practice rather than anything I can cite to MAS; decide whether they belong in
+      a MAS-attributed requirement or in an internal standard this requirement points at.
+
+  # ---------------------------------------------------------------------------
+  M3.6:
+    requirement: >
+      Models are evaluated against pre-defined metrics on representative held-out data,
+      tested for safe behaviour under the conditions they will actually meet, and challenged
+      by a validator who did not build them — with the outcome recorded against a named
+      accountable person before production go-live, at a depth proportionate to the model's
+      materiality.
+
+    # SCOPE is the decision to settle first. A single model's validation report cannot
+    # evidence a policy that governs all models. Elements scoped `model` are assessable from
+    # one evidence set; those scoped `programme` need a standard, a register or a policy.
+    # Mixing them without marking makes `full` unreachable for any single-model artefact —
+    # which would have made the 2026-09-09 corpus label for M3.6_a wrong, not the assessor.
+    #
+    # Decide: does the assessor evaluate only `model`-scoped elements, or all of them?
+    # If all, the corpus needs a programme-level document per control, not a model report.
+    elements:
+      - id: e1
+        text: >
+          Evaluation results exist for the specific model version, measured against
+          pre-defined metrics on representative held-out data
+        basis: P017
+        scope: model
+      - id: e2
+        text: >
+          Testing covers behaviour under conditions the model will meet — robustness, stress,
+          edge case, bias and fairness, adversarial and security testing, and integration or
+          UAT in a production-like environment
+        basis: P017
+        scope: model
+      - id: e3
+        text: >
+          Validation was performed by someone who did not build the model, covering
+          conceptual soundness, replication, and whether the developer's own evaluation and
+          testing were adequate
+        basis: P017
+        scope: model
+      - id: e4
+        text: >
+          The independence boundary is evidenced — the validator is separate from the
+          developer, the business owner and the vendor relationship manager, and the person
+          who signs is named
+        basis: P017
+        scope: model
+      - id: e5
+        text: >
+          A validation outcome is recorded against a named accountable person before
+          production go-live, stating limitations, conditions of use and residual risk
+          accepted
+        basis: P017
+        scope: model
+      - id: e6
+        text: >
+          The depth of validation is proportionate to the model's materiality, tiered on
+          impact, complexity and reliance
+        basis: P017
+        scope: programme
+      - id: e7
+        text: >
+          Re-validation triggers are defined — material change, model or version upgrade
+          including vendor-pushed updates, drift threshold breach, data source change,
+          incident, and a periodic cadence by tier
+        basis: P017
+        scope: programme
+      - id: e8
+        text: >
+          Third-party models are validated at use-case and system level — own evaluation set,
+          benchmarking, guardrail testing, vendor attestations, and a contractual right to
+          change notification
+        basis: P017
+        scope: programme
+
+    # Conditional elements. Not yet loaded — the assessor has no way to know the model class
+    # from the evidence. Recorded so they are not lost when the loader learns to handle them.
+    conditional_elements:
+      - applies_when: genai
+        text: >
+          A fixed evaluation set with groundedness, hallucination and refusal measures; prompt
+          injection, data leakage and output-boundary testing
+        basis: P017
+      - applies_when: agentic
+        text: >
+          Tool-use and action-boundary testing, and a kill switch or override for high
+          materiality models
+        basis: P017
+
+    boundary:
+      none: >
+        A testing standard, validation plan or intent, with no evaluation or test results
+      partial: >
+        Results exist but independence is absent or not evidenced (e3, e4). Reciprocal peer
+        review inside the developing team is partial credit, not independence
+      full: >
+        Every model-scoped element evidenced. Conditions, exceptions or open items recorded
+        in the validator's own opinion do not prevent full — they evidence that the control
+        operates
+
+    source:
+      - instrument: AIRG Consultation Paper P017-2025
+        note: >
+          Evaluation, testing and independent validation. Industry feedback (ASIFMA) sought
+          clarification on what triggers full pre-deployment independent validation and on
+          supplier assurances such as attestations and certifications — the final Guidelines
+          may land either way, so e8 is written to work under both
+        confidence: known
+      - instrument: AI MRM Paper (Dec 2024)
+        note: Independent validation proportionate to materiality
+        confidence: known
+
+    rationale: >
+      e5 is the element most likely to be tested by an examiner, because it is binary and
+      evidenced — a go-live either has a recorded validation outcome against a named person
+      or it does not. e7's vendor-pushed upgrade trigger is the gap almost nobody has wired
+      in. e6, e7 and e8 are programme-level: they need a validation standard or register,
+      not a model report, so an assessment that expects them from a single model's evidence
+      will under-credit it.
+
+# ---------------------------------------------------------------------------
+# Loader settings — these change behaviour, so they are versioned with the text.
+settings:
+  # Replace the workbook's artefact string with `elements` (recommended), or append to it.
+  # Appending risks the model treating the artefact name as a separate requirement, which is
+  # what produced the two misses in the 2026-09-09 probe.
+  elements_replace_artefacts: true
+
+  # Put the boundary in the prompt so the model is told directly what full looks like.
+  # Never tried as of 2026-09-09. Toggle it and re-run the probe rather than assuming.
+  prompt_boundary: false
+
+  # Which element scopes the assessor evaluates. "model" only means a single model's
+  # evidence can reach full; "all" means programme-level elements (a validation standard, a
+  # re-validation trigger register) must also be evidenced, which a model report cannot do.
+  # Set this before writing the other 28 — it determines what the corpus documents must be.
+  element_scopes: [model]

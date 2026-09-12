@@ -1,0 +1,1871 @@
+schema_version: 0.5.1.control-contract.2
+framework: SAFR
+source_workbook: AI_Governance_Playbook_MGF_SAFR_v0.4.1_challenge_ready.xlsx
+authority_rule: For MAS, requirement semantics come from requirements/mas.yaml. Workbook testing/challenge content is draft until approved. For
+  other frameworks, workbook-derived requirement/test content is draft.
+control_count: 21
+controls:
+- framework: SAFR
+  control_id: S1.1  ★
+  title: Agent identity & registration
+  requirement: Ensure every acting agent is uniquely identified and registered before it can transact
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: A register covering Agent identity & registration exists with a defined field set
+    scope: model
+  - id: e2
+    text: Each record carries a unique identifier and a named owner
+    scope: model
+  - id: e3
+    text: The trigger and timing for creating a record are defined relative to first use
+    scope: model
+  - id: e4
+    text: An independent source exists against which completeness can be reconciled
+    scope: model
+  - id: e5
+    text: The register is current — status, version and retirement are maintained
+    scope: model
+  - id: e6
+    text: Sampled records reconcile to the deployed reality they describe
+    scope: model
+  boundary:
+    none: no register, or a register with no unique identifier and no ownership.
+    partial: a register exists and is structurally adequate, but completeness has not been reconciled against an independent source, or material
+      staleness is present.
+    full: the register is complete against an independent reconciliation, unique, owned and current, and sampled records trace to deployed reality.
+  owner: InfoSec / AI Risk (2nd line)
+  expected_evidence: []
+  linked_play:
+  - Play 1, 11
+  crosswalk:
+  - AI Inventory & Materiality | A.3 Roles & responsibilities; A.9 Use of AI systems | GOVERN 2.1; MAP 1.1 | MAS F3 | MGF D1.5 | PA 3
+  population_and_evidence_floor: 'Population: the full register extract plus the independent reconciliation source. Evidence floor: no independent
+    source, or a register extract with no as-at date or record count, makes the completeness result NOT TESTABLE rather than PASS.'
+  test_of_design:
+  - id: D1
+    text: Obtain the register or inventory specification for Agent identity & registration — its required fields, unique identifier, ownership
+      field, lifecycle status and retirement rule.
+  - id: D2
+    text: Confirm the specification defines what triggers a record being created, and at what point relative to first use, so completeness has
+      a testable meaning.
+  - id: D3
+    text: Confirm the authoritative source and the reconciliation route used to prove the register is complete against the real estate.
+  - id: D4
+    text: Confirm update and attestation cadence, and who is accountable for accuracy.
+  - id: s5
+    text: 'Design verdict: ADEQUATE when D1-D3 hold. PARTIALLY ADEQUATE when fields and ownership are defined but no completeness route exists.
+      INADEQUATE when there is no unique identifier or no owner field. NOT TESTABLE when the specification is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Obtain the full register extract as at a stated date, with a record count.
+  - id: O2
+    text: 'Test completeness in the direction that can fail: reconcile from the independent source outward to the register, not register to itself.
+      Use a deployment source, an access source or a cost or telemetry source.'
+  - id: O3
+    text: 'Test uniqueness and currency: duplicates, records with no owner, records whose status has not changed since creation, retired entries
+      still active downstream.'
+  - id: O4
+    text: Sample records and trace each to real evidence of the thing it claims to describe.
+  - id: s5
+    text: 'Operating verdict: EFFECTIVE when reconciliation finds no unregistered items and sampled records are accurate and current. PARTIALLY
+      EFFECTIVE when the register is broadly accurate but stale or incomplete in places. INEFFECTIVE when unregistered production items are found.
+      NOT TESTABLE when no independent source is available to reconcile against.'
+  near_miss_failure_modes:
+  - F1. Completeness is tested register-to-register — the register is reconciled to a list derived from itself, which can never find an omission.
+  - F2. Every record was created on the same date, indicating a one-off population exercise rather than an operating process.
+  - F3. Owner fields hold a team mailbox or a departed individual.
+  - F4. Retired records remain in an active state downstream — decommissioned in the register but still holding credentials or serving traffic.
+  - F5. The register captures models but not the prompts, tools or agents that change behaviour without a model change.
+  resolutions:
+  - failure_mode: F1
+    text: A reconciliation from an independent source — deployment pipeline, identity provider, cost report or runtime telemetry — with exceptions
+      listed.
+  - failure_mode: F2
+    text: Evidence of incremental record creation over the period, or an approved backfill with a completeness statement.
+  - failure_mode: F3
+    text: An ownership attestation naming current individuals, dated within the cadence.
+  - failure_mode: F4
+    text: A decommissioning record showing downstream revocation, not only the register status change.
+  - failure_mode: F5
+    text: A field set covering the components that can change behaviour, with at least one example populated.
+  test_provenance: 'Archetype: register_inventory — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S1.2  ★
+  title: Agent mandate definition
+  requirement: Grant each agent an explicit, bounded authority — permitted actions, counterparties, value/exposure limits
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: The authority boundary for Agent mandate definition is explicitly defined
+    scope: model
+  - id: e2
+    text: The boundary is enforced in configuration or at runtime, not only stated in a document
+    scope: model
+  - id: e3
+    text: Grant and approval of authority are separated from the requester
+    scope: model
+  - id: e4
+    text: The behaviour at the boundary — block, refer or log — is approved
+    scope: model
+  - id: e5
+    text: Overrides are approved by a role with authority and carry a recorded reason
+    scope: model
+  - id: e6
+    text: Granted authority is recertified on a defined cadence and revocations take effect
+    scope: model
+  boundary:
+    none: no defined boundary, or authority granted with no approval.
+    partial: the boundary is defined and approved but enforcement, override discipline or recertification is not evidenced.
+    full: the enforced boundary matches the approved boundary, overrides are independently approved with reasons, and recertification demonstrably
+      revokes.
+  owner: Model Owner / AI Risk (2nd line)
+  expected_evidence: []
+  linked_play:
+  - Play 3, 11
+  crosswalk:
+  - 'Lifecycle: Development & Validation | A.6 AI system life cycle; A.9 | GOVERN 1.3; MANAGE 1.3 | MAS M2.3 | MGF D1.3, D2.1 | PA 3'
+  population_and_evidence_floor: 'Population: the enforced configuration plus all grants and all boundary events in the period. Evidence floor:
+    no enforced configuration export, or zero boundary events with no enforcement test, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Obtain the definition of the authority boundary for Agent mandate definition — permitted actions, counterparties, value or exposure
+      limits, data scope and the systems it may write to.
+  - id: D2
+    text: Confirm the boundary is expressed where it is enforced, not only in a document — a configuration, a policy object or a runtime guardrail.
+  - id: D3
+    text: Confirm who grants and who approves a change to the boundary, and that the two are separated from the requester.
+  - id: D4
+    text: 'Confirm what happens at the boundary: hard block, human referral or log-and-continue, and that the choice is approved.'
+  - id: D5
+    text: Confirm periodic recertification of granted authority, with a defined cadence and an accountable reviewer.
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D4 hold. PARTIALLY ADEQUATE when limits are documented but not enforced, or recertification is absent.
+      INADEQUATE when no boundary is defined. NOT TESTABLE when the authoritative definition is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Obtain the enforced configuration as at a date and compare it, field by field, to the approved boundary.
+  - id: O2
+    text: Define the population of granted access or mandate holders, and reconcile it to the approved grants — in the direction of finding grants
+      nobody approved.
+  - id: O3
+    text: 'Sample boundary events in the period: blocks, referrals and overrides. Trace each override to an approver with authority and a recorded
+      reason.'
+  - id: O4
+    text: Where no boundary event occurred, test the enforcement — a controlled attempt or an equivalent assurance that the limit binds.
+  - id: O5
+    text: Inspect the most recent recertification for completeness and for revocations actually taking effect.
+  - id: s6
+    text: 'Operating verdict: EFFECTIVE when enforced limits match approved limits, overrides are approved and recertification took effect. PARTIALLY
+      EFFECTIVE when the boundary holds but grants are stale or overrides are unevidenced. INEFFECTIVE when unapproved authority is found in production.
+      NOT TESTABLE when the enforced configuration cannot be obtained.'
+  near_miss_failure_modes:
+  - F1. The limit is in a policy document and nowhere in the running system, so nothing stops the action.
+  - F2. The enforced value is more permissive than the approved value, changed by a ticket that never reached the approver.
+  - F3. Overrides are recorded but the approver is the same identity that requested the action.
+  - F4. Recertification was completed as an attestation with no revocations, across a population where joiners and leavers certainly occurred.
+  - F5. The agent holds standing credentials broader than its mandate because the mandate is enforced at the orchestration layer and the credential
+    is not.
+  - F6. Limits bind per transaction but not in aggregate, so the boundary is passable by repetition.
+  resolutions:
+  - failure_mode: F1
+    text: An export of the enforced configuration or policy object showing the limit in force.
+  - failure_mode: F2
+    text: A reconciliation of enforced versus approved values with any deviation approved retrospectively.
+  - failure_mode: F3
+    text: An override record naming a distinct approver and the reason.
+  - failure_mode: F4
+    text: A recertification with revocation evidence at the target system, not only the sign-off sheet.
+  - failure_mode: F5
+    text: An entitlement review of the credential itself, scoped to the mandate.
+  - failure_mode: F6
+    text: An aggregate or cumulative limit in the enforced configuration, with evidence of its operation.
+  test_provenance: 'Archetype: access_authority — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S1.3  ★
+  title: Institutional controls repository
+  requirement: Encode policies, rules and risk thresholds in a queryable repository the runtime checks against
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: An approved, current policy or standard covering Institutional controls repository exists
+    scope: model
+  - id: e2
+    text: Its scope names the systems, models or uses it binds
+    scope: model
+  - id: e3
+    text: An accountable owner is named
+    scope: model
+  - id: e4
+    text: Prohibited or controlled uses and the consequence of non-compliance are stated
+    scope: model
+  - id: e5
+    text: An exception route with grantor, basis, expiry and record location is defined
+    scope: model
+  - id: e6
+    text: In-scope activity in the period followed the policy, or holds a live exception
+    scope: model
+  boundary:
+    none: no approved policy, or a document with no owner and no scope.
+    partial: an approved policy exists but lacks an exception route, an implementing control, or sampled activity does not consistently follow
+      it.
+    full: the policy is approved, current, scoped, owned, implemented by a named control, and sampled activity follows it with exceptions governed.
+  owner: AI Risk (2nd line)
+  expected_evidence: []
+  linked_play:
+  - Play 11
+  crosswalk:
+  - Governance & Oversight | A.2 AI policy; A.4 Resources | GOVERN 1.1, 4.1 | MAS M3.7 | MGF D3.1 | —
+  population_and_evidence_floor: 'Population: all in-scope AI use cases or activities in the period, drawn from the AI inventory. Evidence floor:
+    fewer than 3 sampled items, or an inventory that cannot be reconciled, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Obtain the approved policy or standard covering Institutional controls repository, with its approval record, owner and version history.
+  - id: D2
+    text: Confirm it states scope (which systems, models and uses it binds), prohibited and controlled uses, the accountable owner and the consequence
+      of non-compliance.
+  - id: D3
+    text: Confirm it defines the exception route — who may grant one, on what basis, for how long, and where exceptions are recorded.
+  - id: D4
+    text: Confirm the review cycle and the triggers for out-of-cycle review, and that the document is within its cycle.
+  - id: D5
+    text: Confirm the policy is mapped to the controls, plays or procedures that implement it, so a requirement is not left with nothing that
+      operates it.
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D3 hold and D5 identifies at least one implementing control. PARTIALLY ADEQUATE when the policy exists
+      but the exception route or implementing link is absent. INADEQUATE when scope or ownership is undefined. NOT TESTABLE when the approved
+      document is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: 'Define the population: AI use cases, systems or activities in scope of the policy during the period, taken from the AI inventory rather
+      than from a list supplied by the assessed team.'
+  - id: O2
+    text: Sample across materiality tiers and include at least one use case that went live in the period.
+  - id: O3
+    text: 'Reperform: verify each sampled item was assessed against the policy at the required point, and that any required attestation or approval
+      exists and predates the activity.'
+  - id: O4
+    text: Inspect the exception and breach records for the period — verify each is dated, owned, time-bound and dispositioned.
+  - id: s5
+    text: 'Operating verdict: EFFECTIVE when sampled use follows the approved policy and exceptions are governed. PARTIALLY EFFECTIVE when compliance
+      is inconsistent or exceptions are open past expiry. INEFFECTIVE when the policy was bypassed for material use. NOT TESTABLE when the in-scope
+      population cannot be established.'
+  near_miss_failure_modes:
+  - F1. The policy is approved but has no implementing procedure — nothing in the operating environment makes the requirement happen.
+  - F2. Scope is written so broadly ('all AI use') that no one can tell whether a given system is in or out.
+  - F3. Exceptions are granted by the same team that needs them, with no expiry.
+  - F4. The policy was approved in the period but the sampled use cases predate it and were never reassessed against it.
+  - F5. A breach register exists but every entry is closed as 'noted' with no remediation or acceptance.
+  resolutions:
+  - failure_mode: F1
+    text: A named procedure, runbook or control that implements the clause, with an owner.
+  - failure_mode: F2
+    text: A scope statement with inclusion and exclusion criteria, or a mapping from the inventory to in-scope flag.
+  - failure_mode: F3
+    text: An exception record showing an independent grantor, a stated basis and an expiry date.
+  - failure_mode: F4
+    text: A reassessment record for pre-existing use cases, or an approved grandfathering decision.
+  - failure_mode: F5
+    text: A breach entry with a remediation action, owner and closure evidence, or a formal risk acceptance.
+  test_provenance: 'Archetype: policy_standard — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S1.4  ★
+  title: Pre-execution authority check
+  requirement: Test every proposed action against the agent's mandate before it executes
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: The authority boundary for Pre-execution authority check is explicitly defined
+    scope: model
+  - id: e2
+    text: The boundary is enforced in configuration or at runtime, not only stated in a document
+    scope: model
+  - id: e3
+    text: Grant and approval of authority are separated from the requester
+    scope: model
+  - id: e4
+    text: The behaviour at the boundary — block, refer or log — is approved
+    scope: model
+  - id: e5
+    text: Overrides are approved by a role with authority and carry a recorded reason
+    scope: model
+  - id: e6
+    text: Granted authority is recertified on a defined cadence and revocations take effect
+    scope: model
+  boundary:
+    none: no defined boundary, or authority granted with no approval.
+    partial: the boundary is defined and approved but enforcement, override discipline or recertification is not evidenced.
+    full: the enforced boundary matches the approved boundary, overrides are independently approved with reasons, and recertification demonstrably
+      revokes.
+  owner: InfoSec / Model Owner
+  expected_evidence: []
+  linked_play:
+  - Play 11
+  crosswalk:
+  - Governance & Oversight | A.9 Use of AI systems | MANAGE 2.3; MEASURE 3.1 | MAS M3.7 | MGF D1.4, D3.1, D3.7 | PA 3
+  population_and_evidence_floor: 'Population: the enforced configuration plus all grants and all boundary events in the period. Evidence floor:
+    no enforced configuration export, or zero boundary events with no enforcement test, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Obtain the definition of the authority boundary for Pre-execution authority check — permitted actions, counterparties, value or exposure
+      limits, data scope and the systems it may write to.
+  - id: D2
+    text: Confirm the boundary is expressed where it is enforced, not only in a document — a configuration, a policy object or a runtime guardrail.
+  - id: D3
+    text: Confirm who grants and who approves a change to the boundary, and that the two are separated from the requester.
+  - id: D4
+    text: 'Confirm what happens at the boundary: hard block, human referral or log-and-continue, and that the choice is approved.'
+  - id: D5
+    text: Confirm periodic recertification of granted authority, with a defined cadence and an accountable reviewer.
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D4 hold. PARTIALLY ADEQUATE when limits are documented but not enforced, or recertification is absent.
+      INADEQUATE when no boundary is defined. NOT TESTABLE when the authoritative definition is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Obtain the enforced configuration as at a date and compare it, field by field, to the approved boundary.
+  - id: O2
+    text: Define the population of granted access or mandate holders, and reconcile it to the approved grants — in the direction of finding grants
+      nobody approved.
+  - id: O3
+    text: 'Sample boundary events in the period: blocks, referrals and overrides. Trace each override to an approver with authority and a recorded
+      reason.'
+  - id: O4
+    text: Where no boundary event occurred, test the enforcement — a controlled attempt or an equivalent assurance that the limit binds.
+  - id: O5
+    text: Inspect the most recent recertification for completeness and for revocations actually taking effect.
+  - id: s6
+    text: 'Operating verdict: EFFECTIVE when enforced limits match approved limits, overrides are approved and recertification took effect. PARTIALLY
+      EFFECTIVE when the boundary holds but grants are stale or overrides are unevidenced. INEFFECTIVE when unapproved authority is found in production.
+      NOT TESTABLE when the enforced configuration cannot be obtained.'
+  near_miss_failure_modes:
+  - F1. The limit is in a policy document and nowhere in the running system, so nothing stops the action.
+  - F2. The enforced value is more permissive than the approved value, changed by a ticket that never reached the approver.
+  - F3. Overrides are recorded but the approver is the same identity that requested the action.
+  - F4. Recertification was completed as an attestation with no revocations, across a population where joiners and leavers certainly occurred.
+  - F5. The agent holds standing credentials broader than its mandate because the mandate is enforced at the orchestration layer and the credential
+    is not.
+  - F6. Limits bind per transaction but not in aggregate, so the boundary is passable by repetition.
+  resolutions:
+  - failure_mode: F1
+    text: An export of the enforced configuration or policy object showing the limit in force.
+  - failure_mode: F2
+    text: A reconciliation of enforced versus approved values with any deviation approved retrospectively.
+  - failure_mode: F3
+    text: An override record naming a distinct approver and the reason.
+  - failure_mode: F4
+    text: A recertification with revocation evidence at the target system, not only the sign-off sheet.
+  - failure_mode: F5
+    text: An entitlement review of the credential itself, scoped to the mandate.
+  - failure_mode: F6
+    text: An aggregate or cumulative limit in the enforced configuration, with evidence of its operation.
+  test_provenance: 'Archetype: access_authority — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S1.5
+  title: Risk-threshold binding
+  requirement: Bind monetary, exposure and sensitivity thresholds to the pre-execution check
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: Metrics and thresholds for Risk-threshold binding are defined and approved
+    scope: model
+  - id: e2
+    text: The metrics detect the failure the control exists to catch
+    scope: model
+  - id: e3
+    text: Alerts route to a named owner with a stated response time
+    scope: model
+  - id: e4
+    text: Monitoring ran across the whole period with gaps identified
+    scope: model
+  - id: e5
+    text: Alerts raised were dispositioned with a recorded outcome
+    scope: model
+  - id: e6
+    text: The detector has been tested or back-tested, so silence is evidence
+    scope: model
+  boundary:
+    none: no monitoring, or monitoring with no thresholds and no owner.
+    partial: monitoring is configured and running but coverage, alert disposition or detector assurance is incomplete, or the metrics are proxies
+      for the risk rather than the risk.
+    full: approved metrics ran continuously, alerts were owned and dispositioned, and the detector is demonstrably capable of firing.
+  owner: AI Risk (2nd line) / Model Owner
+  expected_evidence: []
+  linked_play:
+  - Play 1, 11
+  crosswalk:
+  - AI Inventory & Materiality | A.5 Impact assessment | MAP 2.3; MANAGE 1.3 | MAS M2.3 | MGF D1.1 | —
+  population_and_evidence_floor: 'Population: the full monitoring period, plus all alerts raised. Evidence floor: no alerts in the period and
+    no detector test means silence is uninformative — report NOT TESTABLE rather than PASS.'
+  test_of_design:
+  - id: D1
+    text: Obtain the monitoring design for Risk-threshold binding — the metrics, their thresholds, the observation window and the alerting route.
+  - id: D2
+    text: Confirm the metrics correspond to the failure the control exists to catch, not only to availability or infrastructure health.
+  - id: D3
+    text: Confirm each alert has a named recipient, a required response time and a disposition record.
+  - id: D4
+    text: Confirm how the detector itself is validated — how anyone knows an alert would fire if the condition occurred.
+  - id: s5
+    text: 'Design verdict: ADEQUATE when D1-D3 hold and D4 identifies a test route. PARTIALLY ADEQUATE when metrics and thresholds exist but ownership
+      or detector assurance is absent. INADEQUATE when thresholds are undefined. NOT TESTABLE when the monitoring configuration is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Obtain the monitoring output for the full period, with coverage gaps identified — periods with no data are findings, not blanks.
+  - id: O2
+    text: Verify the configuration in force matches the approved design, read from the running configuration rather than from a document.
+  - id: O3
+    text: Sample alerts raised and trace each to an owner, a response within the stated time and a disposition.
+  - id: O4
+    text: Where no alert fired in the period, test the detector — a synthetic breach, a back-test against a known past event, or an equivalent.
+  - id: s5
+    text: 'Operating verdict: EFFECTIVE when monitoring ran continuously against the approved thresholds and alerts were dispositioned. PARTIALLY
+      EFFECTIVE when coverage gaps exist or alerts closed without disposition. INEFFECTIVE when monitoring was not operating or breaches were
+      not acted on. NOT TESTABLE when monitoring output for the period is unavailable.'
+  near_miss_failure_modes:
+  - F1. No alert fired all period and this is presented as evidence of health, with nothing showing the detector works.
+  - F2. Thresholds in the running configuration differ from the approved design, usually loosened after a noisy week.
+  - F3. Alerts are routed to a shared channel with no named owner, and closure is by silence.
+  - F4. Monitoring covers latency and uptime while the control is about model quality, drift or mandate breach.
+  - F5. Coverage has gaps that coincide with the periods of highest change.
+  - F6. Drift is monitored on inputs only, with no monitoring of the outcome the model drives.
+  resolutions:
+  - failure_mode: F1
+    text: A detector test, synthetic breach or back-test against a known past event.
+  - failure_mode: F2
+    text: An export of the running configuration compared to the approved baseline, with any deviation approved.
+  - failure_mode: F3
+    text: An alert record naming a recipient, a response time and a disposition.
+  - failure_mode: F4
+    text: A metric definition tied to the control objective, with at least one period of output.
+  - failure_mode: F5
+    text: A continuous coverage statement with gaps explained and dispositioned.
+  - failure_mode: F6
+    text: Output-side monitoring covering the decisions or actions the system produced.
+  test_provenance: 'Archetype: monitoring_detection — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S2.1  ★
+  title: Disposition engine
+  requirement: Evaluate each proposed action at runtime and assign a disposition before execution
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: An approved validation or evaluation method for Disposition engine exists
+    scope: model
+  - id: e2
+    text: Acceptance thresholds are stated before results are seen
+    scope: model
+  - id: e3
+    text: The validator is independent of the team that built the system
+    scope: model
+  - id: e4
+    text: The validation covers the version that was deployed
+    scope: model
+  - id: e5
+    text: Results are supported by retained underlying data, not only a summary
+    scope: model
+  - id: e6
+    text: Shortfalls against threshold are remediated, re-tested or formally accepted
+    scope: model
+  boundary:
+    none: no validation, or a report with no acceptance criteria and no independence.
+    partial: validation was performed but is stale against the deployed version, not independent, or thresholds and shortfall disposition are
+      not evidenced.
+    full: the deployed version was independently validated against pre-stated thresholds, with retained results and every shortfall remediated
+      or formally accepted.
+  owner: InfoSec / Model Owner
+  expected_evidence: []
+  linked_play:
+  - Play 11
+  crosswalk:
+  - Governance & Oversight | A.6 AI system life cycle; A.9 | MEASURE 2.7; MANAGE 2.3 | MAS M3.4 | MGF D3.11 | PA 10
+  population_and_evidence_floor: 'Population: all model, prompt or agent versions promoted in the period. Evidence floor: fewer than 1 validated
+    version in the period, or reports with no version identifier, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Obtain the approved validation or evaluation methodology for Disposition engine — scope, test types, datasets, metrics and acceptance
+      thresholds.
+  - id: D2
+    text: Confirm acceptance thresholds are stated in advance of testing and are specific to the use case rather than generic.
+  - id: D3
+    text: 'Confirm independence: who performs the validation and how they are separated from the team that built the system.'
+  - id: D4
+    text: Confirm the methodology covers the failure modes the system can actually produce, including the ones a benchmark score does not capture.
+  - id: D5
+    text: Confirm the disposition rule — what happens when a threshold is missed, and who may accept a shortfall.
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D3 and D5 hold. PARTIALLY ADEQUATE when tests are defined but thresholds are set after results, or
+      independence is unclear. INADEQUATE when no acceptance criterion exists. NOT TESTABLE when the methodology is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: 'Define the population: every model, prompt or agent version promoted in the period.'
+  - id: O2
+    text: For a sample, obtain the validation report and check it covers the version actually deployed — compare version identifiers and dates,
+      not titles.
+  - id: O3
+    text: Reperform or recompute at least one reported metric from the underlying results where the data permits.
+  - id: O4
+    text: Trace every shortfall against threshold to a remediation, a re-test or an approved acceptance by a role with authority to grant it.
+  - id: s5
+    text: 'Operating verdict: EFFECTIVE when each deployed version has independent validation against pre-stated thresholds and shortfalls are
+      dispositioned. PARTIALLY EFFECTIVE when validation exists but is stale, non-independent or partly unevidenced. INEFFECTIVE when versions
+      reached production unvalidated. NOT TESTABLE when the version population or the underlying results are unavailable.'
+  near_miss_failure_modes:
+  - F1. The validation report predates the deployed version — it validates the model that was tested, not the one that is running.
+  - F2. The validator sits in the same reporting line as the builder, so 'independent review' is a signature rather than a challenge.
+  - F3. The acceptance threshold was chosen after the result was known, which makes a pass unfalsifiable.
+  - F4. The test set overlaps the tuning or training data, so the reported score measures memorisation.
+  - F5. A metric is reported with no sample size, so a favourable number may rest on a handful of cases.
+  - F6. Only aggregate performance is reported — no slice, subgroup or worst-case analysis where the control requires it.
+  resolutions:
+  - failure_mode: F1
+    text: A validation report whose version identifier matches the deployed artefact, or a re-validation of the current version.
+  - failure_mode: F2
+    text: A validation performed or signed by a function outside the delivery reporting line, with the reviewer named.
+  - failure_mode: F3
+    text: A pre-registered threshold — an approved test plan dated before the test run.
+  - failure_mode: F4
+    text: A statement of dataset provenance and separation, or a held-out set with documented construction.
+  - failure_mode: F5
+    text: Reported metrics with denominators and confidence, or the underlying result file.
+  - failure_mode: F6
+    text: Slice-level results for the populations the control names.
+  test_provenance: 'Archetype: validation_evaluation — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S2.2
+  title: Automated approval path
+  requirement: Auto-execute actions that fall within mandate and thresholds
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: Oversight points for Automated approval path are defined with the human's authority stated
+    scope: model
+  - id: e2
+    text: The design states whether the human decides, may veto, or is informed
+    scope: model
+  - id: e3
+    text: The reviewer receives information sufficient to disagree
+    scope: model
+  - id: e4
+    text: An override route exists, is usable in time, and records a reason
+    scope: model
+  - id: e5
+    text: Reviewer competence and capacity are addressed
+    scope: model
+  - id: e6
+    text: Reviews in the period preceded the action and recorded a reasoned decision
+    scope: model
+  boundary:
+    none: no defined human authority over the outcome, or oversight that cannot change anything.
+    partial: oversight points are defined and operating but information sufficiency, timing or genuine disagreement is not evidenced.
+    full: reviewers act before the action with sufficient information, a usable override, reasoned records, and a disagreement rate consistent
+      with real review.
+  owner: Model Owner
+  expected_evidence: []
+  linked_play:
+  - Play 11
+  crosswalk:
+  - 'Lifecycle: Deployment | A.9 Use of AI systems | MANAGE 2.4 | MAS M3.4 | MGF D2.3 | —'
+  population_and_evidence_floor: 'Population: all decisions or actions subject to human oversight in the period. Evidence floor: fewer than 10
+    reviewed items, or no override population, makes the rate analysis NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Obtain the oversight design for Automated approval path — at which points a person acts, what they receive, and what authority they
+      hold.
+  - id: D2
+    text: 'Confirm the design distinguishes deciding from reviewing: state whether the human decides, may veto, or is merely informed, and what
+      happens if they do nothing.'
+  - id: D3
+    text: Confirm the information the reviewer receives is sufficient to disagree — inputs, confidence or uncertainty, and the basis of the recommendation.
+  - id: D4
+    text: Confirm the override route exists, is usable in the time available, and records a reason.
+  - id: D5
+    text: 'Confirm competence and capacity: who may act in the role, and whether the volume allows genuine review.'
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D4 hold. PARTIALLY ADEQUATE when a review point exists but authority or information sufficiency is
+      undefined. INADEQUATE when no human authority to stop or change the outcome exists. NOT TESTABLE when the design is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Define the population of decisions or actions subject to oversight in the period.
+  - id: O2
+    text: Measure the override and rejection rate. A rate at or near zero across a large population is a finding to investigate, not evidence
+      of quality.
+  - id: O3
+    text: Sample reviewed items and verify the reviewer had the stated information and recorded a decision with a reason.
+  - id: O4
+    text: 'Test timing: the review preceded the action it governs, and the time taken is consistent with genuine review rather than batch confirmation.'
+  - id: O5
+    text: Trace a sample of overrides to their effect on the system outcome.
+  - id: s6
+    text: 'Operating verdict: EFFECTIVE when oversight occurred before the action, with reasoned decisions and a credible disagreement rate. PARTIALLY
+      EFFECTIVE when review occurred but reasons or timing are unevidenced. INEFFECTIVE when oversight was nominal or post hoc. NOT TESTABLE when
+      the decision population cannot be established.'
+  near_miss_failure_modes:
+  - F1. Approval rate is 100% across thousands of items, which evidences a click-through rather than a review.
+  - F2. The reviewer sees only the recommendation, not the inputs or the uncertainty, so disagreement has no basis.
+  - F3. The override exists but requires a path longer than the decision window, so it is never used.
+  - F4. Review timestamps cluster in batches seconds apart, inconsistent with individual consideration.
+  - F5. The human is accountable in the policy but the system proceeds automatically on no response.
+  - F6. Overrides are recorded but the system took the original action anyway.
+  resolutions:
+  - failure_mode: F1
+    text: The override and rejection rate with a distribution, plus an explanation for a near-zero rate.
+  - failure_mode: F2
+    text: A screenshot or specification of what the reviewer is shown, including uncertainty.
+  - failure_mode: F3
+    text: An override performed within the decision window, with timings.
+  - failure_mode: F4
+    text: Per-item review timestamps and durations.
+  - failure_mode: F5
+    text: A default-on-no-response rule that halts rather than proceeds, with evidence of it operating.
+  - failure_mode: F6
+    text: System evidence that an override changed the outcome.
+  test_provenance: 'Archetype: human_oversight — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S2.3  ★
+  title: Human-in-the-loop escalation
+  requirement: Route out-of-bounds or ambiguous actions to a named human for review before execution
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: An incident procedure covering Human-in-the-loop escalation exists with severity criteria
+    scope: model
+  - id: e2
+    text: AI-specific incident types are named
+    scope: model
+  - id: e3
+    text: Notification paths and timeframes are defined per severity
+    scope: model
+  - id: e4
+    text: A containment or halt mechanism is specified with a named invoking authority
+    scope: model
+  - id: e5
+    text: Incidents in the period were detected, escalated and contained within target
+    scope: model
+  - id: e6
+    text: Post-incident review produced actions traced to closure or to a control change
+    scope: model
+  boundary:
+    none: no AI incident procedure, or no trigger and no containment path.
+    partial: the procedure exists and events were handled, but timings, containment effectiveness or lessons-to-controls are not evidenced.
+    full: incidents were detected and escalated within target, containment demonstrably took effect, and post-incident actions changed the controls
+      they implicate.
+  owner: Model Owner / AI Risk Committee
+  expected_evidence: []
+  linked_play:
+  - Play 11
+  crosswalk:
+  - Human Oversight | A.9; A.8 Information for interested parties | GOVERN 4.1; MANAGE 2.3 | MAS M3.4 | MGF D2.3, D2.4 | PA 3, PA 10
+  population_and_evidence_floor: 'Population: all incidents and near misses in the period, cross-checked against alerts, overrides and complaints.
+    Evidence floor: zero incidents and no exercise means the mechanism is untested — report NOT TESTABLE rather than PASS.'
+  test_of_design:
+  - id: D1
+    text: Obtain the incident or escalation procedure covering Human-in-the-loop escalation — what constitutes an AI incident, severity criteria,
+      and the trigger for invoking it.
+  - id: D2
+    text: Confirm AI-specific incident types are named, not only availability and security — for example harmful output, mandate breach, unexpected
+      autonomous action, drift beyond tolerance.
+  - id: D3
+    text: Confirm roles, notification paths, timeframes per severity and the authority to contain or halt.
+  - id: D4
+    text: Confirm the containment mechanism is specified and testable, including who may invoke it and how quickly it takes effect.
+  - id: D5
+    text: Confirm post-incident review, root cause and the route by which lessons change a control.
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D4 hold. PARTIALLY ADEQUATE when the procedure is generic and does not name AI failure types, or containment
+      authority is unclear. INADEQUATE when no trigger or severity scheme exists. NOT TESTABLE when the procedure is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Define the population of incidents and near misses in the period from the incident system, and cross-check against monitoring alerts
+      and complaint or override records for events that were never raised as incidents.
+  - id: O2
+    text: Sample incidents and verify detection-to-notification and notification-to-containment times against the stated targets.
+  - id: O3
+    text: Verify containment was invoked by an authorised role and took effect, with evidence from the system rather than the ticket.
+  - id: O4
+    text: Trace post-incident actions to closure and to any control change they required.
+  - id: O5
+    text: Where no incident occurred, test the mechanism — an exercise, a tabletop with evidence, or a controlled invocation in a non-production
+      environment.
+  - id: s6
+    text: 'Operating verdict: EFFECTIVE when incidents were detected, escalated within target and contained, with lessons carried into controls.
+      PARTIALLY EFFECTIVE when handling occurred but timings or closure are unevidenced. INEFFECTIVE when events were not raised or containment
+      failed. NOT TESTABLE when no incident and no exercise occurred in the period.'
+  near_miss_failure_modes:
+  - F1. Zero AI incidents in the period is presented as strength, with no near-miss capture and no exercise to show the process would engage.
+  - F2. Events appear in the monitoring or complaint records but were never raised as incidents, so the population is understated.
+  - F3. The kill switch is documented but has never been invoked, and no one can state how long it takes to take effect.
+  - F4. Severity was assigned after resolution, and always at a level that avoided external notification.
+  - F5. Post-incident actions are closed as 'awareness raised' with no control change.
+  - F6. Containment is evidenced by a ticket status rather than by system evidence that the agent stopped acting.
+  resolutions:
+  - failure_mode: F1
+    text: A near-miss register, or an exercise report with date, participants and observed timings.
+  - failure_mode: F2
+    text: A reconciliation from alerts and complaints to incidents, with any unraised events explained.
+  - failure_mode: F3
+    text: A containment test with a measured time to effect.
+  - failure_mode: F4
+    text: A severity assignment dated at detection, with the criteria applied.
+  - failure_mode: F5
+    text: A post-incident action that amended a control, with the amended control identified.
+  - failure_mode: F6
+    text: System evidence of containment — revoked credentials, disabled route, halted queue.
+  test_provenance: 'Archetype: incident_escalation — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S2.4
+  title: Reject / block path
+  requirement: Block actions outside mandate at the point of action
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: The authority boundary for Reject / block path is explicitly defined
+    scope: model
+  - id: e2
+    text: The boundary is enforced in configuration or at runtime, not only stated in a document
+    scope: model
+  - id: e3
+    text: Grant and approval of authority are separated from the requester
+    scope: model
+  - id: e4
+    text: The behaviour at the boundary — block, refer or log — is approved
+    scope: model
+  - id: e5
+    text: Overrides are approved by a role with authority and carry a recorded reason
+    scope: model
+  - id: e6
+    text: Granted authority is recertified on a defined cadence and revocations take effect
+    scope: model
+  boundary:
+    none: no defined boundary, or authority granted with no approval.
+    partial: the boundary is defined and approved but enforcement, override discipline or recertification is not evidenced.
+    full: the enforced boundary matches the approved boundary, overrides are independently approved with reasons, and recertification demonstrably
+      revokes.
+  owner: InfoSec
+  expected_evidence: []
+  linked_play:
+  - Play 6, 11
+  crosswalk:
+  - Governance & Oversight | A.9 Use of AI systems | MANAGE 2.3 | MAS M3.11 | MGF D3.3 | PA 10
+  population_and_evidence_floor: 'Population: the enforced configuration plus all grants and all boundary events in the period. Evidence floor:
+    no enforced configuration export, or zero boundary events with no enforcement test, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Obtain the definition of the authority boundary for Reject / block path — permitted actions, counterparties, value or exposure limits,
+      data scope and the systems it may write to.
+  - id: D2
+    text: Confirm the boundary is expressed where it is enforced, not only in a document — a configuration, a policy object or a runtime guardrail.
+  - id: D3
+    text: Confirm who grants and who approves a change to the boundary, and that the two are separated from the requester.
+  - id: D4
+    text: 'Confirm what happens at the boundary: hard block, human referral or log-and-continue, and that the choice is approved.'
+  - id: D5
+    text: Confirm periodic recertification of granted authority, with a defined cadence and an accountable reviewer.
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D4 hold. PARTIALLY ADEQUATE when limits are documented but not enforced, or recertification is absent.
+      INADEQUATE when no boundary is defined. NOT TESTABLE when the authoritative definition is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Obtain the enforced configuration as at a date and compare it, field by field, to the approved boundary.
+  - id: O2
+    text: Define the population of granted access or mandate holders, and reconcile it to the approved grants — in the direction of finding grants
+      nobody approved.
+  - id: O3
+    text: 'Sample boundary events in the period: blocks, referrals and overrides. Trace each override to an approver with authority and a recorded
+      reason.'
+  - id: O4
+    text: Where no boundary event occurred, test the enforcement — a controlled attempt or an equivalent assurance that the limit binds.
+  - id: O5
+    text: Inspect the most recent recertification for completeness and for revocations actually taking effect.
+  - id: s6
+    text: 'Operating verdict: EFFECTIVE when enforced limits match approved limits, overrides are approved and recertification took effect. PARTIALLY
+      EFFECTIVE when the boundary holds but grants are stale or overrides are unevidenced. INEFFECTIVE when unapproved authority is found in production.
+      NOT TESTABLE when the enforced configuration cannot be obtained.'
+  near_miss_failure_modes:
+  - F1. The limit is in a policy document and nowhere in the running system, so nothing stops the action.
+  - F2. The enforced value is more permissive than the approved value, changed by a ticket that never reached the approver.
+  - F3. Overrides are recorded but the approver is the same identity that requested the action.
+  - F4. Recertification was completed as an attestation with no revocations, across a population where joiners and leavers certainly occurred.
+  - F5. The agent holds standing credentials broader than its mandate because the mandate is enforced at the orchestration layer and the credential
+    is not.
+  - F6. Limits bind per transaction but not in aggregate, so the boundary is passable by repetition.
+  resolutions:
+  - failure_mode: F1
+    text: An export of the enforced configuration or policy object showing the limit in force.
+  - failure_mode: F2
+    text: A reconciliation of enforced versus approved values with any deviation approved retrospectively.
+  - failure_mode: F3
+    text: An override record naming a distinct approver and the reason.
+  - failure_mode: F4
+    text: A recertification with revocation evidence at the target system, not only the sign-off sheet.
+  - failure_mode: F5
+    text: An entitlement review of the credential itself, scoped to the mandate.
+  - failure_mode: F6
+    text: An aggregate or cumulative limit in the enforced configuration, with evidence of its operation.
+  test_provenance: 'Archetype: access_authority — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S2.5
+  title: Proceed-and-flag path
+  requirement: Permit lower-risk actions to proceed while flagging them for monitoring
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: Metrics and thresholds for Proceed-and-flag path are defined and approved
+    scope: model
+  - id: e2
+    text: The metrics detect the failure the control exists to catch
+    scope: model
+  - id: e3
+    text: Alerts route to a named owner with a stated response time
+    scope: model
+  - id: e4
+    text: Monitoring ran across the whole period with gaps identified
+    scope: model
+  - id: e5
+    text: Alerts raised were dispositioned with a recorded outcome
+    scope: model
+  - id: e6
+    text: The detector has been tested or back-tested, so silence is evidence
+    scope: model
+  boundary:
+    none: no monitoring, or monitoring with no thresholds and no owner.
+    partial: monitoring is configured and running but coverage, alert disposition or detector assurance is incomplete, or the metrics are proxies
+      for the risk rather than the risk.
+    full: approved metrics ran continuously, alerts were owned and dispositioned, and the detector is demonstrably capable of firing.
+  owner: Model Owner / AI Risk (2nd line)
+  expected_evidence: []
+  linked_play:
+  - Play 5, 11
+  crosswalk:
+  - Monitoring | A.6 AI system life cycle | MEASURE 4.1; MANAGE 4.1 | MAS M3.10 | MGF D3.11, D3.12 | PA 9
+  population_and_evidence_floor: 'Population: the full monitoring period, plus all alerts raised. Evidence floor: no alerts in the period and
+    no detector test means silence is uninformative — report NOT TESTABLE rather than PASS.'
+  test_of_design:
+  - id: D1
+    text: Obtain the monitoring design for Proceed-and-flag path — the metrics, their thresholds, the observation window and the alerting route.
+  - id: D2
+    text: Confirm the metrics correspond to the failure the control exists to catch, not only to availability or infrastructure health.
+  - id: D3
+    text: Confirm each alert has a named recipient, a required response time and a disposition record.
+  - id: D4
+    text: Confirm how the detector itself is validated — how anyone knows an alert would fire if the condition occurred.
+  - id: s5
+    text: 'Design verdict: ADEQUATE when D1-D3 hold and D4 identifies a test route. PARTIALLY ADEQUATE when metrics and thresholds exist but ownership
+      or detector assurance is absent. INADEQUATE when thresholds are undefined. NOT TESTABLE when the monitoring configuration is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Obtain the monitoring output for the full period, with coverage gaps identified — periods with no data are findings, not blanks.
+  - id: O2
+    text: Verify the configuration in force matches the approved design, read from the running configuration rather than from a document.
+  - id: O3
+    text: Sample alerts raised and trace each to an owner, a response within the stated time and a disposition.
+  - id: O4
+    text: Where no alert fired in the period, test the detector — a synthetic breach, a back-test against a known past event, or an equivalent.
+  - id: s5
+    text: 'Operating verdict: EFFECTIVE when monitoring ran continuously against the approved thresholds and alerts were dispositioned. PARTIALLY
+      EFFECTIVE when coverage gaps exist or alerts closed without disposition. INEFFECTIVE when monitoring was not operating or breaches were
+      not acted on. NOT TESTABLE when monitoring output for the period is unavailable.'
+  near_miss_failure_modes:
+  - F1. No alert fired all period and this is presented as evidence of health, with nothing showing the detector works.
+  - F2. Thresholds in the running configuration differ from the approved design, usually loosened after a noisy week.
+  - F3. Alerts are routed to a shared channel with no named owner, and closure is by silence.
+  - F4. Monitoring covers latency and uptime while the control is about model quality, drift or mandate breach.
+  - F5. Coverage has gaps that coincide with the periods of highest change.
+  - F6. Drift is monitored on inputs only, with no monitoring of the outcome the model drives.
+  resolutions:
+  - failure_mode: F1
+    text: A detector test, synthetic breach or back-test against a known past event.
+  - failure_mode: F2
+    text: An export of the running configuration compared to the approved baseline, with any deviation approved.
+  - failure_mode: F3
+    text: An alert record naming a recipient, a response time and a disposition.
+  - failure_mode: F4
+    text: A metric definition tied to the control objective, with at least one period of output.
+  - failure_mode: F5
+    text: A continuous coverage statement with gaps explained and dispositioned.
+  - failure_mode: F6
+    text: Output-side monitoring covering the decisions or actions the system produced.
+  test_provenance: 'Archetype: monitoring_detection — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S2.6
+  title: Checkpoint resilience
+  requirement: Ensure the runtime checkpoint is highly available and not itself a single point of failure
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: Oversight points for Checkpoint resilience are defined with the human's authority stated
+    scope: model
+  - id: e2
+    text: The design states whether the human decides, may veto, or is informed
+    scope: model
+  - id: e3
+    text: The reviewer receives information sufficient to disagree
+    scope: model
+  - id: e4
+    text: An override route exists, is usable in time, and records a reason
+    scope: model
+  - id: e5
+    text: Reviewer competence and capacity are addressed
+    scope: model
+  - id: e6
+    text: Reviews in the period preceded the action and recorded a reasoned decision
+    scope: model
+  boundary:
+    none: no defined human authority over the outcome, or oversight that cannot change anything.
+    partial: oversight points are defined and operating but information sufficiency, timing or genuine disagreement is not evidenced.
+    full: reviewers act before the action with sufficient information, a usable override, reasoned records, and a disagreement rate consistent
+      with real review.
+  owner: InfoSec / Technology
+  expected_evidence: []
+  linked_play:
+  - Play 5, 11
+  crosswalk:
+  - Operational Resilience | A.6; A.4 Resources | MANAGE 2.4; MEASURE 2.7 | MAS M3.10 | MGF D3.16 | —
+  population_and_evidence_floor: 'Population: all decisions or actions subject to human oversight in the period. Evidence floor: fewer than 10
+    reviewed items, or no override population, makes the rate analysis NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Obtain the oversight design for Checkpoint resilience — at which points a person acts, what they receive, and what authority they hold.
+  - id: D2
+    text: 'Confirm the design distinguishes deciding from reviewing: state whether the human decides, may veto, or is merely informed, and what
+      happens if they do nothing.'
+  - id: D3
+    text: Confirm the information the reviewer receives is sufficient to disagree — inputs, confidence or uncertainty, and the basis of the recommendation.
+  - id: D4
+    text: Confirm the override route exists, is usable in the time available, and records a reason.
+  - id: D5
+    text: 'Confirm competence and capacity: who may act in the role, and whether the volume allows genuine review.'
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D4 hold. PARTIALLY ADEQUATE when a review point exists but authority or information sufficiency is
+      undefined. INADEQUATE when no human authority to stop or change the outcome exists. NOT TESTABLE when the design is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Define the population of decisions or actions subject to oversight in the period.
+  - id: O2
+    text: Measure the override and rejection rate. A rate at or near zero across a large population is a finding to investigate, not evidence
+      of quality.
+  - id: O3
+    text: Sample reviewed items and verify the reviewer had the stated information and recorded a decision with a reason.
+  - id: O4
+    text: 'Test timing: the review preceded the action it governs, and the time taken is consistent with genuine review rather than batch confirmation.'
+  - id: O5
+    text: Trace a sample of overrides to their effect on the system outcome.
+  - id: s6
+    text: 'Operating verdict: EFFECTIVE when oversight occurred before the action, with reasoned decisions and a credible disagreement rate. PARTIALLY
+      EFFECTIVE when review occurred but reasons or timing are unevidenced. INEFFECTIVE when oversight was nominal or post hoc. NOT TESTABLE when
+      the decision population cannot be established.'
+  near_miss_failure_modes:
+  - F1. Approval rate is 100% across thousands of items, which evidences a click-through rather than a review.
+  - F2. The reviewer sees only the recommendation, not the inputs or the uncertainty, so disagreement has no basis.
+  - F3. The override exists but requires a path longer than the decision window, so it is never used.
+  - F4. Review timestamps cluster in batches seconds apart, inconsistent with individual consideration.
+  - F5. The human is accountable in the policy but the system proceeds automatically on no response.
+  - F6. Overrides are recorded but the system took the original action anyway.
+  resolutions:
+  - failure_mode: F1
+    text: The override and rejection rate with a distribution, plus an explanation for a near-zero rate.
+  - failure_mode: F2
+    text: A screenshot or specification of what the reviewer is shown, including uncertainty.
+  - failure_mode: F3
+    text: An override performed within the decision window, with timings.
+  - failure_mode: F4
+    text: Per-item review timestamps and durations.
+  - failure_mode: F5
+    text: A default-on-no-response rule that halts rather than proceeds, with evidence of it operating.
+  - failure_mode: F6
+    text: System evidence that an override changed the outcome.
+  test_provenance: 'Archetype: human_oversight — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S3.1  ★
+  title: Tamper-evident audit log
+  requirement: Record each governance decision in an immutable, tamper-evident log
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: A logging or traceability design covering Tamper-evident audit log exists
+    scope: model
+  - id: e2
+    text: Captured fields allow a past action to be reconstructed, including the version and the acting identity
+    scope: model
+  - id: e3
+    text: Amendment and deletion are restricted and detectable
+    scope: model
+  - id: e4
+    text: Retention meets the longest applicable obligation
+    scope: model
+  - id: e5
+    text: Capture was continuous across the period
+    scope: model
+  - id: e6
+    text: A real past event has been reconstructed from the retained records
+    scope: model
+  boundary:
+    none: no logging, or logging that cannot attribute an action to a system, version or identity.
+    partial: logging operates but reconstruction requires supplementation, or integrity and retention are not evidenced.
+    full: a real event has been reconstructed end to end from retained, integrity-protected records within the stated retrieval time.
+  owner: InfoSec / Internal Audit
+  expected_evidence: []
+  linked_play:
+  - Play 11
+  crosswalk:
+  - Records & Auditability | A.9; A.4 Resources | MEASURE 3.1; MANAGE 4.1 | MAS M3.8 | MGF D3.6, D3.13 | —
+  population_and_evidence_floor: 'Population: the logged record set for the period, plus at least one real event selected for reconstruction.
+    Evidence floor: no reconstruction attempt makes the operating result NOT TESTABLE — the existence of logs is a design fact, not an operating
+    one.'
+  test_of_design:
+  - id: D1
+    text: Obtain the logging or traceability design for Tamper-evident audit log — what is captured, at what granularity, where it is stored and
+      for how long.
+  - id: D2
+    text: Confirm the captured fields are sufficient to reconstruct a specific decision or action after the fact, including the inputs, the version
+      in force and the identity that acted.
+  - id: D3
+    text: Confirm integrity controls — who can amend or delete, and how tampering would be detected.
+  - id: D4
+    text: Confirm retention meets the longest applicable obligation and that retrieval within a stated time is possible.
+  - id: s5
+    text: 'Design verdict: ADEQUATE when D1-D3 hold. PARTIALLY ADEQUATE when capture is defined but integrity or retention is not. INADEQUATE
+      when reconstruction is impossible from the defined fields. NOT TESTABLE when the design is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Select a specific past event — an incident, a material decision or a random production action — and attempt reconstruction end to end
+      from the logs alone.
+  - id: O2
+    text: 'Verify completeness across the period: sampling intervals, volumes and any interruption in capture.'
+  - id: O3
+    text: 'Test integrity: confirm access to amend is restricted and inspect any amendment record.'
+  - id: O4
+    text: Test retrieval against the stated time and confirm records at the oldest end of the retention window are still retrievable.
+  - id: s5
+    text: 'Operating verdict: EFFECTIVE when a real event can be reconstructed from retained records within the stated time. PARTIALLY EFFECTIVE
+      when reconstruction succeeds with gaps or manual supplementation. INEFFECTIVE when the event cannot be reconstructed. NOT TESTABLE when
+      no suitable event exists in the period.'
+  near_miss_failure_modes:
+  - F1. Logs exist but hold no version identifier, so it is impossible to say which model or prompt produced the output.
+  - F2. The acting identity is a shared service account for every action, so attribution stops at the platform.
+  - F3. Reconstruction requires a person's recollection or a chat thread to fill the gap between records.
+  - F4. Retention is set below the obligation, or the oldest records are technically retained but not retrievable.
+  - F5. Administrators can amend the records with no separate audit of the amendment.
+  - F6. Prompt and tool-call content is not captured, so only the outcome is visible and not the reasoning path.
+  resolutions:
+  - failure_mode: F1
+    text: A log schema including model, prompt and configuration version, with a populated example.
+  - failure_mode: F2
+    text: Per-actor identity in the record, or a documented mapping from service account to the initiating human or agent.
+  - failure_mode: F3
+    text: A reconstruction walkthrough of a real event using only retained records.
+  - failure_mode: F4
+    text: A retention configuration matching the obligation and a successful retrieval from the oldest window.
+  - failure_mode: F5
+    text: An access review of amendment rights plus an immutable or separately audited amendment trail.
+  - failure_mode: F6
+    text: Captured prompt and tool-call records for a sampled action.
+  test_provenance: 'Archetype: logging_traceability — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S3.2
+  title: Decision-record content
+  requirement: Capture proposed action, rules applied, disposition, agent identity and timestamp per record
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: A register covering Decision-record content exists with a defined field set
+    scope: model
+  - id: e2
+    text: Each record carries a unique identifier and a named owner
+    scope: model
+  - id: e3
+    text: The trigger and timing for creating a record are defined relative to first use
+    scope: model
+  - id: e4
+    text: An independent source exists against which completeness can be reconciled
+    scope: model
+  - id: e5
+    text: The register is current — status, version and retirement are maintained
+    scope: model
+  - id: e6
+    text: Sampled records reconcile to the deployed reality they describe
+    scope: model
+  boundary:
+    none: no register, or a register with no unique identifier and no ownership.
+    partial: a register exists and is structurally adequate, but completeness has not been reconciled against an independent source, or material
+      staleness is present.
+    full: the register is complete against an independent reconciliation, unique, owned and current, and sampled records trace to deployed reality.
+  owner: InfoSec / Compliance
+  expected_evidence: []
+  linked_play:
+  - Play 11
+  crosswalk:
+  - Transparency (FEAT F4) | A.8; A.9 | MAP 1.1; MEASURE 3.1 | MAS M3.3, F4 | MGF D2.7, D3.13 | —
+  population_and_evidence_floor: 'Population: the full register extract plus the independent reconciliation source. Evidence floor: no independent
+    source, or a register extract with no as-at date or record count, makes the completeness result NOT TESTABLE rather than PASS.'
+  test_of_design:
+  - id: D1
+    text: Obtain the register or inventory specification for Decision-record content — its required fields, unique identifier, ownership field,
+      lifecycle status and retirement rule.
+  - id: D2
+    text: Confirm the specification defines what triggers a record being created, and at what point relative to first use, so completeness has
+      a testable meaning.
+  - id: D3
+    text: Confirm the authoritative source and the reconciliation route used to prove the register is complete against the real estate.
+  - id: D4
+    text: Confirm update and attestation cadence, and who is accountable for accuracy.
+  - id: s5
+    text: 'Design verdict: ADEQUATE when D1-D3 hold. PARTIALLY ADEQUATE when fields and ownership are defined but no completeness route exists.
+      INADEQUATE when there is no unique identifier or no owner field. NOT TESTABLE when the specification is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Obtain the full register extract as at a stated date, with a record count.
+  - id: O2
+    text: 'Test completeness in the direction that can fail: reconcile from the independent source outward to the register, not register to itself.
+      Use a deployment source, an access source or a cost or telemetry source.'
+  - id: O3
+    text: 'Test uniqueness and currency: duplicates, records with no owner, records whose status has not changed since creation, retired entries
+      still active downstream.'
+  - id: O4
+    text: Sample records and trace each to real evidence of the thing it claims to describe.
+  - id: s5
+    text: 'Operating verdict: EFFECTIVE when reconciliation finds no unregistered items and sampled records are accurate and current. PARTIALLY
+      EFFECTIVE when the register is broadly accurate but stale or incomplete in places. INEFFECTIVE when unregistered production items are found.
+      NOT TESTABLE when no independent source is available to reconcile against.'
+  near_miss_failure_modes:
+  - F1. Completeness is tested register-to-register — the register is reconciled to a list derived from itself, which can never find an omission.
+  - F2. Every record was created on the same date, indicating a one-off population exercise rather than an operating process.
+  - F3. Owner fields hold a team mailbox or a departed individual.
+  - F4. Retired records remain in an active state downstream — decommissioned in the register but still holding credentials or serving traffic.
+  - F5. The register captures models but not the prompts, tools or agents that change behaviour without a model change.
+  resolutions:
+  - failure_mode: F1
+    text: A reconciliation from an independent source — deployment pipeline, identity provider, cost report or runtime telemetry — with exceptions
+      listed.
+  - failure_mode: F2
+    text: Evidence of incremental record creation over the period, or an approved backfill with a completeness statement.
+  - failure_mode: F3
+    text: An ownership attestation naming current individuals, dated within the cadence.
+  - failure_mode: F4
+    text: A decommissioning record showing downstream revocation, not only the register status change.
+  - failure_mode: F5
+    text: A field set covering the components that can change behaviour, with at least one example populated.
+  test_provenance: 'Archetype: register_inventory — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S3.3
+  title: Traceability to mandate & policy version
+  requirement: Link each record to the controls-repository / mandate version that governed the action
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: The authority boundary for Traceability to mandate & policy version is explicitly defined
+    scope: model
+  - id: e2
+    text: The boundary is enforced in configuration or at runtime, not only stated in a document
+    scope: model
+  - id: e3
+    text: Grant and approval of authority are separated from the requester
+    scope: model
+  - id: e4
+    text: The behaviour at the boundary — block, refer or log — is approved
+    scope: model
+  - id: e5
+    text: Overrides are approved by a role with authority and carry a recorded reason
+    scope: model
+  - id: e6
+    text: Granted authority is recertified on a defined cadence and revocations take effect
+    scope: model
+  boundary:
+    none: no defined boundary, or authority granted with no approval.
+    partial: the boundary is defined and approved but enforcement, override discipline or recertification is not evidenced.
+    full: the enforced boundary matches the approved boundary, overrides are independently approved with reasons, and recertification demonstrably
+      revokes.
+  owner: AI Risk (2nd line)
+  expected_evidence: []
+  linked_play:
+  - Play 8, 11
+  crosswalk:
+  - Accountability (FEAT F3) | A.6; A.2 AI policy | GOVERN 1.3; MEASURE 3.1 | MAS F3 | MGF D1.5 | —
+  population_and_evidence_floor: 'Population: the enforced configuration plus all grants and all boundary events in the period. Evidence floor:
+    no enforced configuration export, or zero boundary events with no enforcement test, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Obtain the definition of the authority boundary for Traceability to mandate & policy version — permitted actions, counterparties, value
+      or exposure limits, data scope and the systems it may write to.
+  - id: D2
+    text: Confirm the boundary is expressed where it is enforced, not only in a document — a configuration, a policy object or a runtime guardrail.
+  - id: D3
+    text: Confirm who grants and who approves a change to the boundary, and that the two are separated from the requester.
+  - id: D4
+    text: 'Confirm what happens at the boundary: hard block, human referral or log-and-continue, and that the choice is approved.'
+  - id: D5
+    text: Confirm periodic recertification of granted authority, with a defined cadence and an accountable reviewer.
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D4 hold. PARTIALLY ADEQUATE when limits are documented but not enforced, or recertification is absent.
+      INADEQUATE when no boundary is defined. NOT TESTABLE when the authoritative definition is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Obtain the enforced configuration as at a date and compare it, field by field, to the approved boundary.
+  - id: O2
+    text: Define the population of granted access or mandate holders, and reconcile it to the approved grants — in the direction of finding grants
+      nobody approved.
+  - id: O3
+    text: 'Sample boundary events in the period: blocks, referrals and overrides. Trace each override to an approver with authority and a recorded
+      reason.'
+  - id: O4
+    text: Where no boundary event occurred, test the enforcement — a controlled attempt or an equivalent assurance that the limit binds.
+  - id: O5
+    text: Inspect the most recent recertification for completeness and for revocations actually taking effect.
+  - id: s6
+    text: 'Operating verdict: EFFECTIVE when enforced limits match approved limits, overrides are approved and recertification took effect. PARTIALLY
+      EFFECTIVE when the boundary holds but grants are stale or overrides are unevidenced. INEFFECTIVE when unapproved authority is found in production.
+      NOT TESTABLE when the enforced configuration cannot be obtained.'
+  near_miss_failure_modes:
+  - F1. The limit is in a policy document and nowhere in the running system, so nothing stops the action.
+  - F2. The enforced value is more permissive than the approved value, changed by a ticket that never reached the approver.
+  - F3. Overrides are recorded but the approver is the same identity that requested the action.
+  - F4. Recertification was completed as an attestation with no revocations, across a population where joiners and leavers certainly occurred.
+  - F5. The agent holds standing credentials broader than its mandate because the mandate is enforced at the orchestration layer and the credential
+    is not.
+  - F6. Limits bind per transaction but not in aggregate, so the boundary is passable by repetition.
+  resolutions:
+  - failure_mode: F1
+    text: An export of the enforced configuration or policy object showing the limit in force.
+  - failure_mode: F2
+    text: A reconciliation of enforced versus approved values with any deviation approved retrospectively.
+  - failure_mode: F3
+    text: An override record naming a distinct approver and the reason.
+  - failure_mode: F4
+    text: A recertification with revocation evidence at the target system, not only the sign-off sheet.
+  - failure_mode: F5
+    text: An entitlement review of the credential itself, scoped to the mandate.
+  - failure_mode: F6
+    text: An aggregate or cumulative limit in the enforced configuration, with evidence of its operation.
+  test_provenance: 'Archetype: access_authority — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S3.4
+  title: Supervisory & audit evidence
+  requirement: Make logs retrievable for internal audit, compliance and MAS supervisory review
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: A logging or traceability design covering Supervisory & audit evidence exists
+    scope: model
+  - id: e2
+    text: Captured fields allow a past action to be reconstructed, including the version and the acting identity
+    scope: model
+  - id: e3
+    text: Amendment and deletion are restricted and detectable
+    scope: model
+  - id: e4
+    text: Retention meets the longest applicable obligation
+    scope: model
+  - id: e5
+    text: Capture was continuous across the period
+    scope: model
+  - id: e6
+    text: A real past event has been reconstructed from the retained records
+    scope: model
+  boundary:
+    none: no logging, or logging that cannot attribute an action to a system, version or identity.
+    partial: logging operates but reconstruction requires supplementation, or integrity and retention are not evidenced.
+    full: a real event has been reconstructed end to end from retained, integrity-protected records within the stated retrieval time.
+  owner: Compliance & Legal / Internal Audit
+  expected_evidence: []
+  linked_play:
+  - Play 8, 11
+  crosswalk:
+  - Records & Auditability | A.8; A.9 | GOVERN 1.1; MEASURE 3.1 | MAS M3.8 | MGF D3.13 | PA 6
+  population_and_evidence_floor: 'Population: the logged record set for the period, plus at least one real event selected for reconstruction.
+    Evidence floor: no reconstruction attempt makes the operating result NOT TESTABLE — the existence of logs is a design fact, not an operating
+    one.'
+  test_of_design:
+  - id: D1
+    text: Obtain the logging or traceability design for Supervisory & audit evidence — what is captured, at what granularity, where it is stored
+      and for how long.
+  - id: D2
+    text: Confirm the captured fields are sufficient to reconstruct a specific decision or action after the fact, including the inputs, the version
+      in force and the identity that acted.
+  - id: D3
+    text: Confirm integrity controls — who can amend or delete, and how tampering would be detected.
+  - id: D4
+    text: Confirm retention meets the longest applicable obligation and that retrieval within a stated time is possible.
+  - id: s5
+    text: 'Design verdict: ADEQUATE when D1-D3 hold. PARTIALLY ADEQUATE when capture is defined but integrity or retention is not. INADEQUATE
+      when reconstruction is impossible from the defined fields. NOT TESTABLE when the design is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Select a specific past event — an incident, a material decision or a random production action — and attempt reconstruction end to end
+      from the logs alone.
+  - id: O2
+    text: 'Verify completeness across the period: sampling intervals, volumes and any interruption in capture.'
+  - id: O3
+    text: 'Test integrity: confirm access to amend is restricted and inspect any amendment record.'
+  - id: O4
+    text: Test retrieval against the stated time and confirm records at the oldest end of the retention window are still retrievable.
+  - id: s5
+    text: 'Operating verdict: EFFECTIVE when a real event can be reconstructed from retained records within the stated time. PARTIALLY EFFECTIVE
+      when reconstruction succeeds with gaps or manual supplementation. INEFFECTIVE when the event cannot be reconstructed. NOT TESTABLE when
+      no suitable event exists in the period.'
+  near_miss_failure_modes:
+  - F1. Logs exist but hold no version identifier, so it is impossible to say which model or prompt produced the output.
+  - F2. The acting identity is a shared service account for every action, so attribution stops at the platform.
+  - F3. Reconstruction requires a person's recollection or a chat thread to fill the gap between records.
+  - F4. Retention is set below the obligation, or the oldest records are technically retained but not retrievable.
+  - F5. Administrators can amend the records with no separate audit of the amendment.
+  - F6. Prompt and tool-call content is not captured, so only the outcome is visible and not the reasoning path.
+  resolutions:
+  - failure_mode: F1
+    text: A log schema including model, prompt and configuration version, with a populated example.
+  - failure_mode: F2
+    text: Per-actor identity in the record, or a documented mapping from service account to the initiating human or agent.
+  - failure_mode: F3
+    text: A reconstruction walkthrough of a real event using only retained records.
+  - failure_mode: F4
+    text: A retention configuration matching the obligation and a successful retrieval from the oldest window.
+  - failure_mode: F5
+    text: An access review of amendment rights plus an immutable or separately audited amendment trail.
+  - failure_mode: F6
+    text: Captured prompt and tool-call records for a sampled action.
+  test_provenance: 'Archetype: logging_traceability — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S3.5
+  title: Review of flagged actions
+  requirement: Ensure proceed-and-flag items are actually reviewed and dispositioned post-hoc
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: Metrics and thresholds for Review of flagged actions are defined and approved
+    scope: model
+  - id: e2
+    text: The metrics detect the failure the control exists to catch
+    scope: model
+  - id: e3
+    text: Alerts route to a named owner with a stated response time
+    scope: model
+  - id: e4
+    text: Monitoring ran across the whole period with gaps identified
+    scope: model
+  - id: e5
+    text: Alerts raised were dispositioned with a recorded outcome
+    scope: model
+  - id: e6
+    text: The detector has been tested or back-tested, so silence is evidence
+    scope: model
+  boundary:
+    none: no monitoring, or monitoring with no thresholds and no owner.
+    partial: monitoring is configured and running but coverage, alert disposition or detector assurance is incomplete, or the metrics are proxies
+      for the risk rather than the risk.
+    full: approved metrics ran continuously, alerts were owned and dispositioned, and the detector is demonstrably capable of firing.
+  owner: AI Risk (2nd line) / Model Owner
+  expected_evidence: []
+  linked_play:
+  - Play 5, 6
+  crosswalk:
+  - Monitoring | A.6 AI system life cycle | MEASURE 4.1; MANAGE 4.1 | MAS M3.10 | MGF D2.5, D3.14, D3.15 | —
+  population_and_evidence_floor: 'Population: the full monitoring period, plus all alerts raised. Evidence floor: no alerts in the period and
+    no detector test means silence is uninformative — report NOT TESTABLE rather than PASS.'
+  test_of_design:
+  - id: D1
+    text: Obtain the monitoring design for Review of flagged actions — the metrics, their thresholds, the observation window and the alerting
+      route.
+  - id: D2
+    text: Confirm the metrics correspond to the failure the control exists to catch, not only to availability or infrastructure health.
+  - id: D3
+    text: Confirm each alert has a named recipient, a required response time and a disposition record.
+  - id: D4
+    text: Confirm how the detector itself is validated — how anyone knows an alert would fire if the condition occurred.
+  - id: s5
+    text: 'Design verdict: ADEQUATE when D1-D3 hold and D4 identifies a test route. PARTIALLY ADEQUATE when metrics and thresholds exist but ownership
+      or detector assurance is absent. INADEQUATE when thresholds are undefined. NOT TESTABLE when the monitoring configuration is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Obtain the monitoring output for the full period, with coverage gaps identified — periods with no data are findings, not blanks.
+  - id: O2
+    text: Verify the configuration in force matches the approved design, read from the running configuration rather than from a document.
+  - id: O3
+    text: Sample alerts raised and trace each to an owner, a response within the stated time and a disposition.
+  - id: O4
+    text: Where no alert fired in the period, test the detector — a synthetic breach, a back-test against a known past event, or an equivalent.
+  - id: s5
+    text: 'Operating verdict: EFFECTIVE when monitoring ran continuously against the approved thresholds and alerts were dispositioned. PARTIALLY
+      EFFECTIVE when coverage gaps exist or alerts closed without disposition. INEFFECTIVE when monitoring was not operating or breaches were
+      not acted on. NOT TESTABLE when monitoring output for the period is unavailable.'
+  near_miss_failure_modes:
+  - F1. No alert fired all period and this is presented as evidence of health, with nothing showing the detector works.
+  - F2. Thresholds in the running configuration differ from the approved design, usually loosened after a noisy week.
+  - F3. Alerts are routed to a shared channel with no named owner, and closure is by silence.
+  - F4. Monitoring covers latency and uptime while the control is about model quality, drift or mandate breach.
+  - F5. Coverage has gaps that coincide with the periods of highest change.
+  - F6. Drift is monitored on inputs only, with no monitoring of the outcome the model drives.
+  resolutions:
+  - failure_mode: F1
+    text: A detector test, synthetic breach or back-test against a known past event.
+  - failure_mode: F2
+    text: An export of the running configuration compared to the approved baseline, with any deviation approved.
+  - failure_mode: F3
+    text: An alert record naming a recipient, a response time and a disposition.
+  - failure_mode: F4
+    text: A metric definition tied to the control objective, with at least one period of output.
+  - failure_mode: F5
+    text: A continuous coverage statement with gaps explained and dispositioned.
+  - failure_mode: F6
+    text: Output-side monitoring covering the decisions or actions the system produced.
+  test_provenance: 'Archetype: monitoring_detection — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S4.1
+  title: Integration-model selection
+  requirement: Document native-embedding vs. gateway-interception choice per agent / system
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: An approved methodology for Integration-model selection exists with defined criteria
+    scope: model
+  - id: e2
+    text: Tier or outcome thresholds are stated by rule rather than by unaided judgement
+    scope: model
+  - id: e3
+    text: The assessment is required before the decision it informs
+    scope: model
+  - id: e4
+    text: The outcome is approved by a role independent of the requester
+    scope: model
+  - id: e5
+    text: Each outcome obliges a defined set of controls or gates
+    scope: model
+  - id: e6
+    text: Reassessment triggers are defined and detected
+    scope: model
+  boundary:
+    none: no methodology, or assessments performed with no criteria.
+    partial: a methodology exists and is used, but timing, independence, threshold discipline or reassessment is not evidenced.
+    full: assessments are complete, timely, independent of the requester, reperformable from the recorded facts, and drive the controls their
+      outcome obliges.
+  owner: InfoSec / Technology
+  expected_evidence: []
+  linked_play:
+  - Play 3, 11
+  crosswalk:
+  - 'Lifecycle: Deployment | A.6; A.4 Resources | MAP 1.1; MANAGE 2.4 | MAS M3.5 | —'
+  population_and_evidence_floor: 'Population: all use cases requiring assessment in the period, from the intake log or AI inventory. Evidence
+    floor: fewer than 3 assessments, or no sample from the lowest tier, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Obtain the approved methodology and template for Integration-model selection — trigger, criteria, scoring or classification scheme,
+      and the decision each outcome drives.
+  - id: D2
+    text: 'Confirm the criteria are discriminating: different inputs produce different outcomes, and the thresholds between tiers are stated numerically
+      or by defined rule rather than by judgement alone.'
+  - id: D3
+    text: Confirm the assessment must be completed before the decision it informs, and who approves the outcome.
+  - id: D4
+    text: Confirm reassessment triggers — material change, incident, elapsed time — and who is accountable for detecting them.
+  - id: D5
+    text: 'Confirm what an outcome obliges: which controls a tier turns on, so classification is load-bearing rather than descriptive.'
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D3 and D5 hold. PARTIALLY ADEQUATE when the method exists but thresholds or consequences are undefined.
+      INADEQUATE when outcomes drive nothing. NOT TESTABLE when the approved methodology is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: 'Define the population: all use cases requiring an assessment in the period, taken from the inventory or intake log.'
+  - id: O2
+    text: Sample across tiers, including at least one that was classified into the lowest tier — the classification most likely to be wrong and
+      least likely to be challenged.
+  - id: O3
+    text: Reperform the classification from the underlying facts and compare to the recorded outcome. A reperformance that disagrees is a finding
+      regardless of the approver's seniority.
+  - id: O4
+    text: 'Verify timing: the assessment date precedes the decision date. Verify reassessment where a trigger occurred.'
+  - id: s5
+    text: 'Operating verdict: EFFECTIVE when reperformance agrees, timing holds and triggers were acted on. PARTIALLY EFFECTIVE when assessments
+      are complete but late, or a low-tier outcome cannot be supported. INEFFECTIVE when assessments are missing for material use or systematically
+      under-tier. NOT TESTABLE when the population of in-scope use cases cannot be established.'
+  near_miss_failure_modes:
+  - F1. Every use case lands in the same tier, which means the scheme is not discriminating or is being applied to reach a pre-decided answer.
+  - F2. The assessment is dated after the go-live date, so it documented a decision rather than informing it.
+  - F3. The assessor and the requester are the same person or the same team.
+  - F4. A low-tier classification rests on a scope statement that excludes the risky part of the system — for example classifying a copilot as
+    advisory while it writes to a system of record.
+  - F5. Reassessment triggers exist on paper but no reassessment occurred despite a material model or vendor change in the period.
+  resolutions:
+  - failure_mode: F1
+    text: A tier distribution across the population, with the rationale for outliers in either direction.
+  - failure_mode: F2
+    text: An assessment record dated before the approval or go-live date, or a documented retrospective acceptance.
+  - failure_mode: F3
+    text: An approval by a role outside the delivery team, named in the record.
+  - failure_mode: F4
+    text: A scope statement that enumerates the system's write paths and downstream effects, reassessed on that basis.
+  - failure_mode: F5
+    text: A reassessment record tied to the change that triggered it.
+  test_provenance: 'Archetype: assessment_classification — DRAFT, requires second-line authoring and control-owner approval before authoritative
+    use'
+- framework: SAFR
+  control_id: S4.2
+  title: Gateway interception of actions
+  requirement: Provide an API-level chokepoint that intercepts outbound agent actions where native embedding isn't feasible
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: The authority boundary for Gateway interception of actions is explicitly defined
+    scope: model
+  - id: e2
+    text: The boundary is enforced in configuration or at runtime, not only stated in a document
+    scope: model
+  - id: e3
+    text: Grant and approval of authority are separated from the requester
+    scope: model
+  - id: e4
+    text: The behaviour at the boundary — block, refer or log — is approved
+    scope: model
+  - id: e5
+    text: Overrides are approved by a role with authority and carry a recorded reason
+    scope: model
+  - id: e6
+    text: Granted authority is recertified on a defined cadence and revocations take effect
+    scope: model
+  boundary:
+    none: no defined boundary, or authority granted with no approval.
+    partial: the boundary is defined and approved but enforcement, override discipline or recertification is not evidenced.
+    full: the enforced boundary matches the approved boundary, overrides are independently approved with reasons, and recertification demonstrably
+      revokes.
+  owner: InfoSec / Technology
+  expected_evidence: []
+  linked_play:
+  - Play 11
+  crosswalk:
+  - Governance & Oversight | A.9 Use of AI systems | MANAGE 2.3, 2.4 | MAS M3.7 | MGF D3.1 | PA 8
+  population_and_evidence_floor: 'Population: the enforced configuration plus all grants and all boundary events in the period. Evidence floor:
+    no enforced configuration export, or zero boundary events with no enforcement test, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Obtain the definition of the authority boundary for Gateway interception of actions — permitted actions, counterparties, value or exposure
+      limits, data scope and the systems it may write to.
+  - id: D2
+    text: Confirm the boundary is expressed where it is enforced, not only in a document — a configuration, a policy object or a runtime guardrail.
+  - id: D3
+    text: Confirm who grants and who approves a change to the boundary, and that the two are separated from the requester.
+  - id: D4
+    text: 'Confirm what happens at the boundary: hard block, human referral or log-and-continue, and that the choice is approved.'
+  - id: D5
+    text: Confirm periodic recertification of granted authority, with a defined cadence and an accountable reviewer.
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D4 hold. PARTIALLY ADEQUATE when limits are documented but not enforced, or recertification is absent.
+      INADEQUATE when no boundary is defined. NOT TESTABLE when the authoritative definition is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Obtain the enforced configuration as at a date and compare it, field by field, to the approved boundary.
+  - id: O2
+    text: Define the population of granted access or mandate holders, and reconcile it to the approved grants — in the direction of finding grants
+      nobody approved.
+  - id: O3
+    text: 'Sample boundary events in the period: blocks, referrals and overrides. Trace each override to an approver with authority and a recorded
+      reason.'
+  - id: O4
+    text: Where no boundary event occurred, test the enforcement — a controlled attempt or an equivalent assurance that the limit binds.
+  - id: O5
+    text: Inspect the most recent recertification for completeness and for revocations actually taking effect.
+  - id: s6
+    text: 'Operating verdict: EFFECTIVE when enforced limits match approved limits, overrides are approved and recertification took effect. PARTIALLY
+      EFFECTIVE when the boundary holds but grants are stale or overrides are unevidenced. INEFFECTIVE when unapproved authority is found in production.
+      NOT TESTABLE when the enforced configuration cannot be obtained.'
+  near_miss_failure_modes:
+  - F1. The limit is in a policy document and nowhere in the running system, so nothing stops the action.
+  - F2. The enforced value is more permissive than the approved value, changed by a ticket that never reached the approver.
+  - F3. Overrides are recorded but the approver is the same identity that requested the action.
+  - F4. Recertification was completed as an attestation with no revocations, across a population where joiners and leavers certainly occurred.
+  - F5. The agent holds standing credentials broader than its mandate because the mandate is enforced at the orchestration layer and the credential
+    is not.
+  - F6. Limits bind per transaction but not in aggregate, so the boundary is passable by repetition.
+  resolutions:
+  - failure_mode: F1
+    text: An export of the enforced configuration or policy object showing the limit in force.
+  - failure_mode: F2
+    text: A reconciliation of enforced versus approved values with any deviation approved retrospectively.
+  - failure_mode: F3
+    text: An override record naming a distinct approver and the reason.
+  - failure_mode: F4
+    text: A recertification with revocation evidence at the target system, not only the sign-off sheet.
+  - failure_mode: F5
+    text: An entitlement review of the credential itself, scoped to the mandate.
+  - failure_mode: F6
+    text: An aggregate or cumulative limit in the enforced configuration, with evidence of its operation.
+  test_provenance: 'Archetype: access_authority — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S4.3
+  title: Standard governance-record schema
+  requirement: Adopt a portable, consistent record schema across agents and systems
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: An approved, current policy or standard covering Standard governance-record schema exists
+    scope: model
+  - id: e2
+    text: Its scope names the systems, models or uses it binds
+    scope: model
+  - id: e3
+    text: An accountable owner is named
+    scope: model
+  - id: e4
+    text: Prohibited or controlled uses and the consequence of non-compliance are stated
+    scope: model
+  - id: e5
+    text: An exception route with grantor, basis, expiry and record location is defined
+    scope: model
+  - id: e6
+    text: In-scope activity in the period followed the policy, or holds a live exception
+    scope: model
+  boundary:
+    none: no approved policy, or a document with no owner and no scope.
+    partial: an approved policy exists but lacks an exception route, an implementing control, or sampled activity does not consistently follow
+      it.
+    full: the policy is approved, current, scoped, owned, implemented by a named control, and sampled activity follows it with exceptions governed.
+  owner: InfoSec / AI Risk (2nd line)
+  expected_evidence: []
+  linked_play:
+  - Play 11
+  crosswalk:
+  - Transparency (FEAT F4) | A.8 Information for interested parties | MAP 1.1; MEASURE 3.1 | MAS M3.8 | —
+  population_and_evidence_floor: 'Population: all in-scope AI use cases or activities in the period, drawn from the AI inventory. Evidence floor:
+    fewer than 3 sampled items, or an inventory that cannot be reconciled, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Obtain the approved policy or standard covering Standard governance-record schema, with its approval record, owner and version history.
+  - id: D2
+    text: Confirm it states scope (which systems, models and uses it binds), prohibited and controlled uses, the accountable owner and the consequence
+      of non-compliance.
+  - id: D3
+    text: Confirm it defines the exception route — who may grant one, on what basis, for how long, and where exceptions are recorded.
+  - id: D4
+    text: Confirm the review cycle and the triggers for out-of-cycle review, and that the document is within its cycle.
+  - id: D5
+    text: Confirm the policy is mapped to the controls, plays or procedures that implement it, so a requirement is not left with nothing that
+      operates it.
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D3 hold and D5 identifies at least one implementing control. PARTIALLY ADEQUATE when the policy exists
+      but the exception route or implementing link is absent. INADEQUATE when scope or ownership is undefined. NOT TESTABLE when the approved
+      document is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: 'Define the population: AI use cases, systems or activities in scope of the policy during the period, taken from the AI inventory rather
+      than from a list supplied by the assessed team.'
+  - id: O2
+    text: Sample across materiality tiers and include at least one use case that went live in the period.
+  - id: O3
+    text: 'Reperform: verify each sampled item was assessed against the policy at the required point, and that any required attestation or approval
+      exists and predates the activity.'
+  - id: O4
+    text: Inspect the exception and breach records for the period — verify each is dated, owned, time-bound and dispositioned.
+  - id: s5
+    text: 'Operating verdict: EFFECTIVE when sampled use follows the approved policy and exceptions are governed. PARTIALLY EFFECTIVE when compliance
+      is inconsistent or exceptions are open past expiry. INEFFECTIVE when the policy was bypassed for material use. NOT TESTABLE when the in-scope
+      population cannot be established.'
+  near_miss_failure_modes:
+  - F1. The policy is approved but has no implementing procedure — nothing in the operating environment makes the requirement happen.
+  - F2. Scope is written so broadly ('all AI use') that no one can tell whether a given system is in or out.
+  - F3. Exceptions are granted by the same team that needs them, with no expiry.
+  - F4. The policy was approved in the period but the sampled use cases predate it and were never reassessed against it.
+  - F5. A breach register exists but every entry is closed as 'noted' with no remediation or acceptance.
+  resolutions:
+  - failure_mode: F1
+    text: A named procedure, runbook or control that implements the clause, with an owner.
+  - failure_mode: F2
+    text: A scope statement with inclusion and exclusion criteria, or a mapping from the inventory to in-scope flag.
+  - failure_mode: F3
+    text: An exception record showing an independent grantor, a stated basis and an expiry date.
+  - failure_mode: F4
+    text: A reassessment record for pre-existing use cases, or an approved grandfathering decision.
+  - failure_mode: F5
+    text: A breach entry with a remediation action, owner and closure evidence, or a formal risk acceptance.
+  test_provenance: 'Archetype: policy_standard — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S4.4
+  title: Cross-system enforcement consistency
+  requirement: Enforce the same mandate and policy regardless of the downstream system acted upon
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: An approved, current policy or standard covering Cross-system enforcement consistency exists
+    scope: model
+  - id: e2
+    text: Its scope names the systems, models or uses it binds
+    scope: model
+  - id: e3
+    text: An accountable owner is named
+    scope: model
+  - id: e4
+    text: Prohibited or controlled uses and the consequence of non-compliance are stated
+    scope: model
+  - id: e5
+    text: An exception route with grantor, basis, expiry and record location is defined
+    scope: model
+  - id: e6
+    text: In-scope activity in the period followed the policy, or holds a live exception
+    scope: model
+  boundary:
+    none: no approved policy, or a document with no owner and no scope.
+    partial: an approved policy exists but lacks an exception route, an implementing control, or sampled activity does not consistently follow
+      it.
+    full: the policy is approved, current, scoped, owned, implemented by a named control, and sampled activity follows it with exceptions governed.
+  owner: AI Risk (2nd line)
+  expected_evidence: []
+  linked_play:
+  - Play 11
+  crosswalk:
+  - Governance & Oversight | A.9; A.6 | GOVERN 1.3; MANAGE 2.3 | MAS M3.14 | MGF D1.6, D3.9 | —
+  population_and_evidence_floor: 'Population: all in-scope AI use cases or activities in the period, drawn from the AI inventory. Evidence floor:
+    fewer than 3 sampled items, or an inventory that cannot be reconciled, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Obtain the approved policy or standard covering Cross-system enforcement consistency, with its approval record, owner and version history.
+  - id: D2
+    text: Confirm it states scope (which systems, models and uses it binds), prohibited and controlled uses, the accountable owner and the consequence
+      of non-compliance.
+  - id: D3
+    text: Confirm it defines the exception route — who may grant one, on what basis, for how long, and where exceptions are recorded.
+  - id: D4
+    text: Confirm the review cycle and the triggers for out-of-cycle review, and that the document is within its cycle.
+  - id: D5
+    text: Confirm the policy is mapped to the controls, plays or procedures that implement it, so a requirement is not left with nothing that
+      operates it.
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D3 hold and D5 identifies at least one implementing control. PARTIALLY ADEQUATE when the policy exists
+      but the exception route or implementing link is absent. INADEQUATE when scope or ownership is undefined. NOT TESTABLE when the approved
+      document is not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: 'Define the population: AI use cases, systems or activities in scope of the policy during the period, taken from the AI inventory rather
+      than from a list supplied by the assessed team.'
+  - id: O2
+    text: Sample across materiality tiers and include at least one use case that went live in the period.
+  - id: O3
+    text: 'Reperform: verify each sampled item was assessed against the policy at the required point, and that any required attestation or approval
+      exists and predates the activity.'
+  - id: O4
+    text: Inspect the exception and breach records for the period — verify each is dated, owned, time-bound and dispositioned.
+  - id: s5
+    text: 'Operating verdict: EFFECTIVE when sampled use follows the approved policy and exceptions are governed. PARTIALLY EFFECTIVE when compliance
+      is inconsistent or exceptions are open past expiry. INEFFECTIVE when the policy was bypassed for material use. NOT TESTABLE when the in-scope
+      population cannot be established.'
+  near_miss_failure_modes:
+  - F1. The policy is approved but has no implementing procedure — nothing in the operating environment makes the requirement happen.
+  - F2. Scope is written so broadly ('all AI use') that no one can tell whether a given system is in or out.
+  - F3. Exceptions are granted by the same team that needs them, with no expiry.
+  - F4. The policy was approved in the period but the sampled use cases predate it and were never reassessed against it.
+  - F5. A breach register exists but every entry is closed as 'noted' with no remediation or acceptance.
+  resolutions:
+  - failure_mode: F1
+    text: A named procedure, runbook or control that implements the clause, with an owner.
+  - failure_mode: F2
+    text: A scope statement with inclusion and exclusion criteria, or a mapping from the inventory to in-scope flag.
+  - failure_mode: F3
+    text: An exception record showing an independent grantor, a stated basis and an expiry date.
+  - failure_mode: F4
+    text: A reassessment record for pre-existing use cases, or an approved grandfathering decision.
+  - failure_mode: F5
+    text: A breach entry with a remediation action, owner and closure evidence, or a formal risk acceptance.
+  test_provenance: 'Archetype: policy_standard — DRAFT, requires second-line authoring and control-owner approval before authoritative use'
+- framework: SAFR
+  control_id: S4.5
+  title: Third-party / vendor agent coverage
+  requirement: Subject externally-sourced agents to the same runtime checks and logging
+  requirement_source: playbook_workbook
+  requirement_authority: draft
+  elements:
+  - id: e1
+    text: Third-party requirements covering Third-party / vendor agent coverage exist and are approved
+    scope: model
+  - id: e2
+    text: Due diligence is required before contract or first production use
+    scope: model
+  - id: e3
+    text: Required contractual clauses are specified, including notification and assurance access
+    scope: model
+  - id: e4
+    text: Sub-processors and embedded AI are within scope
+    scope: model
+  - id: e5
+    text: Reassessment cadence and change triggers are defined
+    scope: model
+  - id: e6
+    text: Assurance reports or equivalent are obtained and findings dispositioned
+    scope: model
+  boundary:
+    none: no third-party assessment for AI providers, or providers in production with no assessment.
+    partial: onboarding diligence occurred but contractual rights, sub-processor scope or ongoing oversight is not evidenced.
+    full: assessments preceded use, required clauses are present in executed contracts, and ongoing oversight operated with findings dispositioned.
+  owner: AI Risk (2nd line) / Compliance
+  expected_evidence: []
+  linked_play:
+  - Play 7, 11
+  crosswalk:
+  - Third-Party Risk | A.10 Third-party; A.9 | GOVERN 3.2; MANAGE 3.1 | MAS M3.14 | MGF D1.6 | PA 3
+  population_and_evidence_floor: 'Population: all AI-relevant third parties and AI-embedded products in use during the period, from procurement
+    or vendor-management data. Evidence floor: a vendor list supplied by the assessed team without procurement reconciliation makes the completeness
+    result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Obtain the third-party requirements covering Third-party / vendor agent coverage — the due-diligence scope, the contractual clauses
+      required and the approval route before onboarding.
+  - id: D2
+    text: Confirm the due diligence covers what the provider does with the institution's data, the provider's own model change practice, and its
+      notification obligations on material change or incident.
+  - id: D3
+    text: 'Confirm contractual rights: audit or assurance report access, notification periods, exit and transition, and liability for model behaviour.'
+  - id: D4
+    text: Confirm the ongoing obligation — reassessment cadence, performance monitoring and the trigger for re-approval.
+  - id: D5
+    text: Confirm the treatment of sub-processors and of models embedded in a purchased product, where the AI is not the thing being bought.
+  - id: s6
+    text: 'Design verdict: ADEQUATE when D1-D4 hold. PARTIALLY ADEQUATE when diligence is defined but ongoing obligations or embedded-AI treatment
+      is absent. INADEQUATE when no pre-onboarding assessment is required. NOT TESTABLE when the requirements are not produced.'
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Define the population of AI-relevant third parties in the period from procurement or vendor-management data, including products with
+      embedded AI, not only AI vendors.
+  - id: O2
+    text: Sample and verify a completed assessment dated before contract signature or before first production use.
+  - id: O3
+    text: Verify the required clauses are present in the executed contract, read from the contract rather than the checklist.
+  - id: O4
+    text: Verify ongoing obligations operated — reassessment at cadence, assurance reports obtained and reviewed with findings dispositioned,
+      and provider change notifications acted on.
+  - id: s5
+    text: 'Operating verdict: EFFECTIVE when assessments preceded use, clauses are present and ongoing obligations ran. PARTIALLY EFFECTIVE when
+      onboarding was controlled but ongoing oversight is unevidenced. INEFFECTIVE when material providers were onboarded unassessed. NOT TESTABLE
+      when the vendor population cannot be established.'
+  near_miss_failure_modes:
+  - F1. The provider was assessed as a software vendor before the AI feature was enabled, and never reassessed when it was.
+  - F2. The assessment is dated after contract signature, so it recorded a decision already taken.
+  - F3. The contract references an assurance report that was never obtained, or one that excludes the AI component from scope.
+  - F4. Sub-processors are named in the provider's terms but were never assessed.
+  - F5. Provider change notifications arrive but there is no route by which they reach the control owner.
+  - F6. The provider's own model changes silently under a continuously updated service, with no version pinning and no notification right.
+  resolutions:
+  - failure_mode: F1
+    text: A reassessment triggered by the AI feature being enabled.
+  - failure_mode: F2
+    text: An assessment record dated before signature, or an approved exception.
+  - failure_mode: F3
+    text: The assurance report itself, with its scope section showing the AI component in scope.
+  - failure_mode: F4
+    text: A sub-processor list with assessment status.
+  - failure_mode: F5
+    text: A routing record showing a provider notification reaching and being actioned by the control owner.
+  - failure_mode: F6
+    text: A version-pinning or change-notification clause and evidence of it operating.
+  test_provenance: 'Archetype: third_party — DRAFT, requires second-line authoring and control-owner approval before authoritative use'

@@ -1,0 +1,60 @@
+version: "0.4.0"
+authority_tiers:
+  authoritative: 1
+  approved_interpretation: 2
+  organisational_precedent: 3
+  example: 4
+  heuristic: 5
+memories:
+  - memory_id: GOV-MEM-0001
+    type: precedent
+    authority_tier: organisational_precedent
+    controls: [M3.12]
+    topic: change_implementation_verification
+    statement: "Approval of a production change does not by itself demonstrate successful implementation and post-implementation verification when those elements are required."
+    evidence_pattern:
+      sufficient: ["approved change record", "deployment or implementation record", "post-implementation verification"]
+      insufficient: ["approval record only"]
+    prior_disposition: partial
+    tags: [change, approval, implementation, verification, evidence-sufficiency]
+
+  - memory_id: GOV-MEM-0002
+    type: failure_pattern
+    authority_tier: example
+    controls: [M3.12]
+    topic: population_integrity
+    statement: "Duplicate ticket identifiers, sequence gaps, or a stale change register can undermine the reliability of the population used to assess an operating control."
+    evidence_pattern:
+      warning_signs: ["duplicate identifiers", "sequence gaps", "stale register"]
+    tags: [change, data-quality, population, duplicate, stale]
+
+  - memory_id: GOV-MEM-0003
+    type: evidence_pattern
+    authority_tier: approved_interpretation
+    controls: [F1, F3, M1.1, M3.6, M3.7, M3.9, M3.11, M3.12]
+    topic: design_vs_operation
+    statement: "A policy, standard, or documented intention demonstrates design intent but does not by itself demonstrate that an operational control ran."
+    evidence_pattern:
+      design_only: ["policy", "standard", "procedure", "planned process"]
+      operation: ["log", "test result", "monitoring output", "completed record", "review evidence"]
+    tags: [design, operation, policy, logs, test, evidence]
+
+  - memory_id: GOV-MEM-0004
+    type: precedent
+    authority_tier: organisational_precedent
+    controls: [M3.6, M3.7, M3.9, M3.11]
+    topic: element_completeness
+    statement: "A strong rating requires evidence for every applicable control element; satisfying a majority of elements does not establish the full boundary."
+    evidence_pattern:
+      full: ["all applicable elements evidenced"]
+      partial: ["some applicable elements evidenced"]
+    tags: [elements, completeness, full, partial]
+
+  - memory_id: GOV-MEM-0005
+    type: challenge_pattern
+    authority_tier: example
+    controls: [F1, F3, M1.1, M3.6, M3.7, M3.9, M3.11, M3.12]
+    topic: unsupported_inference
+    statement: "Do not infer an operational outcome from the existence of a policy, approval, ticket, or plan unless the requirement explicitly treats that artefact as sufficient evidence."
+    challenge_prompt: "What evidence demonstrates that the control actually operated, rather than merely existed on paper?"
+    tags: [inference, operation, policy, approval, plan]

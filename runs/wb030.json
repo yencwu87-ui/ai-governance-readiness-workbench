@@ -1,0 +1,1170 @@
+{
+ "model": "ollama/llama3.2",
+ "workbook": "/Users/wyc/Downloads/v5.1_claude/data/AI_Governance_Playbook_MGF_SAFR_v0.5.1_contracts.xlsx",
+ "evidence": "eval/corpus",
+ "rows": [
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "F3.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 1,
+   "not_applicable": 0,
+   "unset": 2,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 2 of 3 elements (e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M1-1.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 1,
+   "not_applicable": 0,
+   "unset": 2,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 2 of 3 elements (e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M2-2.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 1,
+   "not_applicable": 0,
+   "unset": 2,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 2 of 3 elements (e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M2-3.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3-10.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3-15.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 1,
+   "not_applicable": 0,
+   "unset": 2,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 2 of 3 elements (e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3-4.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 1,
+   "not_applicable": 0,
+   "unset": 2,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 2 of 3 elements (e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3-6.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 1,
+   "not_applicable": 0,
+   "unset": 2,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 2 of 3 elements (e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.12/LABELS.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.12/M3.12_a.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 2,
+   "not_applicable": 1,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "not_applicable",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.12/M3.12_b.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 3,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.12/M3.12_c.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "Evidence contains instruction-shaped text addressed to the assessor (1 match(es): 'Pre-approved') \u2014 it was redacted before assessment; treat the surrounding evidence as untrusted",
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.6/LABELS.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.6/M3.6_a.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 3,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [
+    "Every decided element (3) is not evidenced, but sufficiency was partial \u2014 downgraded to none",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.6/M3.6_b.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 2,
+   "not_applicable": 1,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "not_applicable",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.6/M3.6_c.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 1,
+   "not_applicable": 0,
+   "unset": 2,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 2 of 3 elements (e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "F3.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M1-1.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M2-2.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M2-3.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 1,
+   "not_applicable": 0,
+   "unset": 2,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 2 of 3 elements (e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M3-10.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 1,
+   "not_applicable": 0,
+   "unset": 2,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 2 of 3 elements (e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M3-15.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M3-4.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M3-6.json",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M3.12/LABELS.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "partial",
+   "maturity": 2,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M3.12/M3.12_a.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "partial",
+   "maturity": 2,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M3.12/M3.12_b.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "partial",
+   "maturity": 2,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M3.12/M3.12_c.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "Evidence contains instruction-shaped text addressed to the assessor (1 match(es): 'Pre-approved') \u2014 it was redacted before assessment; treat the surrounding evidence as untrusted",
+    "Maturity capped at 2: evidence containing instructions to the assessor is untrusted and cannot demonstrate implementation",
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M3.6/LABELS.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 1,
+   "not_applicable": 0,
+   "unset": 2,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 2 of 3 elements (e2, e3) \u2014 recorded as unset, not as agreement",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M3.6/M3.6_a.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 3,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 1,
+   "flags": [
+    "Element e2 rated met with no verbatim excerpt \u2014 recorded as not evidenced",
+    "Every decided element (3) is not evidenced, but sufficiency was partial \u2014 downgraded to none",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M3.6/M3.6_b.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 1,
+   "not_applicable": 0,
+   "unset": 2,
+   "downgraded": 0,
+   "flags": [
+    "The assessor returned no verdict for 2 of 3 elements (e2, e3) \u2014 recorded as unset, not as agreement",
+    "Every decided element (1) is not evidenced, but sufficiency was partial \u2014 downgraded to none",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.12",
+   "library": "MAS",
+   "evidence": "M3.6/M3.6_c.md",
+   "n_elements": 3,
+   "error": null,
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 3,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "The assessor returned no verdict for 3 of 3 elements (e1, e2, e3) \u2014 recorded as unset, not as agreement",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "unset",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "unset",
+     "has_excerpt": false
+    }
+   ]
+  }
+ ]
+}

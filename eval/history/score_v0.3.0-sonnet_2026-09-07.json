@@ -1,0 +1,146 @@
+{
+  "summary": {
+    "version": "v0.3.0-sonnet",
+    "run_at": "2026-09-07T23:54:00+00:00",
+    "eval_set": "golden_20_mas_v1",
+    "eval_set_size": 18,
+    "model": "claude-sonnet-4-6",
+    "accuracy": 0.0,
+    "adjacent_accuracy": 0.0,
+    "over_credit_rate": 0.0,
+    "under_credit_rate": 0.0,
+    "refusal_rate": 1.0,
+    "maturity_mae": null,
+    "fairness_gap": null,
+    "status": "evaluated",
+    "notes": "18 reviewer-labelled cases, 2 excluded as ambiguous. Labels recorded before scoring; assessor output not shown during labelling."
+  },
+  "rows": [
+    {
+      "case": "R-02",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "R-04",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "R-05",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "R-06",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "R-07",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "R-08",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "R-09",
+      "want": "partial",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "R-10",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "S-01",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "S-02",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "S-03",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "S-04",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "S-05",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "S-06",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "S-07",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "S-08",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "S-09",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    },
+    {
+      "case": "S-10",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal"
+    }
+  ]
+}

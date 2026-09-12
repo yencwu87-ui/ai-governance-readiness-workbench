@@ -1,0 +1,624 @@
+schema_version: 0.4.mas-executable-tests.1
+purpose: Executable evidence-floor checks derived from the approved v0.4 MAS Test
+  of Design and Test of Operating Effectiveness procedures.
+authority: Testing procedure remains subject to human approval; this file contains
+  executable interpretations, not regulatory text.
+controls:
+- control_id: M1.1
+  title: Board & senior management accountability for AI risk
+  design_test_id: MAS-M1.1-D
+  design_required_terms:
+  - Board
+  - risk appetite
+  - accountab
+  operating_test_id: MAS-M1.1-O
+  operating_sources:
+  - risk_reporting
+  - committee_minutes
+  - approvals
+  operating_required_fields: []
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M1.2
+  title: AI policies & guiding principles
+  design_test_id: MAS-M1.2-D
+  design_required_terms:
+  - fair
+  - ethical
+  - accountab
+  - transparent
+  operating_test_id: MAS-M1.2-O
+  operating_sources:
+  - ai_use_cases
+  operating_required_fields:
+  - use_case_id
+  - policy_version
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M1.3
+  title: Cross-functional AI oversight forum
+  design_test_id: MAS-M1.3-D
+  design_required_terms:
+  - terms of reference
+  - quorum
+  - decision rights
+  operating_test_id: MAS-M1.3-O
+  operating_sources:
+  - committee_minutes
+  operating_required_fields:
+  - meeting_date
+  - quorum
+  - decisions
+  operating_min_records: 3
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M1.4
+  title: AI risk appetite & risk tolerance
+  design_test_id: MAS-M1.4-D
+  design_required_terms:
+  - risk appetite
+  - threshold
+  - escalation
+  operating_test_id: MAS-M1.4-O
+  operating_sources:
+  - risk_assessments
+  - incidents
+  operating_required_fields: []
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M1.5
+  title: AI literacy, culture & training
+  design_test_id: MAS-M1.5-D
+  design_required_terms:
+  - competenc
+  - training
+  - refresher
+  - remediation
+  operating_test_id: MAS-M1.5-O
+  operating_sources:
+  - training_records
+  operating_required_fields:
+  - person_id
+  - course
+  - completed_at
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M2.1
+  title: Consistent identification of where AI is used
+  design_test_id: MAS-M2.1-D
+  design_required_terms:
+  - AI use case
+  - intake
+  - triage
+  - unregistered
+  operating_test_id: MAS-M2.1-O
+  operating_sources:
+  - ai_intake
+  - projects
+  - deployments
+  operating_required_fields: []
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M2.2
+  title: AI inventory
+  design_test_id: MAS-M2.2-D
+  design_required_terms:
+  - inventory
+  - version
+  - use case
+  - owner
+  - lifecycle
+  operating_test_id: MAS-M2.2-O
+  operating_sources:
+  - ai_inventory
+  - production_systems
+  operating_required_fields:
+  - system_id
+  - version
+  - use_case
+  - owner
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields:
+  - system_id
+  ordering_pairs: []
+- control_id: M2.3
+  title: Risk materiality assessment
+  design_test_id: MAS-M2.3-D
+  design_required_terms:
+  - materiality
+  - impact
+  - complexity
+  - reliance
+  - inherent
+  - residual
+  operating_test_id: MAS-M2.3-O
+  operating_sources:
+  - risk_assessments
+  operating_required_fields:
+  - use_case_id
+  - inherent_risk
+  - residual_risk
+  - materiality
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M2.4
+  title: AI risk identification & assessment across the lifecycle
+  design_test_id: MAS-M2.4-D
+  design_required_terms:
+  - lifecycle
+  - risk register
+  - risk owner
+  - inherent
+  - residual
+  operating_test_id: MAS-M2.4-O
+  operating_sources:
+  - lifecycle_risk_register
+  operating_required_fields:
+  - system_id
+  - lifecycle_stage
+  - risk
+  - owner
+  - residual_risk
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M3.1
+  title: Data management, quality, representativeness & provenance
+  design_test_id: MAS-M3.1-D
+  design_required_terms:
+  - data management
+  - lineage
+  - quality
+  - provenance
+  - representat
+  operating_test_id: MAS-M3.1-O
+  operating_sources:
+  - data_lineage
+  - data_quality
+  operating_required_fields:
+  - dataset_id
+  - lineage
+  - quality_result
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M3.2
+  title: Fairness & bias mitigation
+  design_test_id: MAS-M3.2-D
+  design_required_terms:
+  - fairness
+  - bias
+  - threshold
+  - mitigation
+  - affected group
+  operating_test_id: MAS-M3.2-O
+  operating_sources:
+  - fairness_results
+  operating_required_fields:
+  - use_case_id
+  - metric
+  - threshold
+  - result
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M3.3
+  title: Transparency & explainability of AI outputs
+  design_test_id: MAS-M3.3-D
+  design_required_terms:
+  - transparency
+  - explainab
+  - model card
+  - stakeholder
+  operating_test_id: MAS-M3.3-O
+  operating_sources:
+  - model_cards
+  - disclosures
+  operating_required_fields:
+  - system_id
+  - version
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M3.4
+  title: Human oversight & intervention
+  design_test_id: MAS-M3.4-D
+  design_required_terms:
+  - human oversight
+  - decision rights
+  - rollback
+  - intervention
+  operating_test_id: MAS-M3.4-O
+  operating_sources:
+  - human_decisions
+  - overrides
+  operating_required_fields:
+  - decision_id
+  - reviewer
+  - decision
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields:
+  - decision_id
+  ordering_pairs: []
+- control_id: M3.5
+  title: Model & feature selection
+  design_test_id: MAS-M3.5-D
+  design_required_terms:
+  - model selection
+  - feature
+  - rationale
+  - approval
+  operating_test_id: MAS-M3.5-O
+  operating_sources:
+  - selection_records
+  operating_required_fields:
+  - model_id
+  - rationale
+  - approval
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M3.6
+  title: Evaluation, testing & independent validation
+  design_test_id: MAS-M3.6-D
+  design_required_terms:
+  - evaluation
+  - acceptance criteria
+  - independent validation
+  - testing
+  operating_test_id: MAS-M3.6-O
+  operating_sources:
+  - validation_packages
+  - test_results
+  operating_required_fields:
+  - system_id
+  - test_type
+  - result
+  - validator
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M3.7
+  title: Technology & cybersecurity controls
+  design_test_id: MAS-M3.7-D
+  design_required_terms:
+  - security architecture
+  - threat model
+  - secure development
+  - penetration
+  operating_test_id: MAS-M3.7-O
+  operating_sources:
+  - security_tests
+  - vulnerability_records
+  operating_required_fields:
+  - system_id
+  - test_type
+  - result
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M3.8
+  title: Reproducibility, auditability, logging & audit trails
+  design_test_id: MAS-M3.8-D
+  design_required_terms:
+  - logging
+  - audit trail
+  - reproducib
+  - traceab
+  operating_test_id: MAS-M3.8-O
+  operating_sources:
+  - audit_logs
+  - decision_logs
+  - change_logs
+  operating_required_fields:
+  - event_id
+  - timestamp
+  - actor
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields:
+  - event_id
+  ordering_pairs: []
+- control_id: M3.9
+  title: Pre-deployment review & approval
+  design_test_id: MAS-M3.9-D
+  design_required_terms:
+  - release gate
+  - pre-deploy
+  - acceptance criteria
+  - approval
+  operating_test_id: MAS-M3.9-O
+  operating_sources:
+  - releases
+  - release_approvals
+  operating_required_fields:
+  - release_id
+  - approved_at
+  - deployed_at
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields:
+  - release_id
+  ordering_pairs:
+  - - approved_at
+    - deployed_at
+- control_id: M3.10
+  title: Post-deployment monitoring
+  design_test_id: MAS-M3.10-D
+  design_required_terms:
+  - monitoring
+  - drift
+  - dashboard
+  - revalidation
+  - backtesting
+  operating_test_id: MAS-M3.10-O
+  operating_sources:
+  - monitoring_results
+  operating_required_fields:
+  - system_id
+  - metric
+  - threshold
+  - observed_at
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M3.11
+  title: Incident management & escalation
+  design_test_id: MAS-M3.11-D
+  design_required_terms:
+  - incident
+  - severity
+  - escalation
+  - notification
+  operating_test_id: MAS-M3.11-O
+  operating_sources:
+  - ai_incidents
+  operating_required_fields:
+  - incident_id
+  - severity
+  - detected_at
+  - escalated_at
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields:
+  - incident_id
+  ordering_pairs:
+  - - detected_at
+    - escalated_at
+- control_id: M3.12
+  title: Change management
+  design_test_id: MAS-M3.12-D
+  design_required_terms:
+  - change management
+  - change taxonomy
+  - approval
+  - emergency change
+  - verification
+  operating_test_id: MAS-M3.12-O
+  operating_sources:
+  - changes
+  operating_required_fields:
+  - ticket_id
+  - approved_at
+  - implemented_at
+  - verified_at
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields:
+  - ticket_id
+  ordering_pairs:
+  - - approved_at
+    - implemented_at
+  - - implemented_at
+    - verified_at
+- control_id: M3.13
+  title: Decommissioning / safe phase-out
+  design_test_id: MAS-M3.13-D
+  design_required_terms:
+  - decommission
+  - phase-out
+  - data disposal
+  - inventory
+  operating_test_id: MAS-M3.13-O
+  operating_sources:
+  - retirements
+  operating_required_fields:
+  - system_id
+  - retired_at
+  - inventory_status
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields:
+  - system_id
+  ordering_pairs: []
+- control_id: M3.14
+  title: Third-party / vendor AI risk management
+  design_test_id: MAS-M3.14-D
+  design_required_terms:
+  - vendor
+  - due diligence
+  - contract
+  - audit rights
+  - exit
+  operating_test_id: MAS-M3.14-O
+  operating_sources:
+  - vendors
+  - vendor_reviews
+  operating_required_fields:
+  - vendor_id
+  - due_diligence
+  - contract_status
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M3.15
+  title: Generative AI & AI-agent risks
+  design_test_id: MAS-M3.15-D
+  design_required_terms:
+  - hallucination
+  - autonomy
+  - prompt injection
+  - data leakage
+  - red-team
+  - human oversight
+  operating_test_id: MAS-M3.15-O
+  operating_sources:
+  - genai_risk_assessments
+  - red_team_tests
+  operating_required_fields:
+  - system_id
+  - risk
+  - test_result
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M4.1
+  title: Skills, training, resourcing & competency
+  design_test_id: MAS-M4.1-D
+  design_required_terms:
+  - competenc
+  - resourcing
+  - skills
+  - training
+  - succession
+  operating_test_id: MAS-M4.1-O
+  operating_sources:
+  - role_assignments
+  - competency_records
+  operating_required_fields:
+  - role
+  - person_id
+  - competency_status
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: M4.2
+  title: Technology infrastructure & tooling capacity
+  design_test_id: MAS-M4.2-D
+  design_required_terms:
+  - infrastructure
+  - capacity
+  - resilience
+  - scaling
+  - continuity
+  operating_test_id: MAS-M4.2-O
+  operating_sources:
+  - capacity_metrics
+  - incidents
+  - recovery_tests
+  operating_required_fields:
+  - service
+  - metric
+  - threshold
+  - observed_at
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: F1
+  title: Fairness
+  design_test_id: MAS-F1-D
+  design_required_terms:
+  - fairness
+  - affected groups
+  - threshold
+  - mitigation
+  operating_test_id: MAS-F1-O
+  operating_sources:
+  - fairness_results
+  operating_required_fields:
+  - use_case_id
+  - metric
+  - threshold
+  - result
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: F2
+  title: Ethics
+  design_test_id: MAS-F2-D
+  design_required_terms:
+  - ethical
+  - prohibited use
+  - attestation
+  - escalation
+  operating_test_id: MAS-F2-O
+  operating_sources:
+  - ethics_assessments
+  operating_required_fields:
+  - use_case_id
+  - attestation
+  - decision
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: F3
+  title: Accountability
+  design_test_id: MAS-F3-D
+  design_required_terms:
+  - accountab
+  - business owner
+  - model owner
+  - third-party
+  - non-delegable
+  operating_test_id: MAS-F3-O
+  operating_sources:
+  - ai_decisions
+  - vendor_arrangements
+  operating_required_fields:
+  - decision_id
+  - accountable_owner
+  - approval
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []
+- control_id: F4
+  title: Transparency
+  design_test_id: MAS-F4-D
+  design_required_terms:
+  - transparency
+  - model card
+  - customer
+  - disclosure
+  - explanation
+  operating_test_id: MAS-F4-O
+  operating_sources:
+  - live_systems
+  - disclosures
+  operating_required_fields:
+  - system_id
+  - version
+  - disclosure_status
+  operating_min_records: 1
+  design_min_hits: 1
+  unique_fields: []
+  ordering_pairs: []

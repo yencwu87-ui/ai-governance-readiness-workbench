@@ -1,0 +1,10 @@
+evidence/
+data/assessments.json
+__pycache__/
+.DS_Store
+.cache/
+*.bak
+.DS_Store
+.DS_Store
+.scratch/
+data/backups/

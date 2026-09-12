@@ -1,0 +1,329 @@
+{
+ "model": "ollama/llama3.1:8b",
+ "workbook": "/Users/wyc/Downloads/fix_work/data/AI_Governance_Playbook_MGF_SAFR_v0.5.1_contracts.xlsx",
+ "evidence": "eval/corpus/M3.6",
+ "modes": [
+  "combined",
+  "split"
+ ],
+ "summary": {
+  "combined": {
+   "scored": 4,
+   "failed": 0,
+   "elements": 12,
+   "unset": 0,
+   "met": 2,
+   "unset_rate": 0.0,
+   "downgraded": 0,
+   "inconsistent": 0
+  },
+  "split": {
+   "scored": 4,
+   "failed": 0,
+   "elements": 12,
+   "unset": 0,
+   "met": 5,
+   "unset_rate": 0.0,
+   "downgraded": 2,
+   "inconsistent": 3
+  }
+ },
+ "rows": [
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "LABELS.md",
+   "n_elements": 3,
+   "error": null,
+   "mode": "combined",
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 3,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [
+    "Every decided element (3) is not evidenced, but sufficiency was partial \u2014 downgraded to none",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.6_a.md",
+   "n_elements": 3,
+   "error": null,
+   "mode": "combined",
+   "sufficiency": "partial",
+   "maturity": 3,
+   "met": 1,
+   "not_evidenced": 2,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "met",
+     "has_excerpt": true
+    }
+   ],
+   "elements_imply": "partial",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.6_b.md",
+   "n_elements": 3,
+   "error": null,
+   "mode": "combined",
+   "sufficiency": "partial",
+   "maturity": 3,
+   "met": 1,
+   "not_evidenced": 2,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "met",
+     "has_excerpt": true
+    }
+   ],
+   "elements_imply": "partial",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.6_c.md",
+   "n_elements": 3,
+   "error": null,
+   "mode": "combined",
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 3,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [
+    "Every decided element (3) is not evidenced, but sufficiency was partial \u2014 downgraded to none",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "LABELS.md",
+   "n_elements": 3,
+   "error": null,
+   "mode": "split",
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 1,
+   "not_evidenced": 2,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 1,
+   "flags": [
+    "Rated partial, but every item this control requires (3 of 3) is listed as a gap \u2014 nothing the requirement asks for is evidenced; downgraded to none",
+    "Element e1 rated met with no verbatim excerpt \u2014 recorded as not evidenced",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "met",
+     "has_excerpt": true
+    }
+   ],
+   "elements_imply": "partial",
+   "rating_matches_elements": false
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.6_a.md",
+   "n_elements": 3,
+   "error": null,
+   "mode": "split",
+   "sufficiency": "partial",
+   "maturity": 3,
+   "met": 3,
+   "not_evidenced": 0,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "met",
+     "has_excerpt": true
+    },
+    {
+     "element_id": "e2",
+     "status": "met",
+     "has_excerpt": true
+    },
+    {
+     "element_id": "e3",
+     "status": "met",
+     "has_excerpt": true
+    }
+   ],
+   "elements_imply": "full",
+   "rating_matches_elements": false
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.6_b.md",
+   "n_elements": 3,
+   "error": null,
+   "mode": "split",
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 1,
+   "not_evidenced": 1,
+   "not_applicable": 1,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "not_applicable",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "met",
+     "has_excerpt": true
+    }
+   ],
+   "elements_imply": "partial",
+   "rating_matches_elements": false
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.6_c.md",
+   "n_elements": 3,
+   "error": null,
+   "mode": "split",
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 3,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 1,
+   "flags": [
+    "Element e2 rated met with no verbatim excerpt \u2014 recorded as not evidenced",
+    "Every decided element (3) is not evidenced, but sufficiency was partial \u2014 downgraded to none",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e2",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    },
+    {
+     "element_id": "e3",
+     "status": "not_evidenced",
+     "has_excerpt": false
+    }
+   ],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  }
+ ]
+}

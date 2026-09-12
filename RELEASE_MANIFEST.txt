@@ -1,0 +1,21 @@
+Governance Engine v0.5.1
+Canonical control contract release
+
+Required runtime artefacts:
+- governance/control_contract.py
+- governance/knowledge/control_contracts.yaml
+- governance/knowledge/contracts/mas.yaml
+- governance/knowledge/contracts/iso_42001.yaml
+- governance/knowledge/contracts/nist_ai_rmf.yaml
+- governance/knowledge/contracts/mgf_agentic.yaml
+- governance/knowledge/contracts/safr.yaml
+- governance/assessment_identity.py
+- challenge.py
+- assessor.py
+- caa/mas_tests.py
+- requirements/mas.yaml
+- data/AI_Governance_Playbook_MGF_SAFR_v0.5.1_contracts.xlsx
+
+Authority rule:
+- MAS requirement semantics: requirements/mas.yaml
+- Workbook-derived testing/challenge content: draft until approved

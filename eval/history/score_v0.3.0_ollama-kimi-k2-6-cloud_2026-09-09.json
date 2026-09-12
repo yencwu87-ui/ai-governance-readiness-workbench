@@ -1,0 +1,265 @@
+{
+  "summary": {
+    "version": "v0.3.0",
+    "run_at": "2026-09-09T01:04:07+00:00",
+    "eval_set": "golden_20_mas_v1",
+    "eval_set_size": 18,
+    "eval_set_sha256_12": "fcc2f33c5c13",
+    "cases_scored": 0,
+    "cases_refused": 18,
+    "min_scored": 12,
+    "label_distribution": {
+      "full": 16,
+      "partial": 2
+    },
+    "kind_distribution": {
+      "real": 8,
+      "synthetic": 10
+    },
+    "model": "ollama/kimi-k2.6:cloud",
+    "accuracy": 0.0,
+    "adjacent_accuracy": 0.0,
+    "over_credit_rate": 0.0,
+    "under_credit_rate": 0.0,
+    "refusal_rate": 1.0,
+    "maturity_mae": null,
+    "maturity_mae_n": 0,
+    "maturity_mae_agreed": null,
+    "maturity_mae_agreed_n": 0,
+    "accuracy_by_kind": {
+      "real": {
+        "n": 8,
+        "correct": 0,
+        "refusals": 8,
+        "accuracy": 0.0
+      },
+      "synthetic": {
+        "n": 10,
+        "correct": 0,
+        "refusals": 10,
+        "accuracy": 0.0
+      }
+    },
+    "fairness_gap": null,
+    "status": "NOT_TESTABLE",
+    "notes": "18 reviewer-labelled cases, 2 excluded as ambiguous. Labels recorded before scoring; assessor output not shown during labelling. Refusals counted as wrong in accuracy. Synthetic cases are author-constructed and are reported separately from real-evidence cases, never pooled."
+  },
+  "rows": [
+    {
+      "case": "R-02",
+      "kind": "real",
+      "control": "M2.2",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 3,
+      "got_maturity": null,
+      "reviewer_reason": "centrally managed inventory and details about the AI agentss. Hthe spirit of control is how the inventory is reconcil."
+    },
+    {
+      "case": "R-03",
+      "kind": "real",
+      "control": "M3.6",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 2,
+      "got_maturity": null,
+      "reviewer_reason": "show references of verify AI such as testing controls and scanners  for vulnerabilities"
+    },
+    {
+      "case": "R-05",
+      "kind": "real",
+      "control": "M3.15",
+      "want": "partial",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 2,
+      "got_maturity": null,
+      "reviewer_reason": "i suppose required credentials from verify ai and referred taxnomy on test cases used to validate against model"
+    },
+    {
+      "case": "R-06",
+      "kind": "real",
+      "control": "M2.3",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 3,
+      "got_maturity": null,
+      "reviewer_reason": "none"
+    },
+    {
+      "case": "R-07",
+      "kind": "real",
+      "control": "M1.5",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 3,
+      "got_maturity": null,
+      "reviewer_reason": "noen"
+    },
+    {
+      "case": "R-08",
+      "kind": "real",
+      "control": "M1.3",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "none"
+    },
+    {
+      "case": "R-09",
+      "kind": "real",
+      "control": "M4.2",
+      "want": "partial",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 3,
+      "got_maturity": null,
+      "reviewer_reason": "none"
+    },
+    {
+      "case": "R-10",
+      "kind": "real",
+      "control": "M3.10",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-01",
+      "kind": "synthetic",
+      "control": "M3.4",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 2,
+      "got_maturity": null,
+      "reviewer_reason": "none"
+    },
+    {
+      "case": "S-02",
+      "kind": "synthetic",
+      "control": "M1.5",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 2,
+      "got_maturity": null,
+      "reviewer_reason": "none"
+    },
+    {
+      "case": "S-03",
+      "kind": "synthetic",
+      "control": "M3.15",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 3,
+      "got_maturity": null,
+      "reviewer_reason": "none"
+    },
+    {
+      "case": "S-04",
+      "kind": "synthetic",
+      "control": "M2.2",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 3,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-05",
+      "kind": "synthetic",
+      "control": "M3.6",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-06",
+      "kind": "synthetic",
+      "control": "M3.10",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-07",
+      "kind": "synthetic",
+      "control": "M2.3",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-08",
+      "kind": "synthetic",
+      "control": "M5.1",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-09",
+      "kind": "synthetic",
+      "control": "M1.3",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-10",
+      "kind": "synthetic",
+      "control": "M4.2",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    }
+  ]
+}

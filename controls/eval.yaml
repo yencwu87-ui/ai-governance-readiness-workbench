@@ -1,0 +1,218 @@
+# EVL-* — controls that test the evaluation golden state in policy/ai-lifecycle.yaml.
+# Thresholds are NOT repeated here; they are read from the policy at run time via
+# params `{policy: <dotted.path>}`, same as OVS-01.
+#
+# TIER 1 is wired and running. TIER 2 and TIER 3 name sources that do not exist
+# yet; they return NOT_TESTABLE rather than raising, which is why they are safe
+# to carry in the pack. Do not add any of them to gates.on_deploy.require_pass
+# until its adapter exists — a NOT_TESTABLE at severity high blocks the gate.
+
+# ---------------------------------------------------------------------------
+# TIER 1 — wired. Sources: corpus_cases, corpus_elements, overlay_candidates,
+# overlay_coverage (caa/adapters/corpus.py, over eval_adapters.py at the root).
+# ---------------------------------------------------------------------------
+
+- id: EVL-01
+  domain: evaluation
+  objective: Every scored control carries a full range of labels
+  assertion: Every control represented in the corpus has one document at each of none, partial and full
+  framework_refs: [MAS-AIRG-M3.6, ISO42001-A.6.2, NIST-AI-RMF-MEASURE-2.3]
+  play_refs: [P5.2]
+  policy_refs: [evaluation.corpus.required_levels, evaluation.corpus.required_per_control]
+  inputs:
+    - source: corpus_cases
+      fields: [control_id, level, case_id, incomplete_set]
+  check: record_count
+  params:
+    source: corpus_cases
+    where: {field: incomplete_set, equals: true}
+    max: 0
+  human_gate: Reviewer confirms the missing level is genuinely unauthored, not a document withheld because it was hard to label.
+  frequency: on_commit
+  severity: high
+
+- id: EVL-02
+  domain: evaluation
+  objective: Cases are scored against the requirement they were authored against
+  assertion: No corpus case is scored whose recorded requirement sha differs from the live entry in the requirement overlay
+  framework_refs: [MAS-AIRG-M3.12, ISO42001-A.6.2]
+  play_refs: [P5.2, P6.1]
+  policy_refs: [evaluation.corpus.requirement_source, evaluation.corpus.stale_handling]
+  inputs:
+    - source: corpus_cases
+      fields: [case_id, control_id, requirement_sha, requirement_sha_live]
+  check: record_count
+  params:
+    source: corpus_cases
+    # requirement_binding_broken would also catch an unbound case. Left on
+    # mismatch deliberately: both corpus controls are bound, so an unbound case
+    # from here on is a new matrix someone forgot to bind, and that is a
+    # drafting finding rather than a staleness one.
+    where: {field: requirement_sha_mismatch, equals: true}
+    max: 0
+  human_gate: Reviewer re-argues the label against the changed requirement, or retires the case. A stale case is never silently re-labelled.
+  frequency: on_commit
+  severity: high
+
+- id: EVL-03
+  domain: evaluation
+  objective: Only one requirement overlay is present on disk
+  assertion: Exactly one requirement overlay candidate exists, so no superseded draft can be loaded by the search
+  framework_refs: [MAS-TRM-6.1, ISO42001-A.4.2]
+  play_refs: [P6.1]
+  policy_refs: [evaluation.corpus.requirement_source]
+  inputs:
+    - source: overlay_candidates
+      fields: [path, is_loaded]
+  check: record_count
+  params:
+    source: overlay_candidates
+    max: 1
+  human_gate: Reviewer confirms the loaded file is the authoritative one and deletes or moves the rest.
+  frequency: on_commit
+  severity: high
+
+- id: EVL-04
+  domain: evaluation
+  objective: No control is assessed against its own title
+  assertion: Every control in the overlay's library carries requirement text rather than a heading
+  framework_refs: [MAS-AIRG-M3.6, NIST-AI-RMF-MEASURE-1.1]
+  play_refs: [P6.1]
+  policy_refs: [evaluation.corpus.requirement_source]
+  inputs:
+    - source: overlay_coverage
+      fields: [control_id, has_requirement]
+  check: record_count
+  params:
+    source: overlay_coverage
+    where: {field: has_requirement, equals: false}
+    max: 0
+  human_gate: Reviewer confirms the requirement text was written from the source instrument, not paraphrased from the control title.
+  frequency: weekly
+  severity: high
+
+- id: EVL-06
+  domain: evaluation
+  objective: Element decisions carry attributable provenance
+  assertion: Element decisions marked as decided by a model on model-authored documents are counted and named
+  framework_refs: [MAS-AIRG-M3.6, ISO42001-A.9.3]
+  play_refs: [P5.2, P11.1]
+  policy_refs: [evaluation.provenance.decided_by_required, evaluation.provenance.unconfirmed_ai_reported]
+  inputs:
+    - source: corpus_elements
+      fields: [case_id, element_id, decided_by]
+  check: record_count
+  params:
+    # No min or max: record_count then always PASSes and reports the count,
+    # which is what reporting-only means here. A null bound is not the way to
+    # say this - record_count does `n > p["max"]` and would raise on None.
+    source: corpus_elements
+    where: {field: decided_by, equals: claude-unconfirmed}
+  human_gate: Reviewer confirms each unconfirmed decision independently, or the case is not reported as independently labelled.
+  frequency: weekly
+  severity: low                     # below on_commit fail_on, so this reports without blocking.
+                                    # Raise to high once the M3.6 decisions are worked through.
+
+# ---------------------------------------------------------------------------
+# TIER 2 — not wired.
+#
+# EVL-05 needs a scanner change, not just an adapter: environment_scan raises
+# SelfScanError against the workbench itself, and there is no `corpus-leak`
+# kind. It tests the contamination path only while scanning an organisation's
+# folder, so it cannot be target-independent the way EVL-01..04 are.
+# REMOVE EVL-05 from gates.on_deploy.require_pass until this lands, or every
+# deploy blocks on a critical NOT_TESTABLE.
+#
+# EVL-07 and EVL-08 need score.py to record a run mode and an incumbent
+# pointer before eval_runs has anything to read.
+# ---------------------------------------------------------------------------
+
+- id: EVL-05
+  domain: evaluation
+  objective: Corpus documents never reach the assessor
+  assertion: No indexed evidence document falls under the declared corpus root
+  framework_refs: [ISO42001-A.6.2, NIST-AI-RMF-MEASURE-2.7]
+  play_refs: [P5.2]
+  policy_refs: [evaluation.corpus.never_as_few_shot, evaluation.corpus.forbidden_in_prompt_context]
+  inputs:
+    - source: environment_scan
+      fields: [path, kind]
+  check: record_count
+  params:
+    source: environment_scan
+    # scanner.scan_environment() must emit this kind for any indexed path under
+    # evaluation.corpus.root, compared RELATIVE to the scan root the way
+    # _skipped() does it. An absolute-path check is what made sample_evidence/
+    # return nothing in WB-021, and here it would make this control pass by
+    # never looking.
+    where: {field: kind, equals: corpus-leak}
+    max: 0
+  human_gate: Reviewer confirms no corpus text appears in any recorded prompt, including as a few-shot example.
+  frequency: on_commit
+  severity: critical                # non_waivable — no exception may cover contamination
+
+- id: EVL-07
+  domain: evaluation
+  objective: A change to the assessor regresses nothing that previously worked
+  assertion: No case correct under the incumbent run is incorrect under the challenger run at the same corpus sha
+  framework_refs: [MAS-AIRG-M3.12, ISO42001-A.6.2]
+  play_refs: [P6.2]
+  policy_refs: [evaluation.promotion.per_case_no_regression]
+  inputs:
+    - source: eval_runs
+      fields: [case_id, corpus_sha, mode, incumbent_agree, challenger_agree]
+  check: record_count
+  params:
+    source: eval_runs
+    where: {field: regressed, equals: true}
+    max: 0
+  human_gate: Reviewer reads each regressed case and decides whether the change is still worth making. A regression may be accepted, but not unnoticed.
+  frequency: on_commit
+  severity: high
+
+- id: EVL-08
+  domain: evaluation
+  objective: A scored run is reproducible
+  assertion: The share of cases whose outcome varied across repeated execution is at or below the policy ceiling
+  framework_refs: [NIST-AI-RMF-MEASURE-2.3, ISO42001-A.6.2]
+  play_refs: [P6.2]
+  policy_refs: [evaluation.promotion.repeat_count, evaluation.promotion.quarantine_ceiling]
+  inputs:
+    - source: eval_runs
+      fields: [case_id, run_index, quarantined]
+  check: rate_within
+  params:
+    # rate_within takes `field` (truthy share), not a where clause. No `min`:
+    # it defaults to 0, and a zero quarantine rate is the good outcome.
+    source: eval_runs
+    field: quarantined
+    max: {policy: evaluation.promotion.quarantine_ceiling}
+    min_records: 6
+  human_gate: Reviewer confirms a quarantined case is genuinely non-deterministic rather than an evidence document that reads both ways.
+  frequency: on_commit
+  severity: high
+
+# ---------------------------------------------------------------------------
+# TIER 3 — not wired. Needs a commit_range adapter; git_log already exists and
+# emits `paths`, so this may only need a derived `touches_both` field rather
+# than a new adapter.
+# ---------------------------------------------------------------------------
+
+- id: EVL-09
+  domain: evaluation
+  objective: A commit changes the assessor or the corpus, never both
+  assertion: No commit in the range touches both the assessor input paths and the corpus paths
+  framework_refs: [MAS-AIRG-M3.12, ISO42001-A.6.2]
+  play_refs: [P6.2]
+  policy_refs: [evaluation.promotion.assessor_input_paths, evaluation.promotion.corpus_paths]
+  inputs:
+    - source: commit_range
+      fields: [commit, paths, touches_both]
+  check: record_count
+  params:
+    source: commit_range
+    where: {field: touches_both, equals: true}
+    max: 0
+  human_gate: Reviewer confirms the split, or records why a combined change was unavoidable and that no improvement is claimed from the run.
+  frequency: on_commit
+  severity: high

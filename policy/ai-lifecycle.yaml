@@ -1,0 +1,179 @@
+# Policy as code for the AI lifecycle.
+#
+# This file is the single declaration of the golden state and the gate rules. The runner reads its
+# gates and thresholds from here; GOV-* controls test the golden state; POLICY.md is generated from
+# it so the approved policy and the enforced policy cannot drift apart.
+#
+# Changing this file is a governed change: policy/ is a governed path, so an edit without a ticket
+# reference fails MCM-06, and the bundle records this file's hash next to every verdict.
+
+policy: ai-lifecycle
+version: 1.4.0
+owner: AI Risk (second line)
+approved_by: AI Risk Committee
+effective: 2026-09-11                # CHECK: set to the approval date, not the edit date
+amends: 1.3.0
+scope: >
+  The readiness-assessor and any model, agent or prompt deployed from this repository, across the
+  eleven lifecycle plays in the AI Governance Playbook.
+
+golden_state:
+
+  inference:
+    # The premise of this workbench is that evidence never leaves the machine.
+    residency: local-only
+    allowed_providers: [ollama, mlx]
+    model_allowlist: null              # any locally-served model is permitted
+    egress_permitted: false
+    provider_exceptions:               # non-local providers need a registered, unexpired exception
+      - provider: anthropic
+        requires_exception: true
+
+  dependencies:
+    pinned: true
+    lockfile: requirements.txt
+
+  # Obligations by registered risk tier. `all` applies to every model; the tier block is additional.
+  # Tiers are cumulative upward: a high-tier model owes all + medium + high.
+  required_artefacts:
+    all:    [model_card, registry_entry, change_ticket]
+    low:    []
+    medium: [eval_before_deploy]
+    high:   [eval_before_deploy, impact_assessment, independent_validation, stress_test_pre_release]
+
+  # Additional obligations that are not artefacts. Tested by GOV-04.
+  tier_obligations:
+    low:
+      review_cycle_days: 380
+      approval_level: model owner
+    medium:
+      review_cycle_days: 190
+      approval_level: model owner
+      eval_before_deploy: true
+    high:
+      review_cycle_days: 100
+      approval_level: AI Risk Committee
+      eval_before_deploy: true
+      independent_validation: true          # approver must not be the model owner
+      stress_test_within_days: 100
+
+  evaluation:
+    golden_set_min_items: 30           # EXC-001 acknowledges 20 is too few for a tolerance band
+    run_before_deploy: true
+    tolerances: {accuracy_max_drop: 0.02, fairness_gap_max_rise: 0.01, refusal_rate_max_rise: 0.05}
+
+    # OPEN DECISION, do not resolve silently: when eval/corpus/ supersedes golden_set.jsonl as
+    # the scored set, golden_set_min_items must be re-pointed or it keeps guarding a retired
+    # artefact. Raise it as its own ticket.
+
+    # --- v1.3.0 (WB-029): the evaluation corpus as a controlled artefact ---
+
+    corpus:
+      root: eval/corpus/
+      requirement_source: requirements/mas.yaml   # the definition; LABELS.md is a reading copy
+      labels_derived_from: elements.yaml          # labels are derived, never stated per case
+      required_levels: [none, partial, full]
+      required_per_control: 3                     # one document at each level
+      # Coverage is measured across requirement shapes, not control count. A new control
+      # matching a represented shape needs no new documents; an unrepresented shape does.
+      shapes: [governance_artefact, recurring_operating_record, compound_requirement,
+               multi_artefact, numeric_output, technical_config, named_role_artefact]
+      excluded_controls_from: [lane_b_fed, fairness_metric]
+      stale_handling: not_testable                # requirement text changed -> stale, not wrong
+      never_as_few_shot: true
+      forbidden_in_prompt_context: [eval/corpus/, eval/golden_set.jsonl, eval/LABELS.md]
+
+    promotion:
+      # A run declares which of these it is. The two are never the same commit.
+      #   ratchet        assessor inputs changed, corpus frozen   -> gated
+      #   recalibration  corpus changed, assessor inputs frozen   -> baseline only, no claim
+      modes: [ratchet, recalibration]
+      mode_required: true
+      assessor_input_paths: [assessor.py, pipeline.py, challenge.py, eval/rubric.md,
+                             requirements/mas.yaml]
+      corpus_paths: [eval/corpus/, eval/golden_set.jsonl, eval/req_elements.json]
+      per_case_no_regression: true       # the gate at current n; aggregate is reported, not gated
+      cross_version_scoring: intersection_only
+      repeat_count: 1
+      quarantine_ceiling: 0.15           # above this a run is INCONCLUSIVE, not PASS or FAIL
+      # score.py already computes constant_baselines. The margin against the majority class is
+      # the honest aggregate reading. Left null deliberately: setting it now would fix a number
+      # against control titles. Set it once requirements/mas.yaml covers all 30 MAS controls.
+      # While null, EVL-07 reports the margin and does not test it.
+      baseline_margin_min: 0.10
+
+    provenance:
+      # LABELS.md records elements marked decided_by: claude-unconfirmed - decided by a model on
+      # documents the same model wrote. Reported, not gated, so this does not block the repo on
+      # day one. Raise EVL-06 from low to high once the M3.6 decisions are worked through.
+      decided_by_required: true
+      unconfirmed_ai_reported: true
+
+  segregation_of_duties:
+    approver_not_author: true
+
+gates:
+  # fail_on:         severity floor at or above which an uncovered FAIL blocks.
+  # inconclusive_on: severity floor at or above which a NOT_TESTABLE blocks. A control
+  #                  that could not be tested is not a control that passed.
+  # non_waivable:    severities an exception may never cover.
+  on_commit: {fail_on: high, inconclusive_on: high}
+  # EVL-05 (corpus isolation, critical) is deliberately NOT here yet: environment_scan
+  # emits no `corpus-leak` kind, so it returns NOT_TESTABLE and a critical inconclusive
+  # would block every deploy. Add it in the same ticket that lands the scanner change,
+  # and add EVL-07 with the eval_runs adapter.
+  on_deploy: {fail_on: high, inconclusive_on: high, require_pass: [MCM-03, STR-03, GOV-06]}
+  scheduled: {fail_on: none, inconclusive_on: none}
+  manual:    {fail_on: none, inconclusive_on: none}
+  non_waivable: [critical]
+
+evidence_floor:
+  # Minimum source population a control must have examined before a PASS counts.
+  # Below the floor the verdict becomes NOT_TESTABLE and the gate treats it per
+  # inconclusive_on. "Found nothing wrong" and "looked at nothing" must not read
+  # the same in a bundle.
+  by_severity: {critical: 1, high: 1, medium: 1, low: 0}
+  overrides:
+    GOV-03: 0   # zero open exceptions is a legitimate governance state
+    MCM-10: 0   # same register, same reasoning
+    MCM-04: 2   # a regression check needs a baseline and a current run
+    OVS-01: 10  # an override rate over fewer than ten decisions is noise
+    # v1.3.0, Tier 1 controls only. EVL-07/08/09 are added with their adapters.
+    EVL-01: 1
+    EVL-02: 1
+    EVL-03: 1
+    EVL-04: 1
+    #EVL-05: 1
+    EVL-06: 0   # zero unconfirmed element decisions is a legitimate state
+
+exceptions:
+  max_days: 180
+  requires: [exception_id, control_id, owner, expires_on, rationale]
+  re_table_at: monthly service governance forum
+
+cadence:
+  stress_test_days: {quarterly: 100, semi-annual: 190, annual: 380}
+  rollback_test_days: 180
+  emergency_change_close_days: 7
+
+# Domain-classification and oversight policy consumed by the HAL controls. These are
+# intentionally explicit policy keys rather than undocumented assumptions in the control pack.
+classification:
+  register: governance/usecases.csv
+  classifier: halocline.yaml
+  unit: component
+  binding_rule: human_override_question
+  permitted_domains: [CAID, OAID]
+  stale_on: [material_change, classification_rule_change, component_change]
+  stale_handling: reclassify_before_next_gate
+
+
+oversight:
+  reviewer_required: true
+  decision_reason: substantive_reason_required
+  override_rate_band: [0.05, 0.60]     # near 0% is rubber-stamping; above 60% the assessor is not fit
+  ai_may: [propose, retrieve, summarise, triage]
+  ai_may_not: [record a decision, sign a result, set a gate outcome, edit an evidence bundle,
+               edit the tracker, edit this policy,
+               author a corpus case and its label,
+               confirm an element decision it made]

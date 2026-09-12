@@ -1,0 +1,253 @@
+{
+  "summary": {
+    "version": "v0.3.0",
+    "run_at": "2026-09-08T11:07:04+00:00",
+    "eval_set": "golden_20_mas_v1",
+    "eval_set_size": 17,
+    "eval_set_sha256_12": "f5a4fcab63cd",
+    "cases_scored": 0,
+    "cases_refused": 17,
+    "min_scored": 12,
+    "label_distribution": {
+      "full": 16,
+      "partial": 1
+    },
+    "kind_distribution": {
+      "real": 7,
+      "synthetic": 10
+    },
+    "model": "ollama/gpt-oss:20b",
+    "accuracy": 0.0,
+    "adjacent_accuracy": 0.0,
+    "over_credit_rate": 0.0,
+    "under_credit_rate": 0.0,
+    "refusal_rate": 1.0,
+    "maturity_mae": null,
+    "maturity_mae_n": 0,
+    "maturity_mae_agreed": null,
+    "maturity_mae_agreed_n": 0,
+    "accuracy_by_kind": {
+      "real": {
+        "n": 7,
+        "correct": 0,
+        "refusals": 7,
+        "accuracy": 0.0
+      },
+      "synthetic": {
+        "n": 10,
+        "correct": 0,
+        "refusals": 10,
+        "accuracy": 0.0
+      }
+    },
+    "fairness_gap": null,
+    "status": "NOT_TESTABLE",
+    "notes": "17 reviewer-labelled cases, 3 excluded as ambiguous. Labels recorded before scoring; assessor output not shown during labelling. Refusals counted as wrong in accuracy. Synthetic cases are author-constructed and are reported separately from real-evidence cases, never pooled."
+  },
+  "rows": [
+    {
+      "case": "R-02",
+      "kind": "real",
+      "control": "M2.2",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 3,
+      "got_maturity": null,
+      "reviewer_reason": "i think the primary information is there. but i would suppose there might be some data flow sort of documents as attached"
+    },
+    {
+      "case": "R-05",
+      "kind": "real",
+      "control": "M3.15",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "the decision is constructed evidence of red teaming and PT on AI model"
+    },
+    {
+      "case": "R-06",
+      "kind": "real",
+      "control": "M2.3",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 3,
+      "got_maturity": null,
+      "reviewer_reason": "none"
+    },
+    {
+      "case": "R-07",
+      "kind": "real",
+      "control": "M1.5",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 3,
+      "got_maturity": null,
+      "reviewer_reason": "noen"
+    },
+    {
+      "case": "R-08",
+      "kind": "real",
+      "control": "M1.3",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "none"
+    },
+    {
+      "case": "R-09",
+      "kind": "real",
+      "control": "M4.2",
+      "want": "partial",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 3,
+      "got_maturity": null,
+      "reviewer_reason": "none"
+    },
+    {
+      "case": "R-10",
+      "kind": "real",
+      "control": "M3.10",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-01",
+      "kind": "synthetic",
+      "control": "M3.4",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 2,
+      "got_maturity": null,
+      "reviewer_reason": "none"
+    },
+    {
+      "case": "S-02",
+      "kind": "synthetic",
+      "control": "M1.5",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 2,
+      "got_maturity": null,
+      "reviewer_reason": "none"
+    },
+    {
+      "case": "S-03",
+      "kind": "synthetic",
+      "control": "M3.15",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 3,
+      "got_maturity": null,
+      "reviewer_reason": "none"
+    },
+    {
+      "case": "S-04",
+      "kind": "synthetic",
+      "control": "M2.2",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 3,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-05",
+      "kind": "synthetic",
+      "control": "M3.6",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-06",
+      "kind": "synthetic",
+      "control": "M3.10",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-07",
+      "kind": "synthetic",
+      "control": "M2.3",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-08",
+      "kind": "synthetic",
+      "control": "M5.1",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-09",
+      "kind": "synthetic",
+      "control": "M1.3",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    },
+    {
+      "case": "S-10",
+      "kind": "synthetic",
+      "control": "M4.2",
+      "want": "full",
+      "got": null,
+      "agree": false,
+      "direction": "refusal",
+      "want_maturity": 4,
+      "got_maturity": null,
+      "reviewer_reason": "None"
+    }
+  ]
+}

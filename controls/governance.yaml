@@ -1,0 +1,138 @@
+# GOV-* — controls that test the declared golden state in policy/ai-lifecycle.yaml.
+# Thresholds and lists are NOT repeated here; they are read from the policy at run time via
+# params.from_policy, so the policy file stays the single source of truth.
+
+- id: GOV-01
+  domain: policy
+  objective: Inference stays on permitted local providers
+  assertion: Every configured and deployed inference provider is in the policy's allowed_providers, or has an open exception
+  framework_refs: [MAS-TRM-11.1, ISO42001-A.10.2, MGF-D2.1]
+  play_refs: [P7.1, P4.3]
+  policy_refs: [inference.residency, inference.provider_exceptions]
+  inputs:
+    - source: runtime_config
+      fields: [provider, source]
+  check: values_subset
+  params:
+    subset: {source: runtime_config, field: provider}
+    superset: {source: policy_providers, field: provider}
+  human_gate: Reviewer confirms no evidence left the machine during any period a non-local provider was configured.
+  frequency: on_commit
+  severity: critical
+
+- id: GOV-02
+  domain: policy
+  objective: Required artefacts exist for every registered model
+  assertion: Every registered model has the artefacts the policy requires for all models
+  framework_refs: [ISO42001-A.6.2, MAS-AIRG-M2.2, NIST-AI-RMF-MAP-1.1]
+  play_refs: [P1.2, P3.2]
+  policy_refs: [required_artefacts.all]
+  inputs:
+    - source: artefact_status
+      fields: [model_id, artefact, present]
+  check: record_count
+  params:
+    source: artefact_status
+    where: {field: universal_gap, equals: true}
+    max: 0
+  human_gate: Reviewer confirms the artefact is current and approved, not merely present.
+  frequency: weekly
+  severity: high
+
+- id: GOV-03
+  domain: policy
+  objective: Exceptions are complete and within their maximum life
+  assertion: Every open exception carries the policy's required fields and expires within the policy's maximum life
+  framework_refs: [MAS-TRM-3.4, ISO42001-A.9.4]
+  play_refs: [P8.4]
+  policy_refs: [exceptions.max_days]
+  inputs:
+    - source: exception_status
+      fields: [exception_id, complete, within_max_life]
+  check: record_count
+  params:
+    source: exception_status
+    where: {field: ok, equals: false}
+    max: 0
+  human_gate: Expired or over-long exceptions are re-tabled at the governance forum, not silently extended.
+  frequency: weekly
+  severity: high
+
+- id: GOV-04
+  domain: policy
+  objective: Tier-specific artefacts exist for higher-risk models
+  assertion: Every registered model has the artefacts its risk tier requires, beyond the universal set
+  # Separated from GOV-02 deliberately: a high-tier gap must not hide behind a passing universal check.
+  framework_refs: [MAS-AIRG-M2.3, ISO42001-6.1.2, NIST-AI-RMF-MAP-1.5]
+  play_refs: [P1.3, P2.1, P8.1]
+  policy_refs: [required_artefacts.high, required_artefacts.medium]
+  inputs:
+    - source: artefact_status
+      fields: [model_id, risk_tier, artefact, scope, present]
+  check: record_count
+  params:
+    source: artefact_status
+    where: {field: tier_gap, equals: true}
+    max: 0
+  human_gate: Reviewer confirms the tier is right before accepting the gap — an over-tiered model creates false findings, an under-tiered one hides real ones.
+  frequency: weekly
+  severity: high
+
+- id: GOV-05
+  domain: policy
+  objective: Higher-risk models meet their tier's operating obligations
+  assertion: Every tier obligation (review cycle, eval before deploy, independent validation, stress-test window) is met
+  framework_refs: [MAS-AIRG-M3.4, MAS-TRM-6.2, ISO42001-A.9.3]
+  play_refs: [P8.1, P8.2, P3.4, P10.1]
+  policy_refs: [tier_obligations]
+  inputs:
+    - source: tier_obligations
+      fields: [model_id, risk_tier, obligation, met]
+  check: record_count
+  params:
+    source: tier_obligations
+    where: {field: met, equals: false}
+    max: 0
+  human_gate: Reviewer decides whether an unmet obligation is a finding, an exception, or a signal the tier is wrong.
+  frequency: weekly
+  severity: high
+
+- id: GOV-06
+  domain: policy
+  objective: The policy in force was approved, and has not changed since
+  assertion: The policy file's version appears in the history register with a named approver, an approval date, a change ticket, and a hash matching the file on disk
+  # An edited policy is an unapproved policy: if the hash differs from the approved record, someone
+  # changed the rules without going back to the approver. That is the whole point of this control.
+  framework_refs: [MAS-TRM-3.1, ISO42001-5.2, NIST-AI-RMF-GOVERN-1.1]
+  play_refs: [P8.4]
+  policy_refs: [approved_by, version]
+  inputs:
+    - source: policy_history
+      fields: [version, is_current, hash_matches, approved_by, ticket_id, in_force_and_approved]
+  check: record_count
+  params:
+    source: policy_history
+    where: {field: current_unapproved, equals: true}
+    max: 0
+  human_gate: If the hash differs, the reviewer establishes what changed and whether it was ever put to the approver — a diff, not a re-approval.
+  frequency: on_commit
+  severity: critical
+
+- id: GOV-07
+  domain: policy
+  objective: Every policy amendment has a complete approval record
+  assertion: Every version in the history register has a named approver, an approval date, and a change ticket that exists in the ticket register
+  framework_refs: [MAS-TRM-3.1, ISO42001-9.3]
+  play_refs: [P8.4]
+  policy_refs: [approved_by]
+  inputs:
+    - source: policy_history
+      fields: [version, approved_by, approved_on, ticket_id, ticket_exists, complete]
+  check: record_count
+  params:
+    source: policy_history
+    where: {field: complete, equals: false}
+    max: 0
+  human_gate: Reviewer confirms the named body actually approved the amendment — a name in a CSV is a claim, not a minute.
+  frequency: weekly
+  severity: high

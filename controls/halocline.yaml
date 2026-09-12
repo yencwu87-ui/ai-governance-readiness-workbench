@@ -1,0 +1,128 @@
+# HAL-* — controls that test the domain-classification golden state in
+# policy/ai-lifecycle.yaml. Thresholds are NOT repeated here; where one is needed it is
+# read from the policy at run time via params {policy: <dotted.path>}, same as OVS-01.
+#
+# All four sources are wired (caa/adapters/halocline.py, over halocline_adapters.py at
+# the root). Every judgement is precomputed as a boolean in the row builder, so each
+# control is a plain record_count — the same division of labour as corpus_cases and its
+# incomplete_set.
+#
+# framework_refs is empty on HAL-01, HAL-02 and HAL-05 on purpose. No MAS, MGF, SAFR,
+# ISO or NIST control uses the CAID/OAID vocabulary, and asserting one would be an
+# invented mapping. HAL-03 does carry refs: it tests whether declared human oversight is
+# real, which those instruments do cover. The classification method is Russo, P. (2026),
+# The Halocline, DOI 10.5281/zenodo.19617437 — the method, not an authority cited here.
+
+- id: HAL-01
+  domain: classification
+  objective: Every use case has its components classified
+  assertion: Every registered use case carries at least one usable component classification
+  framework_refs: []
+  play_refs: [P1.1]
+  policy_refs: [classification.register, classification.classifier, classification.unit]
+  inputs:
+    - source: uc_case_coverage
+      fields: [use_case, components, components_usable, no_usable_components]
+  check: record_count
+  params:
+    # no_usable_components rather than no_components: a register row carrying template
+    # text or an unnamed classifier is not a classification, and counting it would let
+    # the control pass on scaffolding.
+    source: uc_case_coverage
+    where: {field: no_usable_components, equals: true}
+    max: 0
+  human_gate: Reviewer confirms the components listed are the components that exist, not only the ones easy to classify.
+  frequency: on_commit
+  severity: high
+
+- id: HAL-02
+  domain: classification
+  objective: A component with no human evaluation is classified OAID
+  assertion: No component declares CAID while answering no to the override question
+  framework_refs: []
+  play_refs: [P1.1]
+  policy_refs: [classification.binding_rule, classification.permitted_domains]
+  inputs:
+    - source: uc_components
+      fields: [use_case, component_id, declared_domain, override_human_evaluates, override_breach]
+  check: record_count
+  params:
+    # The override is the one binding question: if no human evaluates the output before it
+    # influences the next step, the component is OAID regardless of how it was designed or
+    # labelled. The other five raise advisory_flags and never overturn a declaration.
+    source: uc_components
+    where: {field: override_breach, equals: true}
+    max: 0
+  human_gate: Reviewer re-answers the override question against the component as built, not as designed.
+  frequency: on_commit
+  severity: critical                # non_waivable — see gates.non_waivable
+
+- id: HAL-03
+  domain: classification
+  objective: Declared human evaluation is demonstrated
+  assertion: Every step evidencing a CAID component carries at least one decision with a substantive reason
+  framework_refs: [MAS-AIRG-M3.4, ISO42001-A.9.3, NIST-AI-RMF-GOVERN-3.2]
+  play_refs: [P11.2]
+  policy_refs: [oversight.reviewer_required, oversight.decision_reason]
+  inputs:
+    - source: caid_step_oversight
+      fields: [use_case, component_id, step, decisions_n, substantive_n, rubber_stamp_n, unevidenced]
+  check: record_count
+  params:
+    # Complementary to OVS-01, not redundant with it. On the 51 records in
+    # governance/step_decisions.jsonl the override rate is 4/51 = 0.078, inside
+    # oversight.override_rate_band, while every one of the 51 reasons fails reason_error.
+    # A rate cannot see that no decision carries a rationale.
+    #
+    # blind_absent is reported by the source and deliberately not counted here:
+    # decisions.record() accepts blind= and no caller passes it, so a zero is an unwired
+    # field rather than reviewer conduct.
+    source: caid_step_oversight
+    where: {field: unevidenced, equals: true}
+    max: 0
+  human_gate: Reviewer confirms the reasons name what the evidence showed, not what someone should check next.
+  frequency: on_commit
+  severity: high
+
+- id: HAL-04
+  domain: classification
+  objective: OAID components are evidenced by an operating test
+  assertion: Every step evidencing an OAID component is covered by a control that returned a real verdict
+  framework_refs: []
+  play_refs: [P11.2]
+  policy_refs: [classification.register, classification.unit]
+  inputs:
+    - source: oaid_step_coverage
+      fields: [use_case, component_id, step, controls, controls_with_real_verdict, uncovered]
+  check: record_count
+  params:
+    # An OAID component evidenced only by a judge proposal is uncovered. That is a CAID
+    # artefact standing in for OAID execution — the boundary crossing, inside the tool.
+    source: oaid_step_coverage
+    where: {field: uncovered, equals: true}
+    max: 0
+  human_gate: Reviewer confirms the covering control tests the operation, not merely that an artefact exists.
+  frequency: on_commit
+  severity: high
+
+- id: HAL-05
+  domain: classification
+  objective: Classifications are re-answered when the component changes
+  assertion: No component classification records a spec sha differing from the live component text
+  framework_refs: []
+  play_refs: [P1.1]
+  policy_refs: [classification.stale_on, classification.stale_handling]
+  inputs:
+    - source: uc_components
+      fields: [use_case, component_id, spec_sha, current_spec_sha, stale]
+  check: record_count
+  params:
+    source: uc_components
+    where: {field: stale, equals: true}
+    max: 0
+  human_gate: Reviewer re-answers the six questions. A stale classification is never refreshed by rehashing it.
+  frequency: on_commit
+  severity: medium                  # below on_commit fail_on, so this reports without
+                                    # blocking. Raise to high if a stale classification
+                                    # should stop a deploy — inconclusive_on is a severity
+                                    # floor, not a list of control ids.

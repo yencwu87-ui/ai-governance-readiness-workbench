@@ -1,0 +1,67 @@
+requirement_sha: d09b87cb7c44
+# Element evidence matrix — M3.12
+#
+# GROUND TRUTH for the corpus. One row per element, one column per document. This is the only
+# place the matrix lives: LABELS.md renders it, probe_corpus.py scores against it. Do not
+# restate it elsewhere — that is how the boundary diverged.
+#
+# Values (quoted, because ? is a YAML indicator):
+#   "Y"  the document evidences this element
+#   "N"  it does not
+#   "n/a" the element does not apply to this document (applies_when unmet,
+#        or lane_b). Excluded from the label rather than counted against it.
+#   "?"  undecided. An element you cannot label is an element you cannot score, so a ? left
+#        here is a drafting finding against the element, not an oversight.
+#
+# `where` is the confirmation mechanism: a Y citing a passage can be checked in under a
+# minute, a bare Y cannot. Lines marked SUGGEST are Claude's reading and are NOT decided —
+# replace the "?" and rewrite the note in your own words.
+#
+# Labels are DERIVED from this file, not stated: all applicable Y = full, some = partial,
+# none = none. The matrix is the truth; the label is a consequence.
+
+control: M3.12
+documents: [M3.12_a, M3.12_b, M3.12_c]
+elements:
+  # e0 is lane_b — tested by a control pack, not judged from documents.
+  # Kept here so the element set stays complete; excluded from the label.
+  - id: e0
+    lane: b
+    text: "The change register is complete and internally consistent — no duplicate change ids, no unexplained gaps in the sequence, and entries current with the changes actually made"
+    a: "n/a"
+    b: "n/a"
+    c: "n/a"
+    where: "Not judged from document evidence. Register integrity is a query over the register itself; needs an M3.12 control pack."
+  - id: e1
+    text: "Model changes are raised as changes, including scheduled retraining"
+    a: "Y"
+    b: "Y"
+    c: "N"
+    where: "_a and _b section 'Retraining treated as change'"
+  - id: e2
+    text: "Authorisation is recorded before the first production action, including for emergency changes, evidenced by an approval timestamp and a production-action timestamp comparable to the minute"
+    a: "Y"
+    b: "N"
+    c: "N"
+    where: "_a 'Approval before implementation', all 41 approved ahead of window; _b 2 of 7 emergency raised retrospectively"
+  - id: e3
+    text: "Privileged access used to implement the change is obtained against the approved change number, with no use of standing accounts"
+    applies_when: "where privileged access management is in place"
+    a: "Y"
+    b: "N"
+    c: "N"
+    where: "_a 'Privileged access', checkout raised against the corresponding change number, no standing access; _b F-03, 7 instances"
+  - id: e3b
+    text: "The person who used that access is a named implementer on the approved change"
+    applies_when: "where privileged access management is in place"
+    a: "Y"
+    b: "N"
+    c: "N"
+    where: "_a 'the checkout requester matched a named implementer on the approved change'"
+  - id: e4
+    text: "Production state after implementation is verified against the approved plan, with deviations approved rather than closed silently"
+    applies_when: "where a post-implementation verification step exists"
+    a: "Y"
+    b: "N"
+    c: "N"
+    where: "_a 'Implemented vs planned', 12 compared, all matched; _b 3 of 10 differ with no amendment"

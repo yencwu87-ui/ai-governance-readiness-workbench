@@ -1,0 +1,1461 @@
+version: 1-DRAFT
+library: MAS
+controls:
+  M1.1:
+    requirement: 'Senior management and the accountable AI governance body establish
+      clear accountability for AI risk, approve the AI risk management framework and
+      risk appetite, and retain decision rights for material AI risk rather than delegating
+      them to the model or implementation team.
+
+      '
+    elements:
+    - id: e1
+      text: A named senior management or governance body has an approved mandate covering
+        AI risk oversight and decision rights
+      basis: P017
+      scope: programme
+    - id: e2
+      text: The AI risk management framework and applicable risk appetite or tolerances
+        are formally approved and current
+      basis: P017
+      scope: programme
+    - id: e3
+      text: Material AI risk decisions are attributable to the accountable governance
+        body or named senior accountable role, with the decision record retained
+      basis: P017
+      scope: programme
+    boundary:
+      none: General statements that management supports responsible AI without a named
+        mandate, approved framework or accountable decision record
+      partial: A mandate and/or approved framework exists, but one or more decision-rights
+        or approval elements is not evidenced
+      full: The mandate, approved framework/risk appetite and attributable material-risk
+        decision rights are evidenced and current
+    source:
+    - instrument: AI MRM Paper (Dec 2024)
+      note: Board and senior management accountability for AI risk
+      confidence: known
+    - instrument: AIRG Consultation Paper P017-2025
+      note: Proposed governance and accountability expectations
+      confidence: unchecked
+    rationale: Programme-level control; should not be satisfied by a single model
+      validation report.
+  M3.7:
+    requirement: 'AI systems are subject to security controls and testing proportionate
+      to their risk, including model-specific threats, the runtime environment and
+      the actual paths by which the system can reach networks, data or privileged
+      functions; material findings are tracked to closure or formally accepted before
+      production use.
+
+      '
+    elements:
+    - id: e1
+      text: A named AI security threat set is defined and used to test the model or
+        AI system for model-specific threats relevant to its deployment
+      basis: P017
+      scope: model
+    - id: e2
+      text: Security testing is completed before deployment and material findings
+        are tracked to closure or formally accepted risk
+      basis: P017
+      scope: model
+    - id: e3
+      text: The runtime's actual network, data-store or privileged reachability is
+        tested against the intended security boundary, not only against configured
+        identities or policy intent
+      basis: PRACTICE
+      scope: model
+    - id: e4
+      applies_when: where a material change occurs
+      text: Security testing or validation is repeated after the material change before
+        re-release
+      basis: P017
+      scope: model
+    boundary:
+      none: Generic cybersecurity policy or product-security statements with no AI-specific
+        testing
+      partial: Security testing exists, but model-specific coverage, runtime reachability
+        or change-triggered re-testing is incomplete
+      full: Applicable security elements are evidenced for the deployed model/system
+        and material-change re-testing is performed where the condition applies
+    source:
+    - instrument: AIRG Consultation Paper P017-2025
+      note: Technology and cybersecurity controls
+      confidence: unchecked
+    rationale: Keep the requirement concise and use the operating test for named threat
+      catalogues and reachability evidence.
+  M3.9:
+    requirement: 'A model cannot be released to production until objective release
+      criteria are satisfied, the authorised approver has reviewed the required evidence
+      and residual risk, and the approval is recorded before the first production
+      action.
+
+      '
+    elements:
+    - id: e1
+      text: Objective release criteria and required evidence are defined before deployment
+      basis: P017
+      scope: model
+    - id: e2
+      text: The authorised approver reviews the release evidence and accepts or rejects
+        residual risk
+      basis: P017
+      scope: model
+    - id: e3
+      text: The approval is attributable to a named person or role and is recorded
+        before the first production action
+      basis: P017
+      scope: model
+    - id: e4
+      applies_when: where high-materiality criteria apply
+      text: Required independent validation or FEAT sign-off is complete before release
+      basis: P017
+      scope: model
+    boundary:
+      none: A release checklist or intent exists but no attributable production approval
+        is evidenced
+      partial: Release approval is evidenced, but one or more objective criteria,
+        timing, authority or high-materiality prerequisite is not demonstrated
+      full: All applicable release criteria are met, required evidence is reviewed,
+        and attributable approval predates production action
+    source:
+    - instrument: AI MRM Paper (Dec 2024)
+      note: Pre-deployment review and approval
+      confidence: known
+    - instrument: AIRG Consultation Paper P017-2025
+      note: Proposed lifecycle release controls
+      confidence: unchecked
+    rationale: The time-ordering test belongs in the operating control; the requirement
+      defines what the gate must establish.
+  M3.11:
+    requirement: 'The organisation maintains an AI-specific incident management and
+      escalation process that defines incident classification, accountable responders,
+      escalation thresholds, required records, notification paths and recovery expectations,
+      with applicable regulatory timelines validated against the organisation''s licence
+      and system criticality.
+
+      '
+    elements:
+    - id: e1
+      text: The incident playbook defines what constitutes an AI incident and distinguishes
+        model-behaviour incidents from ordinary application defects
+      basis: P017
+      scope: programme
+    - id: e2
+      text: Incident roles, escalation authority, response records and recovery expectations
+        are assigned and documented
+      basis: P017
+      scope: programme
+    - id: e3
+      text: Applicable external notification obligations and deadlines are identified
+        for the relevant licence, service and system criticality
+      basis: PRACTICE
+      scope: programme
+    - id: e4
+      applies_when: where a designated CII or other separately regulated environment
+        is in scope
+      text: Separate notification paths and clocks are identified and tested independently
+      basis: PRACTICE
+      scope: programme
+    boundary:
+      none: A general incident-management policy exists with no AI-specific classification
+        or escalation path
+      partial: AI incidents and escalation are documented, but one or more notification,
+        recovery or separately regulated path is incomplete
+      full: Applicable AI incident classification, accountability, escalation, notification
+        and recovery obligations are documented and attributable, including separate
+        regulatory paths where applicable
+    source:
+    - instrument: AIRG Consultation Paper P017-2025
+      note: Incident management and escalation
+      confidence: unchecked
+    rationale: Regulatory clocks in the workbook are intentionally not hard-coded
+      as universally applicable; the control requires licence-specific confirmation.
+  F1:
+    requirement: 'For AI-assisted decisions that may materially affect individuals
+      or groups, fairness is assessed using an appropriate methodology and defined
+      measures, material disparities are investigated, and the outcome and any remediation
+      are reviewed before deployment and after material change or identified drift.
+
+      '
+    elements:
+    - id: e1
+      text: The affected individuals or groups and the fairness dimensions relevant
+        to the use case are identified before assessment
+      basis: FEAT
+      scope: model
+    - id: e2
+      text: Fairness measures or qualitative assessment criteria and decision thresholds
+        are defined and supported by appropriate data
+      basis: FEAT
+      scope: model
+    - id: e3
+      text: Assessment results identify material disparities, limitations and remediation
+        actions, with an accountable reviewer recording the outcome
+      basis: FEAT
+      scope: model
+    - id: e4
+      applies_when: where high-materiality or material change triggers apply
+      text: Independent validation or re-assessment is completed before release or
+        continued use
+      basis: FEAT
+      scope: model
+    boundary:
+      none: A general fairness statement exists without a use-case-specific assessment
+      partial: Fairness has been assessed, but measures, affected groups, thresholds,
+        remediation or change-triggered re-assessment is incomplete
+      full: Applicable fairness assessment elements are evidenced, material findings
+        are addressed or accepted by the accountable reviewer, and required re-assessment
+        has occurred
+    source:
+    - instrument: FEAT (2018)
+      note: Fairness principle and assessment methodology
+      confidence: known
+    rationale: Use the organisation's approved FEAT-aligned method and do not infer
+      protected-group analysis from generic model performance metrics.
+  F3:
+    requirement: 'Accountability for AI-assisted decisions is explicit and attributable
+      across internal owners, decision-makers and relevant third parties, with authority,
+      responsibilities and escalation rights documented and retained.
+
+      '
+    elements:
+    - id: e1
+      text: The accountable business and AI-risk owners for the use case are named
+      basis: FEAT
+      scope: model
+    - id: e2
+      text: Decision rights, approval authority and escalation responsibilities for
+        AI-assisted decisions are documented
+      basis: FEAT
+      scope: model
+    - id: e3
+      text: Third-party model or service accountability remains assigned to an internal
+        accountable owner rather than being delegated contractually to the provider
+      basis: FEAT
+      scope: model
+    - id: e4
+      applies_when: where material decisions are customer-facing or otherwise externally
+        consequential
+      text: Internal and external communication or complaint/escalation ownership
+        is identified for decisions materially affected by AI
+      basis: FEAT
+      scope: model
+    boundary:
+      none: Roles are discussed but no accountable decision owner or authority is
+        attributable
+      partial: Accountable owners exist, but decision rights, third-party accountability
+        or external escalation ownership is incomplete
+      full: All applicable accountability elements are named, authoritative and evidenced
+        for the use case
+    source:
+    - instrument: FEAT (2018)
+      note: Accountability principle
+      confidence: known
+    rationale: 'Keep this distinct from M1.1: M1.1 is programme governance; F3 is
+      accountability for the individual AI-assisted decision/use case.
+
+      '
+  M3.12:
+    requirement: "Changes to deployed AI models \u2014 including retraining, feature\
+      \ pipeline changes, threshold adjustments and decommissioning \u2014 are authorised\
+      \ before implementation, and the change that reached production is verifiably\
+      \ the change that was approved.\n"
+    elements:
+    - id: e0
+      lane: b
+      text: "The change register is complete and internally consistent \u2014 no duplicate\
+        \ change ids, no unexplained gaps in the sequence, and entries current with\
+        \ the changes actually made\n"
+      basis: PRACTICE
+      scope: model
+    - id: e1
+      text: Model changes are raised as changes, including scheduled retraining
+      basis: MRM
+    - id: e2
+      text: 'Authorisation is recorded before the first production action, including
+        for emergency changes, evidenced by an approval timestamp and a production-action
+        timestamp comparable to the minute
+
+        '
+      basis: PRACTICE
+    - id: e3
+      applies_when: where privileged access management is in place
+      text: 'Privileged access used to implement the change is obtained against the
+        approved change number, with no use of standing accounts
+
+        '
+      basis: PRACTICE
+    - id: e3b
+      applies_when: where privileged access management is in place
+      text: 'The person who used that access is a named implementer on the approved
+        change
+
+        '
+      basis: PRACTICE
+    - id: e4
+      applies_when: where a post-implementation verification step exists
+      text: 'Production state after implementation is verified against the approved
+        plan, with deviations approved rather than closed silently
+
+        '
+      basis: PRACTICE
+    boundary:
+      none: A procedure, target operating model or intent, with no change records
+      partial: 'Change records exist and cover the AI estate, but one or more of e0,
+        e2, e3, e3b or e4 does not operate consistently across the tested population
+
+        '
+      full: "All applicable model-scoped elements evidenced across a tested population.\
+        \ An element whose applies_when condition is not met is recorded as not applicable\
+        \ with the reason, and does not count against the rating \u2014 a control\
+        \ managed adequately by other means is not a gap. Observations or housekeeping\
+        \ findings recorded in an assurance review do not prevent full\n"
+    source:
+    - instrument: AI MRM Paper (Dec 2024)
+      note: Change and version control over deployed models
+      confidence: known
+    - instrument: AIRG Consultation Paper P017-2025
+      note: "UNVERIFIED \u2014 confirm the section before relying on this attribution"
+      confidence: unchecked
+    rationale: "e1 is the classic finding \u2014 retraining treated as BAU rather\
+      \ than as change. e3 and e4 are audit practice rather than anything I can cite\
+      \ to MAS; decide whether they belong in a MAS-attributed requirement or in an\
+      \ internal standard this requirement points at.\n"
+  M3.6:
+    requirement: "Models are evaluated against pre-defined metrics on representative\
+      \ held-out data, tested for safe behaviour under the conditions they will actually\
+      \ meet, and challenged by a validator who did not build them \u2014 with the\
+      \ outcome recorded against a named accountable person before production go-live,\
+      \ at a depth proportionate to the model's materiality.\n"
+    elements:
+    - id: e1
+      text: 'Evaluation results exist for the specific model version, measured against
+        pre-defined metrics on representative held-out data
+
+        '
+      basis: P017
+      scope: model
+    - id: e2
+      text: "Testing covers behaviour under conditions the model will meet \u2014\
+        \ robustness, stress, edge case, bias and fairness, adversarial and security\
+        \ testing, and integration or UAT in a production-like environment\n"
+      basis: P017
+      scope: model
+    - id: e3
+      text: Validation was performed by someone who did not build the model
+      basis: P017
+      scope: model
+    - id: e3b
+      text: 'The review covers conceptual soundness, replication, and whether the
+        developer''s own evaluation and testing were adequate
+
+        '
+      basis: P017
+      scope: model
+    - id: e4
+      text: 'The validator is separate from the developing function, with no reporting
+        line into it, and the person who signs the opinion is named
+
+        '
+      basis: P017
+      scope: model
+    - id: e4b
+      text: The validator is separate from the business owner of the use case
+      basis: P017
+      scope: model
+    - id: e5
+      text: A validation outcome is recorded and dated
+      basis: P017
+      scope: model
+    - id: e5d
+      applies_when: where a deployment record is available alongside the validation
+        outcome
+      text: 'The recorded date precedes the production go-live date, and both dates
+        are evidenced
+
+        '
+      basis: P017
+      scope: model
+    - id: e5b
+      text: The validation outcome is recorded against a named accountable person
+      basis: P017
+      scope: model
+    - id: e5c
+      text: 'The validation outcome states limitations, conditions of use and residual
+        risk accepted
+
+        '
+      basis: P017
+      scope: model
+    - id: e6
+      text: 'The depth of validation is proportionate to the model''s materiality,
+        tiered on impact, complexity and reliance
+
+        '
+      basis: P017
+      scope: programme
+    - id: e7
+      text: "Re-validation triggers are defined \u2014 material change, model or version\
+        \ upgrade including vendor-pushed updates, drift threshold breach, data source\
+        \ change, incident, and a periodic cadence by tier\n"
+      basis: P017
+      scope: programme
+    - id: e8
+      text: "Third-party models are validated at use-case and system level \u2014\
+        \ own evaluation set, benchmarking, guardrail testing, vendor attestations,\
+        \ and a contractual right to change notification\n"
+      basis: P017
+      scope: programme
+    conditional_elements:
+    - applies_when: third_party_model
+      text: 'The validator is separate from the vendor relationship manager, and the
+        review addresses what could not be validated because the weights were not
+        available
+
+        '
+      basis: P017
+    - applies_when: genai
+      text: 'A fixed evaluation set with groundedness, hallucination and refusal measures;
+        prompt injection, data leakage and output-boundary testing
+
+        '
+      basis: P017
+    - applies_when: agentic
+      text: 'Tool-use and action-boundary testing, and a kill switch or override for
+        high materiality models
+
+        '
+      basis: P017
+    boundary:
+      none: 'A testing standard, validation plan or intent, with no evaluation or
+        test results
+
+        '
+      partial: 'Results exist but independence is absent or not evidenced (e3, e4).
+        Reciprocal peer review inside the developing team is partial credit, not independence
+
+        '
+      full: "Every model-scoped element evidenced. Conditions, exceptions or open\
+        \ items recorded in the validator's own opinion do not prevent full \u2014\
+        \ they evidence that the control operates\n"
+    source:
+    - instrument: AIRG Consultation Paper P017-2025
+      note: "Evaluation, testing and independent validation. Industry feedback (ASIFMA)\
+        \ sought clarification on what triggers full pre-deployment independent validation\
+        \ and on supplier assurances such as attestations and certifications \u2014\
+        \ the final Guidelines may land either way, so e8 is written to work under\
+        \ both\n"
+      confidence: known
+    - instrument: AI MRM Paper (Dec 2024)
+      note: Independent validation proportionate to materiality
+      confidence: known
+    rationale: "e5 is the element most likely to be tested by an examiner, because\
+      \ it is binary and evidenced \u2014 a go-live either has a recorded validation\
+      \ outcome against a named person or it does not. e7's vendor-pushed upgrade\
+      \ trigger is the gap almost nobody has wired in. e6, e7 and e8 are programme-level:\
+      \ they need a validation standard or register, not a model report, so an assessment\
+      \ that expects them from a single model's evidence will under-credit it.\n"
+settings:
+  elements_replace_artefacts: true
+  prompt_boundary: false
+  element_scopes:
+  - model
+test_controls:
+  M1.1:
+    severity: critical
+    assurance_mode: human_only
+    assurance_rationale: 'No deterministic Lane-B pack exists in v0.4; this control
+      remains subject to explicit named human/document assurance until a machine-testable
+      operating control is approved.
+
+      '
+    lane_b_packs: []
+    tests:
+      design: 'Inspect the board mandate and approved framework. Confirm AI risk is
+        named in a board or board-committee charter rather than inferred from technology
+        risk, that framework approval sits with a named body, and that the mandate
+        distinguishes what senior management is accountable for from what it is informed
+        of. ISO A.3.2 requires accountability to be explicitly assigned, so a mandate
+        naming a committee without naming what it decides fails the design test.
+
+        '
+      operating: 'Confirm the framework and risk appetite were tabled for approval
+        rather than noting, that the approving body was quorate, and that decisions
+        are minuted with attendance. An item appearing only as information is the
+        near-miss to look for.
+
+        '
+      population: 'Board and AI risk committee minutes and papers, per the control''s
+        review cycle.
+
+        '
+      csa_pa:
+      - PA 2
+      - PA 6
+      crosswalk_notes: "MGF D2.1 | SAFR S1.2 \u2014 agent authority is bounded by\
+        \ what this mandate authorises. Where agents transact, test that the mandate\
+        \ reaches agent authority rather than stopping at model approval.\n"
+  M1.2:
+    severity: high
+    lane_b_packs: []
+    tests:
+      design: "Inspect the AI use policy. Confirm scope covers the AI in the inventory,\
+        \ that principles are stated as requirements with owners rather than aspirations,\
+        \ and that the policy names its approver and review cycle (ISO A.2.3, A.2.4).\
+        \ Per the sheet's note, confirm the four FEAT principles map onto F1\u2013\
+        F4 as their implementing controls \u2014 a principle with no implementing\
+        \ control is a policy statement, not a control.\n"
+      operating: 'Confirm the version in force at each sampled date, that the review
+        cycle was met, and that exceptions were approved at the authority the policy
+        reserves them to. Test the mapping both ways: a change to a FEAT control should
+        have been reflected upward, and a policy principle without an implementing
+        control should have been raised.
+
+        '
+      population: "Policy version history, exception register, and the F1\u2013F4\
+        \ control records.\n"
+      csa_pa:
+      - PA 2
+  M1.3:
+    severity: high
+    lane_b_packs: []
+    tests:
+      design: "Inspect terms of reference. Confirm membership spans the functions\
+        \ the forum needs in order to decide \u2014 risk, technology, business, compliance,\
+        \ legal \u2014 that it holds decision rights rather than advisory standing,\
+        \ and that escalation into and out of it is defined (ISO A.3.2; NIST GOVERN\
+        \ 2.1). PA 4 frames this as a cross-functional forum able to evaluate and\
+        \ accelerate, so confirm it can say yes as well as no.\n"
+      operating: "Confirm the stated cadence was met, quorum was reached, decisions\
+        \ are recorded with owners and dates, and prior actions were closed or re-tabled.\
+        \ The committee is the decision-maker at Play 1 Step 4, Play 2 Step 5, Play\
+        \ 4 Step 3, Play 5 Step 3, Play 8 Step 4 and Play 10 Step 5 \u2014 reconcile\
+        \ its minutes against those step outputs to test whether it decided what the\
+        \ plays say it decides.\n"
+      population: 'Committee minutes and action logs, plus the six play step outputs
+        above.
+
+        '
+      csa_pa:
+      - PA 4
+  M1.4:
+    severity: high
+    lane_b_packs: []
+    tests:
+      design: 'Inspect the risk appetite statement. Confirm AI risk is expressed in
+        measurable terms rather than adjectives, that tolerance levels carry breach
+        consequences, and that appetite is distinguished from capacity (ISO A.5.2;
+        NIST GOVERN 1.3, MAP 1.5).
+
+        '
+      operating: 'Confirm appetite metrics were reported at the stated cadence, breaches
+        were escalated per the statement, and any appetite change was approved by
+        the body that owns it. The materiality routing at Play 1 Step 4 should be
+        traceable to these tolerance levels; if routing thresholds and appetite are
+        set independently, that is the finding.
+
+        '
+      population: 'Appetite reporting pack, breach log, and Play 1 Step 4 routing
+        decisions.
+
+        '
+      csa_pa:
+      - PA 4
+  M1.5:
+    severity: medium
+    lane_b_packs:
+    - OVS-02
+    tests:
+      design: "Inspect the training plan. Confirm it differentiates by role \u2014\
+        \ board, model owners, first-line users, control functions \u2014 rather than\
+        \ a single all-staff module, that completion is mandated with a consequence,\
+        \ and that it addresses AI literacy and not only policy awareness (ISO A.3.3,\
+        \ A.4.6).\n"
+      operating: "Test completion against the mandated population, confirm non-completion\
+        \ was followed up, and confirm content was refreshed after material regulatory\
+        \ or internal change. Play 11 Step 2 produces training records on onboarding\
+        \ and on cadence for agentic operation \u2014 test that population separately,\
+        \ since agentic oversight training is where the gap usually sits.\n"
+      population: 'Training records, course version history, and Play 11 Step 2 output.
+
+        '
+      play_refs:
+      - P11.2
+      csa_pa:
+      - PA 2
+  M2.1:
+    severity: high
+    lane_b_packs: []
+    tests:
+      design: 'Inspect the identification procedure. Confirm it defines what counts
+        as AI for the organisation''s purposes, names who must identify it and when,
+        and covers AI arriving embedded in vendor products rather than only AI the
+        organisation builds (NIST MAP 1.1).
+
+        '
+      operating: "Take a population independent of the inventory \u2014 procurement\
+        \ records, cloud service consumption, model-serving infrastructure \u2014\
+        \ and test whether the AI in it was identified and reached Play 1 Step 1 as\
+        \ an intake form. Testing the inventory against itself proves nothing; the\
+        \ test is whether AI outside the intake process exists.\n"
+      population: 'Procurement and vendor records and platform consumption data, reconciled
+        against Play 1 Step 1 intake forms.
+
+        '
+      play_refs:
+      - P1.1
+      csa_pa:
+      - PA 2
+      - PA 7
+  M2.2:
+    severity: critical
+    assurance_mode: lane_b
+    assurance_rationale: 'Deterministic operating evidence is available through the
+      declared Lane-B pack(s); document evidence remains available for Lane-A context.
+
+      '
+    lane_b_packs:
+    - GOV-02
+    tests:
+      design: "Inspect the register. ISO A.4.2\u2013A.4.5 covers the resources an\
+        \ AI system depends on \u2014 data, tooling, computing and human resources\
+        \ \u2014 so confirm the register captures dependencies and not only a list\
+        \ of models. Confirm each entry carries an owner, materiality, lifecycle status,\
+        \ and that the register defines who may add and retire entries. PA 7 goes\
+        \ further and requires a **continuous** inventory with **generated SBOMs**:\
+        \ confirm whether the standard requires a real bill of materials or a hand-maintained\
+        \ dependency list. Those are different artefacts and only one is verifiable.\n"
+      operating: "Test completeness both ways against Play 1 Step 2: sample deployed\
+        \ models and confirm an inventory entry exists; sample entries and confirm\
+        \ the model still exists and its status is current. Then test dependency currency\
+        \ \u2014 dependencies rot first and a model-only test never reaches them.\
+        \ Where SBOMs are produced, verify one against the running artefact rather\
+        \ than accepting its existence.\n"
+      population: 'AI inventory register and Play 1 Step 2 entries, plus deployment
+        records.
+
+        '
+      play_refs:
+      - P1.2
+      csa_pa:
+      - PA 2
+      - PA 7
+      lane_b_candidate: "SBOM generation and drift between SBOM and running artefact\
+        \ are machine-verifiable. This is the strongest candidate on the MAS sheet\
+        \ to move out of the judged lane into a Lane B control pack \u2014 a generated\
+        \ SBOM either matches or it does not.\n"
+  M2.3:
+    severity: critical
+    assurance_mode: lane_b
+    assurance_rationale: 'Deterministic operating evidence is available through the
+      declared Lane-B pack(s); document evidence remains available for Lane-A context.
+
+      '
+    lane_b_packs:
+    - GOV-04
+    tests:
+      design: "Inspect the materiality methodology. Confirm impact, complexity and\
+        \ reliance are defined with criteria a second assessor could apply to the\
+        \ same case and reach the same tier, and that inherent and residual are distinguished\
+        \ (ISO A.5.2\u2013A.5.5).\n"
+      operating: 'Sample Play 1 Step 3 materiality scores and rationales. Confirm
+        each names an assessor and date, that the tier follows arithmetically from
+        the recorded scores, and that Play 8 Step 1 updated materiality at the re-validation
+        cadence. A tier no second assessor can reproduce from the recorded rationale
+        is the near-miss.
+
+        '
+      population: 'Play 1 Step 3 scores and rationales; Play 8 Step 1 updated materiality.
+
+        '
+      play_refs:
+      - P1.3
+      - P8.1
+      csa_pa:
+      - PA 6
+      crosswalk_notes: "MGF D1.1, D1.2 | SAFR S1.5 \u2014 this tier drives agent risk\
+        \ tiering and threshold binding. Where agents are in scope, test that the\
+        \ tier propagated to the agent controls rather than stopping at the model.\n"
+  M2.4:
+    severity: high
+    lane_b_packs: []
+    tests:
+      design: 'Inspect the lifecycle risk register. Confirm risks are captured at
+        each lifecycle stage rather than only at inception, and that ownership and
+        treatment are recorded (NIST MANAGE 1.1, 1.2).
+
+        '
+      operating: "Sample Play 2 Step 1 impact analyses and Step 3 failure-mode registers.\
+        \ Confirm risks were re-assessed at stage transitions, treatments carry owners\
+        \ and dates, and overdue treatments were escalated. Test whether failure modes\
+        \ identified at Play 2 appear in the monitoring at Play 5 Step 1 \u2014 a\
+        \ failure mode nobody monitors was identified and then dropped.\n"
+      population: 'Play 2 Steps 1 and 3; Play 5 Step 1 monitoring dashboard.
+
+        '
+      play_refs:
+      - P2.1
+      - P2.3
+      csa_pa:
+      - PA 6
+  M3.1:
+    severity: high
+    lane_b_packs: []
+    tests:
+      design: "Inspect data lineage and quality standards. Confirm provenance is recorded\
+        \ to source, representativeness against the intended population is assessed\
+        \ rather than assumed, and quality thresholds are defined with an action on\
+        \ breach (ISO A.7.2\u2013A.7.6; NIST MAP 2.3).\n"
+      operating: 'Sample Play 3 Step 1 data sign-offs. Confirm lineage is traceable
+        to source for the training data actually used, quality checks ran at the stated
+        frequency, and the sign-off addresses representativeness rather than only
+        completeness.
+
+        '
+      population: 'Play 3 Step 1 data sign-offs and the underlying quality check output.
+
+        '
+      play_refs:
+      - P3.1
+      parallel:
+      - instrument: PDPA / DPIA process
+        relationship: same-population
+        additional_step: "None from this control. Play 2 Step 2 already routes the\
+          \ DPIA to the DPO, which is the right treatment \u2014 do not duplicate\
+          \ PDPA obligations inside an AI control test.\n"
+        confidence: SHAPE
+  M3.2:
+    severity: high
+    lane_b_packs: []
+    tests:
+      design: "Inspect the fairness methodology. Confirm protected and proxy attributes\
+        \ are defined, that metrics and tolerances are set before testing rather than\
+        \ after, and that mitigation options are specified (NIST MEASURE 2.11). Per\
+        \ the sheet, this control carries the FEAT mapping that feeds M1.2 \u2014\
+        \ confirm it is the implementing control for the fairness principle, not a\
+        \ parallel process.\n"
+      operating: "Sample Play 2 Step 1 impact analyses where fairness was triggered.\
+        \ Confirm metrics were computed against the defined tolerance, that a breach\
+        \ produced a recorded decision, and that fairness was re-tested after retraining.\
+        \ Cross-check against F1 \u2014 this control and F1 must not produce two different\
+        \ fairness answers for the same use case.\n"
+      population: 'Play 2 Step 1 outputs and the F1 fairness assessment reports.
+
+        '
+      play_refs:
+      - P2.1
+  M3.3:
+    severity: medium
+    lane_b_packs: []
+    tests:
+      design: 'Inspect the model card standard. Confirm it requires intended use,
+        limits, training data description and evaluation results, and that explainability
+        is specified to the depth the use case needs rather than generically (ISO
+        A.6.2.7, A.8.2; NIST MEASURE 2.8, 2.9).
+
+        '
+      operating: 'Sample Play 3 Step 2 model documentation. Confirm a current model
+        card exists, matches the version deployed, and that explainability output
+        is available to whoever must act on the decision rather than only to the modeller.
+
+        '
+      population: 'Play 3 Step 2 model documentation for deployed models.
+
+        '
+      play_refs:
+      - P3.2
+  M3.4:
+    severity: critical
+    assurance_mode: lane_b
+    assurance_rationale: 'Deterministic operating evidence is available through the
+      declared Lane-B pack(s); document evidence remains available for Lane-A context.
+
+      '
+    lane_b_packs:
+    - GOV-05
+    - HAL-03
+    tests:
+      design: "Inspect the human oversight policy. Confirm it defines where a human\
+        \ decides rather than reviews, what information the human receives, and what\
+        \ authority they hold to override \u2014 including whether the process proceeds\
+        \ if they do nothing. NIST MAP 3.5 requires oversight *capability* to be assessed,\
+        \ so confirm the policy addresses whether the human can actually exercise\
+        \ the authority given the volume and time available.\n"
+      operating: "Sample Play 4 Step 2 oversight and rollback plans, and Play 11 Step\
+        \ 3 oversight-metrics reports. Confirm the human step occurred before the\
+        \ consequential action, overrides were recorded with reasons, and override\
+        \ rates are monitored. An oversight step nobody ever exercises is the finding\
+        \ \u2014 as is one where the rate is so high the human is rubber-stamping.\n"
+      population: 'Play 4 Step 2 plans; Play 11 Step 3 monthly oversight-metrics reports.
+
+        '
+      play_refs:
+      - P4.2
+      - P11.3
+  M3.5:
+    severity: medium
+    lane_b_packs: []
+    tests:
+      design: 'Inspect the selection standard. Confirm alternatives must be considered,
+        that the rationale must address fitness for the stated use, and that rejecting
+        a simpler model must be justified (NIST MAP 2.1, 3.3).
+
+        '
+      operating: 'Sample Play 3 Step 2 model documentation. Confirm a selection rationale
+        exists, was recorded before build rather than reconstructed after, and addresses
+        the alternatives considered.
+
+        '
+      population: 'Play 3 Step 2 model documentation.
+
+        '
+      play_refs:
+      - P3.2
+  M3.6:
+    severity: critical
+    assurance_mode: lane_b
+    assurance_rationale: 'Deterministic operating evidence is available through the
+      declared Lane-B pack(s); document evidence remains available for Lane-A context.
+
+      '
+    lane_b_packs:
+    - EVL-01
+    - EVL-04
+    - EVL-06
+    - STR-01
+    - STR-03
+    tests:
+      design: 'Inspect the validation standard. Confirm validation scope is defined,
+        independence is defined structurally rather than by assertion, tiering is
+        set by materiality, and re-validation triggers include vendor-pushed upgrades
+        (ISO A.6.2.4; NIST MEASURE 1.3, 2.3, 2.5). PA 1 adds a dimension the standard
+        often omits: whether the organisation runs security review across its own
+        AI-generated code and pipelines.
+
+        '
+      operating: 'Sample Play 3 Step 3 test results and Step 4 validation reports.
+        Confirm a validation outcome exists for the version deployed, the validator
+        sits outside the developing function, and the outcome was recorded before
+        the Play 4 Step 3 deployment approval with limitations and residual risk stated.
+        Take Play 10 Step 3 test evidence for the stress and red-team dimension, which
+        Play 3 does not cover.
+
+        '
+      population: 'Play 3 Steps 3 and 4; Play 10 Step 3; Play 8 Step 2 re-validation
+        reports.
+
+        '
+      play_refs:
+      - P3.3
+      - P3.4
+      - P10.3
+      - P8.2
+      csa_pa:
+      - PA 1
+      - PA 11
+      parallel:
+      - instrument: TRM Guidelines
+        relationship: same-population
+        additional_step: 'Independence of the validator from the developing function.
+          A TRMG testing and UAT regime evidences that testing happened; it does not
+          establish who performed the challenge or whether the opinion was issued
+          without the builder''s agreement.
+
+          '
+        confidence: KNOWN
+  M3.7:
+    severity: critical
+    assurance_mode: human_only
+    assurance_rationale: 'No deterministic Lane-B pack exists in v0.4; this control
+      remains subject to explicit named human/document assurance until a machine-testable
+      operating control is approved.
+
+      '
+    lane_b_packs: []
+    tests:
+      design: "Inspect the security standard as applied to AI. Test it against a **named\
+        \ threat catalogue** rather than a general description \u2014 the CSA crosswalk\
+        \ anchors this control to OWASP LLM Top 10 (LLM01 prompt injection, LLM05,\
+        \ LLM06 excessive agency, LLM08), MITRE ATLAS (AML.T0018, AML.T0047, AML.T0051.001)\
+        \ and ASI01\u2013ASI03. A test written against a named catalogue is reproducible;\
+        \ one written against \"model-specific exposure\" is not. PA 8 additionally\
+        \ requires egress filtering, deep segmentation, zero trust and dependency\
+        \ hardening; PA 3 requires agents to be treated as privileged and insecure-by-default.\n"
+      operating: 'Sample Play 3 Step 3 test results and Play 10 Steps 2 and 3 test
+        plans and evidence. Confirm testing ran before deployment against the catalogue
+        above, findings were tracked to closure or accepted risk, and re-testing occurred
+        after material change. Then test **reachability directly**: confirm what the
+        model or agent runtime can actually reach on the network and in data stores,
+        not only what its identity is authorised to call. Egress filtering and segmentation
+        are the control; an IAM policy is the intent.
+
+        '
+      population: 'Play 3 Step 3; Play 10 Steps 2 and 3; network egress and segmentation
+        config.
+
+        '
+      play_refs:
+      - P3.3
+      - P10.2
+      - P10.3
+      csa_pa:
+      - PA 1
+      - PA 3
+      - PA 8
+      - PA 11
+      parallel:
+      - instrument: TRM Guidelines
+        relationship: same-population
+        additional_step: 'Model-specific threat classes. A TRMG security testing regime
+          covers the application and infrastructure; it does not ask about prompt
+          injection, model inversion, or leakage through model outputs.
+
+          '
+        confidence: KNOWN
+      - instrument: MAS Notice 655 (Cyber Hygiene)
+        relationship: same-population
+        additional_step: "None specific to AI. 655 obligations \u2014 multi-factor\
+          \ authentication, administrative account control, patching, malware protection,\
+          \ network perimeter \u2014 apply to the AI estate as to any other. Cite\
+          \ the existing 655 evidence rather than re-testing.\n"
+        confidence: SHAPE
+      crosswalk_notes: "SAFR S1.3, S1.4 \u2014 policy repository and pre-execution\
+        \ check. Where agents act, extend the operating test to whether the runtime\
+        \ actually queries the policy repository before executing. That is a test\
+        \ on the agent, not on the model.\n"
+  M3.8:
+    severity: high
+    lane_b_packs: []
+    tests:
+      design: "Inspect logging standards. Confirm what is logged is sufficient to\
+        \ reconstruct a decision after the fact \u2014 inputs, model version, output,\
+        \ human action \u2014 and that retention meets the period over which the decision\
+        \ may be challenged (ISO A.6.2.8; NIST MEASURE 2.1, MANAGE 4.1). MANAGE 4.1\
+        \ reaches feedback and appeal mechanisms, so confirm the log supports answering\
+        \ a customer challenge, not only an internal one.\n"
+      operating: 'Select decisions and attempt reconstruction from the logs alone.
+        Reconstruction is the test; the existence of a logging standard is not. Confirm
+        logs are tamper-evident and retained per standard, and that Play 5 Step 1
+        monitoring draws on the same log rather than a separate metrics store that
+        could diverge.
+
+        '
+      population: 'Decision logs across the retention period; Play 3 Step 2 and Play
+        5 Step 1.
+
+        '
+      play_refs:
+      - P3.2
+      - P5.1
+      parallel:
+      - instrument: TRM Guidelines
+        relationship: same-population
+        additional_step: 'Decision reconstruction. A TRMG audit-trail test establishes
+          that system events are logged and retained; it does not test whether a specific
+          AI-driven decision can be reconstructed and explained to the person it affected.
+
+          '
+        confidence: KNOWN
+      source_caution: 'Cites MindForge AI Risk Management Toolkit (Mar 2026), not
+        available to the drafter. The toolkit may specify logging fields this test
+        does not cover.
+
+        '
+  M3.9:
+    severity: critical
+    assurance_mode: human_only
+    assurance_rationale: 'No deterministic Lane-B pack exists in v0.4; this control
+      remains subject to explicit named human/document assurance until a machine-testable
+      operating control is approved.
+
+      '
+    lane_b_packs: []
+    tests:
+      design: 'Inspect release criteria. Confirm the gate has objective pass conditions,
+        the approver is named by role, and approval is required before rather than
+        alongside deployment (ISO A.6.2.5).
+
+        '
+      operating: 'Sample Play 4 Step 1 release checklists and Step 3 signed deployment
+        approvals. Confirm the approval timestamp predates the first production action,
+        the approver held the authority, and any release that bypassed the gate was
+        escalated. Per the plays sheet note, confirm no high-materiality model released
+        without FEAT section D validation.
+
+        '
+      population: 'Play 4 Steps 1 and 3, reconciled against deployment logs.
+
+        '
+      play_refs:
+      - P4.1
+      - P4.3
+  M3.10:
+    severity: high
+    lane_b_packs:
+    - OVS-01
+    tests:
+      design: "Inspect the monitoring standard. Confirm drift, performance and stability\
+        \ metrics are defined with thresholds and an owner, that alerting routes to\
+        \ someone who can act, and that revalidation and backtesting cadence is set\
+        \ by materiality (ISO A.6.2.6; NIST MEASURE 2.4, 3.1, MANAGE 4.1). Confirm\
+        \ the model's **recovery objective is inherited from the business service\
+        \ it supports** rather than set locally \u2014 the 4-hour RTO recorded against\
+        \ M3.11 is a continuity parameter, not a monitoring one.\n"
+      operating: 'Sample Play 5 Step 1 monitoring dashboards and Step 2 periodic re-check
+        notes. Confirm monitoring ran continuously rather than at review points, that
+        threshold breaches produced a recorded response, and that suppressed or muted
+        alerts were reviewed. A critical model whose alerts are suppressed is monitored
+        on paper only. Confirm model failure was included in continuity testing for
+        the services that depend on it.
+
+        '
+      population: 'Play 5 Steps 1 and 2; alert history and suppression records; Play
+        11 Step 3.
+
+        '
+      play_refs:
+      - P5.1
+      - P5.2
+      - P11.3
+      csa_pa:
+      - PA 6
+      parallel:
+      - instrument: BCM requirements
+        relationship: same-population
+        additional_step: 'Whether the model is in the dependency map for the business
+          service, and whether its failure has been exercised in continuity testing.
+          A BCM test that never enumerated the model will not have covered it.
+
+          '
+        confidence: SHAPE
+      source_caution: 'Cites MindForge AI Risk Management Toolkit (Mar 2026), not
+        available to the drafter.
+
+        '
+  M3.11:
+    severity: critical
+    assurance_mode: human_only
+    assurance_rationale: 'No deterministic Lane-B pack exists in v0.4; this control
+      remains subject to explicit named human/document assurance until a machine-testable
+      operating control is approved.
+
+      '
+    lane_b_packs: []
+    tests:
+      design: "Inspect the incident playbook. Confirm it defines what constitutes\
+        \ an AI incident as distinct from an application defect, and that it carries\
+        \ the regulatory clocks the sheet records: notification to MAS within **1\
+        \ hour** of discovering a relevant incident, root-cause and impact report\
+        \ within **14 days**, and a **4-hour RTO** for critical systems, per FSM-N05\
+        \ (eff. 10 May 2024, superseding Notices 644 / 127 / PSN05). Confirm the exact\
+        \ FSM notice reference for the licence type \u2014 the sheet flags this as\
+        \ unconfirmed. MAS Notice 655 Cyber Hygiene is a separate instrument. Then\
+        \ confirm the playbook **determines, at classification, whether the affected\
+        \ system is CII-designated**, and routes to the Commissioner of Cybersecurity\
+        \ as well as to MAS where it is. Play 6 Step 4's recorded output is \"MAS\
+        \ notification (\u22641 hr); RCA & impact report\" \u2014 a single path \u2014\
+        \ so the playbook itself may carry this gap. PA 10 adds a dimension: whether\
+        \ detection is engineered and response automated. For agentic systems that\
+        \ is the difference between a 1-hour clock being achievable and being aspirational.\n"
+      operating: "Three populations. Tested separately the sample is self-selecting.\
+        \ (a) Incidents classified as AI incidents: sample Play 6 Step 2 classifications\
+        \ and Step 4 notification records. Measure elapsed time from **discovery**\
+        \ to notification against the 1-hour clock, and corroborate the discovery\
+        \ timestamp independently \u2014 discovery is what organisations get wrong,\
+        \ because the clock starts before anyone opens a ticket. Confirm the 14-day\
+        \ RCA landed and the 4-hour RTO was met for critical systems. (b) Incidents\
+        \ not so classified: sample application defect and problem tickets for model-behaviour\
+        \ symptoms. A model incident logged as a defect never enters population (a),\
+        \ so the notification test passes while the control fails. (c) Incidents touching\
+        \ CII-designated systems: confirm both notification paths ran, on their own\
+        \ clocks. Passing the MAS test proves nothing about the second obligation.\n"
+      population: 'Play 6 Steps 1, 2 and 4; the application defect and problem ticket
+        queues for the same period; and the CII asset register for stratum (c).
+
+        '
+      play_refs:
+      - P6.1
+      - P6.2
+      - P6.4
+      csa_pa:
+      - PA 10
+      parallel:
+      - instrument: "Cybersecurity Act \u2014 CII regime"
+        relationship: separate-clock
+        additional_step: 'Where an AI system supports a designated CII, notification
+          runs to the Commissioner of Cybersecurity on its own timeline, with its
+          own trigger definition, alongside periodic audit and risk assessment obligations.
+          Different recipient, different clock. An incident can be notified to MAS
+          on time and to the Commissioner late while every MAS-facing test passes.
+
+          '
+        confidence: SHAPE
+      - instrument: TRM Guidelines
+        relationship: same-population
+        additional_step: 'AI incident definition. A TRMG incident regime handles severity,
+          escalation and RCA; it does not define model-behaviour failure as an incident
+          class, which is what causes such incidents to be logged as defects.
+
+          '
+        confidence: KNOWN
+  M3.12:
+    severity: high
+    assurance_mode: lane_b
+    assurance_rationale: 'Deterministic operating evidence is available through the
+      declared Lane-B pack(s); document evidence remains available for Lane-A context.
+
+      '
+    lane_b_packs:
+    - EVL-02
+    - EVL-07
+    - EVL-09
+    tests:
+      design: 'Inspect the change standard as it applies to models. Confirm retraining,
+        threshold adjustment and decommissioning are in scope as changes, that emergency
+        change is defined with a ratification window, and that freeze exemption authority
+        is named (ISO A.6.2.2, A.6.2.6; NIST MANAGE 2.2, 4.2). PA 5 frames the forward
+        risk: capacity to triage and deploy a flood of AI-related patches, including
+        vendor-pushed model updates.
+
+        '
+      operating: "Sample across three populations \u2014 normal, emergency, and changes\
+        \ implemented inside a declared freeze. Confirm authorisation predates the\
+        \ first production action, that privileged access reconciles to the approved\
+        \ change number with no standing accounts, that the person who used it is\
+        \ a named implementer on that change, and that production state was verified\
+        \ against the approved plan with deviations approved rather than closed silently.\
+        \ Reconcile against Play 8 Step 2 re-validation where the change was material\
+        \ enough to require it.\n"
+      population: 'Change register for the model-serving estate, PAM checkout records
+        and session recordings, one quarter, full population where small enough; Play
+        8 Steps 2 and 4.
+
+        '
+      play_refs:
+      - P8.2
+      - P8.4
+      csa_pa:
+      - PA 5
+      parallel:
+      - instrument: TRM Guidelines
+        relationship: same-population
+        additional_step: "Whether **retraining** is treated as a change. This is the\
+          \ whole of the AI-specific addition. A TRMG change-and-access test on the\
+          \ model-serving estate \u2014 authorisation, privileged access reconciliation,\
+          \ session recording, post-implementation verification \u2014 will pass without\
+          \ ever asking it, because retraining does not look like a release. Cite\
+          \ the existing TRMG evidence for the access and authorisation limbs rather\
+          \ than re-performing them.\n"
+        confidence: KNOWN
+      - instrument: MAS Notice 655 (Cyber Hygiene)
+        relationship: same-population
+        additional_step: 'None. The administrative-account and privileged-access obligations
+          overlap the PAM limb of this test; cite the 655 evidence.
+
+          '
+        confidence: SHAPE
+  M3.13:
+    severity: medium
+    lane_b_packs: []
+    tests:
+      design: 'Inspect the decommissioning checklist. Confirm it covers dependent
+        systems, data retention and deletion, access removal, inventory retirement,
+        and communication to consumers of the model''s output (ISO A.6.2.6; NIST GOVERN
+        1.7, MANAGE 2.4). PA 7 frames decommissioning as attack-surface reduction,
+        so confirm the checklist reduces surface rather than only recording closure.
+
+        '
+      operating: "Sample Play 9 outputs \u2014 Step 1 phase-out plan, Step 2 data\
+        \ disposal record, Step 3 access-removal log, Step 4 archive and inventory\
+        \ update. Confirm the inventory entry was retired rather than left stale,\
+        \ and that access removal actually completed. A model retired in the register\
+        \ whose service account still authenticates is the near-miss. Verify dependency\
+        \ severance against the **dependency map used for continuity**, not only against\
+        \ the inventory entry.\n"
+      population: "Play 9 Steps 1\u20134; inventory history; access records; BCM dependency\
+        \ map.\n"
+      play_refs:
+      - P9.1
+      - P9.2
+      - P9.3
+      - P9.4
+      csa_pa:
+      - PA 7
+      parallel:
+      - instrument: BCM requirements
+        relationship: same-population
+        additional_step: 'Whether the continuity dependency map was updated on retirement.
+          A stale map is a continuity finding that surfaces only in an incident.
+
+          '
+        confidence: SHAPE
+  M3.14:
+    severity: high
+    lane_b_packs: []
+    tests:
+      design: "Inspect vendor due diligence standards and contract templates. Confirm\
+        \ they address AI specifically \u2014 change notification, evaluation rights,\
+        \ sub-processor and model provenance, exit \u2014 and that risk tiering drives\
+        \ diligence depth (ISO A.10.2\u2013A.10.4; NIST GOVERN 6.1, 6.2, MANAGE 3.1,\
+        \ 3.2). Then confirm the process **determines whether the arrangement is outsourcing,\
+        \ and if so whether it is material outsourcing**, and routes it to the existing\
+        \ outsourcing register rather than running a parallel AI-only assessment.\
+        \ A foundation-model provider serving a customer-affecting decision is a candidate\
+        \ material outsourcing arrangement.\n"
+      operating: "Sample Play 7 outputs. Confirm Step 1 due diligence preceded Step\
+        \ 2 contract signature, that AI-specific clauses are present in the executed\
+        \ contract, that Step 3 recorded concentration and versioning, and that Step\
+        \ 4's vendor monitoring plan is operating. Test whether a vendor-pushed model\
+        \ change was notified and assessed \u2014 the trigger almost nobody has wired\
+        \ in. **Reconcile the AI vendor population against the outsourcing register\
+        \ in both directions.** An AI service that never reached the register is the\
+        \ finding, and it is more serious than a missing contract clause.\n"
+      population: "Play 7 Steps 1\u20134; vendor change notifications for the period;\
+        \ the outsourcing register and its material-outsourcing classifications.\n"
+      play_refs:
+      - P7.1
+      - P7.2
+      - P7.3
+      - P7.4
+      csa_pa:
+      - PA 3
+      parallel:
+      - instrument: MAS outsourcing requirements
+        relationship: additional-obligation
+        additional_step: 'Register entry, material-outsourcing classification, notification
+          or consultation where material, audit and inspection rights, and exit planning.
+          None of these are reached by an AI due-diligence test. Test the routing
+          into the register, not the register itself.
+
+          '
+        confidence: SHAPE
+      crosswalk_notes: "F3 records third-party model accountability as non-delegable\
+        \ \u2014 the same principle as outsourcing not transferring accountability.\
+        \ Test the two together or they will produce two accountability answers for\
+        \ the same vendor.\n"
+  M3.15:
+    severity: critical
+    assurance_mode: lane_b
+    assurance_rationale: 'Deterministic operating evidence is available through the
+      declared Lane-B pack(s); document evidence remains available for Lane-A context.
+
+      '
+    lane_b_packs:
+    - STR-01
+    - STR-02
+    tests:
+      design: "This is the agentic hinge. The sheet links it to **all** of MGF D1\u2013\
+        D4 and SAFR S1\u2013S4, where every other control links to a handful. So the\
+        \ design test is not whether an assessment document exists but whether the\
+        \ assessment **routes**: confirm that identifying a use case as generative\
+        \ or agentic brings the D and S control sets into scope, with a defined trigger\
+        \ and a named owner for that scoping decision. An assessment that concludes\
+        \ in a rating and routes nowhere fails however thorough it is.\n"
+      operating: "Take the GenAI and agentic use cases in the inventory and test coverage:\
+        \ for each, confirm the D and S controls are in scope and have an assessment\
+        \ status, not merely that a risk assessment exists. Then test concentration\
+        \ directly \u2014 trace how many in-scope use cases depend on a single foundation-model\
+        \ provider, and confirm that exposure is reported somewhere a decision could\
+        \ be taken on it. Sample Play 10 Steps 1 to 5 for the stress and red-team\
+        \ cycle, and confirm Step 5 committee sign-off closed the loop.\n"
+      population: "GenAI and agentic entries in the AI inventory; the MGF and SAFR\
+        \ libraries' coverage for those entries; Play 10 Steps 1\u20135.\n"
+      play_refs:
+      - P10.1
+      - P10.2
+      - P10.3
+      - P10.4
+      - P10.5
+      csa_pa:
+      - PA 3
+      source_caution: 'Cites MindForge AI Risk Management Toolkit (Mar 2026), not
+        available to the drafter. The toolkit may define GenAI risk categories this
+        test does not cover.
+
+        '
+  M4.1:
+    severity: medium
+    lane_b_packs: []
+    tests:
+      design: 'Inspect the capability plan. Confirm required competencies are defined
+        by role, current state is assessed against them, and gaps carry funded remediation
+        rather than an intention (ISO A.4.6; NIST GOVERN 2.2). PA 11 frames the specific
+        ask: a permanent, staffed vulnerability operations function rather than a
+        project.
+
+        '
+      operating: "Confirm the assessment was refreshed at the stated cadence, hiring\
+        \ or training followed the identified gaps, and control functions were resourced\
+        \ to the volume of AI in the inventory. Reconcile in-scope model count against\
+        \ second-line headcount \u2014 validation capacity against pipeline is where\
+        \ M3.6's independence requirement fails in practice.\n"
+      population: 'Capability assessment, resourcing records, and the AI inventory
+        count.
+
+        '
+      csa_pa:
+      - PA 11
+  M4.2:
+    severity: medium
+    lane_b_packs: []
+    tests:
+      design: 'Inspect the infrastructure plan. Confirm capacity is planned against
+        forecast AI workload, that environments support testing in production-like
+        conditions, and that monitoring and logging tooling is provisioned rather
+        than assumed (ISO A.4.4, A.4.5; NIST MAP 1.6). PA 5 adds deployment capacity
+        for a sustained patch flow.
+
+        '
+      operating: 'Confirm capacity was reviewed against actual consumption, constraints
+        were escalated, and pre-production environments were available when Play 3
+        validation required them. An integration or UAT step skipped for want of an
+        environment shows up here, not in M3.6.
+
+        '
+      population: 'Capacity reporting, environment availability records, Play 3 Step
+        3 evidence.
+
+        '
+      csa_pa:
+      - PA 5
+      - PA 11
+  F1:
+    severity: critical
+    assurance_mode: human_only
+    assurance_rationale: 'No deterministic Lane-B pack exists in v0.4; this control
+      remains subject to explicit named human/document assurance until a machine-testable
+      operating control is approved.
+
+      '
+    lane_b_packs: []
+    tests:
+      design: "Inspect the fairness assessment standard against the FEAT Assessment\
+        \ Methodology (Veritas-aligned) **\xA7A**, and the **\xA7D** validation route\
+        \ for high-materiality use cases, which the sheet records as a separate requirement.\
+        \ Confirm metrics are chosen with justification and thresholds set before\
+        \ results are known.\n"
+      operating: "**Stratify the sample by materiality** \u2014 an unstratified sample\
+        \ draws mostly low-materiality cases and passes while the \xA7D route goes\
+        \ untested. For high-materiality use cases confirm \xA7D validation occurred\
+        \ at Play 3 Step 4 and that Play 4 Step 3 did not approve release without\
+        \ it, per the plays sheet note. For all sampled cases confirm metric results\
+        \ were compared to threshold and a breach produced a decision. Confirm fairness-drift\
+        \ re-assessment ran at Play 5 Step 2 and Play 8 Step 3 on cadence.\n"
+      population: "Play 2 Step 1 impact analyses; Play 3 Step 4 validation reports\
+        \ (\xA7D where high-materiality); Play 4 Step 3 approvals; Play 5 Step 2 and\
+        \ Play 8 Step 3 re-checks.\n"
+      play_refs:
+      - P2.1
+      - P3.4
+      - P4.3
+      - P5.2
+      - P8.3
+  F2:
+    severity: high
+    lane_b_packs: []
+    tests:
+      design: "Inspect the ethics attestation process against FEAT \xA7B. Confirm\
+        \ the organisation's ethical standards are written and specific enough to\
+        \ attest against, and that the attester is senior enough to bind the function.\
+        \ Per the sheet, principles are set at org level and confirmed per use case\
+        \ at Play 2 \u2014 confirm both layers exist.\n"
+      operating: 'Sample Play 2 Step 5 signed impact assessments and Play 4 Step 3
+        approvals. Confirm the attestation was made at the defined trigger by a named
+        person, that a qualified attestation was escalated rather than filed, and
+        that Play 8 Step 4 re-confirmed on cadence.
+
+        '
+      population: 'Play 2 Step 5; Play 4 Step 3; Play 8 Step 4.
+
+        '
+      play_refs:
+      - P2.5
+      - P4.3
+      - P8.4
+  F3:
+    severity: critical
+    assurance_mode: human_only
+    assurance_rationale: 'No deterministic Lane-B pack exists in v0.4; this control
+      remains subject to explicit named human/document assurance until a machine-testable
+      operating control is approved.
+
+      '
+    lane_b_packs: []
+    tests:
+      design: "Inspect the accountability matrix and internal authorisation record\
+        \ against FEAT \xA7B. Confirm accountability is assigned to **named individuals**\
+        \ rather than to teams, and that internal and external accountability are\
+        \ distinguished. Critically, per the sheet's note, confirm the matrix covers\
+        \ **third-party model accountability, which is non-delegable** \u2014 an entry\
+        \ pointing at a vendor rather than at an internal individual fails the design\
+        \ test.\n"
+      operating: "Sample AIDA decisions, **including those driven by third-party or\
+        \ foundation models**. For each, confirm a named internal individual is accountable\
+        \ for the outcome \u2014 not that the vendor is contractually responsible,\
+        \ which is the substitution this control exists to prevent. Confirm the Play\
+        \ 2 Step 5 and Play 4 Step 3 records carry that name, and that the matrix\
+        \ was updated when roles changed. Reconcile against the outsourcing register\
+        \ used in M3.14: the accountable individual for an AI arrangement should be\
+        \ the same person in both records. Two names is the finding.\n"
+      population: 'Play 2 Step 5, Play 4 Step 3 and Play 8 Step 4 records, stratified
+        to include third-party model use cases; accountability matrix version history;
+        the outsourcing register.
+
+        '
+      play_refs:
+      - P2.5
+      - P4.3
+      - P8.4
+      parallel:
+      - instrument: MAS outsourcing requirements
+        relationship: same-population
+        additional_step: "None new \u2014 the principle is the same one. Test F3 and\
+          \ M3.14 together so the vendor population yields one accountability answer\
+          \ rather than two.\n"
+        confidence: SHAPE
+      crosswalk_notes: "Anchored in M1.1 and M1.3 \u2014 F3 cannot be tested standalone.\
+        \ If the board mandate does not reach AI decisions, there is nothing for individual\
+        \ accountability to hang from, and the F3 finding belongs at M1.1.\n"
+  F4:
+    severity: high
+    lane_b_packs: []
+    tests:
+      design: "Inspect the transparency assessment and customer disclosure standard\
+        \ against FEAT \xA7C. Confirm disclosure is specified per stakeholder \u2014\
+        \ customer, regulator, internal \u2014 and proportionate to materiality (ISO\
+        \ A.8.2, A.8.5; NIST MEASURE 2.8, 2.9).\n"
+      operating: 'Sample customer-facing AIDA decisions. Confirm disclosure was made
+        as the standard requires, that explanations are intelligible to the recipient
+        rather than to the modeller, and that model cards at Play 3 Step 2 are current.
+        Confirm Play 11 Step 1 disclosure notices are operating continuously where
+        agents interact with customers, and that transparency was reviewed at Play
+        8 per the sheet''s note.
+
+        '
+      population: 'Play 3 Step 2 model documentation; Play 4 Step 3 approvals; Play
+        5 Step 2 and Play 8 reviews; Play 11 Step 1 disclosure notices.
+
+        '
+      play_refs:
+      - P3.2
+      - P4.3
+      - P5.2
+      - P11.1
+status: draft
+draft: true
+regulatory_change:
+  source_title: REGULATORY-CHANGE-TEMPLATE
+  source_reference: REPLACE-WITH-AUTHORITATIVE-SOURCE
+  effective_from: null
+  change_ticket: null
+  notes: Template only. Replace the source metadata and edit affected controls before
+    review.
+  drafted_on: '2026-09-11'
+  base_version: 1
+  base_sha256: 0b6a373c098797d634cf36b3a994a22dab5324850f82e6baa5967e9916dc8720
+change_impact:
+  added: []
+  removed: []
+  changed: []
+  control_count: 8

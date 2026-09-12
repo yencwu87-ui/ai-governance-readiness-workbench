@@ -1,0 +1,134 @@
+# Lane B evidence sources. Maps logical source names (used in controls/*.yaml) to adapters and
+# their arguments. Paths are relative to `target`.
+#
+# `target` is overridden by the folder entered in the app, or --target on the CLI.
+#
+# Deduplicated 2026-09-10. The file had 26 source blocks resolving to 17 distinct sources:
+# stress_tracker and decisions_log were each defined three times, and the five governance
+# exports twice. YAML mappings take the last value silently, so nine blocks were dead and
+# nothing said so. Do not re-add a source that already appears above.
+#
+# Every source now names its adapter explicitly. discover() falls back to the source name when
+# `adapter:` is absent (caa/runner.py, adapter_name = cfg.get("adapter", name)), which worked
+# but read as though something were missing.
+
+target: examples/sample_repo
+
+sources:
+
+  # ---- repository state -------------------------------------------------------------
+  environment_scan:
+    adapter: environment_scan
+    args: {}
+
+  git_log:
+    adapter: git_log
+    args:
+      max_commits: 500
+      ticket_pattern: '\b([A-Z]{2,10}-\d+)\b'
+      governed_paths: [prompts/, guardrails/, tools/permissions, policy/]
+
+  lock_file:
+    adapter: lock_file
+    args: {path: requirements.txt}
+
+  deploy_manifest:
+    adapter: deploy_manifest
+    args:
+      path: deploy.yml
+      records_key: models
+      fields: {name: name, version: version, deployed_at: deployed_at}
+
+  # ---- governance exports -----------------------------------------------------------
+  # CSV/JSON exports from ticketing, registry and eval systems, under <target>/governance/.
+  # A missing file is NOT_TESTABLE, never PASS.
+  ticket_export:
+    adapter: ticket_export
+    args: {path: governance/tickets.csv}
+
+  model_registry:
+    adapter: model_registry
+    args: {path: governance/model_registry.csv}
+
+  eval_results:
+    adapter: eval_results
+    args: {path: governance/eval_results.json}
+
+  rollback_log:
+    adapter: rollback_log
+    args: {path: governance/rollback_log.csv}
+
+  exception_register:
+    adapter: exception_register
+    args: {path: governance/exceptions.csv}
+
+  # ---- lifecycle plays --------------------------------------------------------------
+  # Play 10 - Stress-Test Tracker. The workbook is git-ignored; use a CSV export in CI.
+  stress_tracker:
+    adapter: stress_tracker
+    args: {path: "data/*.xlsx", sheet: Stress-Test Tracker}
+
+  # Play 11 - Lane A decision log written by the workbench.
+  decisions_log:
+    adapter: decisions_log
+    args: {path: data/assessments.json}
+
+  # ---- policy as code ---------------------------------------------------------------
+  # GOV-* controls test the declared golden state against what is actually running.
+  runtime_config:
+    adapter: runtime_config
+    args: {}
+
+  policy_providers:
+    adapter: policy_providers
+    args: {}
+
+  policy_history:
+    adapter: policy_history
+    args: {}
+
+  artefact_status:
+    adapter: artefact_status
+    args: {enforce_tier: true}
+
+  exception_status:
+    adapter: exception_status
+    args: {}
+
+  tier_obligations:
+    adapter: tier_obligations
+    args: {}
+  # ---- evaluation corpus ------------------------------------------------------------
+  # EVL-* controls treat the corpus as a controlled artefact. Labels are derived from
+  # each control's element matrix, never read from LABELS.md.
+  overlay_candidates:
+    adapter: overlay_candidates
+    args: {}
+
+  overlay_coverage:
+    adapter: overlay_coverage
+    args: {playbook: "data/*.xlsx"}
+
+  corpus_cases:
+    adapter: corpus_cases
+    args: {corpus_root: eval/corpus}
+
+  corpus_elements:
+    adapter: corpus_elements
+    args: {corpus_root: eval/corpus}
+  
+  uc_components:
+    adapter: uc_components
+    args: {}
+
+  uc_case_coverage:
+    adapter: uc_case_coverage
+    args: {}
+
+  caid_step_oversight:
+    adapter: caid_step_oversight
+    args: {}
+
+  oaid_step_coverage:
+    adapter: oaid_step_coverage
+    args: {}

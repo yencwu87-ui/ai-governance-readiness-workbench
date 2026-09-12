@@ -1,0 +1,2302 @@
+schema_version: 0.5.1.control-contract.2
+framework: MAS
+source_workbook: AI_Governance_Playbook_MGF_SAFR_v0.4.1_challenge_ready.xlsx
+authority_rule: For MAS, requirement semantics come from requirements/mas.yaml. Workbook testing/challenge content is draft until approved. For
+  other frameworks, workbook-derived requirement/test content is draft.
+control_count: 30
+controls:
+- framework: MAS
+  control_id: M1.1
+  title: Board & senior management accountability for AI risk (risk appetite, framework approval)
+  requirement: Senior management and the accountable AI governance body establish and maintain AI-risk accountability, approve the AI risk framework
+    and appetite, and retain material AI-risk decision rights.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: A named senior-management or governance body has an approved mandate covering AI risk oversight.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.1.elements[0]
+  - id: e2
+    text: The AI risk-management framework and applicable risk appetite/tolerances are formally approved and current.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.1.elements[1]
+  - id: e3
+    text: Material AI-risk decisions, escalations and approvals are attributable to an accountable role and retained.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.1.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: AI Risk Cttee / Senior Mgmt
+  expected_evidence:
+  - Board mandate; approved framework
+  linked_play: []
+  crosswalk:
+  - AIRG Consultation Paper P017-2025 (Nov 2025, proposed); AI MRM Paper (Dec 2024) | A.2.2; A.3.2 | GOVERN 1.1; GOVERN 2.3 | MGF D2.1 | SAFR
+    S1.2 | PA 2, PA 6
+  population_and_evidence_floor: 'Population: every meeting or reserved decision in the review period, established from the governance calendar
+    or decision register. Evidence floor: fewer than 3 meetings or fewer than 1 material decision available to inspect makes the operating result
+    NOT TESTABLE rather than a PASS.'
+  test_of_design:
+  - id: D1
+    text: Inspect the Board mandate/risk governance charter, AI risk framework and approval records.
+  - id: D2
+    text: Confirm the documents assign Board/senior-management accountability, define risk appetite/tolerance oversight, and specify decisions
+      reserved for escalation/approval.
+  - id: D3
+    text: Confirm reporting cadence, materiality thresholds and evidence-retention responsibilities are defined. PASS when accountability, decision
+      rights and reporting are formally approved and current; FAIL when any material accountability or approval boundary is missing/ambiguous;
+      NOT TESTABLE when the authoritative governance artefacts cannot be obtained.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Obtain the latest 12 months of AI risk reporting and Board/AI Risk Committee minutes, plus a risk-based sample of material AI approvals
+      or risk acceptances.
+  - id: O2
+    text: Trace material issues, breaches and high-risk use cases to an accountable senior-management/Board decision.
+  - id: O3
+    text: Verify decisions, actions and overdue items were recorded and followed up. PASS when the approved governance model operated on schedule
+      and material matters were escalated/decided; FAIL when required oversight, decisions or follow-up did not occur; NOT TESTABLE when records
+      are unavailable.
+  near_miss_failure_modes:
+  - F1. Minutes record attendance and papers tabled but no decision — the body was informed rather than deciding.
+  - F2. The material decision was taken outside the body and ratified afterwards, with the ratification date after the go-live date.
+  - F3. Quorum was not met at the meeting where the reserved decision was taken, and the minutes do not record it.
+  - F4. Actions carry an owner but no due date, and the same actions reappear across consecutive meetings without disposition.
+  - F5. The mandate is approved but predates the AI scope it is claimed to cover — for example approved before agentic use cases existed.
+  resolutions:
+  - failure_mode: F1
+    text: A minuted decision with the decision wording, the decision-maker and the date.
+  - failure_mode: F2
+    text: Evidence that the approval preceded the deployment, or an approved retrospective risk acceptance naming the exposure.
+  - failure_mode: F3
+    text: An attendance record showing quorum, or a documented out-of-cycle approval route.
+  - failure_mode: F4
+    text: An action log with owner, due date and closure evidence or a formal acceptance.
+  - failure_mode: F5
+    text: A mandate version approved after the scope change, or a scope addendum with its own approval.
+  test_provenance: 'Bespoke — requirements/mas.yaml v1 (AI MRM Paper (Dec 2024) (known); AIRG Consultation Paper P017-2025 (unchecked)). Procedure:
+    MAS v0.4 bespoke.'
+- framework: MAS
+  control_id: M1.2
+  title: AI policies & guiding principles (fair, ethical, accountable, transparent use)
+  requirement: The organisation maintains approved AI policies and guiding principles covering fair, ethical, accountable and transparent use,
+    with defined scope, prohibited or controlled uses, ownership and review.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Approved AI policy and guiding principles define fair, ethical, accountable and transparent use.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.2.elements[0]
+  - id: e2
+    text: The policy defines scope, prohibited or controlled uses, ownership and escalation expectations.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.2.elements[1]
+  - id: e3
+    text: Review and change triggers are defined and the policy is linked to relevant lifecycle controls.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.2.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: AI Risk Cttee / Senior Mgmt
+  expected_evidence:
+  - AI use policy
+  linked_play: []
+  crosswalk:
+  - FEAT (2018); AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.2.2; A.2.3; A.2.4 | GOVERN 1.2; GOVERN 1.4; GOVERN 4.1 | PA 2
+  population_and_evidence_floor: 'Population: all in-scope AI use cases or activities in the period, drawn from the AI inventory. Evidence floor:
+    fewer than 3 sampled items, or an inventory that cannot be reconciled, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect the AI policy and guiding-principles document and approval/version history.
+  - id: D2
+    text: Confirm it covers fair, ethical, accountable and transparent AI use, scope, prohibited/controlled uses, roles and escalation.
+  - id: D3
+    text: Confirm the policy is linked to relevant lifecycle controls and is reviewed on a defined cadence or material change. PASS when the principles
+      are explicit, approved, current and operationally mapped; FAIL when principles or governance expectations are missing or unowned; NOT TESTABLE
+      when no approved policy can be evidenced.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Select a risk-based sample of AI use cases across materiality tiers.
+  - id: O2
+    text: Verify each sampled use case references/apply the relevant AI policy principles and any required attestation or approval.
+  - id: O3
+    text: Inspect exceptions, policy breaches and remediation. PASS when sampled use cases demonstrably follow the approved principles and exceptions
+      are formally dispositioned; FAIL where use is inconsistent with policy or no exception governance exists; NOT TESTABLE where the operating
+      population cannot be established.
+  near_miss_failure_modes:
+  - F1. The policy is approved but has no implementing procedure — nothing in the operating environment makes the requirement happen.
+  - F2. Scope is written so broadly ('all AI use') that no one can tell whether a given system is in or out.
+  - F3. Exceptions are granted by the same team that needs them, with no expiry.
+  - F4. The policy was approved in the period but the sampled use cases predate it and were never reassessed against it.
+  - F5. A breach register exists but every entry is closed as 'noted' with no remediation or acceptance.
+  resolutions:
+  - failure_mode: F1
+    text: A named procedure, runbook or control that implements the clause, with an owner.
+  - failure_mode: F2
+    text: A scope statement with inclusion and exclusion criteria, or a mapping from the inventory to in-scope flag.
+  - failure_mode: F3
+    text: An exception record showing an independent grantor, a stated basis and an expiry date.
+  - failure_mode: F4
+    text: A reassessment record for pre-existing use cases, or an approved grandfathering decision.
+  - failure_mode: F5
+    text: A breach entry with a remediation action, owner and closure evidence, or a formal risk acceptance.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype policy_standard — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M1.3
+  title: Cross-functional AI oversight forum / AI risk committee
+  requirement: A cross-functional AI governance forum has an approved mandate, membership, quorum, cadence and decision rights to oversee AI risk
+    and challenge material matters.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Approved terms of reference define mandate, membership, quorum and AI-risk decision rights.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.3.elements[0]
+  - id: e2
+    text: Reporting inputs, cadence, escalation authority and conflict handling are defined.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.3.elements[1]
+  - id: e3
+    text: Actions, decisions and challenge records are required to be retained.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.3.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: AI Risk Cttee / Senior Mgmt
+  expected_evidence:
+  - Committee terms of reference; minutes
+  linked_play: []
+  crosswalk:
+  - AI MRM Paper (Dec 2024); AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.3.2 | GOVERN 2.1; GOVERN 4.3 | PA 4
+  population_and_evidence_floor: 'Population: every meeting or reserved decision in the review period, established from the governance calendar
+    or decision register. Evidence floor: fewer than 3 meetings or fewer than 1 material decision available to inspect makes the operating result
+    NOT TESTABLE rather than a PASS.'
+  test_of_design:
+  - id: D1
+    text: Inspect committee terms of reference, membership and annual calendar.
+  - id: D2
+    text: Confirm the forum has cross-functional representation, quorum, mandate, decision rights, conflict handling and escalation authority
+      covering AI risk.
+  - id: D3
+    text: Confirm meeting cadence and required reporting inputs are defined. PASS when mandate, membership, quorum, cadence and decision rights
+      are explicit and approved; FAIL when oversight responsibilities are materially unclear; NOT TESTABLE when the governance forum cannot be
+      evidenced.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Sample at least three recent committee meetings, including any meeting covering a high-materiality AI decision if available.
+  - id: O2
+    text: Verify attendance/quorum, agenda coverage, risk decisions, challenge, escalation and action tracking.
+  - id: O3
+    text: Trace a sample of open actions to closure or formal acceptance. PASS when meetings occurred at the required cadence with effective challenge
+      and follow-through; FAIL when meetings, quorum, decisions or action tracking are materially deficient; NOT TESTABLE when minutes/attendance
+      records are incomplete.
+  near_miss_failure_modes:
+  - F1. Minutes record attendance and papers tabled but no decision — the body was informed rather than deciding.
+  - F2. The material decision was taken outside the body and ratified afterwards, with the ratification date after the go-live date.
+  - F3. Quorum was not met at the meeting where the reserved decision was taken, and the minutes do not record it.
+  - F4. Actions carry an owner but no due date, and the same actions reappear across consecutive meetings without disposition.
+  - F5. The mandate is approved but predates the AI scope it is claimed to cover — for example approved before agentic use cases existed.
+  resolutions:
+  - failure_mode: F1
+    text: A minuted decision with the decision wording, the decision-maker and the date.
+  - failure_mode: F2
+    text: Evidence that the approval preceded the deployment, or an approved retrospective risk acceptance naming the exposure.
+  - failure_mode: F3
+    text: An attendance record showing quorum, or a documented out-of-cycle approval route.
+  - failure_mode: F4
+    text: An action log with owner, due date and closure evidence or a formal acceptance.
+  - failure_mode: F5
+    text: A mandate version approved after the scope change, or a scope addendum with its own approval.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype governance_body — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M1.4
+  title: AI risk appetite & risk tolerance setting
+  requirement: AI risk appetite and tolerance are defined, measurable and approved, with thresholds linked to escalation, decision rights and
+    periodic or event-driven review.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Approved AI risk appetite and tolerance thresholds cover material AI risk categories.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.4.elements[0]
+  - id: e2
+    text: Thresholds define prohibited, tolerable and escalation conditions with named ownership.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.4.elements[1]
+  - id: e3
+    text: Review and change triggers for appetite/tolerance are defined.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.4.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: AI Risk Cttee / Senior Mgmt
+  expected_evidence:
+  - AI risk appetite statement
+  linked_play: []
+  crosswalk:
+  - AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.5.2 | GOVERN 1.3; MAP 1.5 | PA 4
+  population_and_evidence_floor: 'Population: every meeting or reserved decision in the review period, established from the governance calendar
+    or decision register. Evidence floor: fewer than 3 meetings or fewer than 1 material decision available to inspect makes the operating result
+    NOT TESTABLE rather than a PASS.'
+  test_of_design:
+  - id: D1
+    text: Inspect the AI risk appetite statement and related thresholds/metrics.
+  - id: D2
+    text: Confirm appetite distinguishes prohibited, tolerable and escalation conditions and addresses material AI risks relevant to the organisation.
+  - id: D3
+    text: Confirm ownership, approval and review/change triggers are documented. PASS when appetite is measurable, approved, attributable and
+      connected to escalation; FAIL when thresholds are vague, absent or disconnected from decision rights; NOT TESTABLE when no current approved
+      appetite statement exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Select a sample of recent AI risk assessments, incidents or monitoring breaches.
+  - id: O2
+    text: Recalculate/compare reported inherent and residual risk to the approved appetite and tolerance thresholds.
+  - id: O3
+    text: Verify breaches were escalated, decisions recorded and temporary exceptions time-bounded. PASS when appetite actively influenced operating
+      decisions and breaches were handled consistently; FAIL when risk appetite was ignored or not evidenced; NOT TESTABLE when no relevant operating
+      instances exist.
+  near_miss_failure_modes:
+  - F1. Minutes record attendance and papers tabled but no decision — the body was informed rather than deciding.
+  - F2. The material decision was taken outside the body and ratified afterwards, with the ratification date after the go-live date.
+  - F3. Quorum was not met at the meeting where the reserved decision was taken, and the minutes do not record it.
+  - F4. Actions carry an owner but no due date, and the same actions reappear across consecutive meetings without disposition.
+  - F5. The mandate is approved but predates the AI scope it is claimed to cover — for example approved before agentic use cases existed.
+  resolutions:
+  - failure_mode: F1
+    text: A minuted decision with the decision wording, the decision-maker and the date.
+  - failure_mode: F2
+    text: Evidence that the approval preceded the deployment, or an approved retrospective risk acceptance naming the exposure.
+  - failure_mode: F3
+    text: An attendance record showing quorum, or a documented out-of-cycle approval route.
+  - failure_mode: F4
+    text: An action log with owner, due date and closure evidence or a formal acceptance.
+  - failure_mode: F5
+    text: A mandate version approved after the scope change, or a scope addendum with its own approval.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype governance_body — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M1.5
+  title: AI literacy, culture & training across the organisation
+  requirement: Role-appropriate AI literacy, training and competency requirements are defined for personnel involved in AI development, use, integration,
+    risk management and oversight.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Role-based AI literacy and competency requirements are defined for relevant functions.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.5.elements[0]
+  - id: e2
+    text: Mandatory training, refresher cadence and completion requirements are defined.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.5.elements[1]
+  - id: e3
+    text: Overdue training, failed assessments and remediation/escalation are governed.
+    scope: programme
+    applies_when: null
+    locator: controls.M1.5.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: AI Risk Cttee / Senior Mgmt
+  expected_evidence:
+  - Training plan & records
+  linked_play:
+  - Play 11
+  crosswalk:
+  - AIRG Consultation Paper P017-2025 (Nov 2025, proposed); AI MRM Paper (Dec 2024) | A.3.3; A.4.6 | GOVERN 2.2; GOVERN 4.1 | MGF D4.3, D4.4 |
+    PA 2
+  population_and_evidence_floor: 'Population: in-scope roles from HR or entitlement data. Evidence floor: a population taken from the training
+    system roster cannot detect an omitted person — report NOT TESTABLE for completeness.'
+  test_of_design:
+  - id: D1
+    text: Inspect the AI literacy/competency framework, role-based training curriculum and mandatory requirements.
+  - id: D2
+    text: Confirm content is differentiated for Board/senior management, business users, model owners/developers, risk/control functions and integrating
+      users where relevant.
+  - id: D3
+    text: Confirm completion, refresher cadence and remediation/escalation rules are defined. PASS when role-based competency requirements and
+      ownership are approved and measurable; FAIL when material roles or refresher/remediation requirements are absent; NOT TESTABLE when no controlled
+      training framework exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Obtain training population and completion records for the last review period.
+  - id: O2
+    text: Sample required roles across business, technology, risk and oversight functions and verify completion/currentness against mandated cadence.
+  - id: O3
+    text: Inspect overdue training, assessment results where applicable and remediation. PASS when required personnel are trained/current and
+      gaps are actively managed; FAIL when material training gaps remain unmanaged; NOT TESTABLE when role population or records cannot be reconciled.
+  near_miss_failure_modes:
+  - F1. Completion is 100% of enrolled, and enrolment omitted part of the in-scope population.
+  - F2. Training is generic AI awareness while the role's decisions require specific control knowledge.
+  - F3. Joiners completed training months after taking on the reviewing authority.
+  - F4. Completion is attendance with no assessment, so competence is assumed.
+  - F5. Non-completion carries a stated consequence that has never been applied.
+  resolutions:
+  - failure_mode: F1
+    text: A reconciliation from HR or entitlement data to the training roster.
+  - failure_mode: F2
+    text: A content outline mapped to the role's decisions.
+  - failure_mode: F3
+    text: Completion dates compared to role start dates.
+  - failure_mode: F4
+    text: An assessment with a pass standard and results.
+  - failure_mode: F5
+    text: Evidence of the consequence being applied, or an approved exception.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype training_competency — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M2.1
+  title: Consistent identification of where AI is used
+  requirement: The organisation consistently identifies AI use cases and routes them into the applicable governance process before deployment
+    or material change.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: AI identification and intake criteria define what is in scope and when governance entry is required.
+    scope: model
+    applies_when: null
+    locator: controls.M2.1.elements[0]
+  - id: e2
+    text: Required intake fields, ownership and triage/routing are defined.
+    scope: model
+    applies_when: null
+    locator: controls.M2.1.elements[1]
+  - id: e3
+    text: Controls prevent material unregistered AI from bypassing governance gates.
+    scope: model
+    applies_when: null
+    locator: controls.M2.1.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: AI Risk (2nd line)
+  expected_evidence:
+  - AI identification procedure
+  linked_play:
+  - Play 1
+  crosswalk:
+  - AI MRM Paper (Dec 2024); AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.4.2 | GOVERN 1.6; MAP 1.1 | PA 2, PA 7
+  population_and_evidence_floor: 'Population: the full register extract plus the independent reconciliation source. Evidence floor: no independent
+    source, or a register extract with no as-at date or record count, makes the completeness result NOT TESTABLE rather than PASS.'
+  test_of_design:
+  - id: D1
+    text: Inspect the AI intake/identification procedure.
+  - id: D2
+    text: Confirm it defines what constitutes an AI use case, scope/exclusions, entry triggers, required intake fields, ownership and the point
+      at which a use case must enter governance.
+  - id: D3
+    text: Confirm the process prevents unregistered AI from bypassing triage. PASS when identification criteria, triggers and routing are explicit
+      and controlled; FAIL when material AI use can enter production without identification; NOT TESTABLE when the procedure cannot be evidenced.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Reconcile a sample of new projects, model procurements, production deployments and material changes to the AI inventory/intake records.
+  - id: O2
+    text: Identify unmatched items and trace whether they were intentionally out of scope or missed.
+  - id: O3
+    text: Verify required intake fields and triage occurred before the relevant lifecycle gate. PASS when sampled AI activity is consistently
+      identified and routed; FAIL when material AI use is missing or entered governance too late; NOT TESTABLE when source populations cannot
+      be reconciled.
+  near_miss_failure_modes:
+  - F1. Completeness is tested register-to-register — the register is reconciled to a list derived from itself, which can never find an omission.
+  - F2. Every record was created on the same date, indicating a one-off population exercise rather than an operating process.
+  - F3. Owner fields hold a team mailbox or a departed individual.
+  - F4. Retired records remain in an active state downstream — decommissioned in the register but still holding credentials or serving traffic.
+  - F5. The register captures models but not the prompts, tools or agents that change behaviour without a model change.
+  resolutions:
+  - failure_mode: F1
+    text: A reconciliation from an independent source — deployment pipeline, identity provider, cost report or runtime telemetry — with exceptions
+      listed.
+  - failure_mode: F2
+    text: Evidence of incremental record creation over the period, or an approved backfill with a completeness statement.
+  - failure_mode: F3
+    text: An ownership attestation naming current individuals, dated within the cadence.
+  - failure_mode: F4
+    text: A decommissioning record showing downstream revocation, not only the register status change.
+  - failure_mode: F5
+    text: A field set covering the components that can change behaviour, with at least one example populated.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype register_inventory — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M2.2
+  title: AI inventory — central register of models / use-cases / dependencies
+  requirement: A central AI inventory records the AI systems or models in scope, their versions, use cases, owners, dependencies, risk tier and
+    lifecycle/deployment state, and is maintained under controlled update rules.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: The inventory schema requires a unique identifier and the key system/model, version, use-case, owner and lifecycle fields applicable
+      to the deployment.
+    scope: model
+    applies_when: null
+    locator: controls.M2.2.elements[0]
+  - id: e2
+    text: Inventory updates, ownership, change triggers and stale-record handling are defined.
+    scope: model
+    applies_when: null
+    locator: controls.M2.2.elements[1]
+  - id: e3
+    text: The inventory is intended to reconcile to the operational AI population.
+    scope: model
+    applies_when: null
+    locator: controls.M2.2.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: AI Risk (2nd line)
+  expected_evidence:
+  - AI inventory register
+  linked_play:
+  - Play 1
+  crosswalk:
+  - AI MRM Paper (Dec 2024); AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.4.2; A.4.3; A.4.4; A.4.5 | GOVERN 1.6 | PA 2, PA 7
+  population_and_evidence_floor: 'Population: the full register extract plus the independent reconciliation source. Evidence floor: no independent
+    source, or a register extract with no as-at date or record count, makes the completeness result NOT TESTABLE rather than PASS.'
+  test_of_design:
+  - id: D1
+    text: Inspect the central AI inventory schema and procedure.
+  - id: D2
+    text: Confirm required fields include, as applicable, system/model and version, use case, owner, dependencies, data, risk tier, lifecycle
+      state, deployment environment and key control links.
+  - id: D3
+    text: Confirm change/update rules, ownership and stale-record handling are defined. PASS when the inventory is central, complete-by-design,
+      attributable and maintained under controlled rules; FAIL when required fields or update controls are missing; NOT TESTABLE when no controlled
+      inventory exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Reconcile the inventory to a sample of active production systems, development projects and recent deployments/changes.
+  - id: O2
+    text: Test uniqueness, completeness, current lifecycle state and version/use-case linkage.
+  - id: O3
+    text: Inspect stale records and confirm remediation/escalation. PASS when the inventory population is accurate and reconciles to operational
+      reality; FAIL when duplicate, stale or materially missing records exist without disposition; NOT TESTABLE when the operational population
+      is unavailable.
+  near_miss_failure_modes:
+  - F1. Completeness is tested register-to-register — the register is reconciled to a list derived from itself, which can never find an omission.
+  - F2. Every record was created on the same date, indicating a one-off population exercise rather than an operating process.
+  - F3. Owner fields hold a team mailbox or a departed individual.
+  - F4. Retired records remain in an active state downstream — decommissioned in the register but still holding credentials or serving traffic.
+  - F5. The register captures models but not the prompts, tools or agents that change behaviour without a model change.
+  resolutions:
+  - failure_mode: F1
+    text: A reconciliation from an independent source — deployment pipeline, identity provider, cost report or runtime telemetry — with exceptions
+      listed.
+  - failure_mode: F2
+    text: Evidence of incremental record creation over the period, or an approved backfill with a completeness statement.
+  - failure_mode: F3
+    text: An ownership attestation naming current individuals, dated within the cadence.
+  - failure_mode: F4
+    text: A decommissioning record showing downstream revocation, not only the register status change.
+  - failure_mode: F5
+    text: A field set covering the components that can change behaviour, with at least one example populated.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype register_inventory — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M2.3
+  title: Risk materiality assessment (impact, complexity, reliance; inherent & residual)
+  requirement: AI use cases are assessed for materiality using defined impact, complexity and reliance criteria, distinguishing inherent and residual
+    risk with recorded rationale.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Approved materiality methodology defines impact, complexity and reliance criteria and scoring rules.
+    scope: model
+    applies_when: null
+    locator: controls.M2.3.elements[0]
+  - id: e2
+    text: Inherent and residual risk are distinguishable and require recorded rationale.
+    scope: model
+    applies_when: null
+    locator: controls.M2.3.elements[1]
+  - id: e3
+    text: Materiality thresholds determine review, approval and reassessment obligations.
+    scope: model
+    applies_when: null
+    locator: controls.M2.3.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: AI Risk (2nd line)
+  expected_evidence:
+  - Risk materiality assessment record
+  linked_play:
+  - Play 1, 2, 8
+  crosswalk:
+  - AI MRM Paper (Dec 2024); AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.5.2; A.5.3; A.5.4; A.5.5 | MAP 2.2; MAP 3.2; MAP 5.1;
+    MEASURE 1.1 | MGF D1.1, D1.2 | SAFR S1.5 | PA 6
+  population_and_evidence_floor: 'Population: all use cases requiring assessment in the period, from the intake log or AI inventory. Evidence
+    floor: fewer than 3 assessments, or no sample from the lowest tier, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect the materiality methodology and scoring model.
+  - id: D2
+    text: Confirm defined criteria cover impact, complexity and reliance and distinguish inherent from residual risk.
+  - id: D3
+    text: Confirm scoring rules, thresholds, approval roles, evidence requirements and recalculation/change triggers are documented. PASS when
+      the methodology is reproducible, approved and linked to routing/approval decisions; FAIL when scores depend on undocumented judgement or
+      lack thresholds/ownership; NOT TESTABLE when the methodology cannot be evidenced.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Sample low-, medium- and high-materiality AI use cases.
+  - id: O2
+    text: Independently recalculate the score from the recorded factors and verify the resulting route agrees with the approved methodology.
+  - id: O3
+    text: Check that residual risk reflects implemented controls and that material changes trigger reassessment. PASS when sampled scores are
+      reproducible, correctly routed and current; FAIL when scoring or routing is inconsistent with the methodology; NOT TESTABLE when required
+      source data is absent.
+  near_miss_failure_modes:
+  - F1. Every use case lands in the same tier, which means the scheme is not discriminating or is being applied to reach a pre-decided answer.
+  - F2. The assessment is dated after the go-live date, so it documented a decision rather than informing it.
+  - F3. The assessor and the requester are the same person or the same team.
+  - F4. A low-tier classification rests on a scope statement that excludes the risky part of the system — for example classifying a copilot as
+    advisory while it writes to a system of record.
+  - F5. Reassessment triggers exist on paper but no reassessment occurred despite a material model or vendor change in the period.
+  resolutions:
+  - failure_mode: F1
+    text: A tier distribution across the population, with the rationale for outliers in either direction.
+  - failure_mode: F2
+    text: An assessment record dated before the approval or go-live date, or a documented retrospective acceptance.
+  - failure_mode: F3
+    text: An approval by a role outside the delivery team, named in the record.
+  - failure_mode: F4
+    text: A scope statement that enumerates the system's write paths and downstream effects, reassessed on that basis.
+  - failure_mode: F5
+    text: A reassessment record tied to the change that triggered it.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype assessment_classification — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M2.4
+  title: AI risk identification & assessment across the lifecycle
+  requirement: AI risks are identified and assessed across the AI lifecycle, with risk ownership, treatment, residual-risk acceptance and reassessment
+    triggers defined.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Lifecycle risk identification covers relevant development, validation, deployment, operation, change and retirement stages.
+    scope: model
+    applies_when: null
+    locator: controls.M2.4.elements[0]
+  - id: e2
+    text: Risk owners, controls, treatment and residual-risk acceptance are recorded.
+    scope: model
+    applies_when: null
+    locator: controls.M2.4.elements[1]
+  - id: e3
+    text: Material changes, incidents, drift or other defined triggers require reassessment.
+    scope: model
+    applies_when: null
+    locator: controls.M2.4.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: AI Risk (2nd line)
+  expected_evidence:
+  - Lifecycle risk register
+  linked_play:
+  - Play 2
+  crosswalk:
+  - AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.5.2; A.5.3 | MAP 4.1; MAP 5.1; MANAGE 1.1; MANAGE 1.2 | PA 6
+  population_and_evidence_floor: 'Population: all use cases requiring assessment in the period, from the intake log or AI inventory. Evidence
+    floor: fewer than 3 assessments, or no sample from the lowest tier, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect the lifecycle risk-assessment procedure and risk-register template.
+  - id: D2
+    text: Confirm required stages span design/development, validation, deployment and post-deployment/decommissioning as applicable, with risk
+      owners, controls, inherent/residual risk, due dates and escalation.
+  - id: D3
+    text: Confirm linkage to materiality, change and monitoring triggers. PASS when lifecycle coverage, ownership and update triggers are explicit;
+      FAIL when material lifecycle stages or risk treatment are absent; NOT TESTABLE when the controlled lifecycle risk process is unavailable.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Select a sample of AI systems at different lifecycle stages and trace their risk register from initiation through current state.
+  - id: O2
+    text: Verify identified risks, mitigations, residual risk, owners, overdue items and changes are updated at lifecycle gates/material events.
+  - id: O3
+    text: Confirm material unresolved risks are escalated or formally accepted. PASS when risk identification/assessment operates throughout the
+      sampled lifecycle; FAIL when registers are stale, incomplete or not linked to lifecycle events; NOT TESTABLE when system-level risk records
+      cannot be obtained.
+  near_miss_failure_modes:
+  - F1. Every use case lands in the same tier, which means the scheme is not discriminating or is being applied to reach a pre-decided answer.
+  - F2. The assessment is dated after the go-live date, so it documented a decision rather than informing it.
+  - F3. The assessor and the requester are the same person or the same team.
+  - F4. A low-tier classification rests on a scope statement that excludes the risky part of the system — for example classifying a copilot as
+    advisory while it writes to a system of record.
+  - F5. Reassessment triggers exist on paper but no reassessment occurred despite a material model or vendor change in the period.
+  resolutions:
+  - failure_mode: F1
+    text: A tier distribution across the population, with the rationale for outliers in either direction.
+  - failure_mode: F2
+    text: An assessment record dated before the approval or go-live date, or a documented retrospective acceptance.
+  - failure_mode: F3
+    text: An approval by a role outside the delivery team, named in the record.
+  - failure_mode: F4
+    text: A scope statement that enumerates the system's write paths and downstream effects, reassessed on that basis.
+  - failure_mode: F5
+    text: A reassessment record tied to the change that triggered it.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype assessment_classification — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M3.1
+  title: Data management, quality, representativeness & provenance
+  requirement: AI data used for development, testing or operation is subject to controls for quality, relevance, representativeness, provenance
+    and known limitations appropriate to the use case.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Data requirements define quality, relevance, representativeness and provenance expectations.
+    scope: model
+    applies_when: null
+    locator: controls.M3.1.elements[0]
+  - id: e2
+    text: Data lineage/provenance and material limitations are recorded for applicable datasets.
+    scope: model
+    applies_when: null
+    locator: controls.M3.1.elements[1]
+  - id: e3
+    text: Data issues and remediation are governed before use in material AI decisions.
+    scope: model
+    applies_when: null
+    locator: controls.M3.1.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Data lineage & quality records
+  linked_play:
+  - Play 3
+  crosswalk:
+  - AI MRM Paper (Dec 2024); AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.7.2; A.7.3; A.7.4; A.7.5; A.7.6 | MAP 2.3; MEASURE 2.1
+    | —
+  population_and_evidence_floor: 'Population: all data sources feeding the system in the period, from pipeline or retrieval configuration. Evidence
+    floor: a source list taken from documentation rather than the pipeline cannot establish completeness — report NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect the data management standard and lineage/quality procedure.
+  - id: D2
+    text: Confirm requirements address data provenance, lineage, quality dimensions, representativeness, suitability, ownership, access and approval
+      of material exceptions.
+  - id: D3
+    text: Confirm data requirements link to model use case and risk assessment. PASS when design criteria are explicit, attributable and sufficient
+      for the intended use; FAIL when material data quality/provenance or representativeness requirements are undefined; NOT TESTABLE when controlled
+      data criteria are unavailable.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Select representative training/validation/input datasets for a risk-based sample.
+  - id: O2
+    text: Trace provenance/lineage to source, inspect quality metrics and representativeness analysis, and verify material exceptions were approved/mitigated.
+  - id: O3
+    text: Confirm the dataset used by the model matches the approved version/source. PASS when sampled data is traceable, suitable and quality/representativeness
+      issues are controlled; FAIL when provenance is broken or material data issues are unmanaged; NOT TESTABLE when lineage/source evidence is
+      unavailable.
+  near_miss_failure_modes:
+  - F1. The documented source list and the retrieval configuration disagree, and only the document was assessed.
+  - F2. Permitted use was assessed for analytics and not for model training or retrieval, which are different bases.
+  - F3. Quality is described as 'reviewed for accuracy' with no measurement and no threshold.
+  - F4. Deletion is honoured in the source system while the vector index or cache retains the content.
+  - F5. A new source was added by a configuration change that never entered the data governance route.
+  - F6. Lineage stops at the dataset name, with no version or snapshot date.
+  resolutions:
+  - failure_mode: F1
+    text: A pipeline or retrieval configuration export reconciled to the documented source list.
+  - failure_mode: F2
+    text: A permitted-use assessment naming the specific processing purpose.
+  - failure_mode: F3
+    text: A measured quality result against a stated threshold.
+  - failure_mode: F4
+    text: Evidence of deletion propagating to the index or cache, with a re-query showing absence.
+  - failure_mode: F5
+    text: An approval record for the source addition, tied to the configuration change.
+  - failure_mode: F6
+    text: A lineage record carrying dataset version or snapshot date.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype data_lifecycle — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M3.2
+  title: Fairness & bias mitigation
+  requirement: AI systems that may produce materially differentiated outcomes are assessed for bias or unfair impact using appropriate methods,
+    with mitigation and reassessment where needed.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Fairness or bias assessment methods define relevant populations, measures or criteria and thresholds.
+    scope: model
+    applies_when: null
+    locator: controls.M3.2.elements[0]
+  - id: e2
+    text: Material disparities are investigated and mitigation actions are defined and approved.
+    scope: model
+    applies_when: null
+    locator: controls.M3.2.elements[1]
+  - id: e3
+    text: Fairness assessment is repeated after material change or identified drift where applicable.
+    scope: model
+    applies_when: null
+    locator: controls.M3.2.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Fairness assessment
+  linked_play:
+  - Play 2
+  crosswalk:
+  - FEAT (2018); AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.5.4; A.7.4 | MEASURE 2.11 | —
+  population_and_evidence_floor: 'Population: all model, prompt or agent versions promoted in the period. Evidence floor: fewer than 1 validated
+    version in the period, or reports with no version identifier, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect the fairness assessment methodology, thresholds and mitigation standard.
+  - id: D2
+    text: Confirm it identifies relevant affected groups, protected/sensitive attributes where appropriate, fairness metrics, statistical/contextual
+      thresholds, limitations, mitigation and independent review requirements.
+  - id: D3
+    text: Confirm reassessment triggers include material change/drift. PASS when the fairness process is defined, risk-appropriate and independently
+      challengeable; FAIL when fairness criteria or mitigation governance are missing; NOT TESTABLE when the approved methodology cannot be evidenced.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Select a risk-based sample of material AI use cases and inspect fairness assessment reports/metric results.
+  - id: O2
+    text: Verify metrics were calculated on relevant populations, compared to approved thresholds, and any breaches triggered mitigation or escalation.
+  - id: O3
+    text: For live systems, inspect drift/event-driven re-tests and confirm findings were resolved or accepted. PASS when fairness testing operates
+      at the required cadence with evidence-backed remediation; FAIL when required tests, thresholds or remediation are missing; NOT TESTABLE
+      when relevant population/metrics cannot be reproduced.
+  near_miss_failure_modes:
+  - F1. The validation report predates the deployed version — it validates the model that was tested, not the one that is running.
+  - F2. The validator sits in the same reporting line as the builder, so 'independent review' is a signature rather than a challenge.
+  - F3. The acceptance threshold was chosen after the result was known, which makes a pass unfalsifiable.
+  - F4. The test set overlaps the tuning or training data, so the reported score measures memorisation.
+  - F5. A metric is reported with no sample size, so a favourable number may rest on a handful of cases.
+  - F6. Only aggregate performance is reported — no slice, subgroup or worst-case analysis where the control requires it.
+  resolutions:
+  - failure_mode: F1
+    text: A validation report whose version identifier matches the deployed artefact, or a re-validation of the current version.
+  - failure_mode: F2
+    text: A validation performed or signed by a function outside the delivery reporting line, with the reviewer named.
+  - failure_mode: F3
+    text: A pre-registered threshold — an approved test plan dated before the test run.
+  - failure_mode: F4
+    text: A statement of dataset provenance and separation, or a held-out set with documented construction.
+  - failure_mode: F5
+    text: Reported metrics with denominators and confidence, or the underlying result file.
+  - failure_mode: F6
+    text: Slice-level results for the populations the control names.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype validation_evaluation — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M3.3
+  title: Transparency & explainability of AI outputs
+  requirement: AI outputs are sufficiently transparent and explainable for their intended stakeholders and risk context, including known limitations
+    and appropriate human-use guidance.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Transparency and explainability requirements are defined for the intended use case and stakeholder groups.
+    scope: model
+    applies_when: null
+    locator: controls.M3.3.elements[0]
+  - id: e2
+    text: Material limitations, intended use and explanation methods are documented.
+    scope: model
+    applies_when: null
+    locator: controls.M3.3.elements[1]
+  - id: e3
+    text: Changes to the model, use case or material incidents trigger review of transparency information.
+    scope: model
+    applies_when: null
+    locator: controls.M3.3.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Model Cards; explainability notes
+  linked_play:
+  - Play 3
+  crosswalk:
+  - FEAT (2018); AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.6.2.7; A.8.2 | MAP 2.2; MEASURE 2.8; MEASURE 2.9 | MGF D2.7, D4.1,
+    D4.2 | SAFR S3.2 | —
+  population_and_evidence_floor: 'Population: all in-scope channels and interaction types in the period. Evidence floor: fewer than all channels
+    observed, or observation from specification rather than delivery, makes the operating result NOT TESTABLE for the unobserved channels.'
+  test_of_design:
+  - id: D1
+    text: Inspect model-card, explainability and transparency standards.
+  - id: D2
+    text: Confirm they define intended audience, material limitations, input/output characteristics, explanation approach, known failure modes
+      and update triggers.
+  - id: D3
+    text: Confirm requirements are proportionate to the use case/materiality and support affected-stakeholder understanding. PASS when transparency
+      design is documented, audience-specific and maintained through change; FAIL when material limitations/explanation requirements are absent;
+      NOT TESTABLE when no controlled transparency artefact exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Sample model cards and a corresponding set of actual outputs/use cases.
+  - id: O2
+    text: Verify explanations/disclosures are consistent with the deployed model/version, appropriate to stakeholder needs and available where
+      required.
+  - id: O3
+    text: Inspect changes/releases for timely updates to transparency artefacts. PASS when operating disclosures and explanations match the approved
+      system and are kept current; FAIL when users receive materially inaccurate/outdated information; NOT TESTABLE when actual output/disclosure
+      evidence is unavailable.
+  near_miss_failure_modes:
+  - F1. Disclosure is present in the main web journey and absent in the app, the call centre script or the partner channel.
+  - F2. Disclosure sits in terms and conditions accepted at onboarding, years before the AI was introduced.
+  - F3. The wording describes an earlier version of the system and overstates or understates what it does.
+  - F4. A human-referral route is promised and the queue behind it is unstaffed.
+  - F5. Evidence is the approved wording document rather than a capture of what the customer actually sees.
+  resolutions:
+  - failure_mode: F1
+    text: A per-channel capture of the delivered disclosure.
+  - failure_mode: F2
+    text: A disclosure at the point of interaction, dated after the AI introduction.
+  - failure_mode: F3
+    text: A wording review dated after the most recent material system change.
+  - failure_mode: F4
+    text: Response-time evidence for the recourse route.
+  - failure_mode: F5
+    text: A screenshot, recording or transcript from the live channel.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype disclosure_transparency — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M3.4
+  title: Human oversight & intervention
+  requirement: Human oversight and intervention are designed and operated proportionately to AI risk, including decision authority, escalation,
+    intervention or override and safe-stop mechanisms where applicable.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Human oversight, decision authority, escalation and intervention requirements are defined by risk and use case.
+    scope: model
+    applies_when: null
+    locator: controls.M3.4.elements[0]
+  - id: e2
+    text: Override, escalation or safe-stop mechanisms are defined and testable where applicable.
+    scope: model
+    applies_when: null
+    locator: controls.M3.4.elements[1]
+  - id: e3
+    text: Human-review exceptions and interventions are recorded.
+    scope: model
+    applies_when: null
+    locator: controls.M3.4.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Human oversight policy
+  linked_play:
+  - Play 4
+  crosswalk:
+  - AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.9.2; A.9.3; A.9.4 | GOVERN 3.2; MAP 3.5 | MGF D2.3, D2.4, D2.6 | SAFR S2.3 | —
+  population_and_evidence_floor: 'Population: all decisions or actions subject to human oversight in the period. Evidence floor: fewer than 10
+    reviewed items, or no override population, makes the rate analysis NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect the human-oversight policy, decision-rights matrix and rollback/kill-switch design.
+  - id: D2
+    text: Confirm the policy defines when human review is mandatory, override/intervention rights, response expectations, escalation, segregation
+      of duties and conditions for disabling the AI system.
+  - id: D3
+    text: Confirm the design addresses automation bias and meaningful—not merely nominal—human control. PASS when oversight thresholds, authority
+      and intervention mechanisms are explicit and testable; FAIL when humans have no effective intervention path; NOT TESTABLE when the approved
+      oversight design cannot be evidenced.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Sample live decisions/use cases requiring human oversight and inspect approval/override logs, response times and escalation records.
+  - id: O2
+    text: Verify prohibited autonomous actions were blocked and intervention mechanisms were usable.
+  - id: O3
+    text: Where controlled testing is available, inspect kill-switch/rollback test results. PASS when human review and intervention operated as
+      designed, including timely overrides/escalation; FAIL when review was bypassed, ineffective or undocumented; NOT TESTABLE when required
+      logs/tests are unavailable.
+  near_miss_failure_modes:
+  - F1. Approval rate is 100% across thousands of items, which evidences a click-through rather than a review.
+  - F2. The reviewer sees only the recommendation, not the inputs or the uncertainty, so disagreement has no basis.
+  - F3. The override exists but requires a path longer than the decision window, so it is never used.
+  - F4. Review timestamps cluster in batches seconds apart, inconsistent with individual consideration.
+  - F5. The human is accountable in the policy but the system proceeds automatically on no response.
+  - F6. Overrides are recorded but the system took the original action anyway.
+  resolutions:
+  - failure_mode: F1
+    text: The override and rejection rate with a distribution, plus an explanation for a near-zero rate.
+  - failure_mode: F2
+    text: A screenshot or specification of what the reviewer is shown, including uncertainty.
+  - failure_mode: F3
+    text: An override performed within the decision window, with timings.
+  - failure_mode: F4
+    text: Per-item review timestamps and durations.
+  - failure_mode: F5
+    text: A default-on-no-response rule that halts rather than proceeds, with evidence of it operating.
+  - failure_mode: F6
+    text: System evidence that an override changed the outcome.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype human_oversight — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M3.5
+  title: Model & feature selection
+  requirement: Model and feature selection are governed by documented suitability criteria, alternatives, risk considerations and approved rationale
+    appropriate to the use case.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Model and feature selection criteria include suitability, performance and AI-risk considerations.
+    scope: model
+    applies_when: null
+    locator: controls.M3.5.elements[0]
+  - id: e2
+    text: Alternatives considered and selection rationale are documented for material use cases.
+    scope: model
+    applies_when: null
+    locator: controls.M3.5.elements[1]
+  - id: e3
+    text: Selection changes trigger appropriate re-assessment before deployment.
+    scope: model
+    applies_when: null
+    locator: controls.M3.5.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Model selection rationale
+  linked_play:
+  - Play 3
+  crosswalk:
+  - AI MRM Paper (Dec 2024); AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.4.4; A.6.2.2; A.6.2.3 | MAP 2.1; MAP 3.3 | MGF D1.3, D1.4
+    | SAFR S4.1 | —
+  population_and_evidence_floor: 'Population: all use cases requiring assessment in the period, from the intake log or AI inventory. Evidence
+    floor: fewer than 3 assessments, or no sample from the lowest tier, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect the model/feature selection standard and decision template.
+  - id: D2
+    text: Confirm selection criteria address intended use, performance, data suitability, fairness, explainability, security, operational constraints
+      and relevant alternatives.
+  - id: D3
+    text: Confirm decision rationale and approval are retained with version traceability. PASS when selection criteria and rationale are objective,
+      documented and attributable; FAIL when material selection decisions are undocumented or untraceable; NOT TESTABLE when controlled selection
+      records cannot be obtained.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Sample newly developed or materially changed models/features.
+  - id: O2
+    text: Trace the selected model/feature set to the documented rationale, approved requirements and deployed version.
+  - id: O3
+    text: Verify deviations from the approved choice were re-assessed/approved. PASS when sampled production choices match approved rationale
+      and version; FAIL when unapproved model/feature substitutions occur; NOT TESTABLE when deployed version/source evidence cannot be reconciled.
+  near_miss_failure_modes:
+  - F1. Every use case lands in the same tier, which means the scheme is not discriminating or is being applied to reach a pre-decided answer.
+  - F2. The assessment is dated after the go-live date, so it documented a decision rather than informing it.
+  - F3. The assessor and the requester are the same person or the same team.
+  - F4. A low-tier classification rests on a scope statement that excludes the risky part of the system — for example classifying a copilot as
+    advisory while it writes to a system of record.
+  - F5. Reassessment triggers exist on paper but no reassessment occurred despite a material model or vendor change in the period.
+  resolutions:
+  - failure_mode: F1
+    text: A tier distribution across the population, with the rationale for outliers in either direction.
+  - failure_mode: F2
+    text: An assessment record dated before the approval or go-live date, or a documented retrospective acceptance.
+  - failure_mode: F3
+    text: An approval by a role outside the delivery team, named in the record.
+  - failure_mode: F4
+    text: A scope statement that enumerates the system's write paths and downstream effects, reassessed on that basis.
+  - failure_mode: F5
+    text: A reassessment record tied to the change that triggered it.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype assessment_classification — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M3.6
+  title: Evaluation, testing & independent validation
+  requirement: AI systems are evaluated and independently validated against defined criteria before deployment, with results, limitations, residual
+    risk and re-validation triggers documented.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Approved evaluation and independent-validation criteria define scope, methods and thresholds.
+    scope: model
+    applies_when: null
+    locator: controls.M3.6.elements[0]
+  - id: e2
+    text: Independent validation responsibilities and separation from development are defined.
+    scope: model
+    applies_when: null
+    locator: controls.M3.6.elements[1]
+  - id: e3
+    text: Limitations, conditions, residual risk and re-validation triggers are documented.
+    scope: model
+    applies_when: null
+    locator: controls.M3.6.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Validation & test reports
+  linked_play:
+  - Play 3, 10
+  crosswalk:
+  - AI MRM Paper (Dec 2024); AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.6.2.4 | MEASURE 1.3; MEASURE 2.3; MEASURE 2.5 | MGF D4.5
+    | PA 1, PA 11
+  population_and_evidence_floor: 'Population: all model, prompt or agent versions promoted in the period. Evidence floor: fewer than 1 validated
+    version in the period, or reports with no version identifier, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect the evaluation/testing standard, acceptance criteria and independent-validation procedure.
+  - id: D2
+    text: Confirm testing covers relevant performance, robustness, fairness, security, explainability and failure-mode dimensions, with risk-based
+      thresholds and evidence-retention requirements.
+  - id: D3
+    text: Confirm independent validation is required where materiality warrants it and that unresolved defects block or condition release. PASS
+      when the evaluation and validation design is risk-based, measurable and independent where required; FAIL when material tests/thresholds
+      or independence are absent; NOT TESTABLE when no controlled test methodology exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Select a risk-based sample of validation packages, including at least one high-materiality system where available.
+  - id: O2
+    text: Reconcile test scope to approved requirements, review results against thresholds, inspect defects/exceptions and confirm independent
+      validation sign-off.
+  - id: O3
+    text: Verify failed/conditional tests resulted in remediation, restricted release or documented approval under policy. PASS when tests were
+      executed as designed and release decisions reflect results; FAIL when material tests were skipped, thresholds ignored or independence bypassed;
+      NOT TESTABLE when validation evidence is incomplete.
+  near_miss_failure_modes:
+  - F1. The validation report predates the deployed version — it validates the model that was tested, not the one that is running.
+  - F2. The validator sits in the same reporting line as the builder, so 'independent review' is a signature rather than a challenge.
+  - F3. The acceptance threshold was chosen after the result was known, which makes a pass unfalsifiable.
+  - F4. The test set overlaps the tuning or training data, so the reported score measures memorisation.
+  - F5. A metric is reported with no sample size, so a favourable number may rest on a handful of cases.
+  - F6. Only aggregate performance is reported — no slice, subgroup or worst-case analysis where the control requires it.
+  resolutions:
+  - failure_mode: F1
+    text: A validation report whose version identifier matches the deployed artefact, or a re-validation of the current version.
+  - failure_mode: F2
+    text: A validation performed or signed by a function outside the delivery reporting line, with the reviewer named.
+  - failure_mode: F3
+    text: A pre-registered threshold — an approved test plan dated before the test run.
+  - failure_mode: F4
+    text: A statement of dataset provenance and separation, or a held-out set with documented construction.
+  - failure_mode: F5
+    text: Reported metrics with denominators and confidence, or the underlying result file.
+  - failure_mode: F6
+    text: Slice-level results for the populations the control names.
+  test_provenance: 'Bespoke — requirements/mas.yaml v1 (AIRG Consultation Paper P017-2025 (known); AI MRM Paper (Dec 2024) (known)). Procedure:
+    MAS v0.4 bespoke.'
+- framework: MAS
+  control_id: M3.7
+  title: Technology & cybersecurity controls
+  requirement: AI systems are protected by security controls and testing proportionate to risk, including model-specific threats, runtime reachability
+    and closure or formal acceptance of material findings.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: AI-specific security threats and security-test scope are defined for relevant deployments.
+    scope: model
+    applies_when: null
+    locator: controls.M3.7.elements[0]
+  - id: e2
+    text: Pre-deployment security testing and treatment of material findings are required.
+    scope: model
+    applies_when: null
+    locator: controls.M3.7.elements[1]
+  - id: e3
+    text: Runtime network, data and privileged reachability is controlled and tested; material changes trigger re-testing where applicable.
+    scope: model
+    applies_when: null
+    locator: controls.M3.7.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Security test results
+  linked_play:
+  - Play 3
+  crosswalk:
+  - AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.4.5; A.6.2.3 | MEASURE 2.7 | MGF D3.1, D3.2, D3.3, D3.7 | SAFR S1.3, S1.4, S4.2
+    | PA 1, PA 3, PA 8, PA 11
+  population_and_evidence_floor: 'Population: current testing reports plus runtime security events in the period. Evidence floor: testing that
+    predates the current architecture, or zero runtime events with no test, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect AI security architecture/standards, threat model, secure-development requirements, access controls and security-testing criteria.
+  - id: D2
+    text: Confirm requirements address model/data access, secrets, supply-chain/vendor risk, adversarial threats, vulnerabilities and monitoring.
+  - id: D3
+    text: Confirm severity thresholds and remediation/exception rules are defined. PASS when security design addresses AI-specific and conventional
+      technology risks with clear ownership and thresholds; FAIL when material security risks or remediation criteria are undefined; NOT TESTABLE
+      when controlled security requirements are unavailable.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Sample security test packs for deployed/high-materiality AI systems, including vulnerability assessments, penetration/red-team results
+      and access reviews as applicable.
+  - id: O2
+    text: Verify findings were triaged, remediated within required timelines or formally accepted, and that deployed configuration matches the
+      tested version.
+  - id: O3
+    text: Check security incidents/alerts were linked back to the AI system and controls. PASS when security controls operated and material findings
+      were addressed; FAIL when material vulnerabilities were unaddressed or tested versions differ materially from deployed versions; NOT TESTABLE
+      when evidence is insufficient.
+  near_miss_failure_modes:
+  - F1. The penetration test covers the web application and stops at the API, leaving the model, its tools and its retrieval path untested.
+  - F2. Testing predates the current architecture — new tools or data sources were added after the last test.
+  - F3. Injection defences are described as prompt-level instructions to the model, which is guidance rather than enforcement.
+  - F4. Findings are closed as 'risk accepted' with no expiry and no named acceptor.
+  - F5. Zero blocked attempts is offered as evidence of safety, with no test showing the defence would block.
+  - F6. The system treats retrieved document content and tool output as trusted instruction.
+  resolutions:
+  - failure_mode: F1
+    text: A test scope section naming the model, tool and retrieval components.
+  - failure_mode: F2
+    text: A test dated after the most recent architectural change.
+  - failure_mode: F3
+    text: An enforcement point outside the model — an allowlist, a schema check, a policy layer — with evidence of operation.
+  - failure_mode: F4
+    text: An acceptance record with a named acceptor and an expiry date.
+  - failure_mode: F5
+    text: A controlled injection test with the blocked result retained.
+  - failure_mode: F6
+    text: A design statement and runtime evidence separating instruction from data.
+  test_provenance: 'Bespoke — requirements/mas.yaml v1 (AIRG Consultation Paper P017-2025 (unchecked)). Procedure: MAS v0.4 bespoke.'
+- framework: MAS
+  control_id: M3.8
+  title: Reproducibility, auditability, logging & audit trails
+  requirement: AI systems maintain reproducible, attributable and auditable records of material configuration, inputs/outputs, decisions, approvals
+    and lifecycle events proportionate to risk.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Logging and audit-trail requirements define what material AI events and artefacts must be retained.
+    scope: model
+    applies_when: null
+    locator: controls.M3.8.elements[0]
+  - id: e2
+    text: Records are attributable, time-stamped and linked to the relevant system/version or decision context.
+    scope: model
+    applies_when: null
+    locator: controls.M3.8.elements[1]
+  - id: e3
+    text: Retention, access and reconstruction requirements support auditability and reproducibility.
+    scope: model
+    applies_when: null
+    locator: controls.M3.8.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Logging standards; audit trail
+  linked_play:
+  - Play 3, 5
+  crosswalk:
+  - AIRG Consultation Paper P017-2025 (Nov 2025, proposed); MindForge AI Risk Mgmt Toolkit (Mar 2026) | A.4.4; A.6.2.8 | MEASURE 2.1; MANAGE 4.1
+    | MGF D3.6, D3.13 | SAFR S3.1, S3.2, S3.4 | —
+  population_and_evidence_floor: 'Population: the logged record set for the period, plus at least one real event selected for reconstruction.
+    Evidence floor: no reconstruction attempt makes the operating result NOT TESTABLE — the existence of logs is a design fact, not an operating
+    one.'
+  test_of_design:
+  - id: D1
+    text: Inspect logging/audit-trail standards.
+  - id: D2
+    text: Confirm required events include, where relevant, actor, timestamp, model/system/version, key configuration/change, decision/output and
+      override/exception events, with retention, integrity and access controls defined.
+  - id: D3
+    text: Confirm logging requirements support reconstruction of material AI decisions and changes. PASS when the logging design is complete,
+      protected and reconstructable for the intended use; FAIL when material events cannot be reconstructed; NOT TESTABLE when no approved logging
+      standard exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: For a risk-based sample of decisions, changes and incidents, attempt to reconstruct what happened from retained logs.
+  - id: O2
+    text: Verify timestamps/order, actor, system/version and decision/override details are present and consistent with source records.
+  - id: O3
+    text: Check retention, access and any detected logging gaps. PASS when sampled events are reconstructable and retained as required; FAIL when
+      material audit-trail gaps prevent reconstruction; NOT TESTABLE when logs are unavailable or the system is not yet operating.
+  near_miss_failure_modes:
+  - F1. Logs exist but hold no version identifier, so it is impossible to say which model or prompt produced the output.
+  - F2. The acting identity is a shared service account for every action, so attribution stops at the platform.
+  - F3. Reconstruction requires a person's recollection or a chat thread to fill the gap between records.
+  - F4. Retention is set below the obligation, or the oldest records are technically retained but not retrievable.
+  - F5. Administrators can amend the records with no separate audit of the amendment.
+  - F6. Prompt and tool-call content is not captured, so only the outcome is visible and not the reasoning path.
+  resolutions:
+  - failure_mode: F1
+    text: A log schema including model, prompt and configuration version, with a populated example.
+  - failure_mode: F2
+    text: Per-actor identity in the record, or a documented mapping from service account to the initiating human or agent.
+  - failure_mode: F3
+    text: A reconstruction walkthrough of a real event using only retained records.
+  - failure_mode: F4
+    text: A retention configuration matching the obligation and a successful retrieval from the oldest window.
+  - failure_mode: F5
+    text: An access review of amendment rights plus an immutable or separately audited amendment trail.
+  - failure_mode: F6
+    text: Captured prompt and tool-call records for a sampled action.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype logging_traceability — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M3.9
+  title: Pre-deployment review & approval (release criteria)
+  requirement: Production release of an AI system is gated by objective criteria, evidence review, authorised approval and applicable independent-validation
+    prerequisites before production action.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Objective release criteria and required evidence are defined before deployment.
+    scope: model
+    applies_when: null
+    locator: controls.M3.9.elements[0]
+  - id: e2
+    text: An authorised approver reviews the release evidence and residual risk.
+    scope: model
+    applies_when: null
+    locator: controls.M3.9.elements[1]
+  - id: e3
+    text: Approval is attributable and recorded before production action; applicable independent validation is complete.
+    scope: model
+    applies_when: null
+    locator: controls.M3.9.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Release approval record
+  linked_play:
+  - Play 4
+  crosswalk:
+  - AI MRM Paper (Dec 2024); AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.6.2.5 | MANAGE 1.1; MEASURE 2.3 | —
+  population_and_evidence_floor: 'Population: all production deployments in the period, established from the deployment pipeline or runtime history.
+    Evidence floor: a population taken only from the change register cannot detect unrecorded change — report NOT TESTABLE for completeness in
+    that case.'
+  test_of_design:
+  - id: D1
+    text: Inspect the release-gate policy/checklist.
+  - id: D2
+    text: Confirm mandatory pre-deployment criteria include applicable validation results, risk assessment, human-oversight readiness, security,
+      monitoring, rollback and required approvals, with clear blocking conditions.
+  - id: D3
+    text: Confirm no-deploy/bypass rules and emergency-release handling are defined. PASS when release criteria are explicit, version-specific
+      and approval-controlled; FAIL when production deployment can occur without satisfying mandatory gates; NOT TESTABLE when no controlled release-gate
+      artefact exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Select a sample of recent production releases and trace each from final tested/versioned artefact through release checklist, approval
+      and deployment timestamp.
+  - id: O2
+    text: Verify mandatory criteria were met before deployment and any exceptions were approved by the required authority.
+  - id: O3
+    text: Inspect emergency releases for retrospective testing/approval. PASS when sampled releases demonstrate gate compliance and authorised
+      exceptions; FAIL when bypasses or approvals-after-deployment occur without governed emergency treatment; NOT TESTABLE when release/deployment
+      evidence cannot be reconciled.
+  near_miss_failure_modes:
+  - F1. Approval timestamp is after the deployment timestamp — the record documents the change rather than authorising it.
+  - F2. The approver is the implementer, or sits outside the approval matrix for that class.
+  - F3. The emergency route carries a material share of all changes, with no incident reference behind them.
+  - F4. The change names the service but not the model or prompt version, so the artefact that actually changed is invisible.
+  - F5. A change freeze was in force and the change proceeded with no documented exemption.
+  - F6. Privileged sessions used to implement are not recorded, or do not reconcile to the named implementer.
+  - F7. No post-implementation verification, so a difference between the approved plan and the deployed state would never surface.
+  resolutions:
+  - failure_mode: F1
+    text: A change record whose approval timestamp precedes deployment, or an approved retrospective acceptance naming the exposure.
+  - failure_mode: F2
+    text: An approval matrix and a record showing an approver drawn from it, distinct from the implementer.
+  - failure_mode: F3
+    text: An emergency change register with incident references and a rate that can be explained.
+  - failure_mode: F4
+    text: A change record field holding the model and prompt version, populated for a sampled change.
+  - failure_mode: F5
+    text: A freeze exemption approved at the level the freeze policy requires.
+  - failure_mode: F6
+    text: A privileged session record reconciling to the change and the named implementer.
+  - failure_mode: F7
+    text: A post-implementation verification record comparing running state to approved state.
+  test_provenance: 'Bespoke — requirements/mas.yaml v1 (AI MRM Paper (Dec 2024) (known); AIRG Consultation Paper P017-2025 (unchecked)). Procedure:
+    MAS v0.4 bespoke.'
+- framework: MAS
+  control_id: M3.10
+  title: Post-deployment monitoring (drift, dashboards, revalidation, backtesting)
+  requirement: Deployed AI systems are monitored for performance, drift, incidents and control effectiveness, with defined thresholds, escalation,
+    revalidation and backtesting triggers.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Monitoring metrics, thresholds, dashboards and ownership are defined for the deployed use case.
+    scope: model
+    applies_when: null
+    locator: controls.M3.10.elements[0]
+  - id: e2
+    text: Drift, performance or control breaches trigger investigation, escalation or remediation.
+    scope: model
+    applies_when: null
+    locator: controls.M3.10.elements[1]
+  - id: e3
+    text: Revalidation and backtesting triggers are defined for material change, drift or other specified events.
+    scope: model
+    applies_when: null
+    locator: controls.M3.10.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Monitoring dashboards
+  linked_play:
+  - Play 5, 11
+  crosswalk:
+  - AI MRM Paper (Dec 2024); AIRG Consultation Paper P017-2025 (Nov 2025, proposed); MindForge AI Risk Mgmt Toolkit (Mar 2026) | A.6.2.6 | MEASURE
+    2.4; MEASURE 3.1; MANAGE 4.1 | MGF D3.11, D3.12, D3.14 | SAFR S2.5, S3.5 | PA 6
+  population_and_evidence_floor: 'Population: the full monitoring period, plus all alerts raised. Evidence floor: no alerts in the period and
+    no detector test means silence is uninformative — report NOT TESTABLE rather than PASS.'
+  test_of_design:
+  - id: D1
+    text: Inspect the post-deployment monitoring standard and dashboard design.
+  - id: D2
+    text: Confirm defined metrics/thresholds cover performance, drift, fairness where relevant, usage outside intended scope, incidents and revalidation/backtesting
+      triggers.
+  - id: D3
+    text: Confirm alert ownership, response SLAs, review cadence and escalation are defined. PASS when monitoring is risk-based, measurable and
+      linked to action; FAIL when material drift/risk indicators or response rules are undefined; NOT TESTABLE when no controlled monitoring design
+      exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Review monitoring records across the latest required period and sample threshold breaches.
+  - id: O2
+    text: Verify alerts were detected, investigated and escalated within the defined cadence, with revalidation/backtesting/change/retirement
+      decisions where triggered.
+  - id: O3
+    text: Confirm dashboards represent the deployed model/version and intended-use population. PASS when monitoring operated continuously/at the
+      required cadence and breaches drove documented actions; FAIL when material alerts were missed, ignored or unresolved; NOT TESTABLE when
+      the operating monitoring population cannot be evidenced.
+  near_miss_failure_modes:
+  - F1. No alert fired all period and this is presented as evidence of health, with nothing showing the detector works.
+  - F2. Thresholds in the running configuration differ from the approved design, usually loosened after a noisy week.
+  - F3. Alerts are routed to a shared channel with no named owner, and closure is by silence.
+  - F4. Monitoring covers latency and uptime while the control is about model quality, drift or mandate breach.
+  - F5. Coverage has gaps that coincide with the periods of highest change.
+  - F6. Drift is monitored on inputs only, with no monitoring of the outcome the model drives.
+  resolutions:
+  - failure_mode: F1
+    text: A detector test, synthetic breach or back-test against a known past event.
+  - failure_mode: F2
+    text: An export of the running configuration compared to the approved baseline, with any deviation approved.
+  - failure_mode: F3
+    text: An alert record naming a recipient, a response time and a disposition.
+  - failure_mode: F4
+    text: A metric definition tied to the control objective, with at least one period of output.
+  - failure_mode: F5
+    text: A continuous coverage statement with gaps explained and dispositioned.
+  - failure_mode: F6
+    text: Output-side monitoring covering the decisions or actions the system produced.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype monitoring_detection — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M3.11
+  title: Incident management & escalation
+  requirement: AI incidents have an AI-specific classification, escalation and recovery process with accountable responders, records and applicable
+    external notification paths.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: AI incident definitions and classification distinguish material model/AI events from ordinary application defects where relevant.
+    scope: model
+    applies_when: null
+    locator: controls.M3.11.elements[0]
+  - id: e2
+    text: Incident response roles, escalation thresholds, records and recovery expectations are defined.
+    scope: model
+    applies_when: null
+    locator: controls.M3.11.elements[1]
+  - id: e3
+    text: Applicable external notification obligations and separately regulated paths are identified where applicable.
+    scope: model
+    applies_when: null
+    locator: controls.M3.11.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Incident playbook
+  linked_play:
+  - Play 6
+  crosswalk:
+  - AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.3.3; A.8.4 | GOVERN 4.3; MEASURE 3.3; MANAGE 4.3 | MGF D3.15, D3.16 | SAFR S2.4,
+    S3.5 | PA 10
+  population_and_evidence_floor: 'Population: all incidents and near misses in the period, cross-checked against alerts, overrides and complaints.
+    Evidence floor: zero incidents and no exercise means the mechanism is untested — report NOT TESTABLE rather than PASS.'
+  test_of_design:
+  - id: D1
+    text: Inspect the AI incident playbook, severity taxonomy, escalation matrix and regulatory-notification procedure.
+  - id: D2
+    text: Confirm roles, containment, evidence preservation, root-cause analysis, customer/stakeholder communications, lessons learned and notification
+      decision criteria are defined, including reference to the currently applicable MAS notice/licence obligations.
+  - id: D3
+    text: Confirm required response/reporting timelines are explicit where applicable. PASS when the incident design is complete, attributable
+      and time-bound; FAIL when material response or notification decisions are undefined; NOT TESTABLE when no controlled incident process exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Select a sample of AI incidents/near misses and trace detection, logging, severity classification, escalation, containment, notification
+      decision, RCA and remediation.
+  - id: O2
+    text: Verify timestamps against applicable internal and regulatory timelines and confirm reasons for any non-notification decision.
+  - id: O3
+    text: Inspect whether lessons learned updated controls/tests where appropriate. PASS when incidents were handled, escalated and closed under
+      the playbook and applicable regulatory obligations; FAIL when material response/notification steps were missed; NOT TESTABLE when incident
+      records are absent or incomplete.
+  near_miss_failure_modes:
+  - F1. Zero AI incidents in the period is presented as strength, with no near-miss capture and no exercise to show the process would engage.
+  - F2. Events appear in the monitoring or complaint records but were never raised as incidents, so the population is understated.
+  - F3. The kill switch is documented but has never been invoked, and no one can state how long it takes to take effect.
+  - F4. Severity was assigned after resolution, and always at a level that avoided external notification.
+  - F5. Post-incident actions are closed as 'awareness raised' with no control change.
+  - F6. Containment is evidenced by a ticket status rather than by system evidence that the agent stopped acting.
+  resolutions:
+  - failure_mode: F1
+    text: A near-miss register, or an exercise report with date, participants and observed timings.
+  - failure_mode: F2
+    text: A reconciliation from alerts and complaints to incidents, with any unraised events explained.
+  - failure_mode: F3
+    text: A containment test with a measured time to effect.
+  - failure_mode: F4
+    text: A severity assignment dated at detection, with the criteria applied.
+  - failure_mode: F5
+    text: A post-incident action that amended a control, with the amended control identified.
+  - failure_mode: F6
+    text: System evidence of containment — revoked credentials, disabled route, halted queue.
+  test_provenance: 'Bespoke — requirements/mas.yaml v1 (AIRG Consultation Paper P017-2025 (unchecked)). Procedure: MAS v0.4 bespoke.'
+- framework: MAS
+  control_id: M3.12
+  title: Change management
+  requirement: AI and model changes are controlled through documented impact assessment, testing, approval and traceability from change request
+    through implementation and post-implementation verification.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Change categories, impact assessment, required testing and approval criteria are defined.
+    scope: model
+    applies_when: null
+    locator: controls.M3.12.elements[0]
+  - id: e2
+    text: Change records link approval, implementation and the deployed system/version.
+    scope: model
+    applies_when: null
+    locator: controls.M3.12.elements[1]
+  - id: e3
+    text: Post-implementation verification and closure or exception handling are required.
+    scope: model
+    applies_when: null
+    locator: controls.M3.12.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Change records
+  linked_play:
+  - Play 8
+  crosswalk:
+  - AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.6.2.2; A.6.2.6 | MANAGE 2.2; MANAGE 4.2 | PA 5
+  population_and_evidence_floor: 'Population: all production deployments in the period, established from the deployment pipeline or runtime history.
+    Evidence floor: a population taken only from the change register cannot detect unrecorded change — report NOT TESTABLE for completeness in
+    that case.'
+  test_of_design:
+  - id: D1
+    text: Inspect the AI change-management policy and change taxonomy.
+  - id: D2
+    text: Confirm changes are categorised by materiality and require impact assessment, testing/validation, approval, implementation recording,
+      rollback/emergency handling and post-implementation verification as applicable.
+  - id: D3
+    text: Confirm separation of requester/approver, version traceability and retrospective approval rules for emergency changes. PASS when the
+      design covers the full change lifecycle and prevents uncontrolled deployment; FAIL when material changes can bypass assessment/approval/testing;
+      NOT TESTABLE when no controlled change process exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Use the authoritative change-register population for the review period.
+  - id: O2
+    text: Check population integrity (unique IDs, completeness, required fields) and sample changes across materiality tiers.
+  - id: O3
+    text: For each sample, verify approval occurred before implementation, tested/versioned artefact matches deployment, emergency changes followed
+      the exception path, and post-implementation verification was recorded. PASS when sampled and population-level checks support effective change
+      control; FAIL when duplicate/stale/incomplete records or approval-after-deployment undermine control effectiveness; NOT TESTABLE when the
+      source population is unavailable/incomplete.
+  near_miss_failure_modes:
+  - F1. Approval timestamp is after the deployment timestamp — the record documents the change rather than authorising it.
+  - F2. The approver is the implementer, or sits outside the approval matrix for that class.
+  - F3. The emergency route carries a material share of all changes, with no incident reference behind them.
+  - F4. The change names the service but not the model or prompt version, so the artefact that actually changed is invisible.
+  - F5. A change freeze was in force and the change proceeded with no documented exemption.
+  - F6. Privileged sessions used to implement are not recorded, or do not reconcile to the named implementer.
+  - F7. No post-implementation verification, so a difference between the approved plan and the deployed state would never surface.
+  resolutions:
+  - failure_mode: F1
+    text: A change record whose approval timestamp precedes deployment, or an approved retrospective acceptance naming the exposure.
+  - failure_mode: F2
+    text: An approval matrix and a record showing an approver drawn from it, distinct from the implementer.
+  - failure_mode: F3
+    text: An emergency change register with incident references and a rate that can be explained.
+  - failure_mode: F4
+    text: A change record field holding the model and prompt version, populated for a sampled change.
+  - failure_mode: F5
+    text: A freeze exemption approved at the level the freeze policy requires.
+  - failure_mode: F6
+    text: A privileged session record reconciling to the change and the named implementer.
+  - failure_mode: F7
+    text: A post-implementation verification record comparing running state to approved state.
+  test_provenance: 'Bespoke — requirements/mas.yaml v1 (AI MRM Paper (Dec 2024) (known); AIRG Consultation Paper P017-2025 (unchecked)). Procedure:
+    MAS v0.4 bespoke.'
+- framework: MAS
+  control_id: M3.13
+  title: Decommissioning / safe phase-out
+  requirement: AI systems can be safely decommissioned or phased out with controlled retirement, dependency closure, data/record retention and
+    communication obligations.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Decommissioning criteria, responsibilities and approval requirements are defined.
+    scope: model
+    applies_when: null
+    locator: controls.M3.13.elements[0]
+  - id: e2
+    text: Dependencies, access, integrations and operational fallback/continuity are addressed before retirement.
+    scope: model
+    applies_when: null
+    locator: controls.M3.13.elements[1]
+  - id: e3
+    text: Required records, data retention, notices and post-retirement verification are defined.
+    scope: model
+    applies_when: null
+    locator: controls.M3.13.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Decommissioning checklist
+  linked_play:
+  - Play 9
+  crosswalk:
+  - AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.6.2.6 | GOVERN 1.7; MANAGE 2.4 | PA 7
+  population_and_evidence_floor: 'Population: all production deployments in the period, established from the deployment pipeline or runtime history.
+    Evidence floor: a population taken only from the change register cannot detect unrecorded change — report NOT TESTABLE for completeness in
+    that case.'
+  test_of_design:
+  - id: D1
+    text: Inspect the decommissioning/safe-phase-out procedure.
+  - id: D2
+    text: Confirm criteria cover dependency/impact analysis, access/credential removal, data retention/disposal, customer/stakeholder communication
+      where needed, documentation/log archiving and inventory closure.
+  - id: D3
+    text: Confirm required approvals and evidence retention are defined. PASS when safe phase-out steps and responsibilities are explicit; FAIL
+      when material dependencies, data or access risks are not addressed; NOT TESTABLE when no controlled decommissioning procedure exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Sample retired/replaced AI systems from the inventory and trace the decommissioning record.
+  - id: O2
+    text: Verify dependent services/users were addressed, access/credentials removed, data disposition followed policy, logs/documentation archived
+      and inventory status updated.
+  - id: O3
+    text: Check for residual production endpoints or stale entries. PASS when sampled systems were fully and safely decommissioned; FAIL when
+      access, data, dependencies or inventory were left unresolved; NOT TESTABLE when the retirement population cannot be reconciled.
+  near_miss_failure_modes:
+  - F1. Approval timestamp is after the deployment timestamp — the record documents the change rather than authorising it.
+  - F2. The approver is the implementer, or sits outside the approval matrix for that class.
+  - F3. The emergency route carries a material share of all changes, with no incident reference behind them.
+  - F4. The change names the service but not the model or prompt version, so the artefact that actually changed is invisible.
+  - F5. A change freeze was in force and the change proceeded with no documented exemption.
+  - F6. Privileged sessions used to implement are not recorded, or do not reconcile to the named implementer.
+  - F7. No post-implementation verification, so a difference between the approved plan and the deployed state would never surface.
+  resolutions:
+  - failure_mode: F1
+    text: A change record whose approval timestamp precedes deployment, or an approved retrospective acceptance naming the exposure.
+  - failure_mode: F2
+    text: An approval matrix and a record showing an approver drawn from it, distinct from the implementer.
+  - failure_mode: F3
+    text: An emergency change register with incident references and a rate that can be explained.
+  - failure_mode: F4
+    text: A change record field holding the model and prompt version, populated for a sampled change.
+  - failure_mode: F5
+    text: A freeze exemption approved at the level the freeze policy requires.
+  - failure_mode: F6
+    text: A privileged session record reconciling to the change and the named implementer.
+  - failure_mode: F7
+    text: A post-implementation verification record comparing running state to approved state.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype change_release — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M3.14
+  title: Third-party / vendor AI risk management
+  requirement: Third-party AI providers and models are governed through risk-based due diligence, contractual protections, monitoring, change
+    notification and exit/concentration management.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Third-party AI due diligence criteria cover security, model risk, data, resilience and other material risks.
+    scope: model
+    applies_when: null
+    locator: controls.M3.14.elements[0]
+  - id: e2
+    text: Contracts allocate responsibilities, audit/notification rights, data protections and change obligations.
+    scope: model
+    applies_when: null
+    locator: controls.M3.14.elements[1]
+  - id: e3
+    text: Ongoing monitoring, material-change reassessment and concentration/exit considerations are defined.
+    scope: model
+    applies_when: null
+    locator: controls.M3.14.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - Vendor due diligence; contract clauses
+  linked_play:
+  - Play 7
+  crosswalk:
+  - AI MRM Paper (Dec 2024); AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.10.2; A.10.3; A.10.4 | GOVERN 6.1; GOVERN 6.2; MAP 4.1;
+    MANAGE 3.1; MANAGE 3.2 | MGF D1.6, D3.9 | SAFR S4.4, S4.5 | PA 3
+  population_and_evidence_floor: 'Population: all AI-relevant third parties and AI-embedded products in use during the period, from procurement
+    or vendor-management data. Evidence floor: a vendor list supplied by the assessed team without procurement reconciliation makes the completeness
+    result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect vendor/foundation-model due-diligence standards, procurement controls and contract templates.
+  - id: D2
+    text: Confirm requirements address responsible-AI posture, data/IP rights, security, limitations, change/version notification, audit rights,
+      responsibility allocation, concentration and exit/transition.
+  - id: D3
+    text: Confirm ownership and reassessment triggers are defined. PASS when third-party risk criteria and contractual protections are explicit
+      and approved; FAIL when material vendor risks lack ownership or contractual control; NOT TESTABLE when vendor governance artefacts are unavailable.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Sample material third-party AI providers/models and inspect due diligence, contract terms, current version and ongoing monitoring.
+  - id: O2
+    text: Verify material vendor/model changes triggered reassessment, change notification and approval where required.
+  - id: O3
+    text: Inspect concentration/exit considerations and any vendor incidents. PASS when sampled vendor relationships operate under current due
+      diligence, enforceable responsibilities and change controls; FAIL when material vendor changes/risks are unmanaged; NOT TESTABLE when supplier
+      records cannot be reconciled.
+  near_miss_failure_modes:
+  - F1. The provider was assessed as a software vendor before the AI feature was enabled, and never reassessed when it was.
+  - F2. The assessment is dated after contract signature, so it recorded a decision already taken.
+  - F3. The contract references an assurance report that was never obtained, or one that excludes the AI component from scope.
+  - F4. Sub-processors are named in the provider's terms but were never assessed.
+  - F5. Provider change notifications arrive but there is no route by which they reach the control owner.
+  - F6. The provider's own model changes silently under a continuously updated service, with no version pinning and no notification right.
+  resolutions:
+  - failure_mode: F1
+    text: A reassessment triggered by the AI feature being enabled.
+  - failure_mode: F2
+    text: An assessment record dated before signature, or an approved exception.
+  - failure_mode: F3
+    text: The assurance report itself, with its scope section showing the AI component in scope.
+  - failure_mode: F4
+    text: A sub-processor list with assessment status.
+  - failure_mode: F5
+    text: A routing record showing a provider notification reaching and being actioned by the control owner.
+  - failure_mode: F6
+    text: A version-pinning or change-notification clause and evidence of it operating.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype third_party — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M3.15
+  title: Generative AI & AI-agent risks (hallucination, autonomy, adversarial, concentration)
+  requirement: Generative AI and agentic systems are assessed and controlled for hallucination/error, autonomy, tool use, adversarial abuse, data
+    leakage, concentration and misuse, with human oversight proportionate to risk.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: GenAI/agent risk methodology covers relevant reliability, autonomy, adversarial and dependency risks.
+    scope: model
+    applies_when: null
+    locator: controls.M3.15.elements[0]
+  - id: e2
+    text: Risk-specific boundaries, human approvals and safety controls are defined and tested.
+    scope: model
+    applies_when: null
+    locator: controls.M3.15.elements[1]
+  - id: e3
+    text: Red-team/stress testing and re-testing after material model, tool, prompt or architecture change are required where applicable.
+    scope: model
+    applies_when: null
+    locator: controls.M3.15.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Model Owner + InfoSec
+  expected_evidence:
+  - GenAI/ agent risk assessment
+  linked_play:
+  - Play 10
+  crosswalk:
+  - 'AIRG Consultation Paper P017-2025 (Nov 2025, proposed); MindForge AI Risk Mgmt Toolkit (Mar 2026) | A.5.5; A.6.2.6 | MAP 5.1; MEASURE 2.6;
+    MEASURE 2.7; MANAGE 2.3 | AGENTIC HINGE → MGF: all D1–D4 | SAFR: all S1–S4 | PA 3'
+  population_and_evidence_floor: 'Population: current testing reports plus runtime security events in the period. Evidence floor: testing that
+    predates the current architecture, or zero runtime events with no test, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect the GenAI/agent risk-assessment methodology.
+  - id: D2
+    text: Confirm it explicitly considers hallucination/error, autonomy/tool use, prompt injection/adversarial abuse, data leakage, concentration/dependency,
+      misuse and human-oversight risks, with risk-specific controls and thresholds.
+  - id: D3
+    text: Confirm pre-release red-team/stress-test and ongoing reassessment triggers are defined. PASS when the design covers relevant GenAI/agent-specific
+      risks and control responses; FAIL when material risks or boundaries are omitted; NOT TESTABLE when the approved methodology is unavailable.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Sample GenAI/agent systems in scope and review risk assessments, red-team/stress-test results, action/approval logs and monitoring.
+  - id: O2
+    text: Verify risky actions are bounded, human approval is enforced where required, and material findings are remediated or formally accepted.
+  - id: O3
+    text: Check re-testing after major model/tool/prompt changes and review concentration/vendor dependencies. PASS when agent-specific risks
+      are actively tested and controlled in operation; FAIL when autonomy/adversarial/accuracy risks are unmanaged; NOT TESTABLE when no operating
+      sample is available.
+  near_miss_failure_modes:
+  - F1. The penetration test covers the web application and stops at the API, leaving the model, its tools and its retrieval path untested.
+  - F2. Testing predates the current architecture — new tools or data sources were added after the last test.
+  - F3. Injection defences are described as prompt-level instructions to the model, which is guidance rather than enforcement.
+  - F4. Findings are closed as 'risk accepted' with no expiry and no named acceptor.
+  - F5. Zero blocked attempts is offered as evidence of safety, with no test showing the defence would block.
+  - F6. The system treats retrieved document content and tool output as trusted instruction.
+  resolutions:
+  - failure_mode: F1
+    text: A test scope section naming the model, tool and retrieval components.
+  - failure_mode: F2
+    text: A test dated after the most recent architectural change.
+  - failure_mode: F3
+    text: An enforcement point outside the model — an allowlist, a schema check, a policy layer — with evidence of operation.
+  - failure_mode: F4
+    text: An acceptance record with a named acceptor and an expiry date.
+  - failure_mode: F5
+    text: A controlled injection test with the blocked result retained.
+  - failure_mode: F6
+    text: A design statement and runtime evidence separating instruction from data.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype security_resilience — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M4.1
+  title: Skills, training, resourcing & competency
+  requirement: The organisation maintains sufficient AI risk, technical, validation and oversight skills, capacity and competency for the AI risk
+    profile.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Role-specific skills and competency requirements are defined for material AI responsibilities.
+    scope: model
+    applies_when: null
+    locator: controls.M4.1.elements[0]
+  - id: e2
+    text: Training, delegated authority, coverage and succession expectations are defined.
+    scope: model
+    applies_when: null
+    locator: controls.M4.1.elements[1]
+  - id: e3
+    text: Capacity gaps or critical vacancies trigger escalation, remediation or formal risk acceptance.
+    scope: model
+    applies_when: null
+    locator: controls.M4.1.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: AI Risk / HR
+  expected_evidence:
+  - Capability plan; training records
+  linked_play: []
+  crosswalk:
+  - AIRG Consultation Paper P017-2025 (Nov 2025, proposed); AI MRM Paper (Dec 2024) | A.4.6 | GOVERN 2.2 | PA 11
+  population_and_evidence_floor: 'Population: in-scope roles from HR or entitlement data. Evidence floor: a population taken from the training
+    system roster cannot detect an omitted person — report NOT TESTABLE for completeness.'
+  test_of_design:
+  - id: D1
+    text: Inspect the AI capability/competency plan, role matrix and resourcing model.
+  - id: D2
+    text: Confirm required skills, minimum competencies, succession/coverage and role-specific training are defined for model, risk, technology,
+      validation and oversight roles.
+  - id: D3
+    text: Confirm capacity/risk thresholds and escalation for critical vacancies are documented. PASS when capability and resource requirements
+      are explicit and aligned to the risk profile; FAIL when material roles lack competency or capacity expectations; NOT TESTABLE when no controlled
+      capability plan exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Compare current role assignments, competency/training records and staffing against the approved role matrix.
+  - id: O2
+    text: Sample critical AI roles and verify required skills, training and delegated authority are current.
+  - id: O3
+    text: Inspect vacancies, contractor dependencies or capacity constraints and verify risk acceptance/remediation. PASS when the organisation
+      has adequate qualified coverage for the sampled AI risk profile; FAIL when material gaps are unmanaged; NOT TESTABLE when staffing/competency
+      records cannot be reconciled.
+  near_miss_failure_modes:
+  - F1. Completion is 100% of enrolled, and enrolment omitted part of the in-scope population.
+  - F2. Training is generic AI awareness while the role's decisions require specific control knowledge.
+  - F3. Joiners completed training months after taking on the reviewing authority.
+  - F4. Completion is attendance with no assessment, so competence is assumed.
+  - F5. Non-completion carries a stated consequence that has never been applied.
+  resolutions:
+  - failure_mode: F1
+    text: A reconciliation from HR or entitlement data to the training roster.
+  - failure_mode: F2
+    text: A content outline mapped to the role's decisions.
+  - failure_mode: F3
+    text: Completion dates compared to role start dates.
+  - failure_mode: F4
+    text: An assessment with a pass standard and results.
+  - failure_mode: F5
+    text: Evidence of the consequence being applied, or an approved exception.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype training_competency — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: M4.2
+  title: Technology infrastructure & tooling capacity
+  requirement: AI infrastructure and governance tooling provide sufficient capacity, resilience, monitoring and support for expected AI workloads
+    and control obligations.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Infrastructure and tooling capacity requirements are defined for material AI workloads and control processes.
+    scope: model
+    applies_when: null
+    locator: controls.M4.2.elements[0]
+  - id: e2
+    text: Performance, availability, resilience and scaling thresholds are defined and owned.
+    scope: model
+    applies_when: null
+    locator: controls.M4.2.elements[1]
+  - id: e3
+    text: Capacity or continuity breaches trigger remediation and recovery testing where applicable.
+    scope: model
+    applies_when: null
+    locator: controls.M4.2.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: AI Risk / HR
+  expected_evidence:
+  - Infrastructure & tooling plan
+  linked_play: []
+  crosswalk:
+  - AIRG Consultation Paper P017-2025 (Nov 2025, proposed) | A.4.4; A.4.5 | MAP 1.6 | PA 5, PA 11
+  population_and_evidence_floor: 'Population: current testing reports plus runtime security events in the period. Evidence floor: testing that
+    predates the current architecture, or zero runtime events with no test, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect the infrastructure/tooling capacity and resilience plan.
+  - id: D2
+    text: Confirm required compute, storage, network, monitoring, security, model-serving, evaluation and governance tooling capacity is defined
+      for expected demand and risk tier.
+  - id: D3
+    text: Confirm performance/resilience thresholds, scaling, continuity and support responsibilities are documented. PASS when capacity and resilience
+      requirements are measurable and owned; FAIL when critical capacity/resilience dependencies are undefined; NOT TESTABLE when no controlled
+      capacity plan exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Review recent capacity/performance metrics, incidents, scaling events and service-level results for material AI environments.
+  - id: O2
+    text: Verify resource levels remained within approved thresholds and exceptions triggered scaling/remediation.
+  - id: O3
+    text: Inspect continuity/recovery tests and critical tooling availability. PASS when the deployed environment consistently supports required
+      AI workloads and control processes without material unmanaged capacity risk; FAIL when threshold breaches or tooling failures were not addressed;
+      NOT TESTABLE when operational telemetry is unavailable.
+  near_miss_failure_modes:
+  - F1. The penetration test covers the web application and stops at the API, leaving the model, its tools and its retrieval path untested.
+  - F2. Testing predates the current architecture — new tools or data sources were added after the last test.
+  - F3. Injection defences are described as prompt-level instructions to the model, which is guidance rather than enforcement.
+  - F4. Findings are closed as 'risk accepted' with no expiry and no named acceptor.
+  - F5. Zero blocked attempts is offered as evidence of safety, with no test showing the defence would block.
+  - F6. The system treats retrieved document content and tool output as trusted instruction.
+  resolutions:
+  - failure_mode: F1
+    text: A test scope section naming the model, tool and retrieval components.
+  - failure_mode: F2
+    text: A test dated after the most recent architectural change.
+  - failure_mode: F3
+    text: An enforcement point outside the model — an allowlist, a schema check, a policy layer — with evidence of operation.
+  - failure_mode: F4
+    text: An acceptance record with a named acceptor and an expiry date.
+  - failure_mode: F5
+    text: A controlled injection test with the blocked result retained.
+  - failure_mode: F6
+    text: A design statement and runtime evidence separating instruction from data.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype security_resilience — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: F1
+  title: Fairness — AIDA decisions do not systematically disadvantage individuals/groups
+  requirement: For AI-assisted decisions that may materially affect people, fairness is assessed using appropriate methods and results are acted
+    upon before deployment and after material change or drift.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Affected groups and relevant fairness dimensions are identified for the use case.
+    scope: model
+    applies_when: null
+    locator: controls.F1.elements[0]
+  - id: e2
+    text: Fairness measures or criteria, thresholds and data requirements are defined.
+    scope: model
+    applies_when: null
+    locator: controls.F1.elements[1]
+  - id: e3
+    text: Material disparities are investigated and mitigated, with accountable review and reassessment triggers.
+    scope: model
+    applies_when: null
+    locator: controls.F1.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Compliance
+  expected_evidence:
+  - Fairness Assessment Report (Veritas 3A); fairness-metric results vs thresholds
+  linked_play:
+  - Play 2, 3, 4, 5, 8
+  crosswalk:
+  - FEAT (2018) | A.5.4; A.7.4 | MEASURE 2.11 | —
+  population_and_evidence_floor: 'Population: all model, prompt or agent versions promoted in the period. Evidence floor: fewer than 1 validated
+    version in the period, or reports with no version identifier, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect the fairness assessment standard and FEAT-aligned methodology.
+  - id: D2
+    text: Confirm it defines affected groups, relevant fairness dimensions/metrics, thresholds, dataset/population requirements, mitigation and
+      independent validation for high-materiality use cases.
+  - id: D3
+    text: Confirm event-driven reassessment triggers for drift/material change are defined. PASS when the design can detect and manage systematic
+      disadvantage for the intended decision context; FAIL when material groups/metrics/thresholds or mitigation are omitted; NOT TESTABLE when
+      no approved fairness method exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: For the sampled AIDA/use-case population, inspect the latest fairness results against approved thresholds and relevant groups.
+  - id: O2
+    text: Verify breaches/near-breaches triggered mitigation, escalation or restricted use and that re-testing occurred after material change/drift.
+  - id: O3
+    text: Trace any complaints or observed disparities to investigation and remediation. PASS when fairness performance is measured, thresholded
+      and acted upon in operation; FAIL when systematic disadvantage is evidenced without effective response; NOT TESTABLE when the relevant population
+      or metrics cannot be verified.
+  near_miss_failure_modes:
+  - F1. The validation report predates the deployed version — it validates the model that was tested, not the one that is running.
+  - F2. The validator sits in the same reporting line as the builder, so 'independent review' is a signature rather than a challenge.
+  - F3. The acceptance threshold was chosen after the result was known, which makes a pass unfalsifiable.
+  - F4. The test set overlaps the tuning or training data, so the reported score measures memorisation.
+  - F5. A metric is reported with no sample size, so a favourable number may rest on a handful of cases.
+  - F6. Only aggregate performance is reported — no slice, subgroup or worst-case analysis where the control requires it.
+  resolutions:
+  - failure_mode: F1
+    text: A validation report whose version identifier matches the deployed artefact, or a re-validation of the current version.
+  - failure_mode: F2
+    text: A validation performed or signed by a function outside the delivery reporting line, with the reviewer named.
+  - failure_mode: F3
+    text: A pre-registered threshold — an approved test plan dated before the test run.
+  - failure_mode: F4
+    text: A statement of dataset provenance and separation, or a held-out set with documented construction.
+  - failure_mode: F5
+    text: Reported metrics with denominators and confidence, or the underlying result file.
+  - failure_mode: F6
+    text: Slice-level results for the populations the control names.
+  test_provenance: 'Bespoke — requirements/mas.yaml v1 (FEAT (2018) (known)). Procedure: MAS v0.4 bespoke.'
+- framework: MAS
+  control_id: F2
+  title: Ethics — AIDA use aligns with organisational ethical standards
+  requirement: AI-assisted decision use aligns with the organisation’s ethical principles, prohibited-use boundaries and materiality-based ethics
+    review requirements.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Approved ethical principles and prohibited or controlled-use criteria are defined.
+    scope: model
+    applies_when: null
+    locator: controls.F2.elements[0]
+  - id: e2
+    text: Use-case ethics assessment or attestation is required where materiality warrants it.
+    scope: model
+    applies_when: null
+    locator: controls.F2.elements[1]
+  - id: e3
+    text: Conflicts, exceptions and material changes are escalated and dispositioned.
+    scope: model
+    applies_when: null
+    locator: controls.F2.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Compliance
+  expected_evidence:
+  - Ethics alignment attestation (Veritas 3B)
+  linked_play:
+  - Play 2, 4, 8
+  crosswalk:
+  - FEAT (2018) | A.2.2; A.5.5 | GOVERN 1.2; GOVERN 4.1 | —
+  population_and_evidence_floor: 'Population: all in-scope AI use cases or activities in the period, drawn from the AI inventory. Evidence floor:
+    fewer than 3 sampled items, or an inventory that cannot be reconciled, makes the operating result NOT TESTABLE.'
+  test_of_design:
+  - id: D1
+    text: Inspect organisational ethical principles, prohibited-use criteria and use-case ethics assessment/attestation.
+  - id: D2
+    text: Confirm the design requires ethics review appropriate to materiality and provides escalation where the use conflicts with organisational
+      principles.
+  - id: D3
+    text: Confirm ownership and approval/version controls. PASS when ethical expectations are explicit, use-case applicable and governed; FAIL
+      when material ethical boundaries are absent; NOT TESTABLE when no controlled ethics framework can be evidenced.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Sample material/high-impact AI use cases and inspect ethics alignment assessments or attestations.
+  - id: O2
+    text: Verify the assessed purpose/use matches approved ethical principles and any prohibited/conditional uses, and that exceptions were escalated.
+  - id: O3
+    text: Inspect material changes for refreshed ethics assessment. PASS when the ethical assessment operates consistently and identified concerns
+      are dispositioned; FAIL when use-case evidence conflicts with approved principles without governance action; NOT TESTABLE when the relevant
+      use-case population cannot be established.
+  near_miss_failure_modes:
+  - F1. The policy is approved but has no implementing procedure — nothing in the operating environment makes the requirement happen.
+  - F2. Scope is written so broadly ('all AI use') that no one can tell whether a given system is in or out.
+  - F3. Exceptions are granted by the same team that needs them, with no expiry.
+  - F4. The policy was approved in the period but the sampled use cases predate it and were never reassessed against it.
+  - F5. A breach register exists but every entry is closed as 'noted' with no remediation or acceptance.
+  resolutions:
+  - failure_mode: F1
+    text: A named procedure, runbook or control that implements the clause, with an owner.
+  - failure_mode: F2
+    text: A scope statement with inclusion and exclusion criteria, or a mapping from the inventory to in-scope flag.
+  - failure_mode: F3
+    text: An exception record showing an independent grantor, a stated basis and an expiry date.
+  - failure_mode: F4
+    text: A reassessment record for pre-existing use cases, or an approved grandfathering decision.
+  - failure_mode: F5
+    text: A breach entry with a remediation action, owner and closure evidence, or a formal risk acceptance.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype policy_standard — DRAFT, requirement text not yet written'
+- framework: MAS
+  control_id: F3
+  title: Accountability — clear internal & external accountability for AIDA-driven decisions
+  requirement: Accountability for AI-assisted decisions is explicit across internal owners, decision authorities and material third-party dependencies,
+    with non-delegable internal accountability.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Named business, model, risk/control and decision-accountable roles are defined.
+    scope: model
+    applies_when: null
+    locator: controls.F3.elements[0]
+  - id: e2
+    text: Approval, escalation and decision-authorisation records are required and retained.
+    scope: model
+    applies_when: null
+    locator: controls.F3.elements[1]
+  - id: e3
+    text: Third-party responsibilities are defined without replacing retained internal accountability.
+    scope: model
+    applies_when: null
+    locator: controls.F3.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Compliance
+  expected_evidence:
+  - Accountability matrix; internal authorisation record (Veritas 3B)
+  linked_play:
+  - Play 2, 4, 8
+  crosswalk:
+  - FEAT (2018) | A.3.2; A.10.2 | GOVERN 2.1; GOVERN 2.3 | MGF D1.5, D2.1 | SAFR S1.1, S3.3 | —
+  population_and_evidence_floor: 'Population: every meeting or reserved decision in the review period, established from the governance calendar
+    or decision register. Evidence floor: fewer than 3 meetings or fewer than 1 material decision available to inspect makes the operating result
+    NOT TESTABLE rather than a PASS.'
+  test_of_design:
+  - id: D1
+    text: Inspect the accountability matrix, internal authorisation records and third-party responsibility model.
+  - id: D2
+    text: Confirm accountable roles cover business owner, model owner, risk/control functions, decision authority, escalation and external/vendor
+      responsibilities, with non-delegable accountability clearly defined.
+  - id: D3
+    text: Confirm approval and record-retention requirements. PASS when accountability is explicit from AI system through decision outcome, including
+      material third-party dependencies; FAIL when responsibility is ambiguous or delegated without retained accountability; NOT TESTABLE when
+      approved accountability artefacts are unavailable.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Sample material AI decisions, releases and third-party model arrangements.
+  - id: O2
+    text: Trace each to named accountable owners, required approvals, escalation paths and decision/authorisation records.
+  - id: O3
+    text: Inspect incidents/complaints to confirm responsibility was clear and exercised. PASS when sampled decisions have identifiable accountable
+      owners and documented authorisation; FAIL when responsibility cannot be established or vendors are treated as replacing internal accountability;
+      NOT TESTABLE when required decision records are unavailable.
+  near_miss_failure_modes:
+  - F1. Minutes record attendance and papers tabled but no decision — the body was informed rather than deciding.
+  - F2. The material decision was taken outside the body and ratified afterwards, with the ratification date after the go-live date.
+  - F3. Quorum was not met at the meeting where the reserved decision was taken, and the minutes do not record it.
+  - F4. Actions carry an owner but no due date, and the same actions reappear across consecutive meetings without disposition.
+  - F5. The mandate is approved but predates the AI scope it is claimed to cover — for example approved before agentic use cases existed.
+  resolutions:
+  - failure_mode: F1
+    text: A minuted decision with the decision wording, the decision-maker and the date.
+  - failure_mode: F2
+    text: Evidence that the approval preceded the deployment, or an approved retrospective risk acceptance naming the exposure.
+  - failure_mode: F3
+    text: An attendance record showing quorum, or a documented out-of-cycle approval route.
+  - failure_mode: F4
+    text: An action log with owner, due date and closure evidence or a formal acceptance.
+  - failure_mode: F5
+    text: A mandate version approved after the scope change, or a scope addendum with its own approval.
+  test_provenance: 'Bespoke — requirements/mas.yaml v1 (FEAT (2018) (known)). Procedure: MAS v0.4 bespoke.'
+- framework: MAS
+  control_id: F4
+  title: Transparency — disclosure & explanation appropriate to each stakeholder
+  requirement: AI-assisted decisions are disclosed and explained to relevant stakeholders in a manner proportionate to materiality, with current
+    limitations and update triggers.
+  requirement_source: requirements/mas.yaml
+  requirement_authority: authoritative_internal_interpretation
+  elements:
+  - id: e1
+    text: Transparency and disclosure requirements distinguish relevant stakeholder groups and materiality.
+    scope: model
+    applies_when: null
+    locator: controls.F4.elements[0]
+  - id: e2
+    text: Material limitations, purpose, explanation and contact/escalation information are defined where applicable.
+    scope: model
+    applies_when: null
+    locator: controls.F4.elements[1]
+  - id: e3
+    text: Material changes or incidents trigger review and update of disclosures or model-card information.
+    scope: model
+    applies_when: null
+    locator: controls.F4.elements[2]
+  boundary:
+    none: The control requirement is not evidenced beyond generic intent, policy aspiration or unrelated material.
+    partial: Some applicable requirement elements are evidenced, but one or more required elements or operating evidence is missing or incomplete.
+    full: All applicable requirement elements are evidenced with current, attributable and sufficient design or operating evidence; no material
+      mandatory element remains unsubstantiated.
+  owner: Compliance
+  expected_evidence:
+  - Transparency assessment; model card; customer disclosure standard (Veritas 3C)
+  linked_play:
+  - Play 2, 3, 4, 5, 8
+  crosswalk:
+  - FEAT (2018) | A.8.2; A.8.5; A.6.2.7 | MEASURE 2.8; MEASURE 2.9 | MGF D2.7, D4.1 | SAFR S3.2 | —
+  population_and_evidence_floor: 'Population: all in-scope channels and interaction types in the period. Evidence floor: fewer than all channels
+    observed, or observation from specification rather than delivery, makes the operating result NOT TESTABLE for the unobserved channels.'
+  test_of_design:
+  - id: D1
+    text: Inspect transparency standards, model-card template and stakeholder disclosure requirements.
+  - id: D2
+    text: Confirm the design differentiates internal users, customers/affected persons, regulators and other stakeholders, with proportionate
+      explanation/disclosure requirements, material limitations and update triggers.
+  - id: D3
+    text: Confirm change and incident events trigger review of disclosures. PASS when transparency requirements are audience-specific, proportionate
+      and maintainable; FAIL when material stakeholders or update triggers are omitted; NOT TESTABLE when no controlled transparency standard
+      exists.
+  test_of_operating_effectiveness:
+  - id: O1
+    text: Sample live AI systems and inspect the disclosures/model cards actually presented to relevant stakeholders.
+  - id: O2
+    text: Verify content is consistent with the deployed version/use case, includes material limitations and provides an appropriate explanation/contact
+      path.
+  - id: O3
+    text: Trace material changes/incidents to timely disclosure/model-card updates. PASS when operating disclosures are accurate, proportionate
+      and current; FAIL when material stakeholder information is missing or materially inconsistent with the deployed system; NOT TESTABLE when
+      actual disclosure evidence cannot be obtained.
+  near_miss_failure_modes:
+  - F1. Disclosure is present in the main web journey and absent in the app, the call centre script or the partner channel.
+  - F2. Disclosure sits in terms and conditions accepted at onboarding, years before the AI was introduced.
+  - F3. The wording describes an earlier version of the system and overstates or understates what it does.
+  - F4. A human-referral route is promised and the queue behind it is unstaffed.
+  - F5. Evidence is the approved wording document rather than a capture of what the customer actually sees.
+  resolutions:
+  - failure_mode: F1
+    text: A per-channel capture of the delivered disclosure.
+  - failure_mode: F2
+    text: A disclosure at the point of interaction, dated after the AI introduction.
+  - failure_mode: F3
+    text: A wording review dated after the most recent material system change.
+  - failure_mode: F4
+    text: Response-time evidence for the recourse route.
+  - failure_mode: F5
+    text: A screenshot, recording or transcript from the live channel.
+  test_provenance: 'Procedure: MAS v0.4 bespoke. Elements/boundary: archetype disclosure_transparency — DRAFT, requirement text not yet written'
