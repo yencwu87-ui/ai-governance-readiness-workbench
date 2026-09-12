@@ -1,0 +1,133 @@
+# Policy as code — fixture copy for examples/sample_repo.
+#
+# Added 2026-09-10. The fixture had governance/ exports but no policy/, so every demo run
+# produced bundles with the evidence floor defaulted to 1 and the gate defaulted to
+# fail_on=none. The runner now refuses to run without this file (caa/runner.py), but a demo
+# target that cannot demonstrate policy-as-code was the more basic problem.
+#
+# Values mirror the repository policy. Edit them here to show how a different golden state
+# changes the verdicts — that is what the fixture is for.
+
+policy: ai-lifecycle
+version: 1.2.0
+owner: AI Risk (second line)
+approved_by: AI Risk Committee
+effective: 2026-09-07
+amends: 1.1.0
+scope: 'The readiness-assessor and any model, agent or prompt deployed from this repository, across
+  the eleven lifecycle plays in the AI Governance Playbook.
+
+  '
+golden_state:
+  inference:
+    residency: local-only
+    allowed_providers:
+    - ollama
+    - mlx
+    model_allowlist: null
+    egress_permitted: false
+    provider_exceptions:
+    - provider: anthropic
+      requires_exception: true
+  dependencies:
+    pinned: true
+    lockfile: requirements.txt
+  required_artefacts:
+    all:
+    - model_card
+    - registry_entry
+    - change_ticket
+    low: []
+    medium:
+    - eval_before_deploy
+    high:
+    - eval_before_deploy
+    - impact_assessment
+    - independent_validation
+    - stress_test_pre_release
+  tier_obligations:
+    low:
+      review_cycle_days: 380
+      approval_level: model owner
+    medium:
+      review_cycle_days: 190
+      approval_level: model owner
+      eval_before_deploy: true
+    high:
+      review_cycle_days: 100
+      approval_level: AI Risk Committee
+      eval_before_deploy: true
+      independent_validation: true
+      stress_test_within_days: 100
+  evaluation:
+    golden_set_min_items: 20
+    run_before_deploy: true
+    tolerances:
+      accuracy_max_drop: 0.02
+      fairness_gap_max_rise: 0.01
+      refusal_rate_max_rise: 0.05
+  segregation_of_duties:
+    approver_not_author: true
+gates:
+  on_commit:
+    fail_on: high
+    inconclusive_on: high
+  on_deploy:
+    fail_on: high
+    inconclusive_on: high
+    require_pass:
+    - MCM-03
+    - STR-03
+    - GOV-06
+  scheduled:
+    fail_on: none
+    inconclusive_on: none
+  manual:
+    fail_on: none
+    inconclusive_on: none
+  non_waivable:
+  - critical
+evidence_floor:
+  by_severity:
+    critical: 1
+    high: 1
+    medium: 1
+    low: 0
+  overrides:
+    GOV-03: 0
+    MCM-10: 0
+    MCM-04: 2
+    OVS-01: 10
+exceptions:
+  max_days: 180
+  requires:
+  - exception_id
+  - control_id
+  - owner
+  - expires_on
+  - rationale
+  re_table_at: monthly service governance forum
+cadence:
+  stress_test_days:
+    quarterly: 100
+    semi-annual: 190
+    annual: 380
+  rollback_test_days: 180
+  emergency_change_close_days: 7
+oversight:
+  reviewer_required: true
+  override_rate_band:
+  - 0.05
+  - 0.6
+  ai_may:
+  - propose
+  - retrieve
+  - summarise
+  - triage
+  ai_may_not:
+  - record a decision
+  - sign a result
+  - set a gate outcome
+  - edit an evidence bundle
+  - edit the tracker
+  - edit this policy

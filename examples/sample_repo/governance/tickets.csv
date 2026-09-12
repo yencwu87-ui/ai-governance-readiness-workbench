@@ -1,0 +1,3 @@
+ticket_id,model_id,version,risk_tier,approver,emergency,opened_at,approved_at
+MCM-101,triage-classifier,v1.4.0,high,Carol Ng,false,2026-08-20,2026-08-25
+MCM-102,triage-classifier,v1.5.0,medium,Bob Lim,true,2026-08-30,

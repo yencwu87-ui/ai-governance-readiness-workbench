@@ -1,0 +1,7 @@
+models:
+  - name: triage-classifier
+    version: v1.4.0
+    deployed_at: 2026-08-28T09:00:00Z
+  - name: triage-classifier
+    version: v1.5.0
+    deployed_at: 2026-09-03T14:30:00Z
