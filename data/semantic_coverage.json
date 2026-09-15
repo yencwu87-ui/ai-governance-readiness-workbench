@@ -1,0 +1,57 @@
+{
+  "audit_PASS": 135,
+  "audit_REVISE": 47,
+  "audit_UNMAPPED": 13,
+  "controls": 195,
+  "controls_total": 195,
+  "deterministic_elements": 19,
+  "elements": 284,
+  "elements_total": 371,
+  "framework_elements": {
+    "ISO 42001": 39,
+    "MAS": 101,
+    "MGF Agentic": 126,
+    "NIST AI RMF": 83,
+    "SAFR": 22
+  },
+  "frameworks": {
+    "ISO 42001": {
+      "controls": 38,
+      "elements": 39
+    },
+    "MAS": {
+      "controls": 30,
+      "elements": 101
+    },
+    "MGF Agentic": {
+      "controls": 34,
+      "elements": 39
+    },
+    "NIST AI RMF": {
+      "controls": 72,
+      "elements": 83
+    },
+    "SAFR": {
+      "controls": 21,
+      "elements": 22
+    }
+  },
+  "grounding_INSTRUMENT_MATCH_CANDIDATE": 332,
+  "grounding_INTERNAL_GOVERNED_SOURCE": 39,
+  "grounding_gap_count": 0,
+  "human_judgement_elements": 351,
+  "mgf_agentic_elements": 126,
+  "out_of_band_elements": 1,
+  "registry_sha256": "832e21e3e325057a5ea639f09cdd27fafdb709d5516c7449a3d23cec90b7a2a4",
+  "schema_version": "1.0.0",
+  "semantic_coverage_percent": 100.0,
+  "semantic_elements": 371,
+  "verification": {
+    "DETERMINISTIC": 19,
+    "HUMAN_JUDGEMENT": 264,
+    "OUT_OF_BAND": 1
+  },
+  "verification_DETERMINISTIC": 19,
+  "verification_HUMAN_JUDGEMENT": 351,
+  "verification_OUT_OF_BAND": 1
+}

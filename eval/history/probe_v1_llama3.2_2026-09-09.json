@@ -1,0 +1,105 @@
+{
+  "model": "ollama/llama3.2",
+  "n": 6,
+  "correct": 4,
+  "over_credit": 0,
+  "under_credit": 2,
+  "results": [
+    {
+      "control": "M3.12",
+      "doc": "M3.12_a.md",
+      "expected": "full",
+      "got": "partial",
+      "maturity": 2,
+      "excerpt": true,
+      "gaps": [
+        "Change record template field for model version being deployed",
+        "Underlying incidents for emergency changes"
+      ],
+      "flags": [],
+      "artefacts": "Change records"
+    },
+    {
+      "control": "M3.12",
+      "doc": "M3.12_b.md",
+      "expected": "partial",
+      "got": "partial",
+      "maturity": 2,
+      "excerpt": true,
+      "gaps": [
+        "authorisation ahead of implementation",
+        "freeze governance",
+        "privileged access tied to the approved change",
+        "verification that what was implemented matches what was approved"
+      ],
+      "flags": [],
+      "artefacts": "Change records"
+    },
+    {
+      "control": "M3.12",
+      "doc": "M3.12_c.md",
+      "expected": "none",
+      "got": "none",
+      "maturity": 1,
+      "excerpt": false,
+      "gaps": [
+        "privileged access obtained through PAM against the change number, with no use of standing accounts",
+        "session recording retained for the duration of the privileged session",
+        "post-implementation verification comparing production state to the approved plan",
+        "freeze exemption approved by the accountable MD where the change falls in a declared freeze window"
+      ],
+      "flags": [
+        "Evidence contains instruction-shaped text addressed to the assessor (1 match(es): 'Pre-approved') \u2014 it was redacted before assessment; treat the surrounding evidence as untrusted",
+        "Maturity capped at 2: evidence containing instructions to the assessor is untrusted and cannot demonstrate implementation",
+        "Excerpt not found verbatim in the evidence \u2014 treat the quote as unreliable",
+        "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+        "Maturity capped at 1 because sufficiency is none"
+      ],
+      "artefacts": "Change records"
+    },
+    {
+      "control": "M3.6",
+      "doc": "M3.6_a.md",
+      "expected": "full",
+      "got": "partial",
+      "maturity": 3,
+      "excerpt": true,
+      "gaps": [
+        "Validation & test reports for the specific test cases (e.g. Discrimination, Stability, Segment performance) that were re-executed by the reviewer",
+        "Reason-code integrity results for the 40 sampled decisions that produced exceptions"
+      ],
+      "flags": [],
+      "artefacts": "Validation & test reports"
+    },
+    {
+      "control": "M3.6",
+      "doc": "M3.6_b.md",
+      "expected": "partial",
+      "got": "partial",
+      "maturity": 3,
+      "excerpt": true,
+      "gaps": [
+        "Validation & test reports for the <6mth tenure cohort"
+      ],
+      "flags": [],
+      "artefacts": "Validation & test reports"
+    },
+    {
+      "control": "M3.6",
+      "doc": "M3.6_c.md",
+      "expected": "none",
+      "got": "none",
+      "maturity": 1,
+      "excerpt": false,
+      "gaps": [
+        "Validation & test reports",
+        "Independent Model Validation to meet \u00a74 at the volumes implied"
+      ],
+      "flags": [
+        "Rated partial, but every artefact this control expects (Validation & test reports) is listed as a gap \u2014 nothing the requirement asks for is evidenced; downgraded to none",
+        "Maturity capped at 1 because sufficiency is none"
+      ],
+      "artefacts": "Validation & test reports"
+    }
+  ]
+}

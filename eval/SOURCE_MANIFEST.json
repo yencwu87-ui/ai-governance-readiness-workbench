@@ -1,0 +1,77 @@
+{
+  "adopted_at": "2026-09-15",
+  "adopted_by": "Claude (designated writer, eval/ measurement layer)",
+  "files": {
+    "eval/corpus/M3.12/LABELS.md": {
+      "bytes": 4361,
+      "class": "data",
+      "owner": "Claude (designated writer, eval/ measurement layer)",
+      "sha256": "2370378d3c314e940b899ec87a589e7c27b312ccfb68431612992cc9bbed2f64"
+    },
+    "eval/corpus/M3.12/elements.yaml": {
+      "bytes": 7840,
+      "class": "data",
+      "owner": "Claude (designated writer, eval/ measurement layer)",
+      "sha256": "7bec3b06ae6dbe49761e879519ca7233666914c6568206bdc3ce436cee3d9beb"
+    },
+    "eval/corpus/M3.6/AUTHORED_CASES.json": {
+      "bytes": 1520,
+      "class": "data",
+      "owner": "Claude (designated writer, eval/ measurement layer)",
+      "sha256": "ebbc657cb311f3d8015a50dcc6b2b5826834ed82e298cc804be3aecd3e4067f5"
+    },
+    "eval/corpus/M3.6/LABELS.md": {
+      "bytes": 7496,
+      "class": "data",
+      "owner": "Claude (designated writer, eval/ measurement layer)",
+      "sha256": "0c5eb6d4c6b65947cf40280bbbd589635d7faec61853e36a0b2fb7826b7a7e0f"
+    },
+    "eval/corpus/M3.6/elements.yaml": {
+      "bytes": 42971,
+      "class": "data",
+      "owner": "Claude (designated writer, eval/ measurement layer)",
+      "sha256": "552605aa7dc65a42e3c70599e9416ca645cb3cf9f63946fe1600f1aeaad941c3"
+    },
+    "eval/corpus_adequacy.py": {
+      "bytes": 28668,
+      "class": "source",
+      "owner": "Claude (designated writer, eval/ measurement layer)",
+      "sha256": "fb7dfb6b280f210be02bea6769e72b04c7d8df236a3feea4ca339b264f1c67a8"
+    },
+    "eval/corpus_labels.py": {
+      "bytes": 25029,
+      "class": "source",
+      "owner": "Claude (designated writer, eval/ measurement layer)",
+      "sha256": "40081ccd383f97199ddde6f82f5fa0c1531a9ce533145bb427d2c25095d738e2"
+    },
+    "eval/evaluators.py": {
+      "bytes": 6237,
+      "class": "source",
+      "owner": "Claude (designated writer, eval/ measurement layer)",
+      "sha256": "61e43f9ecbd75f6f9b57b9238cebd1905e8ffe92652033a52ba66328746f9313"
+    },
+    "eval/label_provenance.py": {
+      "bytes": 15841,
+      "class": "source",
+      "owner": "Claude (designated writer, eval/ measurement layer)",
+      "sha256": "d1642eaa6ba1033590c217b259124b2ec9b8d397a6a10b151d4d692fe53e049e"
+    },
+    "eval/measurement_run.py": {
+      "bytes": 15165,
+      "class": "source",
+      "owner": "Claude (designated writer, eval/ measurement layer)",
+      "sha256": "758e87fc5a9bfe5b53a70033e679b1ffcaabb6d02a336340e72db0379146eb7d",
+      "supersedes": "0d06caf035d7df6e"
+    },
+    "eval/source_integrity.py": {
+      "bytes": 7435,
+      "class": "source",
+      "owner": "Claude (designated writer, eval/ measurement layer)",
+      "sha256": "6a0bc921983f2d1410e4524bcf479ee85d553bd76c2f2d7b2da8f701208a46b5",
+      "supersedes": "a0524c79079239b6"
+    }
+  },
+  "note": "GE-110b.5 \u2014 evaluators added; denominator fixed to the gold population.",
+  "rule": "One designated writer per source file. A hash mismatch against this manifest is a test failure, not a warning. Data files are recorded for provenance and are not enforced.",
+  "schema": "ge110b3.source-integrity.1"
+}

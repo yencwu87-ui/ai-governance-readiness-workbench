@@ -1,0 +1,29 @@
+schema_version: wb063.element-draft.1
+generated_at: '2026-09-13T21:02:56+00:00'
+instrument_provenance: file:SAFR.txt
+instrument_verified: true
+needs_instrument: false
+authority: draft
+note: Proposed decomposition for second-line argument. Not governed. Promote into requirements/<framework>.yaml
+  only after the wording has been argued against the instrument by a named person — at which point the
+  confidence becomes 'known' because a person checked it, not because this tool did.
+controls:
+  S4.2:
+    framework: SAFR
+    title: Gateway interception of actions
+    instrument_provenance: file:SAFR.txt
+    instrument_verified: true
+    elements:
+    - id: e1
+      text: the agent must be verified against its registry entry before any other evaluation proceeds.
+      kind: design
+      anchor: The agent proposing an action must be who it claims to be.
+      anchor_verified: true
+      confidence: known
+    dropped: []
+    beyond_title: ''
+    beyond_instrument: The control title claims to provide an API-level chokepoint that intercepts outbound
+      agent actions, but the instrument does not obligate the control to do so.
+    kinds:
+      design: 1
+      operation: 0

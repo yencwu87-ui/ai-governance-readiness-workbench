@@ -1,0 +1,204 @@
+{
+ "model": "ollama/llama3.2:latest",
+ "workbook": "/Users/wyc/Downloads/fix_work/data/AI_Governance_Playbook_MGF_SAFR_v0.5.1_contracts.xlsx",
+ "evidence": "eval/corpus/M3.6",
+ "modes": [
+  "split"
+ ],
+ "corpus_binding": {
+  "available": true,
+  "by_control": {
+   "M3.6": {
+    "cases": 3,
+    "recorded": "77beaa02c634",
+    "live": "dba77f604297",
+    "stale": [
+     "M3.6_a",
+     "M3.6_b",
+     "M3.6_c"
+    ],
+    "unbound": []
+   }
+  }
+ },
+ "label_comparison_testable": false,
+ "summary": {
+  "split": {
+   "scored": 4,
+   "failed": 0,
+   "elements": 12,
+   "unset": 0,
+   "met": 4,
+   "unset_rate": 0.0,
+   "downgraded": 0,
+   "inconsistent": 2
+  }
+ },
+ "rows": [
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "LABELS.md",
+   "n_elements": 3,
+   "error": null,
+   "mode": "split",
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 0,
+   "not_evidenced": 3,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [
+    "Every decided element (3) is not evidenced, but sufficiency was partial \u2014 downgraded to none",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": true,
+     "rejected_excerpt": null
+    },
+    {
+     "element_id": "e2",
+     "status": "not_evidenced",
+     "has_excerpt": true,
+     "rejected_excerpt": null
+    },
+    {
+     "element_id": "e3",
+     "status": "not_evidenced",
+     "has_excerpt": true,
+     "rejected_excerpt": null
+    }
+   ],
+   "rejections": [],
+   "elements_imply": "none",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.6_a.md",
+   "n_elements": 3,
+   "error": null,
+   "mode": "split",
+   "sufficiency": "partial",
+   "maturity": 3,
+   "met": 1,
+   "not_evidenced": 2,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": true,
+     "rejected_excerpt": null
+    },
+    {
+     "element_id": "e2",
+     "status": "met",
+     "has_excerpt": true,
+     "rejected_excerpt": null
+    },
+    {
+     "element_id": "e3",
+     "status": "not_evidenced",
+     "has_excerpt": true,
+     "rejected_excerpt": null
+    }
+   ],
+   "rejections": [],
+   "elements_imply": "partial",
+   "rating_matches_elements": true
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.6_b.md",
+   "n_elements": 3,
+   "error": null,
+   "mode": "split",
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 2,
+   "not_evidenced": 1,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": true,
+     "rejected_excerpt": null
+    },
+    {
+     "element_id": "e2",
+     "status": "met",
+     "has_excerpt": true,
+     "rejected_excerpt": null
+    },
+    {
+     "element_id": "e3",
+     "status": "met",
+     "has_excerpt": true,
+     "rejected_excerpt": null
+    }
+   ],
+   "rejections": [],
+   "elements_imply": "partial",
+   "rating_matches_elements": false
+  },
+  {
+   "control": "M3.6",
+   "library": "MAS",
+   "evidence": "M3.6_c.md",
+   "n_elements": 3,
+   "error": null,
+   "mode": "split",
+   "sufficiency": "none",
+   "maturity": 1,
+   "met": 1,
+   "not_evidenced": 2,
+   "not_applicable": 0,
+   "unset": 0,
+   "downgraded": 0,
+   "flags": [
+    "Rated partial with no surviving verbatim excerpt \u2014 nothing in the evidence was shown to meet the requirement; downgraded to none",
+    "Maturity capped at 1 because sufficiency is none"
+   ],
+   "verdicts": [
+    {
+     "element_id": "e1",
+     "status": "not_evidenced",
+     "has_excerpt": true,
+     "rejected_excerpt": null
+    },
+    {
+     "element_id": "e2",
+     "status": "met",
+     "has_excerpt": true,
+     "rejected_excerpt": null
+    },
+    {
+     "element_id": "e3",
+     "status": "not_evidenced",
+     "has_excerpt": true,
+     "rejected_excerpt": null
+    }
+   ],
+   "rejections": [],
+   "elements_imply": "partial",
+   "rating_matches_elements": false
+  }
+ ]
+}

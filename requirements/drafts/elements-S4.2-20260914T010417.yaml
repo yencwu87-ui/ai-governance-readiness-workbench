@@ -1,0 +1,165 @@
+schema_version: wb070.element-draft.2
+generated_at: '2026-09-14T01:04:17+00:00'
+instrument_provenance: file:SAFR.txt
+instrument_verified: true
+needs_instrument: false
+authority: draft
+method: sentence selection by index, obligation stated in a second call; anchors are verbatim by construction
+note: Proposed decomposition for second-line argument. Not governed. Promote into requirements/<framework>.yaml
+  only after the wording has been argued against the instrument by a named person — the confidence becomes
+  'known' because a person checked it, not because this tool matched a string.
+controls:
+  S4.2:
+    framework: SAFR
+    title: Gateway interception of actions
+    instrument_provenance: file:SAFR.txt
+    instrument_verified: true
+    candidates_offered: 18
+    selected:
+    - index: 4
+      sentence: The governance envelope is intended to provide a complete and coherent representation
+        of the proposed action at the point it is submitted for governance.
+    - index: 6
+      sentence: In open networks, where an agent may interact with counterparties, payment systems, or
+        other institutions outside the deploying organisation, the context is more complex.
+    - index: 8
+      sentence: 'The Controls Repository The Controls Repository holds the controls against which proposed
+        actions are checked: the institution''s configurable rulebook, drawn from sources such as organisational
+        policies, regulatory requirements, product rules, and user -provided authority.'
+    - index: 12
+      sentence: Native Integration The agent is instrumented to emit a Governance Envelope before each
+        proposed action.
+    - index: 14
+      sentence: Gateway Integration A SAFR gateway intercepts outbound API calls at the infrastructure
+        layer, wrapping each call in a Governance Envelope and evaluating it without any changes to the
+        agent code itself.
+    - index: 16
+      sentence: For institutions with many existing agents, the gateway pattern serve s as a practical
+        starting point by establishing coverage first and native instrumentation can follow for new builds.
+    - index: 17
+      sentence: Agents performing critical The agent's permitted scope is defined by predefined constraints
+        - limited to The workflow distinguishes between tasks that the agent may execute autonomously
+        and Agent actions are subject to enterprise-level monitoring, with clear visibility and traceability
+        of each 13 Developed together with Bank of Singapore, a wholly owned private banking subsidiary
+        of OCBC.
+    - index: 18
+      sentence: SAFEGUARDS FOR AGENTIC FINANCE AT RUNTIME Agent Identity Controls Repository Disposition
+        Engine Audit Log bankers ahead of client meetings tasks autonomously are assigned a named, accountable
+        human owner with clear responsibility for the agent's output. accessing designated news sources
+        - and the principle that impactful and material actions require human approval. material actions
+        (e.g., delivering the brief), which requires explicit approval from a human. agent's actions,
+        enabling the institution to trace what was done back to a named, accountable human owner.
+    elements:
+    - id: e1
+      text: be complete and coherent
+      kind: operation
+      anchor: The governance envelope is intended to provide a complete and coherent representation of
+        the proposed action at the point it is submitted for governance.
+      anchor_verified: true
+      confidence: known
+    - id: e2
+      text: be able to show
+      kind: operation
+      anchor: In open networks, where an agent may interact with counterparties, payment systems, or other
+        institutions outside the deploying organisation, the context is more complex.
+      anchor_verified: true
+      confidence: known
+    - id: e3
+      text: The institution must have a configurable rulebook
+      kind: design
+      anchor: 'The Controls Repository The Controls Repository holds the controls against which proposed
+        actions are checked: the institution''s configurable rulebook, drawn from sources such as organisational
+        policies, regulatory requirements, product rules, and user -provided authority.'
+      anchor_verified: true
+      confidence: known
+    - id: e4
+      text: The institution must hold controls against organisational policies, regulatory requirements,
+        product rules, and user-provided authority
+      kind: operation
+      anchor: 'The Controls Repository The Controls Repository holds the controls against which proposed
+        actions are checked: the institution''s configurable rulebook, drawn from sources such as organisational
+        policies, regulatory requirements, product rules, and user -provided authority.'
+      anchor_verified: true
+      confidence: known
+    - id: e5
+      text: The agent must emit a Governance Envelope before each proposed action.
+      kind: operation
+      anchor: Native Integration The agent is instrumented to emit a Governance Envelope before each proposed
+        action.
+      anchor_verified: true
+      confidence: known
+    - id: e6
+      text: wrap each call in a Governance Envelope
+      kind: design
+      anchor: Gateway Integration A SAFR gateway intercepts outbound API calls at the infrastructure layer,
+        wrapping each call in a Governance Envelope and evaluating it without any changes to the agent
+        code itself.
+      anchor_verified: true
+      confidence: known
+    - id: e7
+      text: evaluate it without any changes to the agent code itself
+      kind: operation
+      anchor: Gateway Integration A SAFR gateway intercepts outbound API calls at the infrastructure layer,
+        wrapping each call in a Governance Envelope and evaluating it without any changes to the agent
+        code itself.
+      anchor_verified: true
+      confidence: known
+    - id: e8
+      text: Establish coverage
+      kind: operation
+      anchor: For institutions with many existing agents, the gateway pattern serve s as a practical starting
+        point by establishing coverage first and native instrumentation can follow for new builds.
+      anchor_verified: true
+      confidence: known
+    - id: e9
+      text: The agent's permitted scope is defined by predefined constraints - limited to
+      kind: design
+      anchor: Agents performing critical The agent's permitted scope is defined by predefined constraints
+        - limited to The workflow distinguishes between tasks that the agent may execute autonomously
+        and Agent actions are subject to enterprise-level monitoring, with clear visibility and traceability
+        of each 13 Developed together with Bank of Singapore, a wholly owned private banking subsidiary
+        of OCBC.
+      anchor_verified: true
+      confidence: known
+    - id: e10
+      text: Agent actions are subject to enterprise-level monitoring, with clear visibility and traceability
+        of each
+      kind: operation
+      anchor: Agents performing critical The agent's permitted scope is defined by predefined constraints
+        - limited to The workflow distinguishes between tasks that the agent may execute autonomously
+        and Agent actions are subject to enterprise-level monitoring, with clear visibility and traceability
+        of each 13 Developed together with Bank of Singapore, a wholly owned private banking subsidiary
+        of OCBC.
+      anchor_verified: true
+      confidence: known
+    - id: e11
+      text: an accountable human owner with clear responsibility for the agent's output
+      kind: operation
+      anchor: SAFEGUARDS FOR AGENTIC FINANCE AT RUNTIME Agent Identity Controls Repository Disposition
+        Engine Audit Log bankers ahead of client meetings tasks autonomously are assigned a named, accountable
+        human owner with clear responsibility for the agent's output. accessing designated news sources
+        - and the principle that impactful and material actions require human approval. material actions
+        (e.g., delivering the brief), which requires explicit approval from a human. agent's actions,
+        enabling the institution to trace what was done back to a named, accountable human owner.
+      anchor_verified: true
+      confidence: known
+    - id: e12
+      text: explicit approval from a human
+      kind: operation
+      anchor: SAFEGUARDS FOR AGENTIC FINANCE AT RUNTIME Agent Identity Controls Repository Disposition
+        Engine Audit Log bankers ahead of client meetings tasks autonomously are assigned a named, accountable
+        human owner with clear responsibility for the agent's output. accessing designated news sources
+        - and the principle that impactful and material actions require human approval. material actions
+        (e.g., delivering the brief), which requires explicit approval from a human. agent's actions,
+        enabling the institution to trace what was done back to a named, accountable human owner.
+      anchor_verified: true
+      confidence: known
+    dropped: []
+    selection_note: ''
+    invalid_indices: 0
+    selected_not_stated: []
+    selected_count_raw: 15
+    over_selected: true
+    kinds:
+      design: 3
+      operation: 9

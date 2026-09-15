@@ -1,0 +1,59 @@
+# Patch for policy/ai-lifecycle.yaml — WB-030. Not a drop-in file: apply these
+# fragments into the existing 1.3.1 document at the keys shown.
+
+# 1. header
+version: 1.4.0
+amends: 1.3.1
+effective: 2026-__-__          # the approval date, not the edit date
+
+# 2. NEW BLOCK under golden_state:, alongside `evaluation:` and `segregation_of_duties:`
+golden_state:
+
+  classification:
+    # Which side of the CAID/OAID boundary each component of a governed use case sits on.
+    # Derived from the Halocline Test (Russo 2026, DOI 10.5281/zenodo.19617437). The
+    # obligation is this clause; that work is the method, not an authority the controls cite.
+    register: governance/uc_components.csv
+    unit: component                 # per component of the use case, never per use case
+    permitted_domains: [CAID, OAID]
+    third_value_permitted: false    # no hybrid, no unknown — a hybrid step is two components
+    classifier: named_person
+    binding_rule: override_human_evaluates
+    # If no human evaluates the output before it influences the next step, the component is
+    # OAID regardless of how it was designed or labelled. The other five questions of the
+    # test are advisory: they raise flags, they never overturn a declaration.
+    advisory_only: [outcome_defined, correctness_verifiable, errors_recoverable,
+                    human_between_steps, judgement_required]
+    stale_on: component_spec_change
+    stale_handling: not_testable    # same reading as evaluation.stale_handling
+
+# 3. ADD to the existing oversight: block
+oversight:
+  # ai_may_not gains one entry. A model proposing a domain and a validator downgrading it
+  # would put a machine opinion into the record for the field that decides whether a human
+  # is required at all.
+  ai_may_not:
+    - classify a component's domain
+  # override_rate_band (OVS-01) and the reason rule are complementary, not redundant. On the
+  # 51 records in governance/step_decisions.jsonl the override rate is 4/51 = 0.078, inside
+  # the band, while every one of the 51 reasons fails reason_error. Rate alone cannot see it.
+  decision_reason: reasons.reason_error
+  blind_reading: recommended        # decisions.record() accepts blind=; no caller passes it yet
+
+# 4. ADD to evidence_floor.overrides
+evidence_floor:
+  overrides:
+    HAL-01: 1
+    HAL-02: 1
+    HAL-03: 1
+    HAL-04: 1
+    HAL-05: 1
+
+# 5. ADD to gates.on_deploy.require_pass
+gates:
+  on_deploy:
+    require_pass: [MCM-03, STR-03, GOV-06, HAL-02]
+# NOTE on the gate shape: inconclusive_on is a SEVERITY FLOOR, not a list of control ids.
+# My earlier draft had it as a list. So "a stale classification blocks" is expressed by
+# giving HAL-05 severity high; at medium it is reported and does not block. HAL-05 is left
+# at medium in controls/halocline.yaml — raise it if you want staleness to stop a deploy.

@@ -1,0 +1,159 @@
+schema: v0.9.capabilities.1
+version: 0.1.0
+capabilities:
+  - capability_id: SDLC.BRANCH_PROTECTION
+    title: "Branch protection enforced on the governed branch"
+    evidence_modes: [plugin_observation, document, record]
+    default_weight: high
+  - capability_id: SDLC.CODEOWNERS_ENFORCED
+    title: "Code ownership rules are defined and enforced"
+    evidence_modes: [plugin_observation, document, record]
+    default_weight: high
+  - capability_id: SDLC.REQUIRED_STATUS_CHECKS
+    title: "Required CI/status checks gate production-impacting changes"
+    evidence_modes: [plugin_observation, record]
+    default_weight: high
+  - capability_id: SDLC.APPROVER_NOT_AUTHOR
+    title: "Approvals are attributable and independent from authorship"
+    evidence_modes: [plugin_observation, record, document]
+    default_weight: high
+  - capability_id: OPS.ROLLBACK_TESTED
+    title: "Rollback capability is practiced and evidenced"
+    evidence_modes: [record, document]
+    default_weight: high
+  - capability_id: GOV.APPEND_ONLY_EVENT_LOG
+    title: "Governance events are retained in an append-only log"
+    evidence_modes: [record, plugin_observation]
+    default_weight: high
+  - capability_id: GOV.BASIS_HASH_REPRODUCIBLE
+    title: "Decision basis is reproducible with integrity hashes"
+    evidence_modes: [record]
+    default_weight: high
+  - capability_id: GOV.EVIDENCE_LINEAGE
+    title: "Evidence can be traced to its source and assessment cycle"
+    evidence_modes: [record, plugin_observation]
+    default_weight: high
+  - capability_id: GOV.DECISION_ADMISSIBILITY_ENFORCED
+    title: "Governance decision blockers are enforced at the API boundary"
+    evidence_modes: [record]
+    default_weight: high
+  - capability_id: GOV.EXCEPTION_REGISTER
+    title: "Exceptions are registered with accountable ownership"
+    evidence_modes: [record, document]
+    default_weight: high
+  - capability_id: GOV.EXCEPTION_EXPIRY_ENFORCED
+    title: "Exceptions have enforced expiry"
+    evidence_modes: [record]
+    default_weight: high
+  - capability_id: GOV.EXCEPTION_REVIEW_CADENCE
+    title: "Exceptions are reviewed on a governed cadence"
+    evidence_modes: [record, document]
+    default_weight: medium
+  - capability_id: DISC.MODEL_REGISTRY_PRESENT
+    title: "AI models/use-cases are inventoried"
+    evidence_modes: [record, document, plugin_observation]
+    default_weight: high
+  - capability_id: DISC.OWNERSHIP_DEFINED
+    title: "AI assets have accountable ownership"
+    evidence_modes: [record, document]
+    default_weight: high
+  - capability_id: DISC.DEPENDENCIES_RECORDED
+    title: "Material dependencies are recorded"
+    evidence_modes: [record, document, plugin_observation]
+    default_weight: medium
+  - capability_id: DISC.RISK_TIER_RECORDED
+    title: "AI assets have a recorded risk tier"
+    evidence_modes: [record, document]
+    default_weight: high
+  - capability_id: EVAL.GOLDEN_SET_GOVERNED
+    title: "Evaluation sets are governed and integrity-controlled"
+    evidence_modes: [record]
+    default_weight: high
+  - capability_id: EVAL.RUN_BEFORE_DEPLOY
+    title: "Evaluation runs before deployment"
+    evidence_modes: [record, document, plugin_observation]
+    default_weight: high
+  - capability_id: EVAL.REGRESSION_GATES
+    title: "Regression gates constrain releases"
+    evidence_modes: [record, plugin_observation]
+    default_weight: high
+  - capability_id: EVAL.RESULTS_AUDITABLE
+    title: "Evaluation results are attributable and auditable"
+    evidence_modes: [record, document]
+    default_weight: high
+  - capability_id: OVS.REVIEWER_REQUIRED
+    title: "A named human reviewer is required"
+    evidence_modes: [record, document]
+    default_weight: high
+  - capability_id: OVS.REASON_QUALITY_ENFORCED
+    title: "Decision reasons satisfy validation rules"
+    evidence_modes: [record]
+    default_weight: high
+  - capability_id: OVS.BLIND_READ_BEFORE_AI
+    title: "Reviewer reading is captured before AI influence"
+    evidence_modes: [record]
+    default_weight: high
+  - capability_id: OVS.OVERRIDE_RATE_MONITORED
+    title: "Reviewer override/revision behaviour is monitored"
+    evidence_modes: [record]
+    default_weight: medium
+  - capability_id: OPS.RUNTIME_MONITORING
+    title: "Runtime behaviour is monitored"
+    evidence_modes: [record, document, plugin_observation]
+    default_weight: high
+  - capability_id: OPS.GUARDRAILS_ENFORCED
+    title: "Runtime guardrails are enforced"
+    evidence_modes: [record, document, plugin_observation]
+    default_weight: high
+  - capability_id: OPS.KILL_SWITCH_TESTED
+    title: "Intervention/kill-switch capability is tested"
+    evidence_modes: [record]
+    default_weight: high
+  - capability_id: OPS.ESCALATION_HANDLING
+    title: "Operational escalation is handled within governed paths"
+    evidence_modes: [record, document]
+    default_weight: high
+  - capability_id: OPS.INCIDENT_CLASSIFICATION
+    title: "AI incidents are classifiable"
+    evidence_modes: [record, document]
+    default_weight: high
+  - capability_id: OPS.INCIDENT_ESCALATION
+    title: "AI incidents have governed escalation paths"
+    evidence_modes: [record, document]
+    default_weight: high
+  - capability_id: OPS.INCIDENT_RECOVERY
+    title: "AI incidents have recovery procedures"
+    evidence_modes: [record, document]
+    default_weight: high
+  - capability_id: OPS.INCIDENT_LESSONS_FEEDBACK
+    title: "Incident learning feeds back into governance"
+    evidence_modes: [record, document]
+    default_weight: medium
+  - capability_id: DATA.QUALITY_GOVERNED
+    title: "Material AI data quality is governed"
+    evidence_modes: [record, document]
+    default_weight: high
+  - capability_id: DATA.ACCESS_CONTROLLED
+    title: "AI data access is controlled"
+    evidence_modes: [record, document, plugin_observation]
+    default_weight: high
+  - capability_id: DATA.LINEAGE_RECORDED
+    title: "AI data lineage is recorded"
+    evidence_modes: [record, document, plugin_observation]
+    default_weight: high
+  - capability_id: DATA.RETENTION_DEFINED
+    title: "AI data retention is defined and governed"
+    evidence_modes: [record, document]
+    default_weight: medium
+  - capability_id: TPR.DEPENDENCIES_IDENTIFIED
+    title: "Critical third-party/provider dependencies are identified"
+    evidence_modes: [record, document, plugin_observation]
+    default_weight: high
+  - capability_id: TPR.CONCENTRATION_ASSESSED
+    title: "Third-party/provider concentration risk is assessed"
+    evidence_modes: [record, document]
+    default_weight: high
+  - capability_id: TPR.EXIT_STRATEGY_CONSIDERED
+    title: "Material provider exit/fallback options are considered"
+    evidence_modes: [record, document]
+    default_weight: medium

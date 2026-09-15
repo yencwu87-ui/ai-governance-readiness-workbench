@@ -1,0 +1,653 @@
+{
+  "schema": "ge110b4.measurement-run.1",
+  "evaluator": "lexical-0.45",
+  "lineage": {
+    "contract_sha": "1da1835f75cc94d45dfd469dc311a3c5f3dbe5ca63900c74927c24be45a7c40c",
+    "corpus_sha": "957cc756b5825840da05707eccaaee5bd13294b5254109ef784b98c6c19fa408",
+    "labelset_sha": "97eb3a635b65b7044211877f6f23600736bb3c0592513d6932c220ba838a323f",
+    "evaluator_sha": "356ea395029d7ca034fa64b7473fdfb03a8d8ebd90775902e4cef5b95fcbf8dd",
+    "cases": [
+      "d",
+      "e",
+      "f",
+      "g"
+    ],
+    "case_files": {
+      "d": {
+        "file": "M3.6_d.md",
+        "sha256": "6e1b172199dfc2a60d52ebbc420db72e00f0d061dae00011900a3bdf60c5c288"
+      },
+      "e": {
+        "file": "M3.6_e.md",
+        "sha256": "b9eb9582994fc224b96c6b163b924e9e15681f49cf10d4cdeb8b917a425d3c39"
+      },
+      "f": {
+        "file": "M3.6_f.md",
+        "sha256": "b92bc8616e0148cab88fd7fb94dcf82f8181b864d3950862ffdf807d0cbfc7d0"
+      },
+      "g": {
+        "file": "M3.6_g.md",
+        "sha256": "98eecd81ebac3ca58116003412a28d45f409b9b64803b2d22e2b7befd59e960b"
+      }
+    },
+    "n_elements": 14,
+    "n_judgements": 52
+  },
+  "element_accuracy": 0.585,
+  "n_scored": 41,
+  "n_judgements": 52,
+  "n_excluded_not_applicable": 11,
+  "n_declined": 2,
+  "n_no_answer": 0,
+  "per_element": {
+    "e1": {
+      "n": 4,
+      "correct": 3,
+      "accuracy": 0.75
+    },
+    "e10": {
+      "n": 3,
+      "correct": 2,
+      "accuracy": 0.667
+    },
+    "e11": {
+      "n": 3,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    "e12": {
+      "n": 4,
+      "correct": 4,
+      "accuracy": 1.0
+    },
+    "e13": {
+      "n": 4,
+      "correct": 4,
+      "accuracy": 1.0
+    },
+    "e2": {
+      "n": 4,
+      "correct": 4,
+      "accuracy": 1.0
+    },
+    "e3": {
+      "n": 4,
+      "correct": 1,
+      "accuracy": 0.25
+    },
+    "e4": {
+      "n": 3,
+      "correct": 1,
+      "accuracy": 0.333
+    },
+    "e5": {
+      "n": 4,
+      "correct": 2,
+      "accuracy": 0.5
+    },
+    "e6": {
+      "n": 4,
+      "correct": 1,
+      "accuracy": 0.25
+    },
+    "e7": {
+      "n": 4,
+      "correct": 2,
+      "accuracy": 0.5
+    }
+  },
+  "baselines": {
+    "always_N": 0.293,
+    "always_Y": 0.707
+  },
+  "baseline_population": "scored (Y/N) judgements only",
+  "strongest_trivial_strategy": "always_Y",
+  "strongest_trivial_score": 0.707,
+  "margin_over_strongest_trivial": -0.122,
+  "evaluator_errors": [],
+  "limitations": [
+    {
+      "code": "ADJUDICATION_GRADE",
+      "blocks": "treating these labels as human ground truth",
+      "detail": "labels are ai_adjudicated_candidate; adjudicator kinds ['ai']"
+    },
+    {
+      "code": "NO_HEADLINE_VARIATION",
+      "blocks": "any claim about full/partial/none accuracy",
+      "detail": "every case derives to the same outcome (['partial']); there is no case-level variation to measure against"
+    },
+    {
+      "code": "NEAR_IDENTICAL_CASES",
+      "blocks": "treating the case count as the effective sample size",
+      "detail": "d and f differ on 1 element(s)"
+    },
+    {
+      "code": "PARTIAL_ELEMENT_COVERAGE",
+      "blocks": "generalising the score to the whole contract",
+      "detail": "7 of 14 elements discriminate; the rest contribute no information about evaluator behaviour"
+    }
+  ],
+  "predictions": [
+    {
+      "case": "d",
+      "element": "e1",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "d",
+      "element": "e10",
+      "gold": "N",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "d",
+      "element": "e11",
+      "gold": "N",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "d",
+      "element": "e12",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "d",
+      "element": "e13",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "d",
+      "element": "e2",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "d",
+      "element": "e3",
+      "gold": "Y",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "d",
+      "element": "e4",
+      "gold": "Y",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "d",
+      "element": "e5",
+      "gold": "Y",
+      "predicted": "n/a",
+      "scored": true,
+      "declined": true,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "d",
+      "element": "e6",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "d",
+      "element": "e7",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "d",
+      "element": "e8",
+      "gold": "n/a",
+      "predicted": "Y",
+      "scored": false,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "d",
+      "element": "e9",
+      "gold": "n/a",
+      "predicted": "Y",
+      "scored": false,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "e",
+      "element": "e1",
+      "gold": "N",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "e",
+      "element": "e10",
+      "gold": "n/a",
+      "predicted": "n/a",
+      "scored": false,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "e",
+      "element": "e11",
+      "gold": "n/a",
+      "predicted": "n/a",
+      "scored": false,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "e",
+      "element": "e12",
+      "gold": "N",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "e",
+      "element": "e13",
+      "gold": "N",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "e",
+      "element": "e2",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "e",
+      "element": "e3",
+      "gold": "Y",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "e",
+      "element": "e4",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "e",
+      "element": "e5",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "e",
+      "element": "e6",
+      "gold": "N",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "e",
+      "element": "e7",
+      "gold": "N",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "e",
+      "element": "e8",
+      "gold": "n/a",
+      "predicted": "N",
+      "scored": false,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "e",
+      "element": "e9",
+      "gold": "n/a",
+      "predicted": "N",
+      "scored": false,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "f",
+      "element": "e1",
+      "gold": "N",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "f",
+      "element": "e10",
+      "gold": "N",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "f",
+      "element": "e11",
+      "gold": "N",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "f",
+      "element": "e12",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "f",
+      "element": "e13",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "f",
+      "element": "e2",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "f",
+      "element": "e3",
+      "gold": "Y",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "f",
+      "element": "e4",
+      "gold": "Y",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "f",
+      "element": "e5",
+      "gold": "Y",
+      "predicted": "n/a",
+      "scored": true,
+      "declined": true,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "f",
+      "element": "e6",
+      "gold": "Y",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "f",
+      "element": "e7",
+      "gold": "Y",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "f",
+      "element": "e8",
+      "gold": "n/a",
+      "predicted": "N",
+      "scored": false,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "f",
+      "element": "e9",
+      "gold": "n/a",
+      "predicted": "Y",
+      "scored": false,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "g",
+      "element": "e1",
+      "gold": "Y",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "g",
+      "element": "e10",
+      "gold": "N",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "g",
+      "element": "e11",
+      "gold": "Y",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "g",
+      "element": "e12",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "g",
+      "element": "e13",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "g",
+      "element": "e2",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "g",
+      "element": "e3",
+      "gold": "N",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "g",
+      "element": "e4",
+      "gold": "n/a",
+      "predicted": "N",
+      "scored": false,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "g",
+      "element": "e5",
+      "gold": "Y",
+      "predicted": "Y",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": true
+    },
+    {
+      "case": "g",
+      "element": "e6",
+      "gold": "Y",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "g",
+      "element": "e7",
+      "gold": "Y",
+      "predicted": "N",
+      "scored": true,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "g",
+      "element": "e8",
+      "gold": "n/a",
+      "predicted": "N",
+      "scored": false,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    },
+    {
+      "case": "g",
+      "element": "e9",
+      "gold": "n/a",
+      "predicted": "N",
+      "scored": false,
+      "declined": false,
+      "no_answer": false,
+      "correct": false
+    }
+  ],
+  "aggregate_not_computed": "The corpus has one distinct case-level outcome, so full/partial/none accuracy is not defined against it. This is a property of the corpus, not a failure of the run."
+}

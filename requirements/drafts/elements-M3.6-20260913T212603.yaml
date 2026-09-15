@@ -1,0 +1,66 @@
+schema_version: wb063.element-draft.1
+generated_at: '2026-09-13T21:26:03+00:00'
+instrument_provenance: file:Final_Consultation_Paper_on_Guidelines_on_AI_Risk_Management_ForRelease.txt
+instrument_verified: true
+needs_instrument: false
+authority: draft
+note: Proposed decomposition for second-line argument. Not governed. Promote into requirements/<framework>.yaml
+  only after the wording has been argued against the instrument by a named person — at which point the
+  confidence becomes 'known' because a person checked it, not because this tool did.
+controls:
+  M3.6:
+    framework: MAS
+    title: Evaluation, testing & independent validation
+    instrument_provenance: file:Final_Consultation_Paper_on_Guidelines_on_AI_Risk_Management_ForRelease.txt
+    instrument_verified: true
+    passages_shown: 6
+    passages_total: 15
+    elements: []
+    dropped:
+    - reason: quote is not verbatim in the supplied instrument
+      text: AI systems are evaluated and independently validated before deployment.
+      quote: AI systems are evaluated and independently validated against defined criteria before deployment,
+        with results, limitations, residual risk and re-validation trig
+    - reason: quote is not verbatim in the supplied instrument
+      text: The results, limitations, residual risk, and re-validation triggers of AI system evaluations
+        are documented.
+      quote: with results, limitations, residual risk and re-validation triggers documented.
+    - reason: quote is not verbatim in the supplied instrument
+      text: AI systems are deployed using defined criteria.
+      quote: defined criteria before deployment,
+    - reason: quote is not verbatim in the supplied instrument
+      text: The documentation of AI system evaluation results, limitations, residual risk, and re-validation
+        triggers is maintained.
+      quote: with results, limitations, residual risk and re-validation triggers documented.
+    - reason: quote is not verbatim in the supplied instrument
+      text: AI systems are deployed with defined criteria.
+      quote: defined criteria before deployment,
+    - reason: quote is not verbatim in the supplied instrument
+      text: The residual risk and re-validation triggers of AI system deployments are managed.
+      quote: with results, limitations, residual risk and re-validation triggers documented.
+    - reason: quote is not verbatim in the supplied instrument
+      text: AI systems are deployed using defined criteria.
+      quote: defined criteria before deployment,
+    - reason: quote is not verbatim in the supplied instrument
+      text: The results of AI system evaluations are communicated to stakeholders.
+      quote: with results, limitations, residual risk and re-validation triggers documented.
+    - reason: quote is not verbatim in the supplied instrument
+      text: AI systems are deployed with defined criteria.
+      quote: defined criteria before deployment,
+    - reason: quote is not verbatim in the supplied instrument
+      text: The residual risk of AI system deployments is assessed.
+      quote: with results, limitations, residual risk and re-validation triggers documented.
+    - reason: quote is not verbatim in the supplied instrument
+      text: AI systems are deployed using defined criteria.
+      quote: defined criteria before deployment,
+    - reason: quote is not verbatim in the supplied instrument
+      text: The re-validation triggers of AI system evaluations are managed.
+      quote: with results, limitations, residual risk and re-validation triggers documented.
+    - reason: quote is not verbatim in the supplied instrument
+      text: AI systems are deployed with defined criteria.
+      quote: defined criteria before deployment,
+    beyond_title: ''
+    beyond_instrument: ''
+    kinds:
+      design: 0
+      operation: 0

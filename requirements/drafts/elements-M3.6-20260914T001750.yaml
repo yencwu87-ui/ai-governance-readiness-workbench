@@ -1,0 +1,539 @@
+schema_version: wb070.element-draft.2
+generated_at: '2026-09-14T00:17:50+00:00'
+instrument_provenance: file:Final_Consultation_Paper_on_Guidelines_on_AI_Risk_Management_ForRelease.txt
+instrument_verified: true
+needs_instrument: false
+authority: draft
+method: sentence selection by index, obligation stated in a second call; anchors are verbatim by construction
+note: Proposed decomposition for second-line argument. Not governed. Promote into requirements/<framework>.yaml
+  only after the wording has been argued against the instrument by a named person — the confidence becomes
+  'known' because a person checked it, not because this tool matched a string.
+controls:
+  M3.6:
+    framework: MAS
+    title: Evaluation, testing & independent validation
+    instrument_provenance: file:Final_Consultation_Paper_on_Guidelines_on_AI_Risk_Management_ForRelease.txt
+    instrument_verified: true
+    candidates_offered: 47
+    selected:
+    - index: 1
+      sentence: AI Risk Materiality Assessment 3.8 An FI should establish an assessment methodology to
+        evaluate the risk materiality of an AI use case, system or model based on the nature of its business.
+    - index: 2
+      sentence: The assessment methodology should be applied consistently to perform risk materiality
+        assessments for each AI use case, system or model used by the FI.
+    - index: 3
+      sentence: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+    - index: 4
+      sentence: This ensures that the AI use case, system or model assessed as having higher risk materiality
+        receives more stringent scrutiny and robust controls, supporting effective oversight and confirming
+        that AI usage remains within approved boundaries. 3.9 The assessment should take into account
+        both the inherent risk materiality of an AI use case, system or model before the appropriate risk
+        management controls are applied, as well as the residual risk materiality after risk management
+        controls are applied.
+    - index: 5
+      sentence: The FI should ensure that the residual risk materiality of the AI use case, system or
+        model meets the FI's risk appetite before deployment.
+    - index: 6
+      sentence: 'The risk materiality assessment methodology and risk materiality assessments for each
+        AI use case, system or model should also be regularly reviewed to ensure their continued relevance
+        and appropriateness. 3.10 The risk materiality assessments should consider various risk dimensions
+        relevant to the FI''s context, minimally covering: a.'
+    - index: 11
+      sentence: An FI should identify key AI risks and set clear, measurable thresholds.
+    - index: 12
+      sentence: Ident ification of AI risks and reliability and safety assessments should take into account
+        the context of AI use, and assessments should take refe rence from best practices25.
+    - index: 13
+      sentence: Evaluation and testing should assess performance of the AI use case, system or model under
+        a range of plausible conditions, from real-world scenarios to edge cases.
+    - index: 14
+      sentence: 'Key areas that the FI should consider include: a.'
+    - index: 15
+      sentence: 'Evaluation Measures: Define appropriate evaluation measures aligned with the AI''s objectives
+        and establish acceptable performance thresholds for these evaluation measures.'
+    - index: 16
+      sentence: Performance thresholds should be clearly defined, documented, and mutually agreed upon
+        by business owners, developers and reviewers. b.
+    - index: 17
+      sentence: 'Testing Approaches: Employ relevant testing methods, such as out -of-sample or out -of-time
+        testing, sensitivity analysis, stability analysis across different data distributions or time
+        periods, sub-population analysis, stress testing (including edge cases and adversarial testing
+        where appropriate), error analysis, and benchmarking against alternatives.'
+    - index: 18
+      sentence: Datasets used for testing should be representative of the context of use in the FI. c.
+    - index: 19
+      sentence: 'Overfitting Mitigation: Where possible, i mplement techniques to prevent overfitting,
+        especially for more complex AI.'
+    - index: 20
+      sentence: Evaluation and testing of newer AI developments such as Generative AI and AI agents should
+        cover their key failure modes27. 25Such as IMDA's Starter Kit for Safety Testing of LLM-Based
+        Applications which can be accessed at https://www.imda.gov.sg/- /media/imda/files/about/emerging-tech-and-research/artificial-intelligence/large-language-model-starter-kit.pdf.
+    - index: 21
+      sentence: The Starter Kit is a set of voluntary guidelines that coalesces emerging best practices
+        and methodologies for the test ing of LLM -based applications. 26Such techniques generally try
+        to limit the number of parameters used so that the trained model is less complex, e.g., some regularisation
+        techniques force less important parameters to values of zero. 27For example, for Generative AI,
+        evaluation and testing should pay greater attention to hallucinations, generation of undesirable
+        content such as toxic, harmful or biased content, bias, data leakages or disclosures, and vulnerability
+        to adversarial attacks.
+    - index: 22
+      sentence: For more information on the testing of such risks, please refer to IMDA's Starter Kit
+        for Safety Testing of LLM -Based Applications.
+    - index: 23
+      sentence: Proposed Guidelines on AI Risk Management | 24 Technology & Cybersecurity Risks 4.16 An
+        FI should ensure that the AI system is secure, well-governed, and supported by appropriate controls
+        to manage technology and cybersecurity risks .
+    - index: 24
+      sentence: Pre-Deployment Reviews 4.18 Prior to deployment, an FI should subject the AI use case,
+        system or model to reviews by parties not involved in its development to ensure that the relevant
+        controls , such as evaluation and testin g, have been adhered to .
+    - index: 25
+      sentence: Such r eviews should be supported by clear policies and procedures, and assess the suitability,
+        robustness, and performance of AI for its intended purpose within defined boundaries.
+    - index: 26
+      sentence: Roles and responsibilities relating to such reviews should be clearly assigned, and t
+        he scope and independence of these pre -deployment reviews should be proportionate to the AI's
+        assessed risk materiality. 4.19 The scope of these pre -deployment reviews, as well as the degree
+        of independence of the parties undertaking the assessment and reviews, should be proportionate
+        to the assessed risk materiality of the AI use case, system or model .
+    - index: 27
+      sentence: AI use cases, systems or models assessed as having high risk materiality should undergo
+        28Such as MAS' Guidelines on Risk Management Practices for Technology Risk which can be accessed
+        at https://www.mas.gov.sg/regulation/guidelines/technology-risk-management-guidelines.
+    - index: 28
+      sentence: Proposed Guidelines on AI Risk Management | 25 formal independent validation before deployment.
+    - index: 29
+      sentence: Such validations should be conducted by competent personnel or functions possessing the
+        necessary expertise and objectivity, and who are independent from the development and deployment
+        teams.
+    - index: 30
+      sentence: 'The validation process should provide effective challenge to developers and should cover
+        areas such as: a. conceptual soundness of the design; b. suitability and quality of data inputs;
+        c. integrity of the implementation; d. evaluation measures, performance thresholds, testing approaches
+        and results; e. explainability analysis and fairness assessments; and f. assumptions, limitations
+        and mitigants. 4.20 For AI use cases, systems or models not assessed as having high risk materiality,
+        other forms of documented review (such as peer reviews by qualified individuals that were not
+        involved in development or deployment 29) on key aspects of the development and deployment processes
+        may be undertaken. 4.21 Review findings, including any identified limitations, necessary remediation
+        actions, or conditions for use, should be reported by reviewers to the relevant approval body.'
+    - index: 31
+      sentence: The relevant approval body should ensure review recommendations are actioned appropriately.
+        4.22 An FI should conduct technology and cybersecurity reviews to ensure that AI can be deployed
+        into the production environment in a controlled and secure manner .
+    - index: 32
+      sentence: Such reviews should cover areas such as technical implementation, system and network security,
+        system resilience, recoverability and operational readiness of AI for deployment.
+    - index: 33
+      sentence: 'Secure Design and Access Control: Review the AI system architecture, including APIs,
+        plugins and thirdparty services, for secure design, environment segregation, and access controls
+        based on the principle of least privilege.'
+    - index: 34
+      sentence: Prior to go-live, complete deployment checklists to confirm that critical controls, including
+        encryption, data loss prevention, firewalls, access restrictions and logging, are operational
+        and correctly configured. b.
+    - index: 35
+      sentence: 'Testing and Threat Mitigation: Conduct vulnerability assessments, penetration testing,
+        and red teaming across AI systems to identify and remediate security weaknesses.'
+    - index: 36
+      sentence: Test AI systems against adversarial threats (e.g. , manipulation, evasion, poisoning)
+        and implement safeguards, such as input validation, throttling and anomaly detection.
+    - index: 37
+      sentence: Post Deployment Monitoring & Review 4.23 An FI should develop and implement comprehensive
+        and robust controls for the ongoing monitoring of all deployed AI (including third-party AI used
+        in the FI).
+    - index: 38
+      sentence: Given the uncertainties associated with AI, their dynamic nature and the potential for
+        model staleness and performance degradation due to data or model drifts over time, ongoing monitoring
+        is critical to ensure that deployed AI operates as intended and remains fit for purpose over time.
+    - index: 39
+      sentence: The frequency and intensity of monitoring activities should be proportionate to the assessed
+        risk materiality of the deployed AI.
+    - index: 40
+      sentence: 'Monitoring Measures: Based on the risks of the AI use case, system or model, define key
+        metrics to be monitored and acceptable performance thresholds for each metric .'
+    - index: 41
+      sentence: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+    - index: 42
+      sentence: Access to AI models or systems, training data, pipelines, and configuration files should
+        be strictly controlled and logged. e.
+    - index: 43
+      sentence: 'Training and Awareness : Equip persons responsible for monitoring with appropriate training
+        to support effective monitoring and incident management ; and equip users of deployed AI with
+        the necessary training and awareness to report unintended behaviour of deployed AI. 4.24 An FI
+        should periodically review aggregate risks across all AI use cases, systems and models, and, where
+        necessary, conduct more detailed reviews or re-validations of specific AI in the portfolio.'
+    - index: 44
+      sentence: For AI use cases, systems or models assessed as having high risk materiality, regular
+        re -validations by independent parties should be conducted.
+    - index: 45
+      sentence: Such reviews or validations ensure that AI continue to be used appropriately and that
+        risks are still managed appropriately.
+    - index: 46
+      sentence: The need for detailed re -validations or reviews of specific AI should be informed by
+        the AI's assessed risk materiality.
+    elements:
+    - id: e1
+      text: An FI should establish an assessment methodology to evaluate the risk materiality of an AI
+        use case, system or model based on the nature of its business.
+      kind: design
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e2
+      text: An FI should apply the assessment methodology consistently to perform risk materiality assessments
+        for each AI use case, system or model used by the FI.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e3
+      text: An FI should ensure that the residual risk materiality of the AI use case, system or model
+        meets the FI's risk appetite before deployment.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e4
+      text: An FI should regularly review the risk materiality assessment methodology and risk materiality
+        assessments for each AI use case, system or model to ensure their continued relevance and appropriateness.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e5
+      text: An FI should consider various risk dimensions relevant to the FI's context, minimally covering
+        key AI risks and setting clear, measurable thresholds.
+      kind: design
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e6
+      text: An FI should identify key AI risks and set clear, measurable thresholds.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e7
+      text: An FI should identify key AI risks and set clear, measurable thresholds, and reliability and
+        safety assessments should take into account the context of AI use, and assessments should take
+        reference from best practices.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e8
+      text: An FI should evaluate and test the performance of the AI use case, system or model under a
+        range of plausible conditions, from real-world scenarios to edge cases.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e9
+      text: An FI should define appropriate evaluation measures aligned with the AI's objectives and establish
+        acceptable performance thresholds for these evaluation measures.
+      kind: design
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e10
+      text: An FI should define appropriate evaluation measures aligned with the AI's objectives and establish
+        acceptable performance thresholds for these evaluation measures, and these thresholds should be
+        clearly defined, documented, and mutually agreed upon by business owners, developers and reviewers.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e11
+      text: An FI should employ relevant testing methods, such as out-of-sample or out-of-time testing,
+        sensitivity analysis, stability analysis across different data distributions or time periods,
+        sub-population analysis, stress testing (including edge cases and adversarial testing where appropriate),
+        error analysis, and benchmarking against alternatives.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e12
+      text: An FI should use datasets that are representative of the context of use in the FI for testing.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e13
+      text: An FI should implement techniques to prevent overfitting, especially for more complex AI.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e14
+      text: An FI should evaluate and test newer AI developments such as Generative AI and AI agents,
+        covering their key failure modes, such as hallucinations, generation of undesirable content, bias,
+        data leakages or disclosures, and vulnerability to adversarial attacks.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e15
+      text: An FI should ensure that the AI system is secure, well-governed, and supported by appropriate
+        controls to manage technology and cybersecurity risks.
+      kind: design
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e16
+      text: An FI should ensure that the AI system is secure, well-governed, and supported by appropriate
+        controls to manage technology and cybersecurity risks, and such controls should be supported by
+        clear policies and procedures.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e17
+      text: An FI should subject the AI use case, system or model to reviews by parties not involved in
+        its development prior to deployment, to ensure that the relevant controls, such as evaluation
+        and testing, have been adhered to.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e18
+      text: An FI should conduct pre-deployment reviews, supported by clear policies and procedures, to
+        assess the suitability, robustness, and performance of AI for its intended purpose within defined
+        boundaries.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e19
+      text: An FI should assign clear roles and responsibilities relating to pre-deployment reviews, and
+        the scope and independence of these reviews should be proportionate to the AI's assessed risk
+        materiality.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e20
+      text: An FI should conduct formal independent validation before deployment, such as formal independent
+        validation by competent personnel or functions possessing the necessary expertise and objectivity.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e21
+      text: An FI should conduct formal independent validation before deployment, and such validations
+        should cover areas such as conceptual soundness of the design, suitability and quality of data
+        inputs, integrity of the implementation, evaluation measures, performance thresholds, testing
+        approaches and results, explainability analysis and fairness assessments, and assumptions, limitations
+        and mitigants.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e22
+      text: An FI should conduct other forms of documented review, such as peer reviews by qualified individuals
+        that were not involved in development or deployment, for AI use cases, systems or models not assessed
+        as having high risk materiality.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e23
+      text: An FI should report review findings, including any identified limitations, necessary remediation
+        actions, or conditions for use, to the relevant approval body.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e24
+      text: An FI should ensure that review recommendations are actioned appropriately by the relevant
+        approval body.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e25
+      text: An FI should conduct technology and cybersecurity reviews to ensure that AI can be deployed
+        into the production environment in a controlled and secure manner.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e26
+      text: An FI should review the AI system architecture, including APIs, plugins and third-party services,
+        for secure design, environment segregation, and access controls based on the principle of least
+        privilege.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e27
+      text: An FI should complete deployment checklists prior to go-live to confirm that critical controls,
+        including encryption, data loss prevention, firewalls, access restrictions and logging, are operational
+        and correctly configured.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e28
+      text: An FI should conduct testing and threat mitigation, including vulnerability assessments, penetration
+        testing, and red teaming, across AI systems to identify and remediate security weaknesses.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e29
+      text: An FI should test AI systems against adversarial threats and implement safeguards, such as
+        input validation, throttling and anomaly detection.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e30
+      text: An FI should develop and implement comprehensive and robust controls for the ongoing monitoring
+        of all deployed AI, including third-party AI used in the FI.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e31
+      text: An FI should develop and implement comprehensive and robust controls for the ongoing monitoring
+        of all deployed AI, and such controls should be proportionate to the assessed risk materiality
+        of the deployed AI.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e32
+      text: An FI should define key metrics to be monitored and acceptable performance thresholds for
+        each metric, and these thresholds should be proportionate to the assessed risk materiality of
+        the deployed AI.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e33
+      text: An FI should maintain clear records of monitoring activities, results, identified issues or
+        incidents, and subsequent remediation actions taken for auditability and ongoing risk management.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e34
+      text: An FI should maintain clear records of monitoring activities, results, identified issues or
+        incidents, and subsequent remediation actions taken, and such records should be strictly controlled
+        and logged.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e35
+      text: An FI should equip persons responsible for monitoring with appropriate training to support
+        effective monitoring and incident management, and equip users of deployed AI with the necessary
+        training and awareness to report unintended behaviour of deployed AI.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e36
+      text: An FI should periodically review aggregate risks across all AI use cases, systems and models,
+        and conduct more detailed reviews or re-validations of specific AI in the portfolio as necessary.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    - id: e37
+      text: An FI should periodically review aggregate risks across all AI use cases, systems and models,
+        and conduct more detailed reviews or re-validations of specific AI in the portfolio, and such
+        reviews or validations should ensure that AI continue to be used appropriately and that risks
+        are still managed appropriately.
+      kind: operation
+      anchor: Such assessments are critical for calibrating the AI risk management approach, ensuring
+        that controls are applied proportionate to the risks posed by AI .
+      anchor_verified: true
+      confidence: known
+    dropped: []
+    selection_note: ''
+    invalid_indices: 0
+    selected_not_stated:
+    - 1
+    - 2
+    - 4
+    - 5
+    - 6
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
+    - 20
+    - 21
+    - 22
+    - 23
+    - 24
+    - 25
+    - 26
+    - 27
+    - 28
+    - 29
+    - 30
+    - 31
+    - 32
+    - 33
+    - 34
+    - 35
+    - 36
+    - 37
+    - 38
+    - 39
+    - 40
+    - 41
+    - 42
+    - 43
+    - 44
+    - 45
+    - 46
+    kinds:
+      design: 4
+      operation: 33

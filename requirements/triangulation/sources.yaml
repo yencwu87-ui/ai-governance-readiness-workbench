@@ -1,0 +1,87 @@
+schema_version: wb100.source-registry.1
+as_of: '2026-09-14'
+policy:
+  canonical_requiredness_gate: >-
+    Only effective binding/supervisory sources can support canonical requiredness. Proposed,
+    consultation, voluntary and industry sources can generate future candidates, corroboration,
+    challenge questions or assurance context but cannot promote themselves into a live element.
+  temporal_rule: >-
+    A source is evaluated using publication, consultation, effective and supersession dates.
+    Never use a later proposed source to overwrite an earlier effective requirement for a historical
+    assessment unless the assessment's as_of date is within the proposal's effective window.
+  external_backtest_rule: >-
+    Web findings are challenge evidence. They must be stored with retrieval timestamp, source URL,
+    quoted locator/excerpt, authority classification and content hash. They cannot change the governed
+    requirement file automatically.
+sources:
+  - source_id: MAS-AIRG-P017-2025
+    title: Proposed Guidelines on AI Risk Management for Financial Institutions
+    issuer: MAS
+    authority_tier: T2
+    normative_status: consultation
+    lifecycle_status: proposed
+    publication_date: '2025-11-13'
+    consultation_end: '2026-01-31'
+    effective_from: null
+    effective_to: null
+    source_uri: instrument://Final_Consultation_Paper_on_Guidelines_on_AI_Risk_Management_ForRelease.txt
+    notes: Consultation draft; not a final guideline. Use for future-change and supervisory-expectation triangulation only.
+
+  - source_id: MAS-TRM-P012-2026
+    title: Consultation Paper on Proposed Amendments to Notices on Technology Risk Management
+    issuer: MAS
+    authority_tier: T1
+    normative_status: consultation
+    lifecycle_status: proposed
+    publication_date: '2026-06-10'
+    consultation_end: '2026-07-31'
+    effective_from: null
+    effective_to: null
+    source_uri: instrument://external/P012-2026_TRM_Consultation_Paper.pdf
+    content_sha256: 43a65b572e3c580853c256508f7df977a8a3084880b80ed05da642bcd75a9404
+    notes: Consultation closed 31 July 2026. Proposed effective date is 12 months after finalised Notice is published.
+
+  - source_id: MAS-TRM-NOTICES-BASELINE-2024
+    title: MAS Notices on Technology Risk Management - baseline effective text represented in the control library
+    issuer: MAS
+    authority_tier: T0
+    normative_status: binding
+    lifecycle_status: effective
+    publication_date: '2024-05-10'
+    effective_from: '2024-05-10'
+    effective_to: null
+    source_uri: requirement://MAS/TRM/baseline-2024
+    notes: Baseline binding layer for temporal comparison. Final 2026 amendments must supersede this source only after the final Notice and its effective date are verified.
+
+  - source_id: MAS-AI-MRM-PAPER-2024
+    title: Information Paper on Artificial Intelligence Model Risk Management
+    issuer: MAS
+    authority_tier: T2
+    normative_status: supervisory
+    lifecycle_status: effective
+    publication_date: '2024-12-05'
+    effective_from: '2024-12-05'
+    source_uri: instrument://MAS-AI-MRM-2024
+    notes: Thematic-review good-practice evidence; use as supervisory triangulation, not as a substitute for a binding provision.
+
+  - source_id: IMDA-MGF-AGENTIC-2026
+    title: Model AI Governance Framework for Agentic AI, July 2026
+    issuer: IMDA / AI Verify Foundation
+    authority_tier: T3
+    normative_status: voluntary
+    lifecycle_status: effective
+    publication_date: '2026-07-01'
+    effective_from: '2026-07-01'
+    source_uri: instrument://Mgf_for_Agentic_AI_(atx_Release)_July_2026.txt
+    notes: Implementation context only; cannot establish MAS requiredness.
+
+  - source_id: NIST-AI-RMF-PLAYBOOK
+    title: AI RMF Playbook
+    issuer: NIST
+    authority_tier: T4
+    normative_status: voluntary
+    lifecycle_status: effective
+    publication_date: '2024-01-01'
+    effective_from: '2024-01-01'
+    source_uri: instrument://AI_RMF_Playbook.txt
+    notes: Testing and implementation context only; cannot establish MAS requiredness.

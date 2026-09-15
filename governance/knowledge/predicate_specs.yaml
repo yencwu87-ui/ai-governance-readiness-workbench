@@ -1,0 +1,216 @@
+framework: MAS
+control_id: M3.6
+source_basis: requirements/mas.yaml
+rule: Predicate specifications operationalise the governed element text. They do not add obligations; an absent or untestable source yields NOT_TESTABLE rather than an inferred failure.
+elements:
+  e1:
+    text: Evaluation measures aligned to the AI's objectives and acceptable performance thresholds are defined and documented before testing begins.
+    predicates:
+      - name: field_present
+        params:
+          source: evaluation_criteria
+          fields: [measure_id, threshold]
+      - name: timestamp_before
+        params:
+          earlier: {source: evaluation_criteria, field: defined_at}
+          later: {source: test_run, field: started_at}
+          join: {left_key: control_id, right_key: control_id}
+  e2:
+    text: Evaluation and testing are performed for the specific AI use case, system or model under representative data and plausible conditions of use, with results retained.
+    predicates:
+      - name: field_present
+        params:
+          source: test_run
+          fields: [control_id, use_case_id, representativeness, results_ref]
+      - name: fields_truthy
+        params:
+          source: test_run
+          fields: [plausible_conditions]
+  e3:
+    text: The testing approach covers relevant performance, error and failure conditions, including edge cases where applicable.
+    predicates:
+      - name: field_present
+        params:
+          source: test_coverage
+          fields: [performance, error_conditions, failure_conditions, edge_cases]
+  e4:
+    text: The testing approach includes robustness, security or adversarial testing where those risks are relevant to the AI use case, system or model.
+    applicability:
+      source: risk_assessment
+      field: robustness_relevant
+      equals: true
+    predicates:
+      - name: fields_truthy
+        params:
+          source: test_coverage
+          fields: [robustness_security_adversarial]
+  e5:
+    text: The testing approach considers sub-population, fairness or other stakeholder-impact dimensions where relevant to the AI use case, system or model.
+    applicability:
+      source: risk_assessment
+      field: impact_relevant
+      equals: true
+    predicates:
+      - name: fields_truthy
+        params:
+          source: test_coverage
+          fields: [subpopulation_fairness_stakeholder_impact]
+  e6:
+    text: Before deployment, the AI use case, system or model is reviewed by parties not involved in its development.
+    predicates:
+      - name: field_present
+        params:
+          source: review_record
+          fields: [reviewer_id, reviewer_function, independence_basis, reviewed_at]
+      - name: identity_disjoint
+        params:
+          left: {source: review_record, field: reviewer_id}
+          right: {source: development_team, field: person_id}
+          join: {left_key: control_id, right_key: control_id}
+  e7:
+    text: The scope and independence of the pre-deployment review are proportionate to the assessed risk materiality.
+    predicates:
+      - name: field_present
+        params:
+          source: review_scope
+          fields: [materiality, scope, independence_level, rationale]
+  e8:
+    text: For AI assessed as high risk materiality, formal independent validation is performed before deployment by competent and objective personnel or functions independent from development and deployment teams.
+    applicability:
+      source: risk_assessment
+      field: risk_materiality
+      equals: high
+    predicates:
+      - name: field_present
+        params:
+          source: validation_record
+          fields: [validation_id, validator_id, competence_basis, independence_basis, performed_at]
+      - name: identity_disjoint
+        params:
+          left: {source: validation_record, field: validator_id}
+          right: {source: development_team, field: person_id}
+          join: {left_key: control_id, right_key: control_id}
+  e9:
+    text: The independent validation process provides effective challenge to developers where high risk materiality requires formal validation.
+    applicability:
+      source: risk_assessment
+      field: risk_materiality
+      equals: high
+    predicates:
+      - name: record_count
+        params:
+          source: challenge_record
+          where: {field: effective, equals: true}
+          min: 1
+  e10:
+    text: Independent validation covers conceptual soundness, suitability and quality of data inputs, and integrity of implementation.
+    applicability:
+      source: validation_record
+      field: formal_validation_performed
+      equals: true
+    predicates:
+      - name: fields_truthy
+        params:
+          source: validation_scope
+          fields: [conceptual_soundness, data_quality, implementation_integrity]
+  e11:
+    text: Independent validation considers evaluation measures, performance thresholds, testing approaches and results, and relevant explainability and fairness assessments.
+    applicability:
+      source: validation_record
+      field: formal_validation_performed
+      equals: true
+    predicates:
+      - name: fields_truthy
+        params:
+          source: validation_scope
+          fields: [evaluation_measures, performance_thresholds, testing_approach, testing_results, explainability_assessment, fairness_assessment]
+  e12:
+    text: Review findings, limitations and conditions for use are recorded and reported to the relevant approval body before deployment.
+    predicates:
+      - name: field_present
+        params:
+          source: approval_record
+          fields: [approval_body, reported_at, findings_ref, limitations_ref, conditions_ref]
+      - name: timestamp_before
+        params:
+          earlier: {source: approval_record, field: reported_at}
+          later: {source: deployment_record, field: deployed_at}
+          join: {left_key: control_id, right_key: control_id}
+  e13:
+    text: Residual risk and an accountable owner are recorded for the validation or review outcome before deployment.
+    predicates:
+      - name: field_present
+        params:
+          source: residual_risk_record
+          fields: [risk_id, residual_risk, accountable_owner]
+      - name: timestamp_before
+        params:
+          earlier: {source: residual_risk_record, field: recorded_at}
+          later: {source: deployment_record, field: deployed_at}
+          join: {left_key: control_id, right_key: control_id}
+  e14:
+    text: Re-validation triggers are defined and are proportionate to the assessed risk materiality.
+    observability: out_of_band
+    verification: capability_finding
+
+frameworks:
+  MGF Agentic:
+    controls:
+      D1.2:
+        source_basis:
+          - instruments/Mgf_for_Agentic_AI_(atx_Release)_July_2026.txt §2.1.1 Determine suitable use cases for agent deployment
+          - instruments/Mgf_for_Agentic_AI_(atx_Release)_July_2026.txt Dayos tiering example
+          - Requirement Element Audit MGF Agentic D1.2
+        elements:
+          e1:
+            text: An approved methodology for tiered risk classification exists, with defined criteria.
+            predicates:
+              - name: fields_truthy
+                params:
+                  source: risk_methodology
+                  fields: [methodology_id, criteria_ref, tier_scheme, approved_at]
+          e2:
+            text: Tier or outcome thresholds are stated by rule rather than by unaided judgement.
+            predicates:
+              - name: fields_truthy
+                params:
+                  source: tier_rule
+                  fields: [rule_id, rule_expression, tier_outcome]
+          e3:
+            text: The assessment is required before the decision it informs.
+            predicates:
+              - name: timestamp_before
+                params:
+                  earlier: {source: risk_assessment, field: assessed_at}
+                  later: {source: decision_record, field: decision_at}
+                  join: {left_key: control_id, right_key: control_id}
+          e4:
+            text: The outcome is approved by a role independent of the requester.
+            predicates:
+              - name: field_present
+                params:
+                  source: approval_record
+                  fields: [approver_id, approver_role, requester_id, approved_at]
+              - name: identity_disjoint
+                params:
+                  left: {source: approval_record, field: approver_id}
+                  right: {source: approval_record, field: requester_id}
+                  join: {left_key: control_id, right_key: control_id}
+          e5:
+            text: Each outcome obliges a defined set of controls or gates.
+            predicates:
+              - name: values_subset
+                params:
+                  subset: {source: risk_assessment, field: tier_outcome}
+                  superset: {source: tier_control_map, field: tier_outcome}
+          e6:
+            text: Reassessment triggers are defined and detected.
+            predicates:
+              - name: fields_truthy
+                params:
+                  source: reassessment_control
+                  fields: [trigger_types, detection_owner, reviewed_at]
+              - name: field_present
+                params:
+                  source: reassessment_control
+                  fields: [triggers_detected]

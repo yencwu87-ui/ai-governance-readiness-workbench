@@ -1,0 +1,10 @@
+{
+  "artefacts": [
+    {"name":"AI Change Management Policy", "ref":"policy/ai-change-management.md", "text":"AI change management taxonomy defines approval, emergency change and post-implementation verification."}
+  ],
+  "records": {
+    "changes": [
+      {"ticket_id":"WB-101","approved_at":"2026-09-01T09:00:00Z","implemented_at":"2026-09-01T10:00:00Z","verified_at":"2026-09-01T11:00:00Z"}
+    ]
+  }
+}

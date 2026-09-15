@@ -1,0 +1,44 @@
+{
+  "schema": "ge110b2.authored-cases.1",
+  "frozen_at": "2026-09-15",
+  "authored_by": "Claude (author role)",
+  "authored_from": "GE-110b.2 scenario briefs, 2026-09-15",
+  "adjudicated_by": null,
+  "note": "Frozen before adjudication. Under the GE-110b.2 independence protocol the author does not adjudicate and does not edit after the first adjudication result is seen. The author was given the scenario briefs and the contract, and no element targets, coverage matrix or expected verdicts.",
+  "scenarios": {
+    "d": "Scenario 1 \u2014 retail credit decisioning",
+    "e": "Scenario 2 \u2014 contact-centre generative assistant",
+    "f": "Scenario 3 \u2014 AML transaction monitoring change",
+    "g": "Scenario 4 \u2014 high-impact customer eligibility"
+  },
+  "cases": [
+    {
+      "case": "d",
+      "file": "M3.6_d.md",
+      "sha256": "6e1b172199dfc2a60d52ebbc420db72e00f0d061dae00011900a3bdf60c5c288",
+      "bytes": 9922,
+      "words": 1534
+    },
+    {
+      "case": "e",
+      "file": "M3.6_e.md",
+      "sha256": "b9eb9582994fc224b96c6b163b924e9e15681f49cf10d4cdeb8b917a425d3c39",
+      "bytes": 8123,
+      "words": 1340
+    },
+    {
+      "case": "f",
+      "file": "M3.6_f.md",
+      "sha256": "b92bc8616e0148cab88fd7fb94dcf82f8181b864d3950862ffdf807d0cbfc7d0",
+      "bytes": 9756,
+      "words": 1563
+    },
+    {
+      "case": "g",
+      "file": "M3.6_g.md",
+      "sha256": "98eecd81ebac3ca58116003412a28d45f409b9b64803b2d22e2b7befd59e960b",
+      "bytes": 9167,
+      "words": 1434
+    }
+  ]
+}

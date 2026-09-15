@@ -1,0 +1,1223 @@
+# STATUS: governed draft against CONSULTATION material. Not a released requirement set.
+#
+# Every source backing these 14 elements is lifecycle_status: proposed —
+# MAS-AIRG-P017-2025 (consultation, closed 31 Jan 2026) and MAS-TRM-P012-2026
+# (consultation, closed 31 Jul 2026). The source registry's own rule is that proposed,
+# consultation, voluntary and industry material cannot establish canonical requiredness,
+# which is why the triangulation report returns all 14 as future_change_signals rather
+# than as proven elements. Anything scored against this file inherits that status.
+#
+# All 14 also sit at pending_human in requirements/triangulation/M3.6_element_decisions.yaml.
+# As of WB-102 both triangulation entry points refuse to call that reviewable.
+#
+# The a/b/c corpus labels are deliberately '?'. The prior 7-element labels were NOT carried
+# across the 7 -> 14 contract change: a label that was decided against a different requirement
+# is not evidence about this one. M3.6 therefore has no usable eval case until relabelled,
+# and the known gap that M3.6 has no `full` case is now harder, not easier — a `full` document
+# must satisfy fourteen elements. Before relabelling, note that five elements (e3, e4, e5, e7,
+# e9) are conditional on "where relevant"; compare.py as of WB-102 excludes mutual
+# not_applicable from the compared population, so check the remaining population against
+# MIN_COMPARED = 3.
+requirement_sha: d7cf80216689
+control: M3.6
+documents:
+- M3.6_a
+- M3.6_b
+- M3.6_c
+elements:
+- id: e1
+  text: Evaluation measures aligned to the AI's objectives and acceptable performance thresholds are defined
+    and documented before testing begins.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: ordinary
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+- id: e2
+  text: Evaluation and testing are performed for the specific AI use case, system or model under representative
+    data and plausible conditions of use, with results retained.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: ordinary
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+- id: e3
+  text: The testing approach covers relevant performance, error and failure conditions, including edge
+    cases where applicable.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: ordinary
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+- id: e4
+  text: The testing approach includes robustness, security or adversarial testing where those risks are
+    relevant to the AI use case, system or model.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: conditional
+  precondition: use_case_risk_relevance
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+- id: e5
+  text: The testing approach considers sub-population, fairness or other stakeholder-impact dimensions
+    where relevant to the AI use case, system or model.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: conditional
+  precondition: use_case_impact_relevance
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+- id: e6
+  text: Before deployment, the AI use case, system or model is reviewed by parties not involved in its
+    development.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: ordinary
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+- id: e7
+  text: The scope and independence of the pre-deployment review are proportionate to the assessed risk
+    materiality.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: ordinary
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+- id: e8
+  text: For AI assessed as high risk materiality, formal independent validation is performed before deployment
+    by competent and objective personnel or functions independent from development and deployment teams.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: conditional
+  precondition: high_risk_materiality
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+- id: e9
+  text: The independent validation process provides effective challenge to developers where high risk
+    materiality requires formal validation.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: conditional
+  precondition: high_risk_materiality
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+- id: e10
+  text: Independent validation covers conceptual soundness, suitability and quality of data inputs, and
+    integrity of implementation.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: conditional
+  precondition: formal_validation_performed
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+- id: e11
+  text: Independent validation considers evaluation measures, performance thresholds, testing approaches
+    and results, and relevant explainability and fairness assessments.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: conditional
+  precondition: formal_validation_performed
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+- id: e12
+  text: Review findings, limitations and conditions for use are recorded and reported to the relevant
+    approval body before deployment.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: ordinary
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+- id: e13
+  text: Residual risk and an accountable owner are recorded for the validation or review outcome before
+    deployment.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: ordinary
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+- id: e14
+  text: Re-validation triggers are defined and are proportionate to the assessed risk materiality.
+  a: '?'
+  b: '?'
+  c: '?'
+  decided_by: pending-human-relabel-2026-09-14
+  where: Pending element-level re-argument after the 14-atom contract change; the prior 7-element labels
+    are not copied.
+  observability: out_of_band
+  observability_note: Re-validation triggers are ordinarily a lifecycle-governance artefact held outside
+    any single validation pack. A strong pack can legitimately carry no evidence for this, so a document-retrieval
+    evidence class cannot decide it.
+  observability_source: GE-110b.2 corpus design review, 2026-09-15
+judgements:
+- case: a
+  element: e1
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e1
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e1
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: a
+  element: e2
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e2
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e2
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: a
+  element: e3
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e3
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e3
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: a
+  element: e4
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e4
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e4
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: a
+  element: e5
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e5
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e5
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: a
+  element: e6
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e6
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e6
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: a
+  element: e7
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e7
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e7
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: a
+  element: e8
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e8
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e8
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: a
+  element: e9
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e9
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e9
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: a
+  element: e10
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e10
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e10
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: a
+  element: e11
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e11
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e11
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: a
+  element: e12
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e12
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e12
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: a
+  element: e13
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e13
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e13
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: a
+  element: e14
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: b
+  element: e14
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: c
+  element: e14
+  verdict: '?'
+  justification: Pending element-level re-argument after the 14-atom contract change; the prior 7-element
+    labels are not copied.
+  provenance: inherited_from_element
+  source_refs: []
+  labelled_by: pending-human-relabel-2026-09-14
+  labelled_at: '2026-09-14'
+- case: d
+  element: e1
+  verdict: Y
+  justification: The acceptance criteria and performance thresholds are documented in MDD v3.1 §2.5 before
+    the testing reported in §4; the report also records the sequencing finding separately.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_d.md#§5
+  - M3.6_d.md#§4
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: d
+  element: e2
+  verdict: Y
+  justification: The validation is explicitly for PLS Risk Score v3.1 in its Singapore retail unsecured-loan
+    and credit-line-increase use case, with development, holdout, out-of-time and constructed-record testing
+    and retained results.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_d.md#§1
+  - M3.6_d.md#§2
+  - M3.6_d.md#§4
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: d
+  element: e3
+  verdict: Y
+  justification: Testing covers discrimination, calibration, stability, segment performance, boundary
+    values, missing data, zero history and out-of-range income, including an observed implementation failure.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_d.md#§4
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: d
+  element: e4
+  verdict: Y
+  justification: For this credit-scoring use case, robustness is relevant, and the validator performed
+    constructed-record testing covering boundary values, missing bureau data, zero transaction history
+    and out-of-range income.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_d.md#§4.4
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: d
+  element: e5
+  verdict: Y
+  justification: The validation includes sub-population performance analysis across new-to-bank versus
+    existing customers, income bands and product type.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_d.md#§4.3
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: d
+  element: e6
+  verdict: Y
+  justification: Model Risk Management performed the validation and the report states that no reviewer
+    contributed to development, feature selection, training or tuning.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_d.md#§1
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: d
+  element: e7
+  verdict: Y
+  justification: The review scope and independent team are explicitly tied to the model's Tier-2 inventory
+    classification and its prescribed validation schedule.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_d.md#§1
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: d
+  element: e8
+  verdict: n/a
+  justification: The pack classifies the model as Tier 2 and does not state that it has been assessed
+    as high risk materiality; the high-risk precondition for formal independent validation under e8 is
+    therefore not established.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_d.md#§1
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: d
+  element: e9
+  verdict: n/a
+  justification: The pack does not establish the high-risk-materiality precondition required by e9.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_d.md#§1
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: d
+  element: e10
+  verdict: N
+  justification: Formal independent validation was performed, but the report explicitly states that the
+    Tier-2 scope excludes the extended conceptual-soundness workstream required for Tier 1; the pack therefore
+    does not evidence coverage of conceptual soundness as required by e10.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_d.md#§1
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: d
+  element: e11
+  verdict: N
+  justification: The validation considers evaluation measures, thresholds, testing and results and includes
+    segment analysis, but the pack does not evidence the required explainability/fairness assessment at
+    the independent-validation level as a whole.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_d.md#§4
+  - M3.6_d.md#§5
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: d
+  element: e12
+  verdict: Y
+  justification: Findings, limitations and conditions are recorded in the report and the report is distributed
+    to the Model Risk Committee secretariat before the stated implementation decision.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_d.md#§1
+  - M3.6_d.md#§6
+  - M3.6_d.md#§7
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: d
+  element: e13
+  verdict: Y
+  justification: The report records residual risk from the open findings against the Head of Consumer
+    Credit Analytics as accountable Model Owner.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_d.md#§8
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: f
+  element: e1
+  verdict: N
+  justification: The pack documents evaluation measures and operational thresholds such as the enhanced-review
+    cut-off and capacity, but it does not evidence acceptable performance thresholds defined and documented
+    before testing began.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_f.md#§4
+  - M3.6_f.md#§5
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: f
+  element: e2
+  verdict: Y
+  justification: Release 5.2 is tested in its specific transaction-monitoring use case using a defined
+    30-month transaction population, historical comparison, and 64 constructed typology scenarios, with
+    results retained.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_f.md#§1
+  - M3.6_f.md#§3
+  - M3.6_f.md#§4
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: f
+  element: e3
+  verdict: Y
+  justification: Testing covers historical performance, deliberately constructed typologies, behaviour-change
+    samples, threshold effects and sparse-history degradation, including documented failure conditions.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_f.md#§4
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: f
+  element: e4
+  verdict: Y
+  justification: Robustness is relevant to a transaction-monitoring prioritisation model, and the pack
+    contains independently re-executed scenario testing across trade-based, mule-network, e-wallet and
+    structuring patterns.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_f.md#§4.2
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: f
+  element: e5
+  verdict: Y
+  justification: The validation considers sub-population behaviour, including explicit degradation for
+    customers with fewer than 90 days of history and performance by tenure band.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_f.md#§4.3
+  - M3.6_f.md#§6
+  - M3.6_f.md#§7
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: f
+  element: e6
+  verdict: Y
+  justification: Independent Model Validation performed the review; IMV staff were outside development,
+    feature engineering and tuning, with an additional validator independently re-performing specified
+    sections.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_f.md#§2
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: f
+  element: e7
+  verdict: Y
+  justification: The change was classified as material under the Model Change Standard and therefore received
+    full re-validation, with an independent validation arrangement and an explicitly documented scope
+    basis.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_f.md#§1
+  - M3.6_f.md#§2
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: f
+  element: e8
+  verdict: n/a
+  justification: The pack does not state that the AI was assessed as high risk materiality, so the specific
+    high-risk-materiality precondition for e8 is not established.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_f.md#§1
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: f
+  element: e9
+  verdict: n/a
+  justification: The pack contains effective challenge, but the specific high-risk-materiality precondition
+    in e9 is not established; the challenge is therefore not converted into an e9 verdict.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_f.md#§5
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: f
+  element: e10
+  verdict: N
+  justification: Full re-validation was performed and includes data-input checks and implementation-related
+    re-performance, but the pack does not evidence coverage of conceptual soundness as required by e10.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_f.md#§3
+  - M3.6_f.md#§4
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: f
+  element: e11
+  verdict: N
+  justification: The pack considers evaluation measures, testing approaches and results, but does not
+    evidence the required explainability and relevant fairness assessment as part of the independent validation.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_f.md#§4
+  - M3.6_f.md#§5
+  - M3.6_f.md#§6
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: f
+  element: e12
+  verdict: Y
+  justification: Validation findings, limitations, conditions and unresolved matters are recorded and
+    reported to the Financial Crime Risk Committee, including the unresolved capacity disagreement.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_f.md#§5
+  - M3.6_f.md#§6
+  - M3.6_f.md#§7
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: f
+  element: e13
+  verdict: Y
+  justification: Residual risk and accountable owners are explicitly recorded for the model and for the
+    enhanced-review capacity issue.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_f.md#§8
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: e
+  element: e1
+  verdict: N
+  justification: The pack reports correctness rates and a number of evaluation measures, but it does not
+    evidence acceptable performance thresholds defined and documented before testing began.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_e.md#§3
+  - M3.6_e.md#§4
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: e
+  element: e2
+  verdict: Y
+  justification: Testing is explicitly for the CCA in its contact-centre use case, covers 18,442 pilot
+    interactions plus scripted and difficult scenarios, and retains results.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_e.md#§1
+  - M3.6_e.md#§3
+  - M3.6_e.md#§4
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: e
+  element: e3
+  verdict: Y
+  justification: The evaluation covers scripted scenarios, absent-source cases, conflicting knowledge,
+    commitment elicitation, prompt injection, mixed-language input, unsupported products, live quality
+    sampling and observed failures.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_e.md#§3
+  - M3.6_e.md#§4.2
+  - M3.6_e.md#§5
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: e
+  element: e4
+  verdict: Y
+  justification: Robustness and adversarial risks are directly exercised through conflicting KB articles,
+    prompt-injection attempts, difficult inputs and unsupported-answer conditions.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_e.md#§3
+  - M3.6_e.md#§4.2
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: e
+  element: e5
+  verdict: Y
+  justification: The pack examines interaction-population coverage and language distribution, including
+    under-representation and weaker measured Malay-language performance, and explicitly records limitations
+    affecting customer groups and servicing lines.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_e.md#§4.4
+  - M3.6_e.md#§5
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: e
+  element: e6
+  verdict: N
+  justification: The pack was prepared by Delivery with operational input and explicitly states that second-line
+    review had not commenced at circulation.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_e.md#§1
+  - M3.6_e.md#§7
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: e
+  element: e7
+  verdict: N
+  justification: The pack does not evidence an independent pre-deployment review whose scope and independence
+    have been established as proportionate to assessed risk materiality.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_e.md#§7
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: e
+  element: e8
+  verdict: n/a
+  justification: The pack does not establish that the AI is assessed as high risk materiality, so the
+    specific precondition for formal high-risk independent validation is not established.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_e.md#§7
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: e
+  element: e9
+  verdict: n/a
+  justification: The high-risk-materiality precondition is not established in the pack.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_e.md#§7
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: e
+  element: e10
+  verdict: n/a
+  justification: Formal independent validation is not evidenced as having been performed; the pack states
+    that second-line review had not commenced.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_e.md#§7
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: e
+  element: e11
+  verdict: n/a
+  justification: Because formal independent validation is not evidenced as performed, the precondition
+    for e11 does not hold.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_e.md#§7
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: e
+  element: e12
+  verdict: N
+  justification: Limitations and findings are recorded, but the pack does not evidence that they were
+    reported to the relevant approval body before deployment; the second-line review requested for the
+    expansion decision had not commenced.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_e.md#§5
+  - M3.6_e.md#§7
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: e
+  element: e13
+  verdict: N
+  justification: The pack records open issues and limitations but does not identify an accountable owner
+    for the residual validation/review risk outcome.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_e.md#§5
+  - M3.6_e.md#§7
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: g
+  element: e1
+  verdict: Y
+  justification: The pre-deployment evaluation has explicit success criteria—AUC >= 0.65 out-of-time and
+    uplift >= 1.4x over incumbent rules—documented in the 8 January 2026 model design note before the
+    evaluation.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_g.md#§3.1
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: g
+  element: e2
+  verdict: Y
+  justification: The pack evaluates the specific DOEP use case using a 14-month holdout and controlled-deployment
+    population, with results retained and compared across relevant customer segments.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_g.md#§3.1
+  - M3.6_g.md#§3.2
+  - M3.6_g.md#§3.3
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: g
+  element: e3
+  verdict: N
+  justification: The pack provides performance and segment analysis and records important failure/limitation
+    findings, but it does not evidence a testing approach covering error or edge-case conditions as such.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_g.md#§3
+  - M3.6_g.md#§4
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: g
+  element: e4
+  verdict: n/a
+  justification: The pack does not establish a use-case-specific requirement for robustness, security
+    or adversarial testing, so the conditional precondition is not established from this evidence bundle.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_g.md#§1
+  - M3.6_g.md#§3
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: g
+  element: e5
+  verdict: Y
+  justification: The pack contains explicit stakeholder-impact and fairness analysis, including age-band
+    performance, vulnerable-customer treatment, customer-population representativeness and a Conduct Risk
+    assessment of the observed differential.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_g.md#§3.2
+  - M3.6_g.md#§3.3
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: g
+  element: e6
+  verdict: Y
+  justification: MRM performed independent validation before deployment and again before expansion, with
+    no member of the validation team involved in DOEP design or build.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_g.md#§2
+  - M3.6_g.md#§4
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: g
+  element: e7
+  verdict: Y
+  justification: The heightened governance classification drove independent validation before first deployment
+    and a further independent review before material population expansion, demonstrating risk-proportionate
+    scope and independence.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_g.md#§1
+  - M3.6_g.md#§2
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: g
+  element: e8
+  verdict: n/a
+  justification: The pack uses a Heightened governance classification, but it does not establish the contract's
+    distinct 'high risk materiality' precondition for e8.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_g.md#§1
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: g
+  element: e9
+  verdict: n/a
+  justification: The pack documents independent review and challenge, but the specific high-risk-materiality
+    precondition in e9 is not established.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_g.md#§1
+  - M3.6_g.md#§4
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: g
+  element: e10
+  verdict: N
+  justification: Independent validation is reported as performed, but the evidence in this pack does not
+    establish that the validation covered conceptual soundness, suitability and quality of data inputs,
+    and implementation integrity as required by e10.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_g.md#§2
+  - M3.6_g.md#§4
+  - M3.6_g.md#Appendix F
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: g
+  element: e11
+  verdict: Y
+  justification: The pack records independent validation together with evaluation measures, thresholds,
+    testing and results, and relevant fairness/stakeholder-impact assessment; those materials are explicitly
+    incorporated into the expansion review.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_g.md#§3
+  - M3.6_g.md#§4
+  - M3.6_g.md#Appendix F
+  - M3.6_g.md#Appendix G
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: g
+  element: e12
+  verdict: Y
+  justification: Findings, limitations and conditions are explicitly recorded, and the MRM opinion and
+    Conduct Risk position are put to the Retail Product & Conduct Committee before the expansion decision.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_g.md#§4
+  - M3.6_g.md#§5
+  - M3.6_g.md#§6
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+- case: g
+  element: e13
+  verdict: Y
+  justification: The pack explicitly names accountable owners for the model and residual risk and separately
+    identifies the accountable owner for conduct outcomes.
+  provenance: adjudicated_case_specific
+  source_refs:
+  - M3.6_g.md#§5
+  labelled_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  labelled_at: '2026-09-15'
+provenance_schema: ge110b.label-provenance.1
+capability_findings:
+- element: e14
+  cases:
+  - d
+  - e
+  - f
+  - g
+  kind: out_of_band
+  finding: No pack evidences re-validation triggers. Each states they are held in the model inventory
+    or governance policy rather than the validation bundle. This is a property of the evidence class,
+    not a defect in any case, and no verdict is recorded.
+  needs: a governance-policy source, not document retrieval over an evidence bundle
+  recorded_by: GPT-5.6 Luna
+  adjudicator_kind: ai
+  recorded_at: '2026-09-15'
+calibration_cases:
+- d
+- e
+- f
+- g
+retired_cases:
+  a: superseded by the 14-element contract; labels not carried
+  b: superseded by the 14-element contract; labels not carried
+  c: superseded by the 14-element contract; labels not carried

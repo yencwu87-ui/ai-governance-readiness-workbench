@@ -1,0 +1,98 @@
+requirement_sha: 77beaa02c634
+# Element evidence matrix — M3.6
+#
+# GROUND TRUTH for the corpus. One row per element, one column per document. This is the only
+# place the matrix lives: LABELS.md renders it, probe_corpus.py scores against it. Do not
+# restate it elsewhere — that is how the boundary diverged.
+#
+# Values (quoted, because ? is a YAML indicator):
+#   "Y"  the document evidences this element
+#   "N"  it does not
+#   "n/a" the element does not apply to this document (applies_when unmet,
+#        or lane_b). Excluded from the label rather than counted against it.
+#   "?"  undecided. An element you cannot label is an element you cannot score, so a ? left
+#        here is a drafting finding against the element, not an oversight.
+#
+# `where` is the confirmation mechanism: a Y citing a passage can be checked in under a
+# minute, a bare Y cannot. Lines marked SUGGEST are Claude's reading and are NOT decided —
+# replace the "?" and rewrite the note in your own words.
+#
+# decided_by: claude-unconfirmed marks a cell Claude decided on documents Claude also wrote.
+# That is not independent: it measures Claude's consistency, not the assessor's accuracy. Any
+# score drawn from these cells carries that caveat until a reviewer confirms them and changes
+# the field. Cells without the field were decided from the document text alone and are
+# checkable against the citation.
+#
+# Labels are DERIVED from this file, not stated: all applicable Y = full, some = partial,
+# none = none. The matrix is the truth; the label is a consequence.
+
+control: M3.6
+documents: [M3.6_a, M3.6_b, M3.6_c]
+elements:
+  - id: e1
+    text: "Evaluation results exist for the specific model version, measured against pre-defined metrics on representative held-out data"
+    a: "Y"
+    b: "Y"
+    c: "N"
+    where: "_a §2 table 1 AUC/PSI on out-of-time holdout; _b same six tests"
+  - id: e2
+    text: "Testing covers behaviour under conditions the model will meet — robustness, stress, edge case, bias and fairness, adversarial and security testing, and integration or UAT in a production-like environment"
+    a: "Y"
+    b: "N"
+    c: "N"
+    where: "_a §2 table 2, all six test types; _b has none"
+  - id: e3
+    text: "Validation was performed by someone who did not build the model"
+    a: "Y"
+    b: "N"
+    c: "N"
+    decided_by: claude-unconfirmed
+    where: "_a S1: 'This review was performed by Independent Model Validation... No member of the review team contributed to model development, feature selection or training.' _b: Wei Ming and Priya peer-review each other inside Collections Analytics, the squad that built it. _c: S4 states models WILL require independent review; draft v0.4, not effective."
+  - id: e3b
+    text: "The review covers conceptual soundness, replication, and whether the developer's own evaluation and testing were adequate"
+    a: "N"
+    b: "N"
+    c: "N"
+    decided_by: claude-unconfirmed
+    where: "_a evidences replication ('re-executed by the reviewer rather than accepted from the development team's notebooks') and adequacy of the developer's testing (Appendix B records where results differed). Conceptual soundness is never mentioned - two of three limbs, so N. _b and _c evidence none of the three."
+  - id: e4
+    text: "The validator is separate from the developing function, with no reporting line into it, and the person who signs the opinion is named"
+    a: "Y"
+    b: "N"
+    c: "N"
+    decided_by: claude-unconfirmed
+    where: "_a S5: reviewer 'has no reporting line into Collections Analytics and no involvement in the build'; signed S. Prakash, countersigned A. Loh. _b: the signer is the squad lead who owns the model. _c: defines the boundary but evidences no instance of it."
+  - id: e4b
+    text: "The validator is separate from the business owner of the use case"
+    a: "N"
+    b: "N"
+    c: "N"
+    decided_by: claude-unconfirmed
+    where: "Separation from the BUSINESS OWNER is nowhere stated in any of the three. _a evidences separation from the developing function only. The business owner of the collections process is never identified, so the separation cannot be established either way."
+  - id: e5
+    text: "A validation outcome is recorded and dated"
+    a: "Y"
+    b: "N"
+    c: "N"
+    decided_by: claude-unconfirmed
+    where: "_a S3 is a recorded outcome ('Fit for deployment, with conditions') dated 14 August 2026 and countersigned 15 August. _b records an approval to release, not a validation outcome - no validator issued an opinion. _c has no outcome of any kind."
+  - id: e5d
+    text: "The recorded date precedes the production go-live date, and both dates are evidenced"
+    applies_when: "where a deployment record is available alongside the validation outcome"
+    a: "n/a"
+    b: "n/a"
+    c: "n/a"
+    decided_by: claude-unconfirmed
+    where: "Scoped to where a deployment record is available alongside the validation outcome. None of the three documents is or contains a deployment record, so the precedence relationship cannot be evaluated from this evidence. Not a failure of the control - the artefact is elsewhere."
+  - id: e5b
+    text: "The validation outcome is recorded against a named accountable person"
+    a: "Y"
+    b: "N"
+    c: "N"
+    where: "_a §5 signed S. Prakash, countersigned A. Loh, Head of IMV"
+  - id: e5c
+    text: "The validation outcome states limitations, conditions of use and residual risk accepted"
+    a: "N"
+    b: "N"
+    c: "N"
+    where: "_a states two conditions and an open item, never limitations / conditions of use / residual risk accepted"

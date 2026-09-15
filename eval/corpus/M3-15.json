@@ -1,0 +1,29 @@
+[
+  {
+    "case_id": "M3-15-NONE",
+    "control_id": "M3.15",
+    "shape": "technical_config",
+    "label": "none",
+    "evidence_basis": "No evidence supplied.",
+    "source_status": "diagnostic_fixture",
+    "note": "Synthetic diagnostic fixture; never used as few-shot prompt context."
+  },
+  {
+    "case_id": "M3-15-PARTIAL",
+    "control_id": "M3.15",
+    "shape": "technical_config",
+    "label": "partial",
+    "evidence_basis": "One or more applicable elements evidenced; at least one remains unsupported.",
+    "source_status": "diagnostic_fixture",
+    "note": "Synthetic diagnostic fixture; never used as few-shot prompt context."
+  },
+  {
+    "case_id": "M3-15-FULL",
+    "control_id": "M3.15",
+    "shape": "technical_config",
+    "label": "full",
+    "evidence_basis": "All applicable elements evidenced by attributable, current records.",
+    "source_status": "diagnostic_fixture",
+    "note": "Synthetic diagnostic fixture; never used as few-shot prompt context."
+  }
+]

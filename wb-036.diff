@@ -1,0 +1,73 @@
+--- /home/claude/v52/fix_work/eval/score.py	2026-09-11 13:37:40.000000000 +0000
++++ eval/score.py	2026-09-12 05:22:25.668428985 +0000
+@@ -132,6 +132,29 @@
+     return matrix, metrics, macro_f1, balanced_accuracy
+ 
+ 
++
++def _corpus_binding() -> dict:
++    """Stale and unbound corpus cases, or an empty result when the corpus is unavailable.
++
++    Never raises: score.py must still run on the golden set in a tree without eval_adapters,
++    and an unavailable corpus is not the same claim as a bound one.
++    """
++    try:
++        import sys as _sys
++        from pathlib import Path as _P
++        _sys.path.insert(0, str(_P(__file__).resolve().parents[1]))
++        import eval_adapters as _ea
++        rows = _ea.corpus_case_rows()
++    except Exception as e:
++        return {"available": False, "reason": str(e), "stale": [], "unbound": []}
++    return {
++        "available": True,
++        "stale": sorted(r["case_id"] for r in rows if r.get("requirement_sha_mismatch")),
++        "unbound": sorted(r["case_id"] for r in rows if not r.get("requirement_sha")),
++        "cases_examined": len(rows),
++    }
++
++
+ def main():
+     ap = argparse.ArgumentParser()
+     ap.add_argument("--version", required=True, help="assessor version being evaluated, e.g. v0.3.0")
+@@ -293,6 +316,15 @@
+ 
+     status = "evaluated" if n_scored >= a.min_scored else "NOT_TESTABLE"
+ 
++    # WB-036: a label is only a label while it describes the requirement it was argued against.
++    # eval_adapters has computed requirement_sha since WB-029 and the EVL controls check it, but
++    # nothing in the scoring path consulted it — so a run whose corpus had gone stale reported an
++    # accuracy figure exactly as if it had not. Staleness is not a low sample count and it is not
++    # a failure: it is an unanswerable question, which is what NOT_TESTABLE is for.
++    binding = _corpus_binding()
++    if binding.get("stale") or binding.get("unbound"):
++        status = "NOT_TESTABLE"
++
+     if not rows:
+         print("\nno cases scored")
+         return 1
+@@ -339,7 +371,15 @@
+                    f"{margin:+.0%} against the majority-class baseline")
+         print(f"  accuracy {acc:.0%} is {verdict}")
+ 
+-    if status == "NOT_TESTABLE":
++    if binding.get("stale") or binding.get("unbound"):
++        bad = binding.get("stale") or binding.get("unbound")
++        what = "stale" if binding.get("stale") else "unbound"
++        print(f"\nNOT_TESTABLE - {len(bad)} corpus case(s) are {what}: {', '.join(bad)}")
++        print("The labels were argued against a requirement that has since changed, so agreement "
++              "with them\nmeasures nothing. Re-argue LABELS.md against the current elements and "
++              "update requirement_sha\nin elements.yaml. Any accuracy printed above is reported "
++              "for diagnosis only.")
++    elif status == "NOT_TESTABLE":
+         print(f"\nfewer than {a.min_scored} cases scored - this run reports NOT_TESTABLE, not a rating")
+ 
+     if quarantined:
+@@ -379,6 +419,7 @@
+              "cases_eligible": n_total, "cases_scored": n_scored, "cases_refused": refusals,
+              "cases_quarantined": quarantined, "quarantine_rate": round(quarantine_rate, 3),
+              "repeat_count": repeat, "min_scored": a.min_scored,
++             "corpus_binding": binding,
+              "label_distribution": dict(dist), "kind_distribution": dict(kinds), "real_full_cases": real_full,
+              "label_governance": {"status": label_audit["status"],
+                                   "distribution_status": label_audit["distribution_status"],

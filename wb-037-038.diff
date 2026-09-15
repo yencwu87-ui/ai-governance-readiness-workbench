@@ -1,0 +1,324 @@
+--- /home/claude/v52/fix_work/app.py	2026-09-12 02:38:38.000000000 +0000
++++ app.py	2026-09-12 05:45:43.034445800 +0000
+@@ -18,6 +18,7 @@
+ from caa.review import DISPOSITIONS
+ from playbook import LIBRARIES, load_controls
+ from demo_evidence import generate_pack as generate_demo_evidence
++import folder_picker as fp
+ import tour
+ 
+ DATA = Path("data")
+@@ -235,37 +236,200 @@
+     if not controls:
+         st.info("Load a playbook workbook to use this tab.")
+     else:
++        # ================================================================
++        # WB-037 — Evidence workspace, restructured around the choice a first-time user
++        # actually faces rather than around the widgets the pipeline needs.
++        #
++        # What was wrong with the previous layout:
++        #   - the demo was two widgets pretending to be one. A selectbox reading "Off" looks
++        #     like a toggle, so choosing "Mixed" and pressing Index did nothing, because the
++        #     selectbox was only an argument to the button beside it.
++        #   - the match threshold had the visual weight of a primary action while governing a
++        #     step (matching) that has no button and is never seen to happen.
++        #   - numbering started at the fifth element on the page and step 2 did not exist until
++        #     step 1 succeeded, so the shape of the journey was invisible.
++        #   - the primary button was disabled with no reason shown.
++        #   - the caption said the scan was optional while the page presented itself as the
++        #     mandatory landing tab.
++        #
++        # Nothing about the pipeline changes here. index_folder, match_controls, build_evidence
++        # and propose are called exactly as before, and min_ratio is still recorded on every
++        # evidence bundle so a proposal stays reproducible.
++        # ================================================================
+         st.subheader("Evidence workspace")
+-        st.caption("A folder scan is optional for real engagements. You can point the workbench at an evidence folder, load the built-in synthetic pack covering all 195 controls, or add evidence directly on the Assess tab for one control.")
+-        folder = st.text_input("Evidence folder (optional)", S.get("scan_folder", ""), placeholder="/Users/you/Documents/ai-governance-evidence")
+-        S["scan_folder"] = folder
+-        d1, d2, c3 = st.columns([1.4, 1.4, 2])
+-        demo_mode = d1.selectbox("Demo evidence", ["Off", "Mixed: full/partial/none", "All complete"], index=0, key="demo_mode")
+-        if d2.button("Load demo evidence", disabled=not controls):
+-            scenario = "full" if demo_mode == "All complete" else "mixed"
+-            demo_dir = generate_demo_evidence(scenario=scenario)
+-            st.session_state.demo_evidence_dir = str(demo_dir)
+-            st.session_state.scan_folder = str(demo_dir)
+-            S["scan_folder"] = str(demo_dir)
+-            save_state()
+-            st.success(f"Loaded synthetic evidence pack for 195 controls: {demo_dir}")
+-            st.rerun()
+-        folder = st.session_state.get("demo_evidence_dir", folder)
+-        c1, c2 = st.columns([1, 1])
+-        min_ratio = c3.slider("Match threshold", 0.0, 1.0, MIN_RATIO, 0.05,
+-                              help="How close to a control's best-matching passage another passage must score to be included as evidence. 0.35 keeps passages scoring at least 35% of the best. Lower finds more and noisier; higher is stricter and may leave controls with no evidence at all. The value is recorded with every assessment made under it.")
+-        c3.caption(f"Passages scoring below **{min_ratio:.0%}** of each control's best match are excluded. This is relative to the best match, not an absolute score, so one value means the same thing across libraries with differently-worded controls.")
++
++        route = st.radio(
++            "How do you want to start?",
++            ["I have an evidence folder", "Try it with synthetic evidence", "Assess one control directly"],
++            horizontal=True, key="scan_route",
++            help="A folder scan is optional. It is a way of getting candidate evidence in front "
++                 "of many controls at once, not a required first step.",
++        )
++
++        folder = ""
++        if route == "Assess one control directly":
++            st.info("Go to the **Assess** tab, pick a control, and paste or upload its evidence there. "
++                    "Nothing on this tab is needed for that.")
++
++        elif route == "Try it with synthetic evidence":
++            st.caption("Generates a synthetic document for every one of the 195 control contracts, "
++                       "into a temporary folder outside this repository.")
++            scenario_label = st.radio(
++                "Which pack", ["Mixed — full, partial and none", "All complete"],
++                horizontal=True, key="demo_scenario",
++                label_visibility="collapsed",
++            )
++            if st.button("Generate and load synthetic evidence", type="primary", disabled=not controls):
++                scenario = "full" if scenario_label == "All complete" else "mixed"
++                demo_dir = generate_demo_evidence(scenario=scenario)
++                st.session_state.demo_evidence_dir = str(demo_dir)
++                st.session_state.scan_folder = str(demo_dir)
++                S["scan_folder"] = str(demo_dir)
++                save_state()
++                st.rerun()
++            folder = st.session_state.get("demo_evidence_dir", "")
++            if folder:
++                st.success(f"Synthetic pack loaded: `{folder}`")
++            # The honest caveat belongs on the screen, not only in the release notes: this pack is
++            # generated FROM the control contracts, so it reuses the requirement wording almost
++            # verbatim. Retrieval and assessment both look better against it than against real
++            # documents, and the mixed pack is roughly 60% authored as `full`.
++            st.warning("This pack is generated from the control contracts themselves, so it reuses "
++                       "the requirement wording. Retrieval and assessment will look better here than "
++                       "on real documents. Use it to learn the workflow, never as a measurement.")
++
++        else:
++            # WB-038: three ways to name a folder, because none works everywhere. The in-app
++            # browser always works. The native dialog only works when the browser and this
++            # process are on the same machine — opened by a remote server it blocks on a
++            # dialog nobody can see — so fp.local_runtime() gates it. Pasting stays, because
++            # it is still the fastest route for anyone who already has the path.
++            st.session_state.pop("demo_evidence_dir", None)
++            S.setdefault("recent_folders", [])
++
++            def _use_folder(path: str):
++                S["scan_folder"] = path
++                S["recent_folders"] = fp.remember(S.get("recent_folders", []), path)
++                st.session_state.browse_at = path
++                save_state()
++
++            folder = st.text_input("Evidence folder", S.get("scan_folder", ""),
++                                   placeholder="/Users/you/Documents/ai-governance-evidence")
++            if folder != S.get("scan_folder", ""):
++                S["scan_folder"] = folder
++
++            b1, b2 = st.columns([1, 1])
++            if fp.native_available(folder or None):
++                if b1.button("Browse…", key="btn_native_pick"):
++                    chosen, err = fp.pick_folder_native(folder or str(fp.home()))
++                    if err:
++                        st.warning(err)
++                    elif chosen:
++                        _use_folder(chosen)
++                        st.rerun()
++                    # chosen and err both None means cancelled - not an error, say nothing
++            browsing = b2.toggle("Browse from here", key="browse_open",
++                                 help="Walk the filesystem inside the app. Works whether the "
++                                      "workbench runs on this machine or on a server.")
++
++            if browsing:
++                at = st.session_state.get("browse_at") or folder or str(fp.home())
++                if fp.safe_path(at) is None:
++                    at = str(fp.home())
++                crumbs = fp.breadcrumbs(at)
++                cols = st.columns(len(crumbs) + 1)
++                up = fp.parent_of(at)
++                if cols[0].button("↑", key="browse_up", disabled=up is None,
++                                  help="Up one level"):
++                    st.session_state.browse_at = up
++                    st.rerun()
++                for i, (label, target) in enumerate(crumbs, start=1):
++                    if cols[i].button(label or "/", key=f"crumb_{i}"):
++                        st.session_state.browse_at = target
++                        st.rerun()
++
++                subs = fp.list_subdirs(at, show_hidden=st.session_state.get("browse_hidden", False))
++                st.caption(f"`{at}` — {len(subs)} subfolder(s)")
++                if subs:
++                    pick = st.selectbox("Open a subfolder", ["—"] + subs, key="browse_pick")
++                    if pick != "—":
++                        st.session_state.browse_at = str(Path(at) / pick)
++                        st.session_state.browse_pick = "—"
++                        st.rerun()
++                else:
++                    st.caption("No subfolders here, or this folder cannot be read. "
++                               "It can still be selected.")
++                st.checkbox("Show hidden folders", key="browse_hidden")
++                if st.button(f"Use this folder", type="primary", key="browse_use"):
++                    _use_folder(at)
++                    st.rerun()
++
++            recent = [p for p in S.get("recent_folders", []) if p != folder]
++            if recent:
++                r = st.selectbox("Recent folders", ["—"] + recent, key="recent_pick")
++                if r != "—":
++                    _use_folder(r)
++                    st.rerun()
++
++            if not folder:
++                st.caption("Browse above, or paste the full path. In Finder: right-click the "
++                           "folder, hold Option, then Copy as Pathname.")
++            elif fp.safe_path(folder) is None:
++                st.caption("That path does not point at a readable directory yet.")
++
+         self_scan = self_scan_reason(folder) if folder else None
+         if self_scan:
+             st.error(self_scan)
+-        do_index = c1.button("1. Index evidence", type="primary", disabled=not folder or bool(self_scan))
++
++        # ---- the three steps, always visible, each carrying its own reason when unavailable ----
++        st.markdown("---")
++        idx = st.session_state.get("index")
++        sigs = st.session_state.get("signals", [])
++        s1, s2, s3 = st.columns(3)
++
++        with s1:
++            st.markdown("**1 · Index**")
++            st.caption("Read every file in the folder and split it into searchable passages.")
++            blocked = (not folder) or bool(self_scan)
++            do_index = st.button("Index evidence", type="primary", disabled=blocked, key="btn_index")
++            if blocked:
++                st.caption("Needs an evidence folder above." if not folder
++                           else "Blocked — see the message above.")
++
++        with s2:
++            st.markdown("**2 · Match and assess**")
++            st.caption("Find each control's best passages, then ask the assessor for a proposal "
++                       "on every control that matched.")
++            if not idx:
++                st.caption("Available once evidence is indexed.")
++
++        with s3:
++            st.markdown("**3 · Review**")
++            st.caption("Proposals are stored **hidden**. On the Assess tab each one stays "
++                       "invisible until you have recorded your own reading of the evidence.")
++
++        with st.expander("Advanced — retrieval settings"):
++            st.caption("Defaults are fine for a first run. These change which passages a control is "
++                       "assessed on, so the value in force is recorded with every assessment made "
++                       "under it and a stored proposal stays reproducible.")
++            min_ratio = st.slider("Match threshold", 0.0, 1.0, MIN_RATIO, 0.05, key="min_ratio",
++                                  help="How close to a control's best-matching passage another passage "
++                                       "must score to be included as evidence.")
++            st.caption(f"Passages scoring below **{min_ratio:.0%}** of each control's own best match are "
++                       "excluded. Relative to the best match, not an absolute score, so one value means "
++                       "the same thing across libraries with differently-worded controls. "
++                       "Lower finds more and noisier. Higher is stricter and can leave a control with "
++                       "no evidence at all — which is not the same finding as a control that has none.")
++
+         if do_index:
+             if not os.path.isdir(folder):
+-                st.error("Folder not found. Paste the full path (in Finder: right-click the folder, hold Option, Copy as Pathname).")
++                st.error("Folder not found. Paste the full path (in Finder: right-click the folder, "
++                         "hold Option, Copy as Pathname).")
+             else:
+                 bar = st.progress(0.0, "Reading files…")
+                 try:
+-                    st.session_state.index, st.session_state.signals = index_folder(folder, lambda n, t, name: bar.progress((n + 1) / max(t, 1), f"Reading {name}"))
++                    st.session_state.index, st.session_state.signals = index_folder(
++                        folder, lambda n, t, name: bar.progress((n + 1) / max(t, 1), f"Reading {name}"))
+                 except SelfScanError as e:
+                     bar.empty()
+                     st.error(str(e))
+@@ -273,30 +437,40 @@
+                 bar.empty()
+                 chunks = st.session_state.index.chunks
+                 files = len({c.path for c in chunks})
+-                st.success(f"Indexed {files} documents into {len(chunks)} passages. Found {len(st.session_state.signals)} environment signals.")
+-        # The demo manifest is itself metadata, not organisational evidence.
+-        idx = st.session_state.get("index")
+-        sigs = st.session_state.get("signals", [])
++                st.success(f"Indexed {files} documents into {len(chunks)} passages. "
++                           f"Found {len(st.session_state.signals)} environment signals.")
++                idx = st.session_state.index
++                sigs = st.session_state.signals
+ 
+         if sigs:
+             with st.expander(f"Environment signals ({len(sigs)})"):
+-                st.dataframe([{"File": s_.path, "Kind": s_.kind, "What to check": s_.hint, "Relevant controls": ", ".join(s_.controls)} for s_ in sigs],
++                st.caption("Configuration and infrastructure files that point at a control without "
++                           "being evidence for it. They are shown to the assessor as context.")
++                st.dataframe([{"File": s_.path, "Kind": s_.kind, "What to check": s_.hint,
++                               "Relevant controls": ", ".join(s_.controls)} for s_ in sigs],
+                              width="stretch", hide_index=True)
+ 
+         if idx:
+             matches = match_controls(idx, in_scope, min_ratio=min_ratio)
+             found = [c for c in in_scope if c.key in matches]
+-            st.write(f"Candidate evidence found for **{len(found)}** of {len(in_scope)} in-scope controls; **{len(in_scope) - len(found)}** have no matching document.")
+-            st.caption(f"At a match threshold of {min_ratio:.0%}. Move the slider and this changes — "
+-                       "a control with no matching document is not the same finding as a control "
+-                       "whose evidence was excluded by the threshold.")
++            st.markdown("---")
++            m1, m2 = st.columns([2, 3])
++            m1.metric("Controls with candidate evidence", f"{len(found)} of {len(in_scope)}")
++            m2.caption(f"At a match threshold of {min_ratio:.0%}. "
++                       f"**{len(in_scope) - len(found)}** in-scope controls matched no document. "
++                       "Move the threshold and this number changes — a control with no matching "
++                       "document is not the same finding as one whose evidence the threshold excluded.")
+             with st.expander("Preview matches"):
+-                st.dataframe([{"Control": f"{c.id} {c.title}", "Library": c.lib, "Best match": matches[c.key][0][0].label, "Score": round(matches[c.key][0][1], 1),
++                st.dataframe([{"Control": f"{c.id} {c.title}", "Library": c.lib,
++                               "Best match": matches[c.key][0][0].label,
++                               "Score": round(matches[c.key][0][1], 1),
+                                "Passages kept": len(matches[c.key]),
+-                               "Signals": len(signals_for(c, sigs))} for c in found], width="stretch", hide_index=True)
++                               "Signals": len(signals_for(c, sigs))} for c in found],
++                             width="stretch", hide_index=True)
+             only_new = st.checkbox("Skip controls that already have a recorded decision", True)
+             todo = [c for c in found if not (only_new and c.key in S["decisions"])]
+-            if c2.button(f"2. Assess {len(todo)} matched controls", disabled=not todo):
++            if st.button(f"2 · Assess {len(todo)} matched controls", type="primary",
++                         disabled=not todo, key="btn_assess"):
+                 bar = st.progress(0.0)
+                 fails = 0
+                 for n, c in enumerate(todo):
+@@ -310,8 +484,8 @@
+                     S["decisions"].pop(c.key, None)
+                     save_state()
+                 bar.empty()
+-                st.success(f"Assessed {len(todo)} controls ({fails} errors). Nothing is recorded. "
+-                           "On the Assess tab each proposal stays hidden until you have recorded "
++                st.success(f"Assessed {len(todo)} controls ({fails} errors). **Nothing is recorded yet.** "
++                           "Go to the Assess tab — each proposal stays hidden until you have recorded "
+                            "your own reading of the evidence.")
+ 
+         # gap analysis
+@@ -432,7 +606,7 @@
+             b_mat = k2.selectbox("Maturity", ["—"] + list(range(1, _cap + 1)), index=0, key=f"bm_{c.key}",
+                                  help="1 ad hoc, 2 documented, 3 implemented, 4 measured, 5 optimised. "
+                                       "Sufficiency caps maturity, as it does in eval/label.py.")
+-            # WB-030 — per-element verdicts, so the later comparison has something to compare.
++            # WB-031 — per-element verdicts, so the later comparison has something to compare.
+             # Every element opens unset and an unset element is never counted as agreement by
+             # compare(). That is deliberate: pre-selecting a verdict is the same defect as the
+             # old "Accept proposal" default, which produced 47 accepts to 4 amends because
+@@ -678,7 +852,7 @@
+                                    "and the evidence before it moves you.")
+ 
+             # ================================================================
+-            # WB-030 Phase 4 — compare. Deterministic, no model call.
++            # WB-031 Phase 4 — compare. Deterministic, no model call.
+             #
+             # The rating comparison that used to live in the caption above is a comparison of
+             # two words. This compares the two reads where the reasoning is: element by element,
+@@ -826,7 +1000,7 @@
+                                 rec["blind"] = dict(blind)
+                                 rec["assessor_shown"] = bool(a)
+                                 rec["challenged"] = bool(ch)
+-                                # WB-030: the comparison is stored as a fact of the assessment, not
++                                # WB-031: the comparison is stored as a fact of the assessment, not
+                                 # recomputed later. Element agreement is the calibration signal this
+                                 # lane has never carried — rating agreement over three values cannot
+                                 # distinguish an assessor that is right for the wrong reasons.

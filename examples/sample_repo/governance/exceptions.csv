@@ -1,0 +1,4 @@
+exception_id,owner,expires_on,status
+EXC-7,Alice Tan,2026-12-31,open
+EXC-8,,2026-06-30,open
+EXC-9,Carol Ng,2026-03-01,closed

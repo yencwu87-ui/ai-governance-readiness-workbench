@@ -1,0 +1,19 @@
+{
+  "schema_version": "0.5.eval-set.1",
+  "name": "golden_30_mas_v2",
+  "path": "eval/golden_set.jsonl",
+  "sha256": "9907f04471533f4dd2481bf95637aefea4667b39fdff32e4c3ab4f806acc77d3",
+  "sha256_12": "9907f0447153",
+  "case_count": 30,
+  "labelled_counts": {
+    "none": 11,
+    "partial": 8,
+    "full": 11
+  },
+  "kind_counts": {
+    "real": 15,
+    "synthetic": 15
+  },
+  "status": "UNSCORED_PENDING_RECALIBRATION",
+  "real_full_cases": 5
+}

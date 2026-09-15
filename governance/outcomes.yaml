@@ -1,0 +1,155 @@
+schema: v0.9.outcomes.1
+version: 0.1.0
+maintained_by: "AI Risk (2LoD)"
+notes:
+  - "Outcomes are the product surface: they summarise governance posture."
+  - "MAS/MGF remain the governed requirements; outcomes do not replace them."
+  - "Plugins contribute observations and evidence packets that support capabilities."
+  - "Lane B may later attach deterministic checks to the same capability IDs."
+
+evaluation_policy:
+  posture_precedence: [defer, escalate, remediate, adequate]
+  blocker_propagation: any
+  escalation_propagation: any
+  sufficiency_rule:
+    adequate_requires: all_mapped_items_full
+    remediate_if: any_mapped_item_below_full_or_unresolved
+  longitudinal_window_days: 180
+
+outcomes:
+  - outcome_id: OVS-CHANGE-01
+    title: "Changes are governed, independently reviewed, and reversible"
+    description: "Production-impacting changes are traceable to an approved request, independently reviewed, and reversible through practiced rollback."
+    priority: high
+    capabilities:
+      - SDLC.BRANCH_PROTECTION
+      - SDLC.CODEOWNERS_ENFORCED
+      - SDLC.REQUIRED_STATUS_CHECKS
+      - SDLC.APPROVER_NOT_AUTHOR
+      - OPS.ROLLBACK_TESTED
+    typical_evidence:
+      - "GitHub branch protection settings"
+      - "PR review and approval records"
+      - "Change ticket and approvals"
+      - "Rollback test record"
+
+  - outcome_id: OVS-TRACE-01
+    title: "Decisions and lifecycle events are attributable, reproducible, and auditable"
+    description: "Material inputs, approvals, decisions, and lifecycle events have a durable attributable audit trail with integrity and reproducible basis."
+    priority: high
+    capabilities:
+      - GOV.APPEND_ONLY_EVENT_LOG
+      - GOV.BASIS_HASH_REPRODUCIBLE
+      - GOV.EVIDENCE_LINEAGE
+      - GOV.DECISION_ADMISSIBILITY_ENFORCED
+    typical_evidence:
+      - "append-only event log"
+      - "basis hashes and policy versions"
+      - "evidence lineage records"
+
+  - outcome_id: OVS-INVENTORY-01
+    title: "AI inventory and ownership are complete and maintained under controlled updates"
+    description: "The AI population is identifiable, owned, risk-tiered, dependency-aware, and maintained under controlled updates."
+    priority: high
+    capabilities:
+      - DISC.MODEL_REGISTRY_PRESENT
+      - DISC.OWNERSHIP_DEFINED
+      - DISC.DEPENDENCIES_RECORDED
+      - DISC.RISK_TIER_RECORDED
+    typical_evidence:
+      - "model or use-case registry"
+      - "model cards"
+      - "change tickets referencing model or system IDs"
+
+  - outcome_id: OVS-EVAL-01
+    title: "Evaluation is performed before deployment and regressions are governed"
+    description: "Pre-deployment evaluation is attributable to a version, uses a governed set, and regression claims are admissible against an incumbent."
+    priority: high
+    capabilities:
+      - EVAL.GOLDEN_SET_GOVERNED
+      - EVAL.RUN_BEFORE_DEPLOY
+      - EVAL.REGRESSION_GATES
+      - EVAL.RESULTS_AUDITABLE
+    typical_evidence:
+      - "evaluation result and dataset hash"
+      - "validation or release evidence referencing evaluation"
+
+  - outcome_id: OVS-EXCEPTIONS-01
+    title: "Exceptions are owned, time-bounded, and re-approved"
+    description: "Exceptions have accountable owners, rationale, expiry, and a governed review cadence."
+    priority: high
+    capabilities:
+      - GOV.EXCEPTION_REGISTER
+      - GOV.EXCEPTION_EXPIRY_ENFORCED
+      - GOV.EXCEPTION_REVIEW_CADENCE
+    typical_evidence:
+      - "exception register"
+      - "approvals and review records"
+
+  - outcome_id: OVS-OVERSIGHT-01
+    title: "Human oversight is effective and attributable"
+    description: "Named reviewers make attributable decisions with adequate reasons; AI outputs cannot silently become recorded conclusions."
+    priority: high
+    capabilities:
+      - OVS.REVIEWER_REQUIRED
+      - OVS.REASON_QUALITY_ENFORCED
+      - OVS.BLIND_READ_BEFORE_AI
+      - OVS.OVERRIDE_RATE_MONITORED
+    typical_evidence:
+      - "decision events"
+      - "review and reason validation records"
+
+  - outcome_id: OVS-RUNTIME-01
+    title: "Runtime operation is monitored and bounded by guardrails"
+    description: "Runtime behaviour is monitored and bounded by tested controls, intervention and escalation paths."
+    priority: high
+    capabilities:
+      - OPS.RUNTIME_MONITORING
+      - OPS.GUARDRAILS_ENFORCED
+      - OPS.KILL_SWITCH_TESTED
+      - OPS.ESCALATION_HANDLING
+    typical_evidence:
+      - "monitoring reports"
+      - "guardrail enforcement records"
+      - "intervention and escalation records"
+
+  - outcome_id: OVS-DATA-01
+    title: "AI data is governed for quality, relevance, access, and traceability"
+    description: "Material AI data is subject to defined quality, relevance, access, retention, and traceability controls."
+    priority: high
+    capabilities:
+      - DATA.QUALITY_GOVERNED
+      - DATA.ACCESS_CONTROLLED
+      - DATA.LINEAGE_RECORDED
+      - DATA.RETENTION_DEFINED
+    typical_evidence:
+      - "data standards and inventories"
+      - "lineage records"
+      - "access and retention evidence"
+
+  - outcome_id: OVS-INCIDENT-01
+    title: "AI incidents are detected, escalated, contained, and learned from"
+    description: "AI-specific incident detection, escalation, recovery, review, and revalidation triggers are defined and evidenced."
+    priority: high
+    capabilities:
+      - OPS.INCIDENT_CLASSIFICATION
+      - OPS.INCIDENT_ESCALATION
+      - OPS.INCIDENT_RECOVERY
+      - OPS.INCIDENT_LESSONS_FEEDBACK
+    typical_evidence:
+      - "incident records"
+      - "escalation and recovery runbooks"
+      - "post-incident review records"
+
+  - outcome_id: OVS-THIRDPARTY-01
+    title: "Third-party and provider concentration risk is understood and controlled"
+    description: "Critical dependencies are identified, assessed, governed, and subject to fallback or exit considerations where material."
+    priority: medium
+    capabilities:
+      - TPR.DEPENDENCIES_IDENTIFIED
+      - TPR.CONCENTRATION_ASSESSED
+      - TPR.EXIT_STRATEGY_CONSIDERED
+    typical_evidence:
+      - "vendor and dependency register"
+      - "third-party risk assessment"
+      - "contractual protections"

@@ -1,0 +1,51 @@
+digraph GovernanceEngine {
+  graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.35", ranksep="0.6", fontname="Arial"];
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=10, margin="0.14,0.08", color="#495057", fillcolor="#F8F9FA"];
+  edge [color="#6C757D", arrowsize=0.7, fontname="Arial", fontsize=9];
+
+  evidence [label="Organisation evidence\nPDF / DOCX / XLSX / CSV / JSON / YAML"];
+  playbook [label="Governance Playbook\nRequirement + ToD + ToE + Plays / Steps", fillcolor="#E8F1FB"];
+  mas [label="requirements/mas.yaml\nRegulatory requirement authority", fillcolor="#FFF4D6"];
+  testing [label="Control Testing Brain\nHow to test / evidence expectations", fillcolor="#EAF7EA"];
+  knowledge [label="Governance Knowledge Brain\nPrecedents / interpretations / patterns", fillcolor="#F2EAF8"];
+
+  assessor [label="Assess with AI\nEvidence-first independent proposal", fillcolor="#DFF3E8"];
+  validator [label="Deterministic validation\nCitation / gaps / sufficiency / safety", fillcolor="#F1F3F5"];
+  reviewer [label="Human final gate\nAccept / override / request evidence / escalate", fillcolor="#FFE5E5"];
+  decision [label="Decision record\nAppend-only provenance", fillcolor="#EDE7F6"];
+  writeback [label="Playbook write-back\nOnly from human decision", fillcolor="#F8E6E6"];
+
+  myread [label="Challenge My Read\nClaim → fact → requirement → rebuttal → risk", fillcolor="#DDEBF7"];
+  dossier [label="Challenge Dossier\nEvidence / requirement / knowledge pointers\n+ human response", fillcolor="#E8EAF6"];
+
+  regulation [label="Regulatory inbox\nNew MAS / SAFR / ISO / NIST / other", fillcolor="#FFF4D6"];
+  compiler [label="Regulation Compiler\nExtract → map → draft ToD/ToE → shadow test", fillcolor="#FFF4D6"];
+  shadow [label="Draft / Shadow\nImpact analysis + comparison", fillcolor="#FFF4D6"];
+  promote [label="Approval + effective-date promotion", fillcolor="#FFE5E5"];
+
+  evidence -> assessor;
+  playbook -> assessor;
+  mas -> assessor;
+  testing -> assessor;
+  knowledge -> assessor;
+  assessor -> validator;
+  validator -> reviewer;
+  reviewer -> decision;
+  decision -> writeback;
+
+  playbook -> myread;
+  mas -> myread;
+  evidence -> myread;
+  testing -> myread;
+  knowledge -> myread;
+  myread -> dossier;
+  dossier -> reviewer [label="challenge response"];
+
+  regulation -> compiler;
+  playbook -> compiler;
+  testing -> compiler;
+  knowledge -> compiler;
+  compiler -> shadow;
+  shadow -> promote;
+  promote -> mas [label="new approved version"];
+}

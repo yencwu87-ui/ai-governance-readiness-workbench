@@ -1,0 +1,326 @@
+schema_version: wb100.assurance-overlay.1
+control_id: M3.6
+framework: MAS
+as_of: '2026-09-14'
+canonical_status: draft_candidate
+source_authority:
+  primary: MAS-AIRG-P017-2025
+  status: proposed
+  warning: >-
+    The MAS AI Risk Management text used here is a consultation draft, not a final binding guideline.
+    This overlay therefore cannot promote its elements into a live mandatory requirement.
+control_boundary:
+  included:
+    - evaluation_testing
+    - pre_deployment_review
+    - independent_validation
+    - review_findings_resolution
+    - risk_based_revalidation
+  parallel_context:
+    - source_id: MAS-TRM-P012-2026
+      rationale: >-
+        P012-2026 concerns technology-risk notices. It can alter expectations relevant to secure testing,
+        change controls, monitoring, recovery and incident management, but it does not automatically become an
+        M3.6 AI evaluation element.
+  adjacent_out_of_scope:
+    - source_locator: '4.17'
+      topic: reproducibility_and_auditability
+      treatment: parallel_assurance_context
+    - source_locator: '4.22'
+      topic: technology_and_cybersecurity_review
+      treatment: separate_control_or_cross_reference
+    - source_locator: '4.23-4.24'
+      topic: post_deployment_monitoring_and_periodic_review
+      treatment: lifecycle_follow_on_control
+
+# The dimensions below are assurance obligations, not automatically new canonical elements.
+elements:
+  - id: e1
+    text: Evaluation measures aligned to the AI's objectives and acceptable performance thresholds are defined and documented before testing begins.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:4.14(a)']
+    required_dimensions: [tod, toe, failure_modes, sufficiency_boundary, test_provenance]
+    tod:
+      - measure is defined and aligned to the stated AI objective
+      - threshold is explicit, documented and agreed by relevant actors
+      - definition exists before test execution
+    toe:
+      - executed test uses the approved measure and threshold
+      - results are attributable to the in-scope AI version/use case
+    failure_modes:
+      - threshold missing
+      - threshold created after execution
+      - metric misaligned to objective
+      - result cannot be reconciled to threshold
+    sufficiency_boundary:
+      insufficient: policy aspiration or metric name without threshold/approval/timing
+      minimum: approved evaluation standard plus dated threshold and attributable result
+    test_provenance:
+      - evaluation standard version
+      - approval timestamp
+      - test-run/version identifier
+
+  - id: e2
+    text: Evaluation and testing are performed for the specific AI use case, system or model under representative data and plausible conditions of use, with results retained.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:4.14', 'MAS-AIRG-P017-2025:4.14(b)']
+    required_dimensions: [tod, toe, failure_modes, sufficiency_boundary, test_provenance]
+    tod:
+      - testing plan identifies context of use and plausible conditions
+      - representative-data criterion is defined
+    toe:
+      - actual execution covers the approved context/data/conditions
+      - results are retained and attributable
+    failure_modes:
+      - synthetic-only or non-representative test set
+      - wrong model/version tested
+      - edge conditions omitted
+      - results not retained
+    sufficiency_boundary:
+      insufficient: generic testing policy or retained report with no scope/version context
+      minimum: test plan + dataset/context rationale + executed result tied to version/use case
+    test_provenance:
+      - dataset/version hash where available
+      - test run id
+      - AI version
+
+  - id: e3
+    text: The testing approach covers relevant performance, error and failure conditions, including edge cases where applicable.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:4.14']
+    required_dimensions: [tod, toe, failure_modes, sufficiency_boundary, test_provenance]
+    tod:
+      - relevant performance/error/failure catalogue exists
+      - edge-case applicability is reasoned
+    toe:
+      - selected conditions were actually exercised where applicable
+    failure_modes:
+      - tests cover only happy path
+      - failure catalogue exists but is never executed
+      - edge cases excluded without applicability rationale
+    sufficiency_boundary:
+      minimum: risk-linked test catalogue plus execution evidence for applicable cases
+    test_provenance:
+      - test case ids
+      - execution records
+
+  - id: e4
+    text: The testing approach includes robustness, security or adversarial testing where those risks are relevant to the AI use case, system or model.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:4.14(b)', 'MAS-AIRG-P017-2025:4.15']
+    required_dimensions: [tod, toe, failure_modes, sufficiency_boundary, test_provenance]
+    tod:
+      - applicability assessment identifies relevant robustness/security/adversarial risks
+      - required methods and thresholds are defined
+    toe:
+      - applicable tests are executed and results retained
+    failure_modes:
+      - relevant adversarial path omitted
+      - risk dismissed without rationale
+      - robustness tested only in nominal conditions
+    sufficiency_boundary:
+      minimum: risk-to-test mapping + executed applicable tests
+    test_provenance:
+      - threat/test scenario identifier
+      - tool/configuration version
+
+  - id: e5
+    text: The testing approach considers sub-population, fairness or other stakeholder-impact dimensions where relevant to the AI use case, system or model.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:4.14(b)', 'MAS-AIRG-P017-2025:4.19(e)']
+    required_dimensions: [tod, toe, failure_modes, sufficiency_boundary, test_provenance]
+    tod:
+      - relevant sub-populations/stakeholder-impact dimensions identified
+      - applicability rationale documented
+    toe:
+      - applicable analysis performed
+    failure_modes:
+      - subgroup omitted
+      - fairness assessment exists but is unrelated to use context
+    sufficiency_boundary:
+      minimum: defined relevant populations + analysis result + rationale for exclusions
+    test_provenance:
+      - population definition
+      - analysis version
+
+  - id: e6
+    text: Before deployment, the AI use case, system or model is reviewed by parties not involved in its development.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:4.18']
+    required_dimensions: [tod, toe, failure_modes, resolution, sufficiency_boundary, test_provenance]
+    tod:
+      - review role and independence boundary are defined
+      - review occurs before deployment
+    toe:
+      - actual reviewer identity/function is reconciled to development roles
+      - review date precedes deployment
+    failure_modes:
+      - reviewer participated in development
+      - review is after go-live
+      - peer review is documented but not independent under the defined boundary
+    resolution:
+      - findings dispositioned by appropriate approval body
+    sufficiency_boundary:
+      minimum: reviewer identity + independence evidence + dated review + findings
+    test_provenance:
+      - reviewer identity
+      - review workpaper/version
+      - deployment timestamp
+
+  - id: e7
+    text: The scope and independence of the pre-deployment review are proportionate to the assessed risk materiality.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:4.18-4.19']
+    required_dimensions: [tod, toe, failure_modes, sufficiency_boundary, test_provenance]
+    tod:
+      - materiality tier maps to minimum review scope and independence
+    toe:
+      - actual review scope matches the approved risk-based plan
+    failure_modes:
+      - same review depth for materially different risk tiers without rationale
+      - high-risk system receives inadequate independence
+    sufficiency_boundary:
+      minimum: risk assessment + review plan + completed review + rationale for deviations
+    test_provenance:
+      - risk assessment version
+      - review plan version
+
+  - id: e8
+    text: For AI assessed as high risk materiality, formal independent validation is performed before deployment by competent and objective personnel or functions independent from development and deployment teams.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:4.19']
+    required_dimensions: [tod, toe, failure_modes, resolution, sufficiency_boundary, test_provenance]
+    tod:
+      - high-risk trigger defined
+      - competency/objectivity/independence criteria defined
+    toe:
+      - validation completed before deployment by qualifying personnel/function
+    failure_modes:
+      - formal validation missing
+      - validator lacks competence
+      - validator not independent
+      - validation completed after deployment
+    resolution:
+      - material validation findings dispositioned before deployment or under documented conditions
+    sufficiency_boundary:
+      minimum: risk tier + validator credentials/independence + validation report + disposition
+    test_provenance:
+      - validator identity/role
+      - validation package version
+      - deployment timestamp
+
+  - id: e9
+    text: The independent validation process provides effective challenge to developers where high risk materiality requires formal validation.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:4.19']
+    required_dimensions: [tod, toe, failure_modes, resolution, sufficiency_boundary, test_provenance]
+    tod:
+      - validation methodology requires challenge and escalation where appropriate
+    toe:
+      - workpapers show substantive questions, disagreements, requests for evidence or changes
+    failure_modes:
+      - independence reduced to organisational separation only
+      - validation report contains no substantive challenge
+      - challenge findings are ignored without disposition
+    resolution:
+      - developer responses and final dispositions are traceable
+    sufficiency_boundary:
+      insufficient: reviewer signature alone
+      minimum: traceable challenge -> response -> disposition chain
+    test_provenance:
+      - challenge record ids
+      - response/disposition timestamps
+
+  - id: e10
+    text: Independent validation covers conceptual soundness, suitability and quality of data inputs, and integrity of implementation.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:4.19(a-c)']
+    required_dimensions: [tod, toe, failure_modes, sufficiency_boundary, test_provenance]
+    tod:
+      - validation scope explicitly includes the three areas
+    toe:
+      - workpapers demonstrate substantive coverage of each applicable area
+    failure_modes:
+      - scope statement without work evidence
+      - data quality checked without suitability/context analysis
+    sufficiency_boundary:
+      minimum: scope matrix + workpapers/results mapped to each area
+    test_provenance:
+      - validation workpaper ids
+      - data-quality artifact versions
+
+  - id: e11
+    text: Independent validation considers evaluation measures, performance thresholds, testing approaches and results, and relevant explainability and fairness assessments.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:4.19(d-f)']
+    required_dimensions: [tod, toe, failure_modes, sufficiency_boundary, test_provenance]
+    tod:
+      - validator's scope maps to evaluation/testing evidence and relevant explainability/fairness artefacts
+    toe:
+      - validator actually reviewed those artefacts
+    failure_modes:
+      - validator relies on management summary only
+      - test results not traced to underlying runs
+      - relevant fairness/explainability omitted without rationale
+    sufficiency_boundary:
+      minimum: evidence trace from validator workpaper to underlying test artefacts
+    test_provenance:
+      - underlying test/evaluation ids
+      - validation workpaper references
+
+  - id: e12
+    text: Review findings, limitations and conditions for use are recorded and reported to the relevant approval body before deployment.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:4.21']
+    required_dimensions: [tod, toe, failure_modes, resolution, sufficiency_boundary, test_provenance]
+    tod:
+      - review workflow defines required reporting and escalation path
+    toe:
+      - findings/limitations/conditions are actually recorded and reported before deployment
+    failure_modes:
+      - findings absent from approval pack
+      - material limitation disclosed verbally only
+      - condition for use not linked to approval
+    resolution:
+      - approval body disposition is recorded
+    sufficiency_boundary:
+      minimum: dated findings + approval-body submission + disposition
+    test_provenance:
+      - finding ids
+      - approval packet version
+
+  - id: e13
+    text: Residual risk and an accountable owner are recorded for the validation or review outcome before deployment.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:3.9', 'MAS-AIRG-P017-2025:4.21']
+    required_dimensions: [tod, toe, failure_modes, sufficiency_boundary, test_provenance]
+    requiredness_note: >-
+      TRIANGULATION FLAG: residual risk is directly supported by 3.9; an explicit requirement to record a named
+      accountable owner for the validation/review outcome is less direct in 4.21. Treat the owner component as
+      candidate/interpretive until a source-accurate anchor is confirmed. Do not label it binding solely because it
+      is operationally sensible.
+    tod:
+      - residual risk must be evaluated against risk appetite
+      - ownership expectation is explicitly defined in the organisation's governed procedure if retained
+    toe:
+      - residual risk statement can be traced to the approval outcome
+      - accountable owner, if required by the adopted control interpretation, is evidenced
+    failure_modes:
+      - residual risk not assessed
+      - owner field inferred after the fact
+    sufficiency_boundary:
+      minimum: residual-risk statement + source-grounded ownership requirement or explicit human-approved interpretation
+    test_provenance:
+      - risk assessment version
+      - approval outcome id
+
+  - id: e14
+    text: Re-validation triggers are defined and are proportionate to the assessed risk materiality.
+    source_obligation_refs: ['MAS-AIRG-P017-2025:4.24']
+    required_dimensions: [tod, toe, failure_modes, sufficiency_boundary, test_provenance, change_revalidation]
+    tod:
+      - risk-based review/re-validation criteria are defined
+      - high-risk periodic re-validation is captured where applicable
+    toe:
+      - trigger events and periodic reviews can be demonstrated in operating records
+    failure_modes:
+      - no trigger logic
+      - re-validation based on calendar only despite material changes
+      - high-risk AI not revalidated as required by adopted policy
+    change_revalidation:
+      - material risk changes
+      - material drift or performance degradation
+      - major model/system changes
+      - incident or material control failure
+    sufficiency_boundary:
+      minimum: approved trigger matrix + risk-tier cadence + at least one attributable execution/decision path
+    test_provenance:
+      - trigger assessment record
+      - re-validation record/version

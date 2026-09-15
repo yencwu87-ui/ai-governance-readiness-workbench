@@ -1,0 +1,128 @@
+# Human-curated source findings used by the offline triangulation runner.
+# In production these rows may be generated from live web retrieval but must retain URL,
+# retrieval timestamp, locator, excerpt hash and source classification.
+control_id: M3.6
+findings:
+  - element_id: e1
+    source_id: MAS-AIRG-P017-2025
+    locator: '4.14(a)'
+    finding_type: normative_proposed
+    supports: true
+    text: >-
+      Define appropriate evaluation measures aligned with the AI's objectives and establish acceptable
+      performance thresholds for these evaluation measures. Performance thresholds should be clearly defined,
+      documented, and mutually agreed upon by business owners, developers and reviewers.
+  - element_id: e2
+    source_id: MAS-AIRG-P017-2025
+    locator: '4.14(b)'
+    finding_type: normative_proposed
+    supports: true
+    text: >-
+      Employ relevant testing methods including out-of-sample or out-of-time testing, sensitivity analysis,
+      stability analysis, sub-population analysis, stress testing, error analysis and benchmarking against
+      alternatives. Datasets used for testing should be representative of the context of use.
+  - element_id: e3
+    source_id: MAS-AIRG-P017-2025
+    locator: '4.14'
+    finding_type: normative_proposed
+    supports: true
+    text: >-
+      Evaluation and testing should assess performance under a range of plausible conditions, from real-world
+      scenarios to edge cases.
+  - element_id: e4
+    source_id: MAS-AIRG-P017-2025
+    locator: '4.14(b), 4.15 footnote 27'
+    finding_type: failure_mode
+    supports: true
+    text: >-
+      Stress testing including edge cases and adversarial testing where appropriate should be employed; for newer
+      AI developments evaluation and testing should cover key failure modes such as hallucinations, undesirable
+      content, bias, data leakages and adversarial attacks.
+  - element_id: e5
+    source_id: MAS-AIRG-P017-2025
+    locator: '4.14(b), 4.19'
+    finding_type: normative_proposed
+    supports: true
+    text: >-
+      Sub-population analysis should be considered as part of relevant testing and fairness assessments are within
+      independent validation where relevant.
+  - element_id: e6
+    source_id: MAS-AIRG-P017-2025
+    locator: '4.18'
+    finding_type: normative_proposed
+    supports: true
+    text: >-
+      Prior to deployment an FI should subject the AI use case, system or model to reviews by parties not involved
+      in its development.
+  - element_id: e7
+    source_id: MAS-AIRG-P017-2025
+    locator: '4.18-4.19'
+    finding_type: materiality_boundary
+    supports: true
+    text: >-
+      The scope and independence of pre-deployment reviews should be proportionate to the assessed risk materiality
+      of the AI use case, system or model.
+  - element_id: e8
+    source_id: MAS-AIRG-P017-2025
+    locator: '4.19'
+    finding_type: normative_proposed
+    supports: true
+    text: >-
+      AI use cases, systems or models assessed as having high risk materiality should undergo formal independent
+      validation before deployment by competent personnel or functions possessing necessary expertise and objectivity
+      and independent from development and deployment teams.
+  - element_id: e9
+    source_id: MAS-AIRG-P017-2025
+    locator: '4.19'
+    finding_type: challenge_requirement
+    supports: true
+    text: The validation process should provide effective challenge to developers.
+  - element_id: e10
+    source_id: MAS-AIRG-P017-2025
+    locator: '4.19(a-c)'
+    finding_type: validation_scope
+    supports: true
+    text: >-
+      Independent validation should cover conceptual soundness of the design, suitability and quality of data inputs,
+      and integrity of the implementation.
+  - element_id: e11
+    source_id: MAS-AIRG-P017-2025
+    locator: '4.19(d-f)'
+    finding_type: validation_scope
+    supports: true
+    text: >-
+      Independent validation should cover evaluation measures, performance thresholds, testing approaches and results,
+      explainability analysis and fairness assessments, and assumptions, limitations and mitigants.
+  - element_id: e12
+    source_id: MAS-AIRG-P017-2025
+    locator: '4.21'
+    finding_type: resolution
+    supports: true
+    text: >-
+      Review findings including identified limitations, necessary remediation actions or conditions for use should be
+      reported to the relevant approval body, and the approval body should ensure review recommendations are actioned appropriately.
+  - element_id: e13
+    source_id: MAS-AIRG-P017-2025
+    locator: '3.9, 4.21'
+    finding_type: residual_risk
+    supports: true
+    text: >-
+      Residual risk should meet the FI's risk appetite before deployment; review findings, limitations, remediation actions
+      and conditions for use should be actioned appropriately.
+  - element_id: e14
+    source_id: MAS-AIRG-P017-2025
+    locator: '4.23-4.24'
+    finding_type: change_revalidation
+    supports: true
+    text: >-
+      Deployed AI should be subject to ongoing monitoring, periodic review and, for high risk materiality AI, regular
+      re-validations by independent parties; the need for detailed re-validations should be informed by risk materiality.
+  - element_id: e10
+    source_id: MAS-TRM-P012-2026
+    locator: '2.10-2.13 / draft Notice 15'
+    finding_type: parallel_regulatory_context
+    supports: true
+    text: >-
+      MAS proposes robust testing and validation of system changes, with testing of all changes to critical systems
+      before production and effective recovery measures when problems arise. This is parallel technology-risk context,
+      not a direct expansion of the M3.6 canonical element.

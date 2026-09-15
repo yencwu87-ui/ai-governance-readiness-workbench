@@ -1,0 +1,61 @@
+schema_version: wb063.element-draft.1
+generated_at: '2026-09-13T21:19:23+00:00'
+instrument_provenance: file:SAFR.txt
+instrument_verified: true
+needs_instrument: false
+authority: draft
+note: Proposed decomposition for second-line argument. Not governed. Promote into requirements/<framework>.yaml
+  only after the wording has been argued against the instrument by a named person — at which point the
+  confidence becomes 'known' because a person checked it, not because this tool did.
+controls:
+  S4.2:
+    framework: SAFR
+    title: Gateway interception of actions
+    instrument_provenance: file:SAFR.txt
+    instrument_verified: true
+    passages_shown: 6
+    passages_total: 15
+    elements:
+    - id: e1
+      text: A user must define the bounds of the authority delegated to an agent through a mandate.
+      kind: design
+      anchor: A mandate is the mechanism through which a user defines the bounds of the authority delegated
+        to an agent.
+      anchor_verified: true
+      confidence: known
+    - id: e2
+      text: The governance envelope must provide a complete and coherent representation of the proposed
+        action at the point it is submitted for governance.
+      kind: operation
+      anchor: The governance envelope is intended to provide a complete and coherent representation of
+        the proposed action at the point it is submitted for governance.
+      anchor_verified: true
+      confidence: known
+    dropped:
+    - reason: the model echoed the schema or the worked example instead of reading the instrument
+      text: The institution must obtain board approval before onboarding a material outsourcing arrangement.
+    - reason: quote is not verbatim in the supplied instrument
+      text: The institution must document criteria for determining materiality.
+      quote: Criteria for determining materiality shall be documented.
+    - reason: quote is not verbatim in the supplied instrument
+      text: 'The governance envelope must capture three classes of information: action, action trace,
+        and context metadata.'
+      quote: 'The governance envelope should capture three classes of information: action, action trace,
+        and context metadata.'
+    - reason: quote is not verbatim in the supplied instrument
+      text: Controls must encode the parameters of an agent's permitted authority.
+      quote: Controls encodes the parameters of an agent's permitted authority, such as permitted action
+        types, decision logic, escalation conditions, validity period, and p
+    - reason: quote is not verbatim in the supplied instrument
+      text: The Controls Repository must hold the controls against which proposed actions are checked.
+      quote: The Controls Repository holds the controls against which proposed actions are checked.
+    - reason: quote is not verbatim in the supplied instrument
+      text: The Agent Identity component must determine which registry is authoritative for the context
+        of the proposed action and r
+      quote: The Agent Identity component must determine which registry is authoritative for the context
+        of the proposed action and retrieve the appropriate identifier accor
+    beyond_title: ''
+    beyond_instrument: ''
+    kinds:
+      design: 1
+      operation: 1

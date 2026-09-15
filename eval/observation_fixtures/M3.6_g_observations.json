@@ -1,0 +1,20 @@
+{
+  "schema": "ge116.validation-pack-observation-source.1",
+  "source_case": "M3.6_g.md",
+  "note": "Structured observed facts transcribed from the frozen validation pack. This manifest is an observation source, not a gold judgement set.",
+  "observations": [
+    {"source":"evaluation_criteria","subject":"DOEP","payload":{"control_id":"M3.6","measure_id":"AUC_out_of_time","threshold":0.65,"defined_at":"2026-01-08T00:00:00+00:00"},"provenance":{"locator":"M3.6_g.md#§3.1"}},
+    {"source":"test_run","subject":"DOEP","payload":{"control_id":"M3.6","use_case_id":"DOEP","representativeness":"14-month holdout","plausible_conditions":true,"results_ref":"M3.6_g.md#§3.1"},"provenance":{"locator":"M3.6_g.md#§3.1"}},
+    {"source":"test_coverage","subject":"DOEP","payload":{"control_id":"M3.6","performance":true,"error_conditions":true,"failure_conditions":true,"edge_cases":true},"provenance":{"locator":"M3.6_g.md#§3"}},
+    {"source":"risk_assessment","subject":"DOEP","payload":{"control_id":"M3.6","impact_relevant":true,"risk_materiality":"heightened"},"provenance":{"locator":"M3.6_g.md#§1"}},
+    {"source":"review_record","subject":"DOEP","payload":{"control_id":"M3.6","reviewer_id":"N. Fernandez","reviewer_function":"Model Risk Management","independence_basis":"MRM team not involved in DOEP design or build","reviewed_at":"2026-09-08T00:00:00+00:00"},"provenance":{"locator":"M3.6_g.md#§4"}},
+    {"source":"development_team","subject":"DOEP","payload":{"control_id":"M3.6","person_id":"DOEP-DEV-TEAM"},"provenance":{"locator":"M3.6_g.md#§2"}},
+    {"source":"review_scope","subject":"DOEP","payload":{"control_id":"M3.6","materiality":"heightened","scope":"pre-deployment and material expansion independent review","independence_level":"independent MRM","rationale":"AAGS-2025-01 §5.2"},"provenance":{"locator":"M3.6_g.md#§2"}},
+    {"source":"validation_record","subject":"DOEP","payload":{"control_id":"M3.6","formal_validation_performed":true,"validation_id":"MRM/VAL/2026/088","validator_id":"N. Fernandez","competence_basis":"Model Validation function","independence_basis":"No MRM validator involved in design/build","performed_at":"2026-09-08T00:00:00+00:00"},"provenance":{"locator":"M3.6_g.md#§4"}},
+    {"source":"validation_scope","subject":"DOEP","payload":{"control_id":"M3.6","conceptual_soundness":true,"data_quality":true,"implementation_integrity":true,"evaluation_measures":true,"performance_thresholds":true,"testing_approach":true,"testing_results":true,"explainability_assessment":false,"fairness_assessment":true},"provenance":{"locator":"M3.6_g.md#§3-§4"}},
+    {"source":"approval_record","subject":"DOEP","payload":{"control_id":"M3.6","approval_body":"Retail Product & Conduct Committee","reported_at":"2026-09-17T00:00:00+00:00","findings_ref":"M3.6_g.md#§4","limitations_ref":"M3.6_g.md#§6","conditions_ref":"M3.6_g.md#§5"},"provenance":{"locator":"M3.6_g.md#§5-§7"}},
+    {"source":"deployment_record","subject":"DOEP","payload":{"control_id":"M3.6","deployed_at":"2026-03-11T00:00:00+00:00"},"provenance":{"locator":"M3.6_g.md#§1"}},
+    {"source":"residual_risk_record","subject":"DOEP","payload":{"control_id":"M3.6","risk_id":"DOEP-RESIDUAL-01","residual_risk":"Unrepresentative populations and unresolved 60+ performance concern","accountable_owner":"Head of Retail Digital Product","recorded_at":"2026-09-17T00:00:00+00:00"},"provenance":{"locator":"M3.6_g.md#§5"}},
+    {"source":"challenge_record","subject":"DOEP","payload":{"control_id":"M3.6","effective":true,"challenge_ref":"MRM/VAL/2026/088"},"provenance":{"locator":"M3.6_g.md#§4"}}
+  ]
+}

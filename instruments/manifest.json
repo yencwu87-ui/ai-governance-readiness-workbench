@@ -1,0 +1,49 @@
+{
+ "instruments": {
+  "SAFR.txt": {
+   "source_pdf": "SAFR.pdf",
+   "text_file": "SAFR.txt",
+   "sha256": "c41473e7ca16876e9db4d8122a46dbd1829908190f68c125e6740113387bb328",
+   "pages": 25,
+   "words": 7152,
+   "converted_at": "2026-09-13T20:59:27+00:00",
+   "usable": true,
+   "warning": null,
+   "authority": "MAS / BuildFin.ai SAFR white paper \u2014 industry paper, not a rule"
+  },
+  "Mgf_for_Agentic_AI_(atx_Release)_July_2026.txt": {
+   "source_pdf": "Mgf for Agentic AI (atx Release) July 2026.pdf",
+   "text_file": "Mgf_for_Agentic_AI_(atx_Release)_July_2026.txt",
+   "sha256": "2636e19ff1c86e862394d2fc900592e97b83c04cc35e3c8443108114b7f1dfba",
+   "pages": 53,
+   "words": 18485,
+   "converted_at": "2026-09-13T21:04:15+00:00",
+   "usable": true,
+   "warning": null,
+   "authority": "IMDA MGF for Agentic AI, July 2026 \u2014 framework guidance"
+  },
+  "Final_Consultation_Paper_on_Guidelines_on_AI_Risk_Management_ForRelease.txt": {
+   "source_pdf": "Final_Consultation_Paper_on_Guidelines_on_AI_Risk_Management_ForRelease.pdf",
+   "text_file": "Final_Consultation_Paper_on_Guidelines_on_AI_Risk_Management_ForRelease.txt",
+   "sha256": "bcdc6fd8938ae0acd337a0aca00bc658bce8ebd9ed3e7edbe1113e795cb6f40f",
+   "pages": 30,
+   "words": 12708,
+   "converted_at": "2026-09-13T21:19:30+00:00",
+   "usable": true,
+   "warning": null,
+   "authority": "MAS consultation paper on Guidelines on AI Risk Management, CONSULTATION DRAFT not final guidelines"
+  },
+  "AI_RMF_Playbook.txt": {
+   "source_pdf": "AI_RMF_Playbook.pdf",
+   "text_file": "AI_RMF_Playbook.txt",
+   "sha256": "65d6101d806502875aadb0fd19a75c3a9cc9a5e9461129e9398a39192d8202d2",
+   "pages": 147,
+   "words": 45022,
+   "converted_at": "2026-09-13T21:13:28+00:00",
+   "usable": true,
+   "warning": null,
+   "authority": "NIST AI RMF Playbook AI 100-2, voluntary suggested actions, not the AI 100-1 framework"
+  }
+ },
+ "updated_at": "2026-09-13T21:19:30+00:00"
+}

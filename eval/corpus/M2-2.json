@@ -1,0 +1,29 @@
+[
+  {
+    "case_id": "M2-2-NONE",
+    "control_id": "M2.2",
+    "shape": "named_role_artefact",
+    "label": "none",
+    "evidence_basis": "No evidence supplied.",
+    "source_status": "diagnostic_fixture",
+    "note": "Synthetic diagnostic fixture; never used as few-shot prompt context."
+  },
+  {
+    "case_id": "M2-2-PARTIAL",
+    "control_id": "M2.2",
+    "shape": "named_role_artefact",
+    "label": "partial",
+    "evidence_basis": "One or more applicable elements evidenced; at least one remains unsupported.",
+    "source_status": "diagnostic_fixture",
+    "note": "Synthetic diagnostic fixture; never used as few-shot prompt context."
+  },
+  {
+    "case_id": "M2-2-FULL",
+    "control_id": "M2.2",
+    "shape": "named_role_artefact",
+    "label": "full",
+    "evidence_basis": "All applicable elements evidenced by attributable, current records.",
+    "source_status": "diagnostic_fixture",
+    "note": "Synthetic diagnostic fixture; never used as few-shot prompt context."
+  }
+]

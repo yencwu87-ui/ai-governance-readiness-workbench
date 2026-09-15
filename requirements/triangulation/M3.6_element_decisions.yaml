@@ -1,0 +1,25 @@
+schema_version: wb100.element-decision.1
+control_id: M3.6
+requirement_id: R1
+as_of: '2026-09-14'
+decision_policy:
+  canonical_status_values: [pending_human, include, exclude, merge, split, candidate_pending_source, parallel_context]
+  default_status: pending_human
+  rule: >-
+    No model score, RAG result, online source, or triangulation finding may itself set a canonical element
+    to include. A human reviewer must record the disposition and rationale.
+elements:
+  e1: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}
+  e2: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}
+  e3: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}
+  e4: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}
+  e5: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}
+  e6: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}
+  e7: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}
+  e8: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}
+  e9: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}
+  e10: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}
+  e11: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}
+  e12: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}
+  e13: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}
+  e14: {status: pending_human, rationale: '', reviewer: '', decided_at: ''}

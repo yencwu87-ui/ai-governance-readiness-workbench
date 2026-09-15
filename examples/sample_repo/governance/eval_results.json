@@ -1,0 +1,4 @@
+[
+ {"version":"v1.4.0","run_at":"2026-08-27T10:00:00Z","accuracy":0.91,"fairness_gap":0.02,"refusal_rate":0.04},
+ {"version":"v1.5.0","run_at":"2026-09-03T15:00:00Z","accuracy":0.88,"fairness_gap":0.02,"refusal_rate":0.05}
+]

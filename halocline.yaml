@@ -1,0 +1,115 @@
+# controls/halocline.yaml — WB-030 rev 2
+#
+# Obligation: policy/ai-lifecycle.yaml golden_state.classification.* and .oversight.*
+# Meridian is the method the clause derives from, not an authority these controls cite.
+# framework_refs stays empty: no MAS, MGF, SAFR, ISO or NIST control uses CAID/OAID.
+
+version: 1
+pack: halocline
+policy_version: "1.4.0"
+derived_from: "Russo, P. (2026). The Halocline: The Invisible Boundary Between Two Kinds of AI Work. Riverbend Consulting Group. DOI 10.5281/zenodo.19617437"
+
+controls:
+
+  - id: HAL-01
+    title: Every use case has its components classified by a named person
+    severity: high
+    policy_refs: [golden_state.classification.register, golden_state.classification.classifier]
+    framework_refs: []
+    checks:
+      - name: classification_coverage
+        sources: [uc_components]
+        params:
+          require_one_per: use_case
+          reject_rows_with_errors: true
+          missing_result: fail          # the use case exists, so absence is a finding
+        min_records: 1
+    waivable: true
+
+  - id: HAL-02
+    title: A component with no human evaluation before the next step is classified OAID
+    severity: critical
+    policy_refs: [golden_state.classification.binding_rule]
+    framework_refs: []
+    checks:
+      - name: classification_override_consistency
+        sources: [uc_components]
+        params:
+          binding:
+            when: {override_human_evaluates: "no"}
+            require: {declared_domain: "OAID"}
+          advisory:
+            - when: {declared_domain: "CAID", human_between_steps: "no"}
+              flag: caid_without_human_between_steps
+            - when: {declared_domain: "OAID", judgement_required: "yes", override_human_evaluates: "yes"}
+              flag: oaid_with_human_judgement
+            - when: {declared_domain: "OAID", outcome_defined: "no"}
+              flag: oaid_without_defined_outcome
+            - when: {declared_domain: "OAID", correctness_verifiable: "no"}
+              flag: oaid_without_verifiable_correctness
+            - when: {declared_domain: "OAID", errors_recoverable: "no"}
+              flag: oaid_unrecoverable_check_exception_path
+          exclude_stale: true
+        min_records: 1
+    waivable: false
+
+  - id: HAL-03
+    title: Declared human evaluation is demonstrated in the decision record
+    severity: high
+    policy_refs: [golden_state.oversight.decision_reason, golden_state.oversight.blind_reading]
+    framework_refs: []
+    checks:
+      - name: oversight_judgement_demonstrated
+        sources: [uc_components, step_decision_quality]
+        params:
+          domain: CAID
+          join_on: evidencing_step_ids
+          require_substantive_reason: true       # reasons.reason_error
+          rubber_stamp_pattern:                  # the functional-OAID test
+            all_decisions_accept: true
+            proposal_source: lane_b
+            reason_hollow: true
+            blind_absent: true
+          blind_leg_result_when_unwired: not_testable
+        min_records: 1
+    waivable: true
+    # Ships failing. 51 of 51 records hollow, 0 blind, 17 lane_b rubber stamps.
+    # Needs a dated exception, not a backfill — the log is append-only.
+
+  - id: HAL-04
+    title: OAID components are evidenced by an operating test, not a judge
+    severity: high
+    policy_refs: [golden_state.classification.register]
+    framework_refs: []
+    checks:
+      - name: classification_oaid_deterministic_evidence
+        sources: [uc_components, lane_b_by_step]
+        params:
+          domain: OAID
+          join_on: evidencing_step_ids
+          require_real_verdict: true
+          inconclusive_verdicts: [NOT_TESTABLE, ERROR]
+          judge_proposal_as_evidence: fail
+          exclude_stale: true
+        min_records: 1
+    waivable: true
+
+  - id: HAL-05
+    title: Classifications are re-answered when the component description changes
+    severity: medium
+    policy_refs: [golden_state.classification.stale_on]
+    framework_refs: []
+    checks:
+      - name: classification_staleness
+        sources: [uc_components]
+        params:
+          sha_field: spec_sha
+          recompute_from: [component_name, description]
+          stale_result: fail
+          report_stale_ids: true
+        min_records: 1
+    waivable: true
+
+gate:
+  play_exit:
+    inconclusive_on: [HAL-01, HAL-05]

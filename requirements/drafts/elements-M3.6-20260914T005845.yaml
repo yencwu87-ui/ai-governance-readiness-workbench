@@ -1,0 +1,291 @@
+schema_version: wb070.element-draft.2
+generated_at: '2026-09-14T00:58:45+00:00'
+instrument_provenance: file:Final_Consultation_Paper_on_Guidelines_on_AI_Risk_Management_ForRelease.txt
+instrument_verified: true
+needs_instrument: false
+authority: draft
+method: sentence selection by index, obligation stated in a second call; anchors are verbatim by construction
+note: Proposed decomposition for second-line argument. Not governed. Promote into requirements/<framework>.yaml
+  only after the wording has been argued against the instrument by a named person — the confidence becomes
+  'known' because a person checked it, not because this tool matched a string.
+controls:
+  M3.6:
+    framework: MAS
+    title: Evaluation, testing & independent validation
+    instrument_provenance: file:Final_Consultation_Paper_on_Guidelines_on_AI_Risk_Management_ForRelease.txt
+    instrument_verified: true
+    candidates_offered: 18
+    selected:
+    - index: 3
+      sentence: Each AI use case, system or model should be evaluated and tested to meet an appropriate
+        level of reliability and safety based on the assessed risk materiality before deployment.
+    - index: 5
+      sentence: 'Testing Approaches: Employ relevant testing methods, such as out -of-sample or out -of-time
+        testing, sensitivity analysis, stability analysis across different data distributions or time
+        periods, sub-population analysis, stress testing (including edge cases and adversarial testing
+        where appropriate), error analysis, and benchmarking against alternatives.'
+    - index: 7
+      sentence: Proposed Guidelines on AI Risk Management | 24 Technology & Cybersecurity Risks 4.16 An
+        FI should ensure that the AI system is secure, well-governed, and supported by appropriate controls
+        to manage technology and cybersecurity risks .
+    - index: 11
+      sentence: Proposed Guidelines on AI Risk Management | 25 formal independent validation before deployment.
+    - index: 12
+      sentence: Such validations should be conducted by competent personnel or functions possessing the
+        necessary expertise and objectivity, and who are independent from the development and deployment
+        teams.
+    - index: 13
+      sentence: 'The validation process should provide effective challenge to developers and should cover
+        areas such as: a. conceptual soundness of the design; b. suitability and quality of data inputs;
+        c. integrity of the implementation; d. evaluation measures, performance thresholds, testing approaches
+        and results; e. explainability analysis and fairness assessments; and f. assumptions, limitations
+        and mitigants. 4.20 For AI use cases, systems or models not assessed as having high risk materiality,
+        other forms of documented review (such as peer reviews by qualified individuals that were not
+        involved in development or deployment 29) on key aspects of the development and deployment processes
+        may be undertaken. 4.21 Review findings, including any identified limitations, necessary remediation
+        actions, or conditions for use, should be reported by reviewers to the relevant approval body.'
+    - index: 15
+      sentence: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+    - index: 16
+      sentence: 'Training and Awareness : Equip persons responsible for monitoring with appropriate training
+        to support effective monitoring and incident management ; and equip users of deployed AI with
+        the necessary training and awareness to report unintended behaviour of deployed AI. 4.24 An FI
+        should periodically review aggregate risks across all AI use cases, systems and models, and, where
+        necessary, conduct more detailed reviews or re-validations of specific AI in the portfolio.'
+    elements:
+    - id: e1
+      text: be evaluated and tested
+      kind: operation
+      anchor: Each AI use case, system or model should be evaluated and tested to meet an appropriate
+        level of reliability and safety based on the assessed risk materiality before deployment.
+      anchor_verified: true
+      confidence: known
+    - id: e2
+      text: meet an appropriate level of reliability and safety
+      kind: design
+      anchor: Each AI use case, system or model should be evaluated and tested to meet an appropriate
+        level of reliability and safety based on the assessed risk materiality before deployment.
+      anchor_verified: true
+      confidence: known
+    - id: e3
+      text: Employ relevant testing methods
+      kind: operation
+      anchor: 'Testing Approaches: Employ relevant testing methods, such as out -of-sample or out -of-time
+        testing, sensitivity analysis, stability analysis across different data distributions or time
+        periods, sub-population analysis, stress testing (including edge cases and adversarial testing
+        where appropriate), error analysis, and benchmarking against alternatives.'
+      anchor_verified: true
+      confidence: known
+    - id: e4
+      text: The AI system should be secure
+      kind: operation
+      anchor: Proposed Guidelines on AI Risk Management | 24 Technology & Cybersecurity Risks 4.16 An
+        FI should ensure that the AI system is secure, well-governed, and supported by appropriate controls
+        to manage technology and cybersecurity risks .
+      anchor_verified: true
+      confidence: known
+    - id: e5
+      text: The FI should have appropriate controls
+      kind: design
+      anchor: Proposed Guidelines on AI Risk Management | 24 Technology & Cybersecurity Risks 4.16 An
+        FI should ensure that the AI system is secure, well-governed, and supported by appropriate controls
+        to manage technology and cybersecurity risks .
+      anchor_verified: true
+      confidence: known
+    - id: e6
+      text: The FI should be well-governed
+      kind: operation
+      anchor: Proposed Guidelines on AI Risk Management | 24 Technology & Cybersecurity Risks 4.16 An
+        FI should ensure that the AI system is secure, well-governed, and supported by appropriate controls
+        to manage technology and cybersecurity risks .
+      anchor_verified: true
+      confidence: known
+    - id: e7
+      text: Perform 25 formal independent validations
+      kind: operation
+      anchor: Proposed Guidelines on AI Risk Management | 25 formal independent validation before deployment.
+      anchor_verified: true
+      confidence: known
+    - id: e8
+      text: Conducted by competent personnel
+      kind: operation
+      anchor: Such validations should be conducted by competent personnel or functions possessing the
+        necessary expertise and objectivity, and who are independent from the development and deployment
+        teams.
+      anchor_verified: true
+      confidence: known
+    - id: e9
+      text: Possessing the necessary expertise and objectivity
+      kind: design
+      anchor: Such validations should be conducted by competent personnel or functions possessing the
+        necessary expertise and objectivity, and who are independent from the development and deployment
+        teams.
+      anchor_verified: true
+      confidence: known
+    - id: e10
+      text: Independent from the development and deployment teams
+      kind: operation
+      anchor: Such validations should be conducted by competent personnel or functions possessing the
+        necessary expertise and objectivity, and who are independent from the development and deployment
+        teams.
+      anchor_verified: true
+      confidence: known
+    - id: e11
+      text: 'The validation process should provide effective challenge to developers and should cover
+        areas such as: a. conceptual soundness of the design; b. suitability and quality of data inputs;
+        c. integrity of the implementation; d. evaluation measures, performance thresholds, testing approaches
+        and results; e. explainability analysis and fairness assessments; and f. assumptions, limitations
+        and mitigants.'
+      kind: operation
+      anchor: 'The validation process should provide effective challenge to developers and should cover
+        areas such as: a. conceptual soundness of the design; b. suitability and quality of data inputs;
+        c. integrity of the implementation; d. evaluation measures, performance thresholds, testing approaches
+        and results; e. explainability analysis and fairness assessments; and f. assumptions, limitations
+        and mitigants. 4.20 For AI use cases, systems or models not assessed as having high risk materiality,
+        other forms of documented review (such as peer reviews by qualified individuals that were not
+        involved in development or deployment 29) on key aspects of the development and deployment processes
+        may be undertaken. 4.21 Review findings, including any identified limitations, necessary remediation
+        actions, or conditions for use, should be reported by reviewers to the relevant approval body.'
+      anchor_verified: true
+      confidence: known
+    - id: e12
+      text: Maintain
+      kind: operation
+      anchor: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+      anchor_verified: true
+      confidence: known
+    - id: e13
+      text: clear records
+      kind: design
+      anchor: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+      anchor_verified: true
+      confidence: known
+    - id: e14
+      text: of
+      kind: design
+      anchor: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+      anchor_verified: true
+      confidence: known
+    - id: e15
+      text: monitoring activities
+      kind: design
+      anchor: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+      anchor_verified: true
+      confidence: known
+    - id: e16
+      text: results
+      kind: design
+      anchor: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+      anchor_verified: true
+      confidence: known
+    - id: e17
+      text: identified issues or incidents
+      kind: design
+      anchor: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+      anchor_verified: true
+      confidence: known
+    - id: e18
+      text: and
+      kind: design
+      anchor: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+      anchor_verified: true
+      confidence: known
+    - id: e19
+      text: subsequent remediation actions
+      kind: design
+      anchor: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+      anchor_verified: true
+      confidence: known
+    - id: e20
+      text: taken
+      kind: operation
+      anchor: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+      anchor_verified: true
+      confidence: known
+    - id: e21
+      text: for
+      kind: design
+      anchor: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+      anchor_verified: true
+      confidence: known
+    - id: e22
+      text: auditability
+      kind: design
+      anchor: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+      anchor_verified: true
+      confidence: known
+    - id: e23
+      text: and
+      kind: design
+      anchor: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+      anchor_verified: true
+      confidence: known
+    - id: e24
+      text: ongoing risk management
+      kind: design
+      anchor: 'Documentation: Maintain clear records of monitoring activities, results, identified issues
+        or incidents, and subsequent remediation actions taken for auditability and ongoing risk management.'
+      anchor_verified: true
+      confidence: known
+    - id: e25
+      text: Equip persons responsible for monitoring with appropriate training
+      kind: design
+      anchor: 'Training and Awareness : Equip persons responsible for monitoring with appropriate training
+        to support effective monitoring and incident management ; and equip users of deployed AI with
+        the necessary training and awareness to report unintended behaviour of deployed AI. 4.24 An FI
+        should periodically review aggregate risks across all AI use cases, systems and models, and, where
+        necessary, conduct more detailed reviews or re-validations of specific AI in the portfolio.'
+      anchor_verified: true
+      confidence: known
+    - id: e26
+      text: Equip users of deployed AI with the necessary training and awareness
+      kind: design
+      anchor: 'Training and Awareness : Equip persons responsible for monitoring with appropriate training
+        to support effective monitoring and incident management ; and equip users of deployed AI with
+        the necessary training and awareness to report unintended behaviour of deployed AI. 4.24 An FI
+        should periodically review aggregate risks across all AI use cases, systems and models, and, where
+        necessary, conduct more detailed reviews or re-validations of specific AI in the portfolio.'
+      anchor_verified: true
+      confidence: known
+    - id: e27
+      text: An FI should periodically review aggregate risks
+      kind: operation
+      anchor: 'Training and Awareness : Equip persons responsible for monitoring with appropriate training
+        to support effective monitoring and incident management ; and equip users of deployed AI with
+        the necessary training and awareness to report unintended behaviour of deployed AI. 4.24 An FI
+        should periodically review aggregate risks across all AI use cases, systems and models, and, where
+        necessary, conduct more detailed reviews or re-validations of specific AI in the portfolio.'
+      anchor_verified: true
+      confidence: known
+    - id: e28
+      text: An FI should conduct more detailed reviews or re-validations of specific AI
+      kind: operation
+      anchor: 'Training and Awareness : Equip persons responsible for monitoring with appropriate training
+        to support effective monitoring and incident management ; and equip users of deployed AI with
+        the necessary training and awareness to report unintended behaviour of deployed AI. 4.24 An FI
+        should periodically review aggregate risks across all AI use cases, systems and models, and, where
+        necessary, conduct more detailed reviews or re-validations of specific AI in the portfolio.'
+      anchor_verified: true
+      confidence: known
+    dropped: []
+    selection_note: ''
+    invalid_indices: 0
+    selected_not_stated: []
+    selected_count_raw: 15
+    over_selected: true
+    kinds:
+      design: 16
+      operation: 12

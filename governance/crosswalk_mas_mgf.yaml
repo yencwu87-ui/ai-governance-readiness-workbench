@@ -1,0 +1,246 @@
+schema: v0.9.crosswalk.1
+version: 0.1.0
+notes:
+  - "Curated governance mappings; they are not claims of regulatory equivalence."
+  - "Map at atomic element level where the repository provides audited elements."
+  - "capability_id is the stable internal semantic anchor; outcomes aggregate via capabilities."
+  - "Lane A uses evidence sufficiency. Lane B may later attach deterministic checks to capability_id."
+  - "MGF namespace is D1.x through D4.x from the governed MGF Agentic workbook."
+
+mappings:
+  # MAS — actual repository control IDs/elements
+  - framework: MAS
+    control_id: M2.2
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-INVENTORY-01]
+      capabilities: [DISC.MODEL_REGISTRY_PRESENT, DISC.OWNERSHIP_DEFINED, DISC.DEPENDENCIES_RECORDED]
+    lane: a
+    evidence_modes: [document, record, plugin_observation]
+
+  - framework: MAS
+    control_id: M3.8
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-TRACE-01]
+      capabilities: [GOV.APPEND_ONLY_EVENT_LOG, GOV.EVIDENCE_LINEAGE, GOV.BASIS_HASH_REPRODUCIBLE]
+    lane: a
+    evidence_modes: [record, repo_artifact, plugin_observation]
+
+  - framework: MAS
+    control_id: M3.8
+    element_id: e2
+    maps_to:
+      outcomes: [OVS-TRACE-01]
+      capabilities: [GOV.EVIDENCE_LINEAGE]
+    lane: a
+    evidence_modes: [record, plugin_observation]
+
+  - framework: MAS
+    control_id: M3.6
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-EVAL-01]
+      capabilities: [EVAL.RUN_BEFORE_DEPLOY, EVAL.RESULTS_AUDITABLE]
+    lane: a
+    evidence_modes: [record, document]
+
+  - framework: MAS
+    control_id: M3.12
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-CHANGE-01]
+      capabilities: [SDLC.APPROVER_NOT_AUTHOR]
+    lane: a
+    evidence_modes: [record, document, plugin_observation]
+
+  - framework: MAS
+    control_id: M3.12
+    element_id: e2
+    maps_to:
+      outcomes: [OVS-CHANGE-01, OVS-TRACE-01]
+      capabilities: [SDLC.APPROVER_NOT_AUTHOR, GOV.EVIDENCE_LINEAGE]
+    lane: a
+    evidence_modes: [record, plugin_observation]
+
+  - framework: MAS
+    control_id: M3.4
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-OVERSIGHT-01]
+      capabilities: [OVS.REVIEWER_REQUIRED]
+    lane: a
+    evidence_modes: [document, record]
+
+  - framework: MAS
+    control_id: M3.4
+    element_id: e2
+    maps_to:
+      outcomes: [OVS-OVERSIGHT-01]
+      capabilities: [OVS.REASON_QUALITY_ENFORCED]
+    lane: a
+    evidence_modes: [document, record]
+
+  - framework: MAS
+    control_id: M3.10
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-RUNTIME-01]
+      capabilities: [OPS.RUNTIME_MONITORING]
+    lane: a
+    evidence_modes: [record, document]
+
+  - framework: MAS
+    control_id: M3.11
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-INCIDENT-01]
+      capabilities: [OPS.INCIDENT_CLASSIFICATION, OPS.INCIDENT_ESCALATION]
+    lane: a
+    evidence_modes: [record, document]
+
+  - framework: MAS
+    control_id: M3.14
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-THIRDPARTY-01]
+      capabilities: [TPR.DEPENDENCIES_IDENTIFIED, TPR.CONCENTRATION_ASSESSED]
+    lane: a
+    evidence_modes: [record, document]
+
+  # MGF Agentic — actual D1.x/D2.x/D3.x IDs from the audited workbook
+  - framework: MGF
+    control_id: D1.5
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-TRACE-01, OVS-OVERSIGHT-01]
+      capabilities: [GOV.EVIDENCE_LINEAGE, OVS.REVIEWER_REQUIRED]
+    lane: a
+    evidence_modes: [document, record, plugin_observation]
+
+  - framework: MGF
+    control_id: D2.2
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-CHANGE-01]
+      capabilities: [SDLC.APPROVER_NOT_AUTHOR]
+    lane: a
+    evidence_modes: [document, record, plugin_observation]
+
+  - framework: MGF
+    control_id: D2.3
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-OVERSIGHT-01]
+      capabilities: [OVS.REVIEWER_REQUIRED]
+    lane: a
+    evidence_modes: [document, record]
+
+  - framework: MGF
+    control_id: D2.4
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-OVERSIGHT-01]
+      capabilities: [OVS.REASON_QUALITY_ENFORCED]
+    lane: a
+    evidence_modes: [document, record]
+
+  - framework: MGF
+    control_id: D2.6
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-OVERSIGHT-01]
+      capabilities: [OVS.BLIND_READ_BEFORE_AI, OVS.OVERRIDE_RATE_MONITORED]
+    lane: a
+    evidence_modes: [record]
+
+  - framework: MGF
+    control_id: D3.1
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-RUNTIME-01]
+      capabilities: [OPS.GUARDRAILS_ENFORCED]
+    lane: a
+    evidence_modes: [record, plugin_observation]
+
+  - framework: MGF
+    control_id: D3.3
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-RUNTIME-01]
+      capabilities: [OPS.GUARDRAILS_ENFORCED]
+    lane: a
+    evidence_modes: [record, plugin_observation]
+
+  - framework: MGF
+    control_id: D3.8
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-EVAL-01]
+      capabilities: [EVAL.RUN_BEFORE_DEPLOY]
+    lane: a
+    evidence_modes: [record, document]
+
+  - framework: MGF
+    control_id: D3.11
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-RUNTIME-01, OVS-INCIDENT-01]
+      capabilities: [OPS.RUNTIME_MONITORING, OPS.ESCALATION_HANDLING]
+    lane: a
+    evidence_modes: [record, document]
+
+  - framework: MGF
+    control_id: D3.13
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-TRACE-01]
+      capabilities: [GOV.EVIDENCE_LINEAGE]
+    lane: a
+    evidence_modes: [record, document, plugin_observation]
+
+  - framework: MGF
+    control_id: D3.15
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-INCIDENT-01]
+      capabilities: [OPS.INCIDENT_LESSONS_FEEDBACK]
+    lane: a
+    evidence_modes: [record, document]
+
+  - framework: MGF
+    control_id: D4.3
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-OVERSIGHT-01]
+      capabilities: [OVS.REVIEWER_REQUIRED]
+    lane: a
+    evidence_modes: [document, record]
+
+  - framework: MGF
+    control_id: D4.4
+    element_id: e1
+    maps_to:
+      outcomes: [OVS-OVERSIGHT-01]
+      capabilities: [OVS.REVIEWER_REQUIRED]
+    lane: a
+    evidence_modes: [document, record]
+
+capability_observations:
+  - capability_id: SDLC.BRANCH_PROTECTION
+    provider: github
+    resource: branch_protection
+    evidence_packets:
+      title_template: "GitHub branch protection — {branch}"
+      locator_template: "github_api:GET /repos/{owner}/{repo}/branches/{branch}/protection"
+      excerpt_fields: [enforce_admins, required_pull_request_reviews, required_approving_review_count, require_code_owner_reviews]
+
+  - capability_id: SDLC.REQUIRED_STATUS_CHECKS
+    provider: github
+    resource: branch_protection
+    excerpt_fields: [required_status_checks]
+
+  - capability_id: SDLC.CODEOWNERS_ENFORCED
+    provider: github
+    resource: codeowners
+    excerpt_fields: [codeowners_present, codeowners_paths_count]

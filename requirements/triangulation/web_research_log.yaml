@@ -1,0 +1,31 @@
+schema_version: wb100.web-research.1
+control_id: M3.6
+as_of: '2026-09-14'
+online_check:
+  attempted: true
+  completed: true
+  retrieval_method: web_search
+  operator: ChatGPT-web
+  retrieved_at: '2026-09-14T12:00:00+08:00'
+  search_queries:
+    - 'MAS AI Risk Management consultation P017-2025 independent validation evaluation testing'
+    - 'MAS P012-2026 Technology Risk Management consultation June 2026'
+  source_checks:
+    - source_id: WEB-MAS-P017-STATUS-2026-09-14
+      url: https://www.gage.academy/tools/singapore-ai-governance/node/mas-p017-2025
+      source_class: secondary_verification
+      authority_tier: T5
+      purpose: verify current public status of P017-2025
+      retrieved_at: '2026-09-14T12:00:00+08:00'
+      result: P017-2025 remains proposed / not final in the retrieved status record
+    - source_id: WEB-MAS-P012-STATUS-2026-09-14
+      url: https://www.gage.academy/tools/singapore-ai-governance/node/mas-trm-notices.event.trm-amendments-consultation-p012-2026
+      source_class: secondary_verification
+      authority_tier: T5
+      purpose: verify current public status of P012-2026
+      retrieved_at: '2026-09-14T12:00:00+08:00'
+      result: P012-2026 consultation closed and not final in the retrieved status record
+  limitation: >-
+    This online log verifies status and discovery. It does not replace the attached MAS source documents.
+    Secondary web sources can corroborate status but cannot establish MAS requiredness.
+findings: []

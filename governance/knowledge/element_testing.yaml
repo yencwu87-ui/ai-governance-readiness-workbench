@@ -1,0 +1,75 @@
+framework: MAS
+control_id: M3.6
+source_basis: requirements/mas.yaml
+rule: Verification metadata guides testing only and never creates a requirement obligation.
+elements:
+  e1:
+    verification: deterministic_plus_document
+    evidence_types: [evaluation_standard, test_plan, threshold_register]
+    capability_hints: [document.inspect, lifecycle.timestamp.compare]
+    failure_condition: Criteria or thresholds cannot be shown as defined before testing began.
+  e2:
+    verification: deterministic_plus_artifact
+    evidence_types: [test_run, evaluation_result, dataset_record]
+    capability_hints: [evaluation_run.inspect, artifact.integrity] 
+    failure_condition: No attributable result exists for the in-scope system/use-case under representative or plausible conditions.
+  e3:
+    verification: document_plus_artifact
+    evidence_types: [test_catalogue, test_results, failure_analysis]
+    capability_hints: [test_suite.inspect, test_run.query]
+    failure_condition: Relevant performance/error/failure conditions are absent from the controlled testing approach.
+  e4:
+    verification: risk_based_test
+    evidence_types: [risk_register, security_test, robustness_test, adversarial_test]
+    capability_hints: [risk.assess, test_suite.inspect]
+    failure_condition: Applicable robustness/security/adversarial coverage is absent or unjustifiably excluded.
+  e5:
+    verification: risk_based_test
+    evidence_types: [impact_assessment, fairness_test, subgroup_analysis]
+    capability_hints: [risk.assess, fairness_test.inspect]
+    failure_condition: Relevant subgroup/fairness/stakeholder-impact dimensions are omitted without a documented applicability basis.
+  e6:
+    verification: deterministic_identity_timing
+    evidence_types: [review_record, reviewer_assignment, deployment_record]
+    capability_hints: [identity.resolve, lifecycle.timestamp.compare]
+    failure_condition: Pre-deployment reviewer involvement cannot be distinguished from development involvement.
+  e7:
+    verification: risk_based_comparison
+    evidence_types: [risk_assessment, review_scope, reviewer_assignment]
+    capability_hints: [risk.assess, review_scope.compare]
+    failure_condition: Review scope or independence is not aligned to the assessed materiality.
+  e8:
+    verification: conditional_independent_validation
+    evidence_types: [risk_assessment, validation_report, validator_assignment, deployment_record]
+    capability_hints: [risk.assess, identity.resolve, validation_record.inspect]
+    failure_condition: A high-risk case lacks formal independent validation before deployment.
+  e9:
+    verification: evidence_plus_inference
+    evidence_types: [validation_report, challenge_log, findings_register, response_record]
+    capability_hints: [validation_record.inspect, challenge_record.query]
+    failure_condition: Validation is independent in structure but shows no substantive challenge where high-risk validation is required.
+  e10:
+    verification: scope_reconciliation
+    evidence_types: [validation_scope, workpaper_index, implementation_record, data_assessment]
+    capability_hints: [validation_scope.compare, artifact.inspect]
+    failure_condition: One or more required conceptual/data/implementation validation dimensions is absent from the independent validation scope.
+  e11:
+    verification: cross_artifact_reconciliation
+    evidence_types: [validation_report, test_results, explainability_assessment, fairness_assessment]
+    capability_hints: [validation_scope.compare, test_run.query]
+    failure_condition: Validation does not consider applicable evaluation/testing results or relevant explainability/fairness work.
+  e12:
+    verification: deterministic_record_trace
+    evidence_types: [review_report, approval_submission, approval_record]
+    capability_hints: [approval_record.inspect, lifecycle.timestamp.compare]
+    failure_condition: Findings/limitations/conditions are not recorded or not reported to the relevant approval body before deployment.
+  e13:
+    verification: deterministic_record_trace
+    evidence_types: [residual_risk_record, ownership_record, approval_record]
+    capability_hints: [risk_register.query, identity.resolve]
+    failure_condition: Residual risk or an accountable owner cannot be tied to the pre-deployment outcome.
+  e14:
+    verification: risk_based_policy_test
+    evidence_types: [validation_policy, trigger_register, risk_tiering]
+    capability_hints: [policy.inspect, risk_tier.compare]
+    failure_condition: Re-validation triggers are absent or not proportionate to risk materiality.

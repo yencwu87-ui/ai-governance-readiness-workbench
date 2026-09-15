@@ -1,0 +1,896 @@
+{
+  "schema_version": "wb100.triangulation.1",
+  "control_id": "M3.6",
+  "as_of": "2026-09-14",
+  "results": [
+    {
+      "element_id": "e1",
+      "element_text": "Evaluation measures aligned to the AI's objectives and acceptable performance thresholds are defined and documented before testing begins.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:4.14(a)"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "4.14(a)",
+          "finding_type": "normative_proposed",
+          "text": "Define appropriate evaluation measures aligned with the AI's objectives and establish acceptable performance thresholds for these evaluation measures. Performance thresholds should be clearly defined, documented, and mutually agreed upon by business owners, developers and reviewers.",
+          "lexical_support": 0.8182,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.0668,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 1,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": false,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": false
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 0.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 0.0
+      }
+    },
+    {
+      "element_id": "e2",
+      "element_text": "Evaluation and testing are performed for the specific AI use case, system or model under representative data and plausible conditions of use, with results retained.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:4.14",
+        "MAS-AIRG-P017-2025:4.14(b)"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "4.14(b)",
+          "finding_type": "normative_proposed",
+          "text": "Employ relevant testing methods including out-of-sample or out-of-time testing, sensitivity analysis, stability analysis, sub-population analysis, stress testing, error analysis and benchmarking against alternatives. Datasets used for testing should be representative of the context of use.",
+          "lexical_support": 0.2,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.0163,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 1,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": false,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": false
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 0.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 0.0
+      }
+    },
+    {
+      "element_id": "e3",
+      "element_text": "The testing approach covers relevant performance, error and failure conditions, including edge cases where applicable.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:4.14"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "4.14",
+          "finding_type": "normative_proposed",
+          "text": "Evaluation and testing should assess performance under a range of plausible conditions, from real-world scenarios to edge cases.",
+          "lexical_support": 0.4167,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.034,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 1,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": false,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": false
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 0.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 0.0
+      }
+    },
+    {
+      "element_id": "e4",
+      "element_text": "The testing approach includes robustness, security or adversarial testing where those risks are relevant to the AI use case, system or model.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:4.14(b)",
+        "MAS-AIRG-P017-2025:4.15"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "4.14(b), 4.15 footnote 27",
+          "finding_type": "failure_mode",
+          "text": "Stress testing including edge cases and adversarial testing where appropriate should be employed; for newer AI developments evaluation and testing should cover key failure modes such as hallucinations, undesirable content, bias, data leakages and adversarial attacks.",
+          "lexical_support": 0.1538,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.0126,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 1,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": false,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": false
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 0.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 0.0
+      }
+    },
+    {
+      "element_id": "e5",
+      "element_text": "The testing approach considers sub-population, fairness or other stakeholder-impact dimensions where relevant to the AI use case, system or model.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:4.14(b)",
+        "MAS-AIRG-P017-2025:4.19(e)"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "4.14(b), 4.19",
+          "finding_type": "normative_proposed",
+          "text": "Sub-population analysis should be considered as part of relevant testing and fairness assessments are within independent validation where relevant.",
+          "lexical_support": 0.3333,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.0272,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 1,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": false,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": false
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 0.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 0.0
+      }
+    },
+    {
+      "element_id": "e6",
+      "element_text": "Before deployment, the AI use case, system or model is reviewed by parties not involved in its development.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:4.18"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "4.18",
+          "finding_type": "normative_proposed",
+          "text": "Prior to deployment an FI should subject the AI use case, system or model to reviews by parties not involved in its development.",
+          "lexical_support": 0.9091,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.0742,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 1,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": true,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": false
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 1.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 0.0
+      }
+    },
+    {
+      "element_id": "e7",
+      "element_text": "The scope and independence of the pre-deployment review are proportionate to the assessed risk materiality.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:4.18-4.19"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "4.18-4.19",
+          "finding_type": "materiality_boundary",
+          "text": "The scope and independence of pre-deployment reviews should be proportionate to the assessed risk materiality of the AI use case, system or model.",
+          "lexical_support": 0.8889,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.0726,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 1,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": false,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": false
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 0.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 0.0
+      }
+    },
+    {
+      "element_id": "e8",
+      "element_text": "For AI assessed as high risk materiality, formal independent validation is performed before deployment by competent and objective personnel or functions independent from development and deployment teams.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:4.19"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "4.19",
+          "finding_type": "normative_proposed",
+          "text": "AI use cases, systems or models assessed as having high risk materiality should undergo formal independent validation before deployment by competent personnel or functions possessing necessary expertise and objectivity and independent from development and deployment teams.",
+          "lexical_support": 0.8667,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.0708,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 1,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": true,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": false
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 1.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 0.0
+      }
+    },
+    {
+      "element_id": "e9",
+      "element_text": "The independent validation process provides effective challenge to developers where high risk materiality requires formal validation.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:4.19"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "4.19",
+          "finding_type": "challenge_requirement",
+          "text": "The validation process should provide effective challenge to developers.",
+          "lexical_support": 0.4167,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.034,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 1,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": true,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": false
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 1.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 0.0
+      }
+    },
+    {
+      "element_id": "e10",
+      "element_text": "Independent validation covers conceptual soundness, suitability and quality of data inputs, and integrity of implementation.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:4.19(a-c)"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "4.19(a-c)",
+          "finding_type": "validation_scope",
+          "text": "Independent validation should cover conceptual soundness of the design, suitability and quality of data inputs, and integrity of the implementation.",
+          "lexical_support": 0.9091,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.0742,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        },
+        {
+          "source_id": "MAS-TRM-P012-2026",
+          "locator": "2.10-2.13 / draft Notice 15",
+          "finding_type": "parallel_regulatory_context",
+          "text": "MAS proposes robust testing and validation of system changes, with testing of all changes to critical systems before production and effective recovery measures when problems arise. This is parallel technology-risk context, not a direct expansion of the M3.6 canonical element.",
+          "lexical_support": 0.0909,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.0093,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T1"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 2,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": false,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": false
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 0.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 0.0
+      }
+    },
+    {
+      "element_id": "e11",
+      "element_text": "Independent validation considers evaluation measures, performance thresholds, testing approaches and results, and relevant explainability and fairness assessments.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:4.19(d-f)"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "4.19(d-f)",
+          "finding_type": "validation_scope",
+          "text": "Independent validation should cover evaluation measures, performance thresholds, testing approaches and results, explainability analysis and fairness assessments, and assumptions, limitations and mitigants.",
+          "lexical_support": 0.8571,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.07,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 1,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": false,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": false
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 0.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 0.0
+      }
+    },
+    {
+      "element_id": "e12",
+      "element_text": "Review findings, limitations and conditions for use are recorded and reported to the relevant approval body before deployment.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:4.21"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "4.21",
+          "finding_type": "resolution",
+          "text": "Review findings including identified limitations, necessary remediation actions or conditions for use should be reported to the relevant approval body, and the approval body should ensure review recommendations are actioned appropriately.",
+          "lexical_support": 0.8182,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.0668,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 1,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": true,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": false
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 1.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 0.0
+      }
+    },
+    {
+      "element_id": "e13",
+      "element_text": "Residual risk and an accountable owner are recorded for the validation or review outcome before deployment.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:3.9",
+        "MAS-AIRG-P017-2025:4.21"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "3.9, 4.21",
+          "finding_type": "residual_risk",
+          "text": "Residual risk should meet the FI's risk appetite before deployment; review findings, limitations, remediation actions and conditions for use should be actioned appropriately.",
+          "lexical_support": 0.4444,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.0363,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 1,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": false,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": false
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 0.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 0.0
+      }
+    },
+    {
+      "element_id": "e14",
+      "element_text": "Re-validation triggers are defined and are proportionate to the assessed risk materiality.",
+      "source_obligation_refs": [
+        "MAS-AIRG-P017-2025:4.24"
+      ],
+      "external_findings": [
+        {
+          "source_id": "MAS-AIRG-P017-2025",
+          "locator": "4.23-4.24",
+          "finding_type": "change_revalidation",
+          "text": "Deployed AI should be subject to ongoing monitoring, periodic review and, for high risk materiality AI, regular re-validations by independent parties; the need for detailed re-validations should be informed by risk materiality.",
+          "lexical_support": 0.2857,
+          "classification": "future_candidate",
+          "obligation_confidence": 0.0233,
+          "source_status": "proposed",
+          "normative_status": "consultation",
+          "authority_tier": "T2"
+        }
+      ],
+      "triangulation": {
+        "corroboration_count": 0,
+        "future_candidate_count": 1,
+        "current_requiredness_supported": false,
+        "future_change_signal": true
+      },
+      "assurance": {
+        "status": "sufficient",
+        "score": 1.0,
+        "covered": {
+          "tod": true,
+          "toe": true,
+          "failure_modes": true,
+          "resolution": false,
+          "sufficiency_boundary": true,
+          "test_provenance": true,
+          "change_revalidation": true
+        },
+        "missing": []
+      },
+      "gap_vector": {
+        "tod": 1.0,
+        "toe": 1.0,
+        "failure_modes": 1.0,
+        "resolution": 0.0,
+        "sufficiency_boundary": 1.0,
+        "test_provenance": 1.0,
+        "change_revalidation": 1.0
+      }
+    }
+  ],
+  "control": {
+    "source_mapping_coverage": 1.0,
+    "source_orphans": [],
+    "insufficient_elements": [],
+    "future_change_signals": [
+      "e1",
+      "e2",
+      "e3",
+      "e4",
+      "e5",
+      "e6",
+      "e7",
+      "e8",
+      "e9",
+      "e10",
+      "e11",
+      "e12",
+      "e13",
+      "e14"
+    ],
+    "human_decision_pending": [
+      "e1",
+      "e2",
+      "e3",
+      "e4",
+      "e5",
+      "e6",
+      "e7",
+      "e8",
+      "e9",
+      "e10",
+      "e11",
+      "e12",
+      "e13",
+      "e14"
+    ],
+    "online_check_completed": true,
+    "status": "blocked"
+  },
+  "transparency": {
+    "web_research": {
+      "attempted": true,
+      "completed": true,
+      "retrieval_method": "web_search",
+      "operator": "ChatGPT-web",
+      "retrieved_at": "2026-09-14T12:00:00+08:00",
+      "search_queries": [
+        "MAS AI Risk Management consultation P017-2025 independent validation evaluation testing",
+        "MAS P012-2026 Technology Risk Management consultation June 2026"
+      ],
+      "source_checks": [
+        {
+          "source_id": "WEB-MAS-P017-STATUS-2026-09-14",
+          "url": "https://www.gage.academy/tools/singapore-ai-governance/node/mas-p017-2025",
+          "source_class": "secondary_verification",
+          "authority_tier": "T5",
+          "purpose": "verify current public status of P017-2025",
+          "retrieved_at": "2026-09-14T12:00:00+08:00",
+          "result": "P017-2025 remains proposed / not final in the retrieved status record"
+        },
+        {
+          "source_id": "WEB-MAS-P012-STATUS-2026-09-14",
+          "url": "https://www.gage.academy/tools/singapore-ai-governance/node/mas-trm-notices.event.trm-amendments-consultation-p012-2026",
+          "source_class": "secondary_verification",
+          "authority_tier": "T5",
+          "purpose": "verify current public status of P012-2026",
+          "retrieved_at": "2026-09-14T12:00:00+08:00",
+          "result": "P012-2026 consultation closed and not final in the retrieved status record"
+        }
+      ],
+      "limitation": "This online log verifies status and discovery. It does not replace the attached MAS source documents. Secondary web sources can corroborate status but cannot establish MAS requiredness."
+    },
+    "human_decisions": {
+      "e1": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      },
+      "e2": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      },
+      "e3": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      },
+      "e4": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      },
+      "e5": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      },
+      "e6": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      },
+      "e7": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      },
+      "e8": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      },
+      "e9": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      },
+      "e10": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      },
+      "e11": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      },
+      "e12": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      },
+      "e13": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      },
+      "e14": {
+        "status": "pending_human",
+        "rationale": "",
+        "reviewer": "",
+        "decided_at": ""
+      }
+    },
+    "source_registry_digest": "dcf7d3adb68d0a81210f9d7743291c42d6af152b5ecea2ecf105b15459011d46",
+    "decision_rule": {
+      "canonical_status_values": [
+        "pending_human",
+        "include",
+        "exclude",
+        "merge",
+        "split",
+        "candidate_pending_source",
+        "parallel_context"
+      ],
+      "default_status": "pending_human",
+      "rule": "No model score, RAG result, online source, or triangulation finding may itself set a canonical element to include. A human reviewer must record the disposition and rationale."
+    }
+  }
+}
