@@ -10,3 +10,7 @@ __pycache__/
 data/backups/
 # Inference task telemetry (runtime-generated)
 governance/inference_tasks.jsonl
+
+# Software factory runtime state (local to the machine running it)
+/factory/jobs/
+/.worktrees/
